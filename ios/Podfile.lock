@@ -1,0 +1,123 @@
+PODS:
+  - Amplify (1.30.4):
+    - Amplify/Default (= 1.30.4)
+  - Amplify/Default (1.30.4)
+  - amplify_auth_cognito (0.0.1):
+    - Flutter
+    - FlutterMacOS
+  - amplify_datastore (0.0.1):
+    - Amplify (= 1.30.4)
+    - AmplifyPlugins/AWSAPIPlugin (= 1.30.4)
+    - AmplifyPlugins/AWSDataStorePlugin (= 1.30.4)
+    - Flutter
+    - Starscream (= 4.0.4)
+  - amplify_secure_storage (0.0.1):
+    - Flutter
+  - AmplifyPlugins/AWSAPIPlugin (1.30.4):
+    - AppSyncRealTimeClient (~> 3.1)
+    - AWSCore (~> 2.33.0)
+    - AWSPluginsCore (= 1.30.4)
+  - AmplifyPlugins/AWSDataStorePlugin (1.30.4):
+    - AWSCore (~> 2.33.0)
+    - AWSPluginsCore (= 1.30.4)
+    - SQLite.swift (= 0.13.2)
+  - AppSyncRealTimeClient (3.1.1):
+    - Starscream (= 4.0.4)
+  - AWSCore (2.33.4)
+  - AWSPluginsCore (1.30.4):
+    - Amplify (= 1.30.4)
+    - AWSCore (~> 2.33.0)
+  - device_info_plus (0.0.1):
+    - Flutter
+  - Flutter (1.0.0)
+  - flutter_fimber (0.0.1):
+    - Flutter
+  - package_info_plus (0.4.5):
+    - Flutter
+  - path_provider_foundation (0.0.1):
+    - Flutter
+    - FlutterMacOS
+  - Sentry/HybridSDK (8.14.2):
+    - SentryPrivate (= 8.14.2)
+  - sentry_flutter (0.0.1):
+    - Flutter
+    - FlutterMacOS
+    - Sentry/HybridSDK (= 8.14.2)
+  - SentryPrivate (8.14.2)
+  - SQLite.swift (0.13.2):
+    - SQLite.swift/standard (= 0.13.2)
+  - SQLite.swift/standard (0.13.2)
+  - Starscream (4.0.4)
+  - url_launcher_ios (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - amplify_auth_cognito (from `.symlinks/plugins/amplify_auth_cognito/darwin`)
+  - amplify_datastore (from `.symlinks/plugins/amplify_datastore/ios`)
+  - amplify_secure_storage (from `.symlinks/plugins/amplify_secure_storage/ios`)
+  - device_info_plus (from `.symlinks/plugins/device_info_plus/ios`)
+  - Flutter (from `Flutter`)
+  - flutter_fimber (from `.symlinks/plugins/flutter_fimber/ios`)
+  - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
+  - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
+  - sentry_flutter (from `.symlinks/plugins/sentry_flutter/ios`)
+  - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
+
+SPEC REPOS:
+  trunk:
+    - Amplify
+    - AmplifyPlugins
+    - AppSyncRealTimeClient
+    - AWSCore
+    - AWSPluginsCore
+    - Sentry
+    - SentryPrivate
+    - SQLite.swift
+    - Starscream
+
+EXTERNAL SOURCES:
+  amplify_auth_cognito:
+    :path: ".symlinks/plugins/amplify_auth_cognito/darwin"
+  amplify_datastore:
+    :path: ".symlinks/plugins/amplify_datastore/ios"
+  amplify_secure_storage:
+    :path: ".symlinks/plugins/amplify_secure_storage/ios"
+  device_info_plus:
+    :path: ".symlinks/plugins/device_info_plus/ios"
+  Flutter:
+    :path: Flutter
+  flutter_fimber:
+    :path: ".symlinks/plugins/flutter_fimber/ios"
+  package_info_plus:
+    :path: ".symlinks/plugins/package_info_plus/ios"
+  path_provider_foundation:
+    :path: ".symlinks/plugins/path_provider_foundation/darwin"
+  sentry_flutter:
+    :path: ".symlinks/plugins/sentry_flutter/ios"
+  url_launcher_ios:
+    :path: ".symlinks/plugins/url_launcher_ios/ios"
+
+SPEC CHECKSUMS:
+  Amplify: 4e41668c8801667e174ab50c12bc3099c71a257f
+  amplify_auth_cognito: 76b5a54f05f66f69966b468b8121a0dd33a32c70
+  amplify_datastore: 806c9f0489d77bf3648cefd61df63cb4e00477e2
+  amplify_secure_storage: 501cbdac671a050090d48dfcc002d5637d3f4a55
+  AmplifyPlugins: 1335f0919aa07329df58685a020f2311c75a5176
+  AppSyncRealTimeClient: b33e3139fb3e71ee129698aee19de88bc6ddafd8
+  AWSCore: 83e3416d2224ba98b61d8eadcfcb1f90f48fab82
+  AWSPluginsCore: f2188458c27e6cb09597c67876f80611d14275d7
+  device_info_plus: c6fb39579d0f423935b0c9ce7ee2f44b71b9fce6
+  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
+  flutter_fimber: ec011dfb08d7cbfa16ab6bad8450b99574e6f6a4
+  package_info_plus: 115f4ad11e0698c8c1c5d8a689390df880f47e85
+  path_provider_foundation: 29f094ae23ebbca9d3d0cec13889cd9060c0e943
+  Sentry: e0ea366f95ebb68f26d6030d8c22d6b2e6d23dd0
+  sentry_flutter: 9a04c51c373d76ee22167bf1e65bc468c0a91fed
+  SentryPrivate: 949a21fa59872427edc73b524c3ec8456761d97f
+  SQLite.swift: 4fc2be46c36392e3b87afe6fe7f1801c1daa07ef
+  Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
+  url_launcher_ios: 68d46cc9766d0c41dbdc884310529557e3cd7a86
+
+PODFILE CHECKSUM: ade96bceabe3919b69c16573938e4268fe3a6c9d
+
+COCOAPODS: 1.12.1

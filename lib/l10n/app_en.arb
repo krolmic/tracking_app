@@ -1,0 +1,154 @@
+{
+    "hello": "Hello {firstName}!",
+    "@hello": {
+        "placeholders": {
+            "firstName": {
+                "type": "String",
+                "example": "Bob"
+            }
+        }
+    },
+    "signIn": "Sign In",
+    "signUp": "Create Account",
+    "confirm": "Confirm",
+    "continueLabel": "Continue",
+    "submit": "Submit",
+    "changePassword": "Change Password",
+    "sendCode": "Send Code",
+    "lostCode": "Lost your code?",
+    "verify": "",
+    "signOut": "",
+    "signInWith": "Sign In with {provider}",
+    "@signInWith": {
+        "placeholders": {
+            "provider": {
+                "type": "String",
+                "example": "Google"
+            }
+        }
+    },
+    "noAccount": "No account?",
+    "haveAccount": "Have an account?",
+    "forgotPassword": "Forgot your password?",
+    "confirmResetPassword": "Reset Password",
+    "backTo": "Back to {previousStep}",
+    "@backTo": {
+        "placeholders": {
+            "previousStep": {
+                "type": "String",
+                "example": "Sign In"
+            }
+        }
+    },
+    "skip": "Skip",
+    "copyKey": "Copy Key",
+    "confirmSignUp": "Confirm Sign-up",
+    "confirmSignInMfa": "Confirm Sign-in",
+    "confirmSignInNewPassword": "Confirm Sign-in",
+    "resetPassword": "Reset Password",
+    "verifyUser": "Verify User",
+    "confirmVerifyUser": "Confirm Verify User",
+    "username": "Username",
+    "password": "Password",
+    "newPassword": "New Password",
+    "passwordConfirmation": "Confirm Password",
+    "verificationCode": "Verification Code",
+    "customAuthChallenge": "Confirmation Code",
+    "address": "Address",
+    "birthdate": "Birthdate",
+    "email": "Email",
+    "familyName": "Family Name",
+    "gender": "Gender",
+    "givenName": "Fist Name",
+    "middleName": "Middle Name",
+    "name": "Name",
+    "nickname": "Nickname",
+    "phoneNumber": "Phone Number",
+    "preferredUsername": "Preferred Username",
+    "rememberDevice": "Remember Device?",
+    "selectSms": "Text Message (SMS)",
+    "selectTotp": "Authenticator App (TOTP)",
+    "totpCodePrompt": "Please enter the code from your registered Authenticator app",
+    "usernameType": "Log in using:",
+    "promptFill": "Enter your {attribute}",
+    "@promptFill": {
+        "placeholders": {
+            "attribute": {
+                "type": "String",
+                "example": "Email"
+            }
+        }
+    },
+    "promptRefill": "Re-enter your {attribute}",
+    "@promptRefill": {
+        "placeholders": {
+            "attribute": {
+                "type": "String",
+                "example": "Password"
+            }
+        }
+    },
+    "warnEmpty": "{attribute} field must not be blank.",
+    "@warnEmpty": {
+        "placeholders": {
+            "attribute": {
+                "type": "String",
+                "example": "Password"
+            }
+        }
+    },
+    "warnInvalidFormat": "Invalid {attributeType} format.",
+    "@warnInvalidFormat": {
+        "placeholders": {
+            "attributeType": {
+                "type": "String",
+                "example": "password"
+            }
+        }
+    },
+    "usernameRequirements": "Username must only contain alphanumeric characters and symbols.",
+    "optional": "{fieldTitle} (optional)",
+    "@optional": {
+        "placeholders": {
+            "fieldTitle": {
+                "type": "String",
+                "example": "Email"
+            }
+        }
+    },
+    "passwordRequirementsPreamble": "Your password must include:",
+    "passwordRequirementsAtLeast": "at least {numCharacters, plural, =1{1{characterType} character} other{{numCharacters}{characterType} characters}}",
+    "@passwordRequirementsAtLeast": {
+        "placeholders": {
+            "numCharacters": {
+                "type": "int"
+            },
+            "characterType": {
+                "type": "String"
+            }
+        }
+    },
+    "passwordRequirementsCharacterType": "{characterType, select, requiresUppercase{uppercase} requiresLowercase{lowercase} requiresNumbers{number} requiresSymbols{symbol} other{}}",
+    "@passwordRequirementsCharacterType": {
+        "placeholders": {
+            "characterType": {
+                "type": "String"
+            }
+        }
+    },
+    "codeSent": "A confirmation code has been sent to {destination}",
+    "@codeSent": {
+        "placeholders": {
+            "destination": {
+                "type": "String"
+            }
+        }
+    },
+    "codeSentUnknown": "A confirmation code has been sent.",
+    "copySucceeded": "Copied to clipboard!",
+    "copyFailed": "Copy to clipboard failed.",
+    "confirmSignInCustomAuth": "Enter your sign in code'",
+    "continueSignInWithMfaSelection": "Select your preferred Two-Factor Auth method",
+    "continueSignInWithTotpSetup": "Enable Two-Factor Auth",
+    "confirmSignInWithTotpMfaCode": "Enter your one-time passcode"
+}

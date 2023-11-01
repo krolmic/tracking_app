@@ -1,0 +1,154 @@
+{
+    "hello": "Hallo {firstName}!",
+    "@hello": {
+        "placeholders": {
+            "firstName": {
+                "type": "String",
+                "example": "Bob"
+            }
+        }
+    },
+    "signIn": "Anmeldung",
+    "signUp": "Registrierung",
+    "confirm": "Bestätigen",
+    "continueLabel": "Fortfahren",
+    "submit": "Absenden",
+    "changePassword": "Passwort ändern",
+    "sendCode": "Code Absenden",
+    "lostCode": "Code verloren?",
+    "verify": "Verifizieren",
+    "signOut": "Abmelden",
+    "signInWith": "Anmelden mit {provider}",
+    "@signInWith": {
+        "placeholders": {
+            "provider": {
+                "type": "String",
+                "example": "Google"
+            }
+        }
+    },
+    "noAccount": "Kein Nutzerkonto?",
+    "haveAccount": "Nutzerkonto vorhanden?",
+    "forgotPassword": "Passwort vergessen?",
+    "confirmResetPassword": "Passwort zurücksetzen",
+    "backTo": "Zurück zu {previousStep}",
+    "@backTo": {
+        "placeholders": {
+            "previousStep": {
+                "type": "String",
+                "example": "Anmeldung"
+            }
+        }
+    },
+    "skip": "Überspringen",
+    "copyKey": "Schlüssel kopieren",
+    "confirmSignUp": "Registrierung bestätigen",
+    "confirmSignInMfa": "Anmeldung bestätigen",
+    "confirmSignInNewPassword": "Anmeldung bestätigen",
+    "resetPassword": "Passwort zurücksetzen",
+    "verifyUser": "Nutzer Verifizieren",
+    "confirmVerifyUser": "Nutzer Verifizieren bestätigen",
+    "username": "Nutzername",
+    "password": "Passwort",
+    "newPassword": "Neues Passwort",
+    "passwordConfirmation": "Passwort bestätigen",
+    "verificationCode": "Verifizierungscode",
+    "customAuthChallenge": "Bestätigungscode",
+    "address": "Adresse",
+    "birthdate": "Geburtsdatum",
+    "email": "Email",
+    "familyName": "Familienname",
+    "gender": "Geschlecht",
+    "givenName": "Vorname",
+    "middleName": "Zweiter Vorname",
+    "name": "Name",
+    "nickname": "Nickname",
+    "phoneNumber": "Telefonnummer",
+    "preferredUsername": "Präferierter Nutzername",
+    "rememberDevice": "Gerät merken",
+    "selectSms": "Textnachricht (SMS)",
+    "selectTotp": "Authenticator App (TOTP)",
+    "totpCodePrompt": "Bitte gebe den Code aus deiner registrierten Authenticator App ein",
+    "usernameType": "Zur Anmeldung verwenden:",
+    "promptFill": "{attribute} eingeben",
+    "@promptFill": {
+        "placeholders": {
+            "attribute": {
+                "type": "String",
+                "example": "Email"
+            }
+        }
+    },
+    "promptRefill": "{attribute} erneut eingeben",
+    "@promptRefill": {
+        "placeholders": {
+            "attribute": {
+                "type": "String",
+                "example": "Password"
+            }
+        }
+    },
+    "warnEmpty": "Feld {attribute} darf nicht leer sein.",
+    "@warnEmpty": {
+        "placeholders": {
+            "attribute": {
+                "type": "String",
+                "example": "Password"
+            }
+        }
+    },
+    "warnInvalidFormat": "{attributeType} hat inkorrektes Format.",
+    "@warnInvalidFormat": {
+        "placeholders": {
+            "attributeType": {
+                "type": "String",
+                "example": "password"
+            }
+        }
+    },
+    "usernameRequirements": "Nutzername darf nur alpha-nummerische Zeichen und Sonderzeichen beinhalten.",
+    "optional": "{fieldTitle} (optional)",
+    "@optional": {
+        "placeholders": {
+            "fieldTitle": {
+                "type": "String",
+                "example": "Email"
+            }
+        }
+    },
+    "passwordRequirementsPreamble": "Dein Password muss Folgendes beinhalten:",
+    "passwordRequirementsAtLeast": "zumindest {numCharacters, plural, =1{1{characterType} character} other{{numCharacters}{characterType} characters}}",
+    "@passwordRequirementsAtLeast": {
+        "placeholders": {
+            "numCharacters": {
+                "type": "int"
+            },
+            "characterType": {
+                "type": "String"
+            }
+        }
+    },
+    "passwordRequirementsCharacterType": "{characterType, select, requiresUppercase{uppercase} requiresLowercase{lowercase} requiresNumbers{number} requiresSymbols{symbol} other{}}",
+    "@passwordRequirementsCharacterType": {
+        "placeholders": {
+            "characterType": {
+                "type": "String"
+            }
+        }
+    },
+    "codeSent": "Bestätigungscode wurde gesendet an {destination}",
+    "@codeSent": {
+        "placeholders": {
+            "destination": {
+                "type": "String"
+            }
+        }
+    },
+    "codeSentUnknown": "Bestätigungscode wurde versendet.",
+    "copySucceeded": "In die Zwischenablage kopiert!",
+    "copyFailed": "Fehler beim Kopieren in die Zwischenablage.",
+    "confirmSignInCustomAuth": "Gebe deinen Code zur Anmeldung ein'",
+    "continueSignInWithMfaSelection": "Wähle deine bevorzugte Methode für die Zwei-Faktor-Authentisierung aus",
+    "continueSignInWithTotpSetup": "Zwei-Faktor-Authentisierung Aktivieren",
+    "confirmSignInWithTotpMfaCode": "Gebe dein Einmal-Passwort ein"
+}
