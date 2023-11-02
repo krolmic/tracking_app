@@ -360,6 +360,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.11.1"
+  error_text_widget:
+    dependency: "direct main"
+    description:
+      name: error_text_widget
+      sha256: bd8dba49db757dea968cb9596617b0a64f157224a531b8ac8d2ee899ac46707f
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.3"
   fake_async:
     dependency: transitive
     description:
@@ -426,6 +434,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_onboarding_slider:
+    dependency: "direct main"
+    description:
+      name: flutter_onboarding_slider
+      sha256: "70d6b7c8d469abb31f66fd80c61915d7ff9c05d2c9001ec7db659702e7bc4f9d"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.11"
   flutter_test:
     dependency: "direct dev"
     description: flutter
