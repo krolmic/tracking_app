@@ -51,7 +51,7 @@ class HomeScreen extends StatelessWidget {
                 context.go('/home/create');
               },
               icon: const Icon(Icons.add),
-              label: const Text("Track today's mood"),
+              label: Text(AppLocalizations.of(context)!.trackMood),
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size.fromHeight(50),
               ),
@@ -70,10 +70,6 @@ class _HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final translations = AppLocalizations.of(context)!;
-
-    safePrint(translations.hello("firstName"));
-
     return BlocBuilder<UserProfileCubit, UserProfileState>(
       builder: (context, userProfileState) {
         return BlocBuilder<HomeCubit, HomeState>(
@@ -160,13 +156,15 @@ class _HomeContentViewState extends State<_HomeContentView> {
 
   @override
   Widget build(BuildContext context) {
+    final translations = AppLocalizations.of(context)!;
+
     if (widget.moods.isEmpty) {
       return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Center(
             child: Text(
-              'Hello ${widget.firstName}!',
+              translations.hello(widget.firstName),
               style: Theme.of(context).textTheme.headlineSmall,
               textAlign: TextAlign.center,
             ),
@@ -176,7 +174,7 @@ class _HomeContentViewState extends State<_HomeContentView> {
           ),
           Center(
             child: Text(
-              'Use the button below to track your mood.',
+              translations.noMoodsYet,
               style: Theme.of(context).textTheme.bodyLarge,
               textAlign: TextAlign.center,
             ),
@@ -190,40 +188,37 @@ class _HomeContentViewState extends State<_HomeContentView> {
     final moodsListViewHeight =
         (mediaQuery.size.height - screenPadding.top - screenPadding.bottom) / 2;
 
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Hello ${widget.firstName}!',
-            style: Theme.of(context).textTheme.headlineSmall,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(
+          height: verticalPaddingLarge,
+        ),
+        Text(
+          translations.hello(widget.firstName),
+          style: Theme.of(context).textTheme.headlineSmall,
+        ),
+        const SizedBox(
+          height: verticalPaddingMedium,
+        ),
+        Text(
+          translations.moodHistoryTitle,
+          style: Theme.of(context).textTheme.headlineLarge,
+        ),
+        Text(
+          translations.moodHistoryDescription,
+          style: Theme.of(context).textTheme.bodyMedium,
+        ),
+        const SizedBox(
+          height: verticalPaddingLarge,
+        ),
+        SizedBox(
+          height: moodsListViewHeight,
+          child: _MoodsShaderMask(
+            child: _buildMoodsListView(),
           ),
-          const SizedBox(
-            height: verticalPaddingMedium,
-          ),
-          Text(
-            'Your mood history',
-            style: Theme.of(context).textTheme.headlineLarge,
-          ),
-          Text(
-            'Tap on an element to see your diary and things you are greatful '
-            'for.',
-            style: Theme.of(context).textTheme.bodyMedium,
-          ),
-          const SizedBox(
-            height: verticalPaddingLarge,
-          ),
-          SizedBox(
-            height: moodsListViewHeight,
-            child: _MoodsShaderMask(
-              child: _buildMoodsListView(),
-            ),
-          ),
-          const SizedBox(
-            height: 60,
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 

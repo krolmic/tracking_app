@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:formz/formz.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mood_repository/mood_repository.dart';
@@ -27,7 +28,7 @@ class CreateMoodScreen extends StatelessWidget {
       ),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Track today's mood"),
+          title: Text(AppLocalizations.of(context)!.trackMood),
         ),
         body: const _CreateMoodView(),
       ),

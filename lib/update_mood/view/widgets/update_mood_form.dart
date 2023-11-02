@@ -166,9 +166,11 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
       ..showSnackBar(
-        const SnackBar(
-          content: Text('Mood updated successfully! 🎉'),
-          duration: Duration(seconds: 6),
+        SnackBar(
+          content: Text(
+            '${AppLocalizations.of(context)!.moodUpdatedSuccessfully} 🎉',
+          ),
+          duration: const Duration(seconds: 6),
         ),
       );
   }
@@ -177,8 +179,10 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
       ..showSnackBar(
-        const SnackBar(
-          content: Text('Something went wrong... 🚨'),
+        SnackBar(
+          content: Text(
+            '${AppLocalizations.of(context)!.somethingWentWrong} 🚨',
+          ),
         ),
       );
   }
@@ -194,6 +198,8 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
 
   @override
   Widget build(BuildContext context) {
+    final translations = AppLocalizations.of(context)!;
+
     return BlocConsumer<UpdateMoodCubit, FormzSubmissionStatus>(
       listener: (context, state) {
         if (state.isSuccess) {
@@ -212,15 +218,18 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const SizedBox(
+                height: verticalPaddingLarge,
+              ),
               Text(
-                'How are you feeling today?',
+                translations.howAreYouFeelingToday,
                 style: Theme.of(context).textTheme.labelLarge,
               ),
               const SizedBox(
                 height: verticalPaddingSmall,
               ),
               Text(
-                'Estimate your mood on a scale from 1 to 10.',
+                translations.estimateYourMood,
                 style: Theme.of(context).textTheme.bodySmall,
               ),
               const SizedBox(
@@ -241,14 +250,14 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
                 height: verticalPaddingLarge,
               ),
               Text(
-                'What are you greatful for today?',
+                translations.whatAreYouGreatfulForToday,
                 style: Theme.of(context).textTheme.labelLarge,
               ),
               const SizedBox(
                 height: verticalPaddingSmall,
               ),
               Text(
-                'Write down 3 things you are most greatful for today.',
+                translations.writeDownThingsYouAreGreatfulFor,
                 style: Theme.of(context).textTheme.bodySmall,
               ),
               const SizedBox(
@@ -300,14 +309,14 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
                 height: verticalPaddingLarge,
               ),
               Text(
-                'What is on your mind?',
+                translations.whatIsOnYourMind,
                 style: Theme.of(context).textTheme.labelLarge,
               ),
               const SizedBox(
                 height: verticalPaddingSmall,
               ),
               Text(
-                'Here is a space for writing down your thoughts.',
+                translations.whatIsOnYourMindDescription,
                 style: Theme.of(context).textTheme.bodySmall,
               ),
               TextFormField(
@@ -328,7 +337,7 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
                   key: const Key('Update mood entry form submit'),
                   onPressed: _onSubmit,
                   icon: const Icon(Icons.edit),
-                  label: const Text('Update mood'),
+                  label: Text(translations.updateMood),
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size.fromHeight(50),
                   ),

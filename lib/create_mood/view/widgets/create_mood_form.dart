@@ -143,9 +143,11 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
       ..showSnackBar(
-        const SnackBar(
-          content: Text('Mood tracked successfully! 🎉'),
-          duration: Duration(seconds: 6),
+        SnackBar(
+          content: Text(
+            '${AppLocalizations.of(context)!.moodTrackedSuccessfully} 🎉',
+          ),
+          duration: const Duration(seconds: 6),
         ),
       );
   }
@@ -154,8 +156,10 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
       ..showSnackBar(
-        const SnackBar(
-          content: Text('Something went wrong... 🚨'),
+        SnackBar(
+          content: Text(
+            '${AppLocalizations.of(context)!.somethingWentWrong} 🚨',
+          ),
         ),
       );
   }
@@ -171,6 +175,8 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
 
   @override
   Widget build(BuildContext context) {
+    final translations = AppLocalizations.of(context)!;
+
     return BlocConsumer<CreateMoodCubit, FormzSubmissionStatus>(
       listener: (context, state) {
         if (state.isSuccess) {
@@ -189,15 +195,18 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const SizedBox(
+                height: verticalPaddingLarge,
+              ),
               Text(
-                'How are you feeling today?',
+                translations.howAreYouFeelingToday,
                 style: Theme.of(context).textTheme.labelLarge,
               ),
               const SizedBox(
                 height: verticalPaddingSmall,
               ),
               Text(
-                'Estimate your mood on a scale from 1 to 10.',
+                translations.estimateYourMood,
                 style: Theme.of(context).textTheme.bodySmall,
               ),
               const SizedBox(
@@ -218,14 +227,14 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
                 height: verticalPaddingLarge,
               ),
               Text(
-                'What are you greatful for today?',
+                translations.whatAreYouGreatfulForToday,
                 style: Theme.of(context).textTheme.labelLarge,
               ),
               const SizedBox(
                 height: verticalPaddingSmall,
               ),
               Text(
-                'Write down 3 things you are most greatful for today.',
+                translations.writeDownThingsYouAreGreatfulFor,
                 style: Theme.of(context).textTheme.bodySmall,
               ),
               const SizedBox(
@@ -277,14 +286,14 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
                 height: verticalPaddingLarge,
               ),
               Text(
-                'What is on your mind?',
+                translations.whatIsOnYourMind,
                 style: Theme.of(context).textTheme.labelLarge,
               ),
               const SizedBox(
                 height: verticalPaddingSmall,
               ),
               Text(
-                'Here is a space for writing down your thoughts.',
+                translations.whatIsOnYourMindDescription,
                 style: Theme.of(context).textTheme.bodySmall,
               ),
               TextFormField(
@@ -307,7 +316,7 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
                     key: const Key('Create mood entry form submit'),
                     onPressed: _onSubmit,
                     icon: const Icon(Icons.add),
-                    label: const Text("Track today's mood"),
+                    label: Text(translations.trackMood),
                     style: ElevatedButton.styleFrom(
                       minimumSize: const Size.fromHeight(50),
                     ),

@@ -74,9 +74,11 @@ class _UpdateUserProfileFormState extends State<_UpdateUserProfileForm> {
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
       ..showSnackBar(
-        const SnackBar(
-          content: Text('Profile updated successfully! 🎉'),
-          duration: Duration(seconds: 6),
+        SnackBar(
+          content: Text(
+            '${AppLocalizations.of(context)!.profileUpdatedSuccessfully} 🎉',
+          ),
+          duration: const Duration(seconds: 6),
         ),
       );
   }
@@ -85,8 +87,10 @@ class _UpdateUserProfileFormState extends State<_UpdateUserProfileForm> {
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
       ..showSnackBar(
-        const SnackBar(
-          content: Text('Something went wrong... 🚨'),
+        SnackBar(
+          content: Text(
+            '${AppLocalizations.of(context)!.somethingWentWrong} 🚨',
+          ),
         ),
       );
   }
@@ -118,6 +122,9 @@ class _UpdateUserProfileFormState extends State<_UpdateUserProfileForm> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const SizedBox(
+                height: verticalPaddingLarge,
+              ),
               TextFormField(
                 key: const Key('Update user profile form email input'),
                 controller: _emailController,
@@ -151,7 +158,7 @@ class _UpdateUserProfileFormState extends State<_UpdateUserProfileForm> {
                   key: const Key('Update user profile form submit'),
                   onPressed: _onSubmit,
                   icon: const Icon(Icons.edit),
-                  label: const Text('Update'),
+                  label: Text(AppLocalizations.of(context)!.update),
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size.fromHeight(50),
                   ),

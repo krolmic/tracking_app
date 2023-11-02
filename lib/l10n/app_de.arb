@@ -1,4 +1,17 @@
 {
+    "appInitFailed": "Fehler bei Initialisierung der App.",
+    "trackMood": "Stimmung tracken",
+    "moodTrackedSuccessfully": "Stimung erfolgreich getrackt!",
+    "somethingWentWrong": "Ein Fehler ist aufgetreten...",
+    "pleaseTryAgain": "Hier ist etwas schiefgegegangen. Bitte versuche es erneut.",
+    "howAreYouFeelingToday": "Wie geht's dir heute?",
+    "estimateYourMood": "Schätze deine Stimmung auf einer Skala von 1 bis 10.",
+    "whatAreYouGreatfulForToday": "Wofür bist du heute dankbar?",
+    "writeDownThingsYouAreGreatfulFor": "Schreibe 3 Dinge auf, für die du heute dankbar bist.",
+    "whatIsOnYourMind": "Was geht dir durch den Kopf?",
+    "whatIsOnYourMindDescription": "Hier kannst du deine Gedanken aufschrieben.",
+    "moodHistoryTitle": "Deine Stimmungshistorie",
+    "moodHistoryDescription": "Tappe auf einen Eintrag um Dinge für die du dankbar bist und deine Tagebücher zu sehen.",
     "hello": "Hallo {firstName}!",
     "@hello": {
         "placeholders": {
@@ -8,6 +21,23 @@
             }
         }
     },
+    "noMoodsYet": "Nutze 'Stimmung tracken' um neue Einträge zu deiner Stimmungshistorie hinzuzufügen.",
+    "settings": "Einstellungen",
+    "signOutMessage": "Bist du dir sicher, dass du dich ausloggen möchtest?",
+    "cancel": "Abbrechen",
+    "deleteAccount": "Account löschen",
+    "accountDeletion": "Account Löschen",
+    "accountDeletionMessage": "Alle deine Daten werden gelöscht.\n\n Bist du dir sicher, dass dein Account gelöscht werden soll?",
+    "delete": "Löschen",
+    "account": "Account",
+    "personalDetails": "Persönliche Details",
+    "general": "Allgemein",
+    "support": "Support",
+    "termsOfService": "Nutzungsbedingungen",
+    "moodUpdatedSuccessfully": "Stimmung erfolgreich editiert!",
+    "updateMood": "Stimmung aktualisieren",
+    "profileUpdatedSuccessfully": "Persönliche Details erfolgreich editiert!",
+    "update": "Ändern",
     "signIn": "Anmeldung",
     "signUp": "Registrierung",
     "confirm": "Bestätigen",
@@ -17,7 +47,7 @@
     "sendCode": "Code Absenden",
     "lostCode": "Code verloren?",
     "verify": "Verifizieren",
-    "signOut": "Abmelden",
+    "signOut": "Ausloggen",
     "signInWith": "Anmelden mit {provider}",
     "@signInWith": {
         "placeholders": {
@@ -117,7 +147,7 @@
         }
     },
     "passwordRequirementsPreamble": "Dein Password muss Folgendes beinhalten:",
-    "passwordRequirementsAtLeast": "zumindest {numCharacters, plural, =1{1{characterType} character} other{{numCharacters}{characterType} characters}}",
+    "passwordRequirementsAtLeast": "mindestens {numCharacters, plural, =1{1{characterType} Zeichen} other{{numCharacters}{characterType} Zeichen}}",
     "@passwordRequirementsAtLeast": {
         "placeholders": {
             "numCharacters": {

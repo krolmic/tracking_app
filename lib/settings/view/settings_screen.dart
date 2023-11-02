@@ -2,6 +2,7 @@ import 'package:account_repository/account_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mood_repository/mood_repository.dart';
 import 'package:tracking_app/main.dart';
@@ -35,8 +36,8 @@ class SettingsScreen extends StatelessWidget {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: const Text(
-            'Settings',
+          title: Text(
+            AppLocalizations.of(context)!.settings,
           ),
         ),
         body: const _SettingsView(),
@@ -55,26 +56,25 @@ class _SettingsView extends StatelessWidget {
     return showDialog<void>(
       context: context,
       builder: (BuildContext context) {
+        final translations = AppLocalizations.of(context)!;
+
         return AlertDialog(
-          title: const Text('Sign out'),
-          content: const Text(
-            "All your data is stored locally and won't be deleted after "
-            'signing out.\n\nAre you sure you want to sign out? ',
-          ),
+          title: Text(translations.signOut),
+          content: Text(translations.signOutMessage),
           actions: <Widget>[
             TextButton(
               style: TextButton.styleFrom(
                 textStyle: Theme.of(context).textTheme.labelLarge,
               ),
               onPressed: Navigator.of(context).pop,
-              child: const Text('CANCEL'),
+              child: Text(translations.cancel.toUpperCase()),
             ),
             TextButton(
               style: TextButton.styleFrom(
                 textStyle: Theme.of(context).textTheme.labelLarge,
               ),
               onPressed: onConfirm,
-              child: const Text('SIGN OUT'),
+              child: Text(translations.signOut.toUpperCase()),
             ),
           ],
         );
@@ -89,26 +89,25 @@ class _SettingsView extends StatelessWidget {
     return showDialog<void>(
       context: context,
       builder: (BuildContext context) {
+        final translations = AppLocalizations.of(context)!;
+
         return AlertDialog(
-          title: const Text('Account deletion'),
-          content: const Text(
-            'Are you sure you want to delete your account? '
-            '\n\nThis action cannot be undone.',
-          ),
+          title: Text(translations.accountDeletion),
+          content: Text(translations.accountDeletionMessage),
           actions: <Widget>[
             TextButton(
               style: TextButton.styleFrom(
                 textStyle: Theme.of(context).textTheme.labelLarge,
               ),
               onPressed: Navigator.of(context).pop,
-              child: const Text('CANCEL'),
+              child: Text(translations.cancel.toUpperCase()),
             ),
             TextButton(
               style: TextButton.styleFrom(
                 textStyle: Theme.of(context).textTheme.labelLarge,
               ),
               onPressed: onConfirm,
-              child: const Text('DELETE'),
+              child: Text(translations.delete.toUpperCase()),
             ),
           ],
         );
@@ -118,26 +117,20 @@ class _SettingsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final translations = AppLocalizations.of(context)!;
+
     return BlocBuilder<UserProfileCubit, UserProfileState>(
       builder: (context, userProfileState) {
         return BlocConsumer<SettingsCubit, SettingsState>(
           listener: (context, settingsState) {
-            if (settingsState.signOutState.isError) {
+            if (settingsState.signOutState.isError ||
+                settingsState.accountDeletionState.isError) {
               ScaffoldMessenger.of(context)
                 ..hideCurrentSnackBar()
                 ..showSnackBar(
-                  const SnackBar(
-                    content: Text('Signout failed. Please try again.'),
-                    duration: Duration(seconds: 6),
-                  ),
-                );
-            } else if (settingsState.accountDeletionState.isError) {
-              ScaffoldMessenger.of(context)
-                ..hideCurrentSnackBar()
-                ..showSnackBar(
-                  const SnackBar(
-                    content: Text('Something went wrong. Please try again.'),
-                    duration: Duration(seconds: 6),
+                  SnackBar(
+                    content: Text(translations.somethingWentWrong),
+                    duration: const Duration(seconds: 6),
                   ),
                 );
             }
@@ -157,6 +150,9 @@ class _SettingsView extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        const SizedBox(
+                          height: verticalPaddingLarge,
+                        ),
                         Center(
                           child: SizedBox(
                             height: 200,
@@ -199,7 +195,7 @@ class _SettingsView extends StatelessWidget {
                           height: verticalPaddingLarge,
                         ),
                         Text(
-                          'Account',
+                          translations.account,
                           style: Theme.of(context).textTheme.headlineMedium,
                         ),
                         const SizedBox(
@@ -214,7 +210,7 @@ class _SettingsView extends StatelessWidget {
                             ),
                           ),
                           tileColor: const Color(0xFF4d4e42),
-                          title: const Text('Personal details'),
+                          title: Text(translations.personalDetails),
                           trailing: const Icon(Icons.edit),
                           onTap: () => context.push(
                             '/settings/update-user-profile',
@@ -232,7 +228,7 @@ class _SettingsView extends StatelessWidget {
                           height: verticalPaddingLarge,
                         ),
                         Text(
-                          'General',
+                          translations.general,
                           style: Theme.of(context).textTheme.headlineMedium,
                         ),
                         const SizedBox(
@@ -247,7 +243,7 @@ class _SettingsView extends StatelessWidget {
                             ),
                           ),
                           tileColor: const Color(0xFF4d4e42),
-                          title: const Text('Support'),
+                          title: Text(translations.support),
                           trailing: const Icon(Icons.mail),
                           onTap: () {},
                         ),
@@ -263,7 +259,7 @@ class _SettingsView extends StatelessWidget {
                             ),
                           ),
                           tileColor: const Color(0xFF4d4e42),
-                          title: const Text('Terms of service'),
+                          title: Text(translations.termsOfService),
                           trailing: const Icon(Icons.description),
                           onTap: () {},
                         ),
@@ -277,7 +273,7 @@ class _SettingsView extends StatelessWidget {
                               context.read<SettingsCubit>().signOut,
                             ),
                             child: state.signOutState.maybeWhen(
-                              orElse: () => const Text('Sign out'),
+                              orElse: () => Text(translations.signOut),
                               loading: () => const LoadingIndicator(),
                             ),
                           ),
@@ -289,7 +285,7 @@ class _SettingsView extends StatelessWidget {
                               context.read<SettingsCubit>().deleteUserAccount,
                             ),
                             child: state.accountDeletionState.maybeWhen(
-                              orElse: () => const Text('Delete account'),
+                              orElse: () => Text(translations.deleteAccount),
                               loading: () => const LoadingIndicator(),
                             ),
                           ),

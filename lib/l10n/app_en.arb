@@ -1,4 +1,17 @@
 {
+    "appInitFailed": "App initialization failed.",
+    "trackMood": "Track Mood",
+    "moodTrackedSuccessfully": "Mood tracked successfully!",
+    "somethingWentWrong": "An error has occurred...",
+    "pleaseTryAgain": "Something went wrong here. Please try again.",
+    "howAreYouFeelingToday": "How are you feeling today?",
+    "estimateYourMood": "Estimate your mood on a scale from 1 to 10.",
+    "whatAreYouGreatfulForToday": "What are you grateful for today?",
+    "writeDownThingsYouAreGreatfulFor": "Write down 3 things you are most greatful for today.",
+    "whatIsOnYourMind": "What is on your mind?",
+    "whatIsOnYourMindDescription": "Here is a space for writing down your thoughts.",
+    "moodHistoryTitle": "Your mood history",
+    "moodHistoryDescription": "Tap on an element to see your diary and things you are greatful for.",
     "hello": "Hello {firstName}!",
     "@hello": {
         "placeholders": {
@@ -8,6 +21,23 @@
             }
         }
     },
+    "noMoodsYet": "Use the button below to track your mood.",
+    "settings": "Settings",
+    "signOutMessage": "Are you sure you want to sign out?",
+    "cancel": "Cancel",
+    "deleteAccount": "Delete account",
+    "accountDeletion": "Account deletion",
+    "accountDeletionMessage": "All your data is stored locally and will be deleted.\n\n Are you sure you want to delete your account?",
+    "delete": "Delete",
+    "account": "Account",
+    "personalDetails": "Personal details",
+    "general": "General",
+    "support": "Support",
+    "termsOfService": "Terms of service",
+    "moodUpdatedSuccessfully": "Mood updated successfully!",
+    "updateMood": "Update mood",
+    "profileUpdatedSuccessfully": "Profile updated successfully!",
+    "update": "Update",
     "signIn": "Sign In",
     "signUp": "Create Account",
     "confirm": "Confirm",
@@ -16,8 +46,8 @@
     "changePassword": "Change Password",
     "sendCode": "Send Code",
     "lostCode": "Lost your code?",
-    "verify": "",
-    "signOut": "",
+    "verify": "Verify",
+    "signOut": "Sign Out",
     "signInWith": "Sign In with {provider}",
     "@signInWith": {
         "placeholders": {
