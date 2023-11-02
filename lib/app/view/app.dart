@@ -3,6 +3,7 @@ import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_onboarding_slider/flutter_onboarding_slider.dart';
 import 'package:tracking_app/app/cubit/app_cubit.dart';
 import 'package:tracking_app/l10n/amplify_resolvers.dart';
 import 'package:tracking_app/main.dart';
@@ -41,36 +42,102 @@ class App extends StatelessWidget {
               child: LoadingIndicator(),
             );
           } else if (state.isError) {
-            return const ColoredBox(
+            final translations = AppLocalizations.of(context)!;
+
+            return ColoredBox(
               color: Colors.white,
               child: ErrorMessage(
-                message: "Initialising app's state failed.",
+                message: translations.appInitFailed,
+                onRefresh: context.read<AppCubit>().init,
               ),
             );
           }
 
           return Authenticator(
+            initialStep: AuthenticatorStep.onboarding,
+            authenticatorBuilder:
+                (BuildContext context, AuthenticatorState state) {
+              if (state.currentStep == AuthenticatorStep.onboarding) {
+                return OnBoardingSlider(
+                  trailingFunction: () => state.changeStep(
+                    AuthenticatorStep.signIn,
+                  ),
+                  onFinish: () => state.changeStep(
+                    AuthenticatorStep.signUp,
+                  ),
+                  headerBackgroundColor: Colors.white,
+                  finishButtonText: 'Register',
+                  finishButtonStyle: const FinishButtonStyle(
+                    backgroundColor: Colors.black,
+                  ),
+                  skipTextButton: const Text('Skip'),
+                  trailing: const Text('Login'),
+                  background: [
+                    Image.network(
+                      'https://docs.flutter.dev/assets/images/dash/dash-fainting.gif',
+                      fit: BoxFit.scaleDown,
+                    ),
+                    Image.network(
+                      'https://docs.flutter.dev/assets/images/dash/dash-fainting.gif',
+                    ),
+                    Image.network(
+                      'https://docs.flutter.dev/assets/images/dash/dash-fainting.gif',
+                    ),
+                  ],
+                  totalPage: 3,
+                  speed: 1.8,
+                  pageBodies: [
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 40),
+                      child: const Column(
+                        children: <Widget>[
+                          SizedBox(
+                            height: 480,
+                          ),
+                          Text('Discover a New You'),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 40),
+                      child: const Column(
+                        children: <Widget>[
+                          SizedBox(
+                            height: 480,
+                          ),
+                          Text('Cultivate Gratitude, Record Life'),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 40),
+                      child: const Column(
+                        children: <Widget>[
+                          SizedBox(
+                            height: 480,
+                          ),
+                          Text('Empower Your Mind, Find Clarity'),
+                        ],
+                      ),
+                    ),
+                  ],
+                );
+              }
+
+              return null;
+            },
             stringResolver: const AuthStringResolver(
               buttons: LocalizedButtonResolver(),
               inputs: LocalizedInputResolver(),
               messages: LocalizedMessageResolver(),
               titles: LocalizedTitleResolver(),
-              // DialCodeResolver? dialCodes,
-              // InstructionsResolver? instructions,
             ),
             signUpForm: SignUpForm.custom(
               fields: [
-                // SignUpFormField.username(),
                 SignUpFormField.email(required: true),
                 SignUpFormField.givenName(required: true),
                 SignUpFormField.password(),
                 SignUpFormField.passwordConfirmation(),
-              ],
-            ),
-            signInForm: SignInForm.custom(
-              fields: [
-                SignInFormField.username(),
-                SignInFormField.password(),
               ],
             ),
             child: MaterialApp.router(
