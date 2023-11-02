@@ -23,8 +23,6 @@ Future<void> main() async {
     },
     appRunner: () => runApp(const App()),
   );
-
-  // runApp(const App());
 }
 
 final GetIt getIt = GetIt.instance;
