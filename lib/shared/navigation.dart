@@ -25,19 +25,6 @@ class ScaffoldWithNestedNavigation extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: navigationShell,
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {
-      //     context.go('/home/create');
-      //   },
-      //   child: const Icon(Icons.add),
-      //   shape: const CircleBorder(
-
-      //       // borderRadius: BorderRadius.all(
-      //       //   Radius.circular(10),
-      //       // ),
-      //       ),
-      // ),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: AnimatedBottomNavigationBar(
         icons: const [
           Icons.home,
@@ -52,18 +39,7 @@ class ScaffoldWithNestedNavigation extends StatelessWidget {
         activeColor: Colors.blue,
         inactiveColor: Colors.black87,
         iconSize: 25,
-        //other params
       ),
-      // bottomNavigationBar: NavigationBar(
-      //   elevation: 20,
-      //   selectedIndex: navigationShell.currentIndex,
-      //   destinations: const [
-      //     NavigationDestination(label: 'Home', icon: Icon(Icons.home)),
-      //     NavigationDestination(label: 'Settings', icon: Icon(Icons.settings)),
-      //   ],
-      //   onDestinationSelected: _goBranch,
-      //   indicatorColor: primarySwatch,
-      // ),
     );
   }
 }
