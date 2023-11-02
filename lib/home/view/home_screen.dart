@@ -87,8 +87,16 @@ class _HomeView extends StatelessWidget {
                         homeState.isInitialOrLoading) {
                       return const LoadingIndicator();
                     } else if (userProfileState.isError || homeState.isError) {
-                      return const ErrorMessage(
-                        message: 'Loading home failed.',
+                      return ErrorMessage(
+                        onRefresh: () {
+                          if (userProfileState.isError) {
+                            context.read<UserProfileCubit>().loadUserProfile();
+                          }
+
+                          if (homeState.isError) {
+                            context.read<HomeCubit>().init();
+                          }
+                        },
                       );
                     }
 

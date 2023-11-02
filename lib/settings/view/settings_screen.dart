@@ -149,11 +149,8 @@ class _SettingsView extends StatelessWidget {
             return BaseView(
               child: userProfileState.maybeWhen(
                 orElse: () => const LoadingIndicator(),
-                error: () => const ErrorMessage(
-                  message: 'Failed to load user profile',
-                  // onRetry: () {
-                  //   context.read<SettingsCubit>().loadUserProfile();
-                  // },
+                error: () => ErrorMessage(
+                  onRefresh: context.read<UserProfileCubit>().loadUserProfile,
                 ),
                 loaded: (id, email, firstName) {
                   return SingleChildScrollView(
