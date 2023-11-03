@@ -1,5 +1,6 @@
 import 'package:account_repository/account_repository.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mood_repository/mood_repository.dart';
@@ -12,17 +13,21 @@ Future<void> main() async {
 
   registerSingletons();
 
-  await SentryFlutter.init(
-    (options) {
-      options
-        ..dsn =
-            'https://4f59af56d06e9abe568d14eb7d532e23@o4506147108093952.ingest.sentry.io/4506147114254336'
-        // Set tracesSampleRate to 1.0 to capture 100% of transactions for performance monitoring.
-        // We recommend adjusting this value in production.
-        ..tracesSampleRate = 1.0;
-    },
-    appRunner: () => runApp(const App()),
-  );
+  if (kReleaseMode) {
+    await SentryFlutter.init(
+      (options) {
+        options
+          ..dsn =
+              'https://4f59af56d06e9abe568d14eb7d532e23@o4506147108093952.ingest.sentry.io/4506147114254336'
+          // Set tracesSampleRate to 1.0 to capture 100% of transactions for performance monitoring.
+          // We recommend adjusting this value in production.
+          ..tracesSampleRate = 1.0;
+      },
+      appRunner: () => runApp(const App()),
+    );
+  } else {
+    runApp(const App());
+  }
 }
 
 final GetIt getIt = GetIt.instance;
