@@ -3,10 +3,10 @@ import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_onboarding_slider/flutter_onboarding_slider.dart';
 import 'package:tracking_app/app/cubit/app_cubit.dart';
 import 'package:tracking_app/l10n/amplify_resolvers.dart';
 import 'package:tracking_app/main.dart';
+import 'package:tracking_app/onboarding/onboarding_slider.dart';
 import 'package:tracking_app/shared/constants/colors.dart';
 import 'package:tracking_app/shared/router.dart';
 import 'package:tracking_app/shared/widgets/error_message.dart';
@@ -58,69 +58,13 @@ class App extends StatelessWidget {
             authenticatorBuilder:
                 (BuildContext context, AuthenticatorState state) {
               if (state.currentStep == AuthenticatorStep.onboarding) {
-                return OnBoardingSlider(
-                  trailingFunction: () => state.changeStep(
-                    AuthenticatorStep.signIn,
-                  ),
-                  onFinish: () => state.changeStep(
+                return OnboardingSlider(
+                  signUpButtonFunction: () => state.changeStep(
                     AuthenticatorStep.signUp,
                   ),
-                  headerBackgroundColor: Colors.white,
-                  finishButtonText: 'Register',
-                  finishButtonStyle: const FinishButtonStyle(
-                    backgroundColor: Colors.black,
+                  signInButtonFunction: () => state.changeStep(
+                    AuthenticatorStep.signIn,
                   ),
-                  skipTextButton: const Text('Skip'),
-                  trailing: const Text('Login'),
-                  background: [
-                    Image.network(
-                      'https://docs.flutter.dev/assets/images/dash/dash-fainting.gif',
-                      fit: BoxFit.scaleDown,
-                    ),
-                    Image.network(
-                      'https://docs.flutter.dev/assets/images/dash/dash-fainting.gif',
-                    ),
-                    Image.network(
-                      'https://docs.flutter.dev/assets/images/dash/dash-fainting.gif',
-                    ),
-                  ],
-                  totalPage: 3,
-                  speed: 1.8,
-                  pageBodies: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 40),
-                      child: const Column(
-                        children: <Widget>[
-                          SizedBox(
-                            height: 480,
-                          ),
-                          Text('Discover a New You'),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 40),
-                      child: const Column(
-                        children: <Widget>[
-                          SizedBox(
-                            height: 480,
-                          ),
-                          Text('Cultivate Gratitude, Record Life'),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 40),
-                      child: const Column(
-                        children: <Widget>[
-                          SizedBox(
-                            height: 480,
-                          ),
-                          Text('Empower Your Mind, Find Clarity'),
-                        ],
-                      ),
-                    ),
-                  ],
                 );
               }
 
