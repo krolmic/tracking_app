@@ -11,6 +11,6 @@ class AppState with _$AppState {
 extension AppStateX on AppState {
   bool get isInitial => this is _Initial;
   bool get isLoading => this is _Loading;
-  bool get isInitialOrLoading => this is _Error || this is _Loading;
+  bool get isInitialOrLoading => this is _Initial || this is _Loading;
   bool get isError => this is _Error;
 }
