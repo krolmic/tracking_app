@@ -27,6 +27,9 @@ PODS:
   - AWSPluginsCore (1.30.4):
     - Amplify (= 1.30.4)
     - AWSCore (~> 2.33.0)
+  - connectivity_plus (0.0.1):
+    - Flutter
+    - ReachabilitySwift
   - device_info_plus (0.0.1):
     - Flutter
   - Flutter (1.0.0)
@@ -37,6 +40,7 @@ PODS:
   - path_provider_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
+  - ReachabilitySwift (5.0.0)
   - Sentry/HybridSDK (8.14.2):
     - SentryPrivate (= 8.14.2)
   - sentry_flutter (0.0.1):
@@ -55,6 +59,7 @@ DEPENDENCIES:
   - amplify_auth_cognito (from `.symlinks/plugins/amplify_auth_cognito/darwin`)
   - amplify_datastore (from `.symlinks/plugins/amplify_datastore/ios`)
   - amplify_secure_storage (from `.symlinks/plugins/amplify_secure_storage/ios`)
+  - connectivity_plus (from `.symlinks/plugins/connectivity_plus/ios`)
   - device_info_plus (from `.symlinks/plugins/device_info_plus/ios`)
   - Flutter (from `Flutter`)
   - flutter_fimber (from `.symlinks/plugins/flutter_fimber/ios`)
@@ -70,6 +75,7 @@ SPEC REPOS:
     - AppSyncRealTimeClient
     - AWSCore
     - AWSPluginsCore
+    - ReachabilitySwift
     - Sentry
     - SentryPrivate
     - SQLite.swift
@@ -82,6 +88,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/amplify_datastore/ios"
   amplify_secure_storage:
     :path: ".symlinks/plugins/amplify_secure_storage/ios"
+  connectivity_plus:
+    :path: ".symlinks/plugins/connectivity_plus/ios"
   device_info_plus:
     :path: ".symlinks/plugins/device_info_plus/ios"
   Flutter:
@@ -106,11 +114,13 @@ SPEC CHECKSUMS:
   AppSyncRealTimeClient: b33e3139fb3e71ee129698aee19de88bc6ddafd8
   AWSCore: 83e3416d2224ba98b61d8eadcfcb1f90f48fab82
   AWSPluginsCore: f2188458c27e6cb09597c67876f80611d14275d7
+  connectivity_plus: bf0076dd84a130856aa636df1c71ccaff908fa1d
   device_info_plus: c6fb39579d0f423935b0c9ce7ee2f44b71b9fce6
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   flutter_fimber: ec011dfb08d7cbfa16ab6bad8450b99574e6f6a4
   package_info_plus: 115f4ad11e0698c8c1c5d8a689390df880f47e85
   path_provider_foundation: 29f094ae23ebbca9d3d0cec13889cd9060c0e943
+  ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   Sentry: e0ea366f95ebb68f26d6030d8c22d6b2e6d23dd0
   sentry_flutter: 9a04c51c373d76ee22167bf1e65bc468c0a91fed
   SentryPrivate: 949a21fa59872427edc73b524c3ec8456761d97f
