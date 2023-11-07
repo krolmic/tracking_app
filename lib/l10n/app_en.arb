@@ -38,7 +38,7 @@
     "cancel": "Cancel",
     "deleteAccount": "Delete account",
     "accountDeletion": "Account deletion",
-    "accountDeletionMessage": "All your data is stored locally and will be deleted.\n\n Are you sure you want to delete your account?",
+    "accountDeletionMessage": "All your data is stored locally and will be deleted.\n\nAre you sure you want to delete your account?",
     "delete": "Delete",
     "account": "Account",
     "personalDetails": "Personal details",
