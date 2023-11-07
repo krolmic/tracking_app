@@ -3,6 +3,7 @@ import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:tracking_app/app/cubit/app_cubit.dart';
 import 'package:tracking_app/l10n/amplify_resolvers.dart';
 import 'package:tracking_app/main.dart';
@@ -19,8 +20,6 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    safePrint(AppLocalizations.supportedLocales.toString());
-
     return MultiBlocProvider(
       providers: [
         BlocProvider<AppCubit>(
@@ -38,14 +37,14 @@ class App extends StatelessWidget {
         builder: (context, state) {
           if (state.isInitialOrLoading) {
             return const ColoredBox(
-              color: Colors.white,
+              color: lightBackgroundColor,
               child: LoadingIndicator(),
             );
           } else if (state.isError) {
             final translations = AppLocalizations.of(context)!;
 
             return ColoredBox(
-              color: Colors.white,
+              color: lightBackgroundColor,
               child: ErrorMessage(
                 message: translations.appInitFailed,
                 onRefresh: context.read<AppCubit>().init,
@@ -58,12 +57,14 @@ class App extends StatelessWidget {
             authenticatorBuilder:
                 (BuildContext context, AuthenticatorState state) {
               if (state.currentStep == AuthenticatorStep.onboarding) {
-                return OnboardingSlider(
-                  signUpButtonFunction: () => state.changeStep(
-                    AuthenticatorStep.signUp,
-                  ),
-                  signInButtonFunction: () => state.changeStep(
-                    AuthenticatorStep.signIn,
+                return SafeArea(
+                  child: OnboardingSlider(
+                    signUpButtonFunction: () => state.changeStep(
+                      AuthenticatorStep.signUp,
+                    ),
+                    signInButtonFunction: () => state.changeStep(
+                      AuthenticatorStep.signIn,
+                    ),
                   ),
                 );
               }
@@ -94,7 +95,9 @@ class App extends StatelessWidget {
                 useMaterial3: true,
                 colorScheme: ColorScheme.fromSwatch(
                   primarySwatch: primarySwatch,
+                  backgroundColor: lightBackgroundColor,
                 ),
+                textTheme: GoogleFonts.latoTextTheme(),
               ),
               darkTheme: ThemeData.from(
                 useMaterial3: true,
