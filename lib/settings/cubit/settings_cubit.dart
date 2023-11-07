@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:account_repository/account_repository.dart';
-import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_fimber/flutter_fimber.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:mood_repository/mood_repository.dart';
 import 'package:user_profile_repository/user_profile_repository.dart'
@@ -40,7 +40,7 @@ class SettingsCubit extends Cubit<SettingsState> {
 
       await _accountRepository.signOut();
     } catch (e, stackTrace) {
-      // Fimber.e('Failed to sign user out', ex: e, stacktrace: stackTrace)
+      Fimber.e('Sign out failed', ex: e, stacktrace: stackTrace);
       emit(
         state.copyWith(
           signOutState: const SignOutState.error(),
@@ -71,7 +71,8 @@ class SettingsCubit extends Cubit<SettingsState> {
         ),
       );
     } catch (e, stackTrace) {
-      // Fimber.e('Failed to delete user account', ex: e, stacktrace: stackTrace)
+      Fimber.e('Failed to delete user account', ex: e, stacktrace: stackTrace);
+
       emit(
         state.copyWith(
           accountDeletionState: const AccountDeletionState.error(),

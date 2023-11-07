@@ -158,6 +158,7 @@ class HomeCubit extends Cubit<HomeState> {
         },
       );
     } catch (e, stackTrace) {
+      Fimber.e('Failed to load moods', ex: e, stacktrace: stackTrace);
       emit(state.copyWith(moodsState: const HomeMoodsState.error()));
     }
   }

@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_fimber/flutter_fimber.dart';
 import 'package:formz/formz.dart';
 import 'package:mood_repository/mood_repository.dart';
 
@@ -28,6 +29,7 @@ class UpdateMoodCubit extends Cubit<FormzSubmissionStatus> {
 
       emit(FormzSubmissionStatus.success);
     } catch (e, stackTrace) {
+      Fimber.e('Updating mood failed', ex: e, stacktrace: stackTrace);
       emit(FormzSubmissionStatus.failure);
     }
   }
