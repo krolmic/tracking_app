@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_onboarding_slider/flutter_onboarding_slider.dart';
+import 'package:tracking_app/gen/assets.gen.dart';
 import 'package:tracking_app/shared/constants/layout.dart';
 
 class OnboardingSlider extends StatelessWidget {
@@ -40,17 +41,17 @@ class OnboardingSlider extends StatelessWidget {
       background: [
         _OnboardingSliderBackground(
           key: const ValueKey('onboarding-slider-bg-1'),
-          assetName: 'assets/images/onboarding_namaste.png',
+          assetName: Assets.images.onboardingNamaste.path,
           height: backgroundImageHeight,
         ),
         _OnboardingSliderBackground(
           key: const ValueKey('onboarding-slider-bg-2'),
-          assetName: 'assets/images/onboarding_inhale_exhale.png',
+          assetName: Assets.images.onboardingInhaleExhale.path,
           height: backgroundImageHeight,
         ),
         _OnboardingSliderBackground(
           key: const ValueKey('onboarding-slider-bg-3'),
-          assetName: 'assets/images/onboarding_present_moment.png',
+          assetName: Assets.images.onboardingPresentMoment.path,
           height: backgroundImageHeight,
         ),
       ],
