@@ -50,7 +50,6 @@ void registerSingletons() {
     ..registerLazySingleton<AccountRepository>(
       () => AccountRepository(
         amplifyAuth: Amplify.Auth,
-        amplifyDatastore: Amplify.DataStore,
       ),
     );
 }

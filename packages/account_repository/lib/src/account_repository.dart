@@ -20,13 +20,9 @@ class AccountRepositoryException implements Exception {
 class AccountRepository {
   AccountRepository({
     required AuthCategory amplifyAuth,
-    required DataStoreCategory amplifyDatastore,
-  })  : _amplifyAuth = amplifyAuth,
-        _amplifyDatastore = amplifyDatastore;
+  }) : _amplifyAuth = amplifyAuth;
 
   final AuthCategory _amplifyAuth;
-
-  final DataStoreCategory _amplifyDatastore;
 
   Future<void> signOut() async {
     try {
