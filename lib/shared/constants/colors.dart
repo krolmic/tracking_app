@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
 
-const MaterialColor primarySwatch = Colors.lime;
+const MaterialColor primarySwatch = MaterialColor(
+  0xFF000080,
+  {
+    50: Color.fromRGBO(0, 0, 128, .1),
+    100: Color.fromRGBO(0, 0, 128, .2),
+    200: Color.fromRGBO(0, 0, 128, .3),
+    300: Color.fromRGBO(0, 0, 128, .4),
+    400: Color.fromRGBO(0, 0, 128, .5),
+    500: Color.fromRGBO(0, 0, 128, .6),
+    600: Color.fromRGBO(0, 0, 128, .7),
+    700: Color.fromRGBO(0, 0, 128, .8),
+    800: Color.fromRGBO(0, 0, 128, .9),
+    900: Color.fromRGBO(0, 0, 128, 1),
+  },
+);
 
-// Mood value colors
-const Color moodValueColor1 = Colors.red;
-const Color moodValueColor2 = Colors.redAccent;
-const Color moodValueColor3 = Colors.amber;
-const Color moodValueColor4 = Colors.lightGreen;
-const Color moodValueColor5 = Colors.green;
+const Color lightBackgroundColor = Color(0xFFccccff);

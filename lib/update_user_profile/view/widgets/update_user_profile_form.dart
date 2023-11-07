@@ -4,7 +4,6 @@ class _UpdateUserProfileForm extends StatefulWidget {
   const _UpdateUserProfileForm({
     required this.email,
     required this.firstName,
-    super.key,
   });
 
   final String email;
@@ -104,6 +103,8 @@ class _UpdateUserProfileFormState extends State<_UpdateUserProfileForm> {
 
   @override
   Widget build(BuildContext context) {
+    final translations = AppLocalizations.of(context)!;
+
     return BlocConsumer<UpdateUserProfileCubit, FormzSubmissionStatus>(
       listener: (context, state) {
         if (state.isSuccess) {
@@ -131,6 +132,7 @@ class _UpdateUserProfileFormState extends State<_UpdateUserProfileForm> {
                 decoration: InputDecoration(
                   icon: const Icon(Icons.email),
                   iconColor: Theme.of(context).primaryColor,
+                  label: Text(translations.email),
                 ),
                 validator: (value) =>
                     _formState.email.validator(value ?? '')?.toString(),
@@ -138,31 +140,31 @@ class _UpdateUserProfileFormState extends State<_UpdateUserProfileForm> {
                 textInputAction: TextInputAction.next,
                 enabled: false,
               ),
+              const SizedBox(
+                height: verticalPaddingMedium,
+              ),
               TextFormField(
                 key: const Key('Update user profile form first name input'),
                 controller: _firstNameController,
                 decoration: InputDecoration(
                   icon: const Icon(Icons.person),
                   iconColor: Theme.of(context).primaryColor,
+                  label: Text(translations.givenName),
                 ),
                 validator: (value) =>
                     _formState.firstName.validator(value ?? '')?.toString(),
                 keyboardType: TextInputType.text,
                 textInputAction: TextInputAction.next,
               ),
-              const SizedBox(height: 24),
-              if (state.isInProgress)
-                const LoadingIndicator()
-              else
-                ElevatedButton.icon(
-                  key: const Key('Update user profile form submit'),
-                  onPressed: _onSubmit,
-                  icon: const Icon(Icons.edit),
-                  label: Text(AppLocalizations.of(context)!.update),
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: const Size.fromHeight(50),
-                  ),
-                ),
+              const SizedBox(
+                height: verticalPaddingLarge,
+              ),
+              AppElevatedButton(
+                isLoading: state.isInProgress,
+                icon: Icons.edit,
+                onPressed: _onSubmit,
+                label: AppLocalizations.of(context)!.update,
+              ),
             ],
           ),
         );

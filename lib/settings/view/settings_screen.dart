@@ -1,5 +1,5 @@
 import 'package:account_repository/account_repository.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:animated_emoji/animated_emoji.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -39,6 +39,7 @@ class SettingsScreen extends StatelessWidget {
           title: Text(
             AppLocalizations.of(context)!.settings,
           ),
+          centerTitle: true,
         ),
         body: const _SettingsView(),
       ),
@@ -157,19 +158,12 @@ class _SettingsView extends StatelessWidget {
                           child: SizedBox(
                             height: 200,
                             child: CircleAvatar(
-                              backgroundColor: primarySwatch,
+                              backgroundColor: primarySwatch.shade300,
                               radius: 100,
-                              child: firstName.isEmpty
-                                  ? const Icon(
-                                      Icons.person,
-                                      size: 50,
-                                    )
-                                  : Text(
-                                      firstName[0],
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headlineLarge,
-                                    ),
+                              child: const AnimatedEmoji(
+                                AnimatedEmojis.otter,
+                                size: 128,
+                              ),
                             ),
                           ),
                         ),
@@ -201,22 +195,25 @@ class _SettingsView extends StatelessWidget {
                         const SizedBox(
                           height: verticalPaddingLarge,
                         ),
-                        ListTile(
-                          textColor: primarySwatch,
-                          iconColor: primarySwatch,
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(10),
+                        Card(
+                          elevation: 5,
+                          shadowColor: primarySwatch.shade100,
+                          child: ListTile(
+                            textColor: primarySwatch,
+                            iconColor: primarySwatch,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(10),
+                              ),
                             ),
-                          ),
-                          tileColor: const Color(0xFF4d4e42),
-                          title: Text(translations.personalDetails),
-                          trailing: const Icon(Icons.edit),
-                          onTap: () => context.push(
-                            '/settings/update-user-profile',
-                            extra: UpdateUserProfileParams(
-                              email: email,
-                              firstName: firstName,
+                            title: Text(translations.personalDetails),
+                            trailing: const Icon(Icons.edit),
+                            onTap: () => context.push(
+                              '/settings/update-user-profile',
+                              extra: UpdateUserProfileParams(
+                                email: email,
+                                firstName: firstName,
+                              ),
                             ),
                           ),
                         ),
@@ -234,59 +231,78 @@ class _SettingsView extends StatelessWidget {
                         const SizedBox(
                           height: verticalPaddingLarge,
                         ),
-                        ListTile(
-                          textColor: primarySwatch,
-                          iconColor: primarySwatch,
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(10),
+                        Card(
+                          elevation: 5,
+                          shadowColor: primarySwatch.shade100,
+                          child: ListTile(
+                            textColor: primarySwatch,
+                            iconColor: primarySwatch,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(10),
+                              ),
                             ),
+                            title: Text(translations.support),
+                            trailing: const Icon(Icons.mail),
+                            onTap: () {},
                           ),
-                          tileColor: const Color(0xFF4d4e42),
-                          title: Text(translations.support),
-                          trailing: const Icon(Icons.mail),
-                          onTap: () {},
                         ),
                         const SizedBox(
                           height: verticalPaddingMedium,
                         ),
-                        ListTile(
-                          textColor: primarySwatch,
-                          iconColor: primarySwatch,
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(10),
+                        Card(
+                          elevation: 5,
+                          shadowColor: primarySwatch.shade100,
+                          child: ListTile(
+                            textColor: primarySwatch,
+                            iconColor: primarySwatch,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(10),
+                              ),
                             ),
+                            title: Text(translations.termsOfService),
+                            trailing: const Icon(Icons.description),
+                            onTap: () {},
                           ),
-                          tileColor: const Color(0xFF4d4e42),
-                          title: Text(translations.termsOfService),
-                          trailing: const Icon(Icons.description),
-                          onTap: () {},
                         ),
                         const SizedBox(
                           height: verticalPaddingLarge,
                         ),
                         Center(
-                          child: CupertinoButton(
+                          child: TextButton(
                             onPressed: () => _showSignOutDialog(
                               context,
                               context.read<SettingsCubit>().signOut,
                             ),
                             child: state.signOutState.maybeWhen(
                               orElse: () => Text(translations.signOut),
-                              loading: () => const LoadingIndicator(),
+                              loading: () => const SizedBox(
+                                width: 16,
+                                height: 16,
+                                child: CircularProgressIndicator(),
+                              ),
                             ),
                           ),
                         ),
                         Center(
-                          child: CupertinoButton(
+                          child: TextButton(
                             onPressed: () => _showAccountDeletionDialog(
                               context,
                               context.read<SettingsCubit>().deleteUserAccount,
                             ),
                             child: state.accountDeletionState.maybeWhen(
-                              orElse: () => Text(translations.deleteAccount),
-                              loading: () => const LoadingIndicator(),
+                              orElse: () => Text(
+                                translations.deleteAccount,
+                                style: TextStyle(
+                                  color: primarySwatch.shade300,
+                                ),
+                              ),
+                              loading: () => const SizedBox(
+                                width: 16,
+                                height: 16,
+                                child: CircularProgressIndicator(),
+                              ),
                             ),
                           ),
                         ),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_onboarding_slider/flutter_onboarding_slider.dart';
 import 'package:tracking_app/gen/assets.gen.dart';
+import 'package:tracking_app/shared/constants/colors.dart';
 import 'package:tracking_app/shared/constants/layout.dart';
 
 class OnboardingSlider extends StatelessWidget {
@@ -15,6 +17,8 @@ class OnboardingSlider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final translations = AppLocalizations.of(context)!;
+
     final mediaQuery = MediaQuery.of(context);
     final screenPadding = mediaQuery.padding;
     final screenHeight =
@@ -27,17 +31,18 @@ class OnboardingSlider extends StatelessWidget {
       trailingFunction: signInButtonFunction,
       onFinish: signUpButtonFunction,
       headerBackgroundColor: Colors.white,
-      finishButtonText: 'Register',
+      pageBackgroundColor: lightBackgroundColor,
+      finishButtonText: translations.signUp,
       finishButtonStyle: const FinishButtonStyle(
-        backgroundColor: Colors.blue,
+        backgroundColor: primarySwatch,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
-            Radius.circular(10),
+            Radius.circular(30),
           ),
         ),
       ),
-      skipTextButton: const Text('Skip'),
-      trailing: const Text('Login'),
+      skipTextButton: Text(translations.skip),
+      trailing: Text(translations.signIn),
       background: [
         _OnboardingSliderBackground(
           key: const ValueKey('onboarding-slider-bg-1'),
@@ -61,23 +66,20 @@ class OnboardingSlider extends StatelessWidget {
         _OnboardingSliderPageBody(
           key: const ValueKey('onboarding-slider-body-1'),
           offset: backgroundImageHeight,
-          title: 'Discover a New You',
-          subtitle: 'Explore mood tracking and estimate your '
-              'mood on daily basis.',
+          title: translations.onboardingTextTitle1,
+          subtitle: translations.onboardingTextSubtitle1,
         ),
         _OnboardingSliderPageBody(
           key: const ValueKey('onboarding-slider-body-2'),
           offset: backgroundImageHeight,
-          title: 'Cultivate Gratitude, Record Life',
-          subtitle: 'Capture gratitude and emotions daily. Show gratitude and '
-              "write down what you're grateful for.",
+          title: translations.onboardingTextTitle2,
+          subtitle: translations.onboardingTextSubtitle2,
         ),
         _OnboardingSliderPageBody(
           key: const ValueKey('onboarding-slider-body-3'),
           offset: backgroundImageHeight,
-          title: 'Empower Your Mind, Find Clarity',
-          subtitle: 'Unlock inner peace and mental clarity by journaling '
-              'your thoughts in a diary.',
+          title: translations.onboardingTextTitle3,
+          subtitle: translations.onboardingTextSubtitle3,
         ),
       ],
     );
@@ -98,38 +100,41 @@ class _OnboardingSliderPageBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: viewPaddingHorizontal,
-      ),
-      child: Column(
-        children: <Widget>[
-          SizedBox(
-            height: offset,
-          ),
-          Expanded(
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: verticalPaddingLarge,
-                ),
-                Text(
-                  title,
-                  style: Theme.of(context).textTheme.headlineSmall,
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(
-                  height: verticalPaddingSmall,
-                ),
-                Text(
-                  subtitle,
-                  style: Theme.of(context).textTheme.bodyLarge,
-                  textAlign: TextAlign.center,
-                ),
-              ],
+    return SizedBox(
+      width: MediaQuery.of(context).size.width,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: viewPaddingHorizontal,
+        ),
+        child: Column(
+          children: <Widget>[
+            SizedBox(
+              height: offset,
             ),
-          ),
-        ],
+            Expanded(
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: verticalPaddingLarge,
+                  ),
+                  Text(
+                    title,
+                    style: Theme.of(context).textTheme.headlineSmall,
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(
+                    height: verticalPaddingSmall,
+                  ),
+                  Text(
+                    subtitle,
+                    style: Theme.of(context).textTheme.bodyLarge,
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

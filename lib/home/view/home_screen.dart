@@ -1,4 +1,5 @@
 import 'package:amplify_flutter/amplify_flutter.dart';
+import 'package:animated_emoji/animated_emoji.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -9,8 +10,8 @@ import 'package:tracking_app/home/cubit/home_cubit.dart';
 import 'package:tracking_app/main.dart';
 import 'package:tracking_app/shared/constants/colors.dart';
 import 'package:tracking_app/shared/constants/layout.dart';
-import 'package:tracking_app/shared/helper/mood_value_color.dart';
 import 'package:tracking_app/shared/view/base_view.dart';
+import 'package:tracking_app/shared/widgets/app_elevated_button.dart';
 import 'package:tracking_app/shared/widgets/error_message.dart';
 import 'package:tracking_app/shared/widgets/loading_indicator.dart';
 import 'package:tracking_app/user_profile/cubit/user_profile_cubit.dart';
@@ -24,6 +25,10 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Jiffy.setLocale(
+      Localizations.localeOf(context).languageCode,
+    );
+
     return BlocProvider<HomeCubit>(
       create: (context) {
         final userProfileCubit = context.read<UserProfileCubit>();
@@ -43,19 +48,13 @@ class HomeScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(
             horizontal: viewPaddingHorizontal,
           ),
-          child: Hero(
-            tag: 'track-button',
-            child: ElevatedButton.icon(
-              onPressed: () {
-                safePrint('navigate to create mood screen');
-                context.go('/home/create');
-              },
-              icon: const Icon(Icons.add),
-              label: Text(AppLocalizations.of(context)!.trackMood),
-              style: ElevatedButton.styleFrom(
-                minimumSize: const Size.fromHeight(50),
-              ),
-            ),
+          child: AppElevatedButton(
+            icon: Icons.add,
+            label: AppLocalizations.of(context)!.trackMood,
+            onPressed: () {
+              context.go('/home/create');
+            },
+            isLoading: false,
           ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -159,27 +158,8 @@ class _HomeContentViewState extends State<_HomeContentView> {
     final translations = AppLocalizations.of(context)!;
 
     if (widget.moods.isEmpty) {
-      return Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Center(
-            child: Text(
-              translations.hello(widget.firstName),
-              style: Theme.of(context).textTheme.headlineSmall,
-              textAlign: TextAlign.center,
-            ),
-          ),
-          const SizedBox(
-            height: verticalPaddingSmall,
-          ),
-          Center(
-            child: Text(
-              translations.noMoodsYet,
-              style: Theme.of(context).textTheme.bodyLarge,
-              textAlign: TextAlign.center,
-            ),
-          ),
-        ],
+      return _HomeContentWithNoMoods(
+        firstName: widget.firstName,
       );
     }
 
@@ -203,7 +183,10 @@ class _HomeContentViewState extends State<_HomeContentView> {
         ),
         Text(
           translations.moodHistoryTitle,
-          style: Theme.of(context).textTheme.headlineLarge,
+          style: Theme.of(context).textTheme.headlineMedium,
+        ),
+        const SizedBox(
+          height: verticalPaddingMedium,
         ),
         Text(
           translations.moodHistoryDescription,
@@ -215,14 +198,14 @@ class _HomeContentViewState extends State<_HomeContentView> {
         SizedBox(
           height: moodsListViewHeight,
           child: _MoodsShaderMask(
-            child: _buildMoodsListView(),
+            child: _buildMoods(),
           ),
         ),
       ],
     );
   }
 
-  ListView _buildMoodsListView() {
+  ListView _buildMoods() {
     return ListView.builder(
       controller: _scrollController,
       itemCount: widget.hasReachedMaxMoods
@@ -248,6 +231,49 @@ class _HomeContentViewState extends State<_HomeContentView> {
           child: _MoodCard(mood: mood),
         );
       },
+    );
+  }
+}
+
+class _HomeContentWithNoMoods extends StatelessWidget {
+  const _HomeContentWithNoMoods({
+    required this.firstName,
+  });
+
+  final String firstName;
+
+  @override
+  Widget build(BuildContext context) {
+    final translations = AppLocalizations.of(context)!;
+
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const AnimatedEmoji(
+          AnimatedEmojis.warmSmile,
+          size: 128,
+        ),
+        const SizedBox(
+          height: verticalPaddingSmall,
+        ),
+        Center(
+          child: Text(
+            translations.hello(firstName),
+            style: Theme.of(context).textTheme.headlineLarge,
+            textAlign: TextAlign.center,
+          ),
+        ),
+        const SizedBox(
+          height: verticalPaddingSmall,
+        ),
+        Center(
+          child: Text(
+            translations.noMoodsYet,
+            style: Theme.of(context).textTheme.bodyLarge,
+            textAlign: TextAlign.center,
+          ),
+        ),
+      ],
     );
   }
 }

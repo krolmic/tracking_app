@@ -1,3 +1,9 @@
+import 'package:animated_emoji/animated_emoji.dart';
+import 'package:another_flushbar/flushbar.dart';
+import 'package:cool_stepper/cool_stepper.dart';
+// TODO(username): change
+// ignore: implementation_imports
+import 'package:cool_stepper/src/widgets/cool_stepper_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -9,8 +15,6 @@ import 'package:tracking_app/main.dart';
 import 'package:tracking_app/shared/constants/colors.dart';
 import 'package:tracking_app/shared/constants/layout.dart';
 import 'package:tracking_app/shared/formz.dart';
-import 'package:tracking_app/shared/helper/mood_value_color.dart';
-import 'package:tracking_app/shared/view/base_view.dart';
 import 'package:tracking_app/shared/widgets/loading_indicator.dart';
 import 'package:user_profile_repository/user_profile_repository.dart';
 
@@ -29,6 +33,7 @@ class CreateMoodScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text(AppLocalizations.of(context)!.trackMood),
+          centerTitle: true,
         ),
         body: const _CreateMoodView(),
       ),
@@ -41,11 +46,9 @@ class _CreateMoodView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const BaseView(
-      child: SingleChildScrollView(
-        child: _CreateMoodForm(
-          key: ValueKey('Create mood form'),
-        ),
+    return const SafeArea(
+      child: _CreateMoodForm(
+        key: ValueKey('Create mood form'),
       ),
     );
   }
