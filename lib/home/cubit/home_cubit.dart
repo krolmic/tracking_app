@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_fimber/flutter_fimber.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:mood_repository/mood_repository.dart';
 import 'package:user_profile_repository/user_profile_repository.dart'
@@ -37,12 +38,7 @@ class HomeCubit extends Cubit<HomeState> {
   void listenMoodEntryChanges() {
     _moodEntryStream = _dataStore.observe(MoodEntry.classType).listen(
       (event) {
-        safePrint('Received event of type ${event.eventType}');
-        safePrint('Received mood entry ${event.item}');
-
         if (event.eventType == EventType.create) {
-          safePrint('Reloading moods...');
-
           loadMoods(reloadMoods: true);
         } else if (event.eventType == EventType.update &&
             state.moodsState.isSuccess) {
@@ -58,6 +54,29 @@ class HomeCubit extends Cubit<HomeState> {
             ];
 
             updatedMoods[updatedMoodIndex] = Mood.fromMoodEntry(event.item);
+
+            emit(
+              state.copyWith(
+                moodsState: moodsState.copyWith(
+                  moods: updatedMoods,
+                ),
+              ),
+            );
+          }
+        } else if (event.eventType == EventType.delete &&
+            state.moodsState.isSuccess) {
+          final moodsState = state.moodsState as HomeMoodsSuccessState;
+
+          final deletedMoodIndex = moodsState.moods.indexWhere(
+            (mood) => mood.id == event.item.id,
+          );
+
+          if (deletedMoodIndex != -1) {
+            final updatedMoods = [
+              ...moodsState.moods,
+            ]..removeWhere(
+                (mood) => mood.id == event.item.id,
+              );
 
             emit(
               state.copyWith(
@@ -97,13 +116,11 @@ class HomeCubit extends Cubit<HomeState> {
           userId: userId,
         );
 
-        safePrint('initial moods length ${moods.length}');
-
         emit(
           state.copyWith(
             moodsState: HomeMoodsState.loaded(
               moods: moods,
-              hasReachedMax: moods.length < 15,
+              hasReachedMax: moods.length < MoodRepository.paginationLimit,
               loadingMore: false,
               nextPageToLoad: 1,
             ),
@@ -115,46 +132,38 @@ class HomeCubit extends Cubit<HomeState> {
 
       await state.moodsState.whenOrNull(
         loaded: (moods, loadingMore, hasReachedMax, nextPageToLoad) async {
-          if (hasReachedMax) {
-            safePrint('Has reached max');
+          if (hasReachedMax || loadingMore) {
             return;
-          } else {
-            if (loadingMore) {
-              return;
-            }
-
-            emit(
-              state.copyWith(
-                moodsState: HomeMoodsState.loaded(
-                  moods: moods,
-                  loadingMore: true,
-                  hasReachedMax: hasReachedMax,
-                  nextPageToLoad: nextPageToLoad,
-                ),
-              ),
-            );
-
-            final userId = await _userProfileRepository.getCurrentUserId();
-            final fetchedMoods = await _moodRepository.getMoods(
-              page: nextPageToLoad,
-              userId: userId,
-            );
-
-            safePrint(
-              'additionally fetched moods length ${fetchedMoods.length}',
-            );
-
-            emit(
-              state.copyWith(
-                moodsState: HomeMoodsState.loaded(
-                  moods: moods + fetchedMoods,
-                  hasReachedMax: fetchedMoods.length < 15,
-                  loadingMore: false,
-                  nextPageToLoad: nextPageToLoad + 1,
-                ),
-              ),
-            );
           }
+
+          emit(
+            state.copyWith(
+              moodsState: HomeMoodsState.loaded(
+                moods: moods,
+                loadingMore: true,
+                hasReachedMax: hasReachedMax,
+                nextPageToLoad: nextPageToLoad,
+              ),
+            ),
+          );
+
+          final userId = await _userProfileRepository.getCurrentUserId();
+          final fetchedMoods = await _moodRepository.getMoods(
+            page: nextPageToLoad,
+            userId: userId,
+          );
+
+          emit(
+            state.copyWith(
+              moodsState: HomeMoodsState.loaded(
+                moods: moods + fetchedMoods,
+                hasReachedMax:
+                    fetchedMoods.length < MoodRepository.paginationLimit,
+                loadingMore: false,
+                nextPageToLoad: nextPageToLoad + 1,
+              ),
+            ),
+          );
         },
       );
     } catch (e, stackTrace) {
