@@ -36,11 +36,10 @@ class SettingsCubit extends Cubit<SettingsState> {
         ),
       );
 
-      safePrint('singing out...');
-
       await _accountRepository.signOut();
     } catch (e, stackTrace) {
       Fimber.e('Sign out failed', ex: e, stacktrace: stackTrace);
+
       emit(
         state.copyWith(
           signOutState: const SignOutState.error(),
@@ -56,8 +55,6 @@ class SettingsCubit extends Cubit<SettingsState> {
           accountDeletionState: const AccountDeletionState.loading(),
         ),
       );
-
-      safePrint('deleting user account...');
 
       final userId = await _userProfileRepository.getCurrentUserId();
 

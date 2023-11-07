@@ -17,8 +17,6 @@ extension DateTimeX on DateTime {
           '$formattedDate$utcHourOffset:$utcMinuteOffset';
       return TemporalDateTime.fromString(dateTimeWithOffset);
     } catch (e, stackTrace) {
-      safePrint('Formatting DateTime to TemporalDateTime failed: $e');
-
       Error.throwWithStackTrace(
         MoodRepositoryException(
           message: 'Formatting DateTime to TemporalDateTime failed.',
@@ -52,6 +50,8 @@ class MoodRepository {
 
   final DataStoreCategory _amplifyDatastore;
 
+  static const paginationLimit = 15;
+
   Future<List<Mood>> getMoods({
     required int page,
     required String userId,
@@ -63,23 +63,21 @@ class MoodRepository {
           MoodEntry.CREATEDON.descending(),
         ],
         where: MoodEntry.USERID.eq(userId),
-        pagination: QueryPagination(page: page, limit: 15),
+        pagination: QueryPagination(page: page, limit: paginationLimit),
       );
 
       final moods = <Mood>[];
 
       if (fetchedItems.isNotEmpty) {
         final moodEntries = fetchedItems.whereType<MoodEntry>();
+
         for (final moodEntry in moodEntries) {
-          safePrint(moodEntry);
           moods.add(Mood.fromMoodEntry(moodEntry));
         }
       }
 
       return moods;
     } catch (e, stackTrace) {
-      safePrint('MoodEntry query failed: $e');
-
       Error.throwWithStackTrace(
         MoodRepositoryException(
           message: 'MoodEntry query failed.',
@@ -108,12 +106,8 @@ class MoodRepository {
 
       await _amplifyDatastore.save(newMoodEntry);
 
-      safePrint('Create result: $newMoodEntry');
-
       return Mood.fromMoodEntry(newMoodEntry);
     } catch (e, stackTrace) {
-      safePrint('MoodEntry creation failed: $e');
-
       Error.throwWithStackTrace(
         MoodRepositoryException(
           message: 'MoodEntry creation failed.',
@@ -149,8 +143,6 @@ class MoodRepository {
 
       return Mood.fromMoodEntry(updatedMoodEntry);
     } catch (e, stackTrace) {
-      safePrint('MoodEntry query failed: $e');
-
       Error.throwWithStackTrace(
         MoodRepositoryException(
           message: 'MoodEntry query failed.',
@@ -191,12 +183,9 @@ class MoodRepository {
       );
 
       for (final moodEntry in fetchedItems) {
-        safePrint(moodEntry);
         await _amplifyDatastore.delete(moodEntry);
       }
     } catch (e, stackTrace) {
-      safePrint('Deleting mood entries assigned to $userId failed: $e');
-
       Error.throwWithStackTrace(
         MoodRepositoryException(
           message: 'Deleting mood entries assigned to $userId failed',

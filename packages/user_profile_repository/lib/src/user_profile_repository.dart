@@ -33,7 +33,6 @@ class UserProfileRepository {
         authUserAttributes,
       );
     } catch (e, stackTrace) {
-      print("Error in fetchUserProfile");
       Error.throwWithStackTrace(
         UserProfileRepositoryException(
           message: 'Failed to get user details.',
@@ -74,7 +73,6 @@ class UserProfileRepository {
       final user = await Amplify.Auth.getCurrentUser();
       return user.userId;
     } catch (e, stackTrace) {
-      safePrint('Error in getCurrentUserId');
       Error.throwWithStackTrace(
         UserProfileRepositoryException(
           message: 'Failed to get user id.',

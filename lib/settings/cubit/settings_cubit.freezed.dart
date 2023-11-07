@@ -190,7 +190,6 @@ mixin _$SignOutState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() success,
     required TResult Function() error,
   }) =>
       throw _privateConstructorUsedError;
@@ -198,7 +197,6 @@ mixin _$SignOutState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? success,
     TResult? Function()? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -206,7 +204,6 @@ mixin _$SignOutState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? success,
     TResult Function()? error,
     required TResult orElse(),
   }) =>
@@ -215,7 +212,6 @@ mixin _$SignOutState {
   TResult map<TResult extends Object?>({
     required TResult Function(SignOutInitialState value) initial,
     required TResult Function(SignOutLoadingState value) loading,
-    required TResult Function(SignOutSuccessState value) success,
     required TResult Function(SignOutErrorState value) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -223,7 +219,6 @@ mixin _$SignOutState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(SignOutInitialState value)? initial,
     TResult? Function(SignOutLoadingState value)? loading,
-    TResult? Function(SignOutSuccessState value)? success,
     TResult? Function(SignOutErrorState value)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -231,7 +226,6 @@ mixin _$SignOutState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SignOutInitialState value)? initial,
     TResult Function(SignOutLoadingState value)? loading,
-    TResult Function(SignOutSuccessState value)? success,
     TResult Function(SignOutErrorState value)? error,
     required TResult orElse(),
   }) =>
@@ -297,7 +291,6 @@ class _$SignOutInitialStateImpl implements SignOutInitialState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() success,
     required TResult Function() error,
   }) {
     return initial();
@@ -308,7 +301,6 @@ class _$SignOutInitialStateImpl implements SignOutInitialState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? success,
     TResult? Function()? error,
   }) {
     return initial?.call();
@@ -319,7 +311,6 @@ class _$SignOutInitialStateImpl implements SignOutInitialState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? success,
     TResult Function()? error,
     required TResult orElse(),
   }) {
@@ -334,7 +325,6 @@ class _$SignOutInitialStateImpl implements SignOutInitialState {
   TResult map<TResult extends Object?>({
     required TResult Function(SignOutInitialState value) initial,
     required TResult Function(SignOutLoadingState value) loading,
-    required TResult Function(SignOutSuccessState value) success,
     required TResult Function(SignOutErrorState value) error,
   }) {
     return initial(this);
@@ -345,7 +335,6 @@ class _$SignOutInitialStateImpl implements SignOutInitialState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(SignOutInitialState value)? initial,
     TResult? Function(SignOutLoadingState value)? loading,
-    TResult? Function(SignOutSuccessState value)? success,
     TResult? Function(SignOutErrorState value)? error,
   }) {
     return initial?.call(this);
@@ -356,7 +345,6 @@ class _$SignOutInitialStateImpl implements SignOutInitialState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SignOutInitialState value)? initial,
     TResult Function(SignOutLoadingState value)? loading,
-    TResult Function(SignOutSuccessState value)? success,
     TResult Function(SignOutErrorState value)? error,
     required TResult orElse(),
   }) {
@@ -412,7 +400,6 @@ class _$SignOutLoadingStateImpl implements SignOutLoadingState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() success,
     required TResult Function() error,
   }) {
     return loading();
@@ -423,7 +410,6 @@ class _$SignOutLoadingStateImpl implements SignOutLoadingState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? success,
     TResult? Function()? error,
   }) {
     return loading?.call();
@@ -434,7 +420,6 @@ class _$SignOutLoadingStateImpl implements SignOutLoadingState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? success,
     TResult Function()? error,
     required TResult orElse(),
   }) {
@@ -449,7 +434,6 @@ class _$SignOutLoadingStateImpl implements SignOutLoadingState {
   TResult map<TResult extends Object?>({
     required TResult Function(SignOutInitialState value) initial,
     required TResult Function(SignOutLoadingState value) loading,
-    required TResult Function(SignOutSuccessState value) success,
     required TResult Function(SignOutErrorState value) error,
   }) {
     return loading(this);
@@ -460,7 +444,6 @@ class _$SignOutLoadingStateImpl implements SignOutLoadingState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(SignOutInitialState value)? initial,
     TResult? Function(SignOutLoadingState value)? loading,
-    TResult? Function(SignOutSuccessState value)? success,
     TResult? Function(SignOutErrorState value)? error,
   }) {
     return loading?.call(this);
@@ -471,7 +454,6 @@ class _$SignOutLoadingStateImpl implements SignOutLoadingState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SignOutInitialState value)? initial,
     TResult Function(SignOutLoadingState value)? loading,
-    TResult Function(SignOutSuccessState value)? success,
     TResult Function(SignOutErrorState value)? error,
     required TResult orElse(),
   }) {
@@ -484,121 +466,6 @@ class _$SignOutLoadingStateImpl implements SignOutLoadingState {
 
 abstract class SignOutLoadingState implements SignOutState {
   const factory SignOutLoadingState() = _$SignOutLoadingStateImpl;
-}
-
-/// @nodoc
-abstract class _$$SignOutSuccessStateImplCopyWith<$Res> {
-  factory _$$SignOutSuccessStateImplCopyWith(_$SignOutSuccessStateImpl value,
-          $Res Function(_$SignOutSuccessStateImpl) then) =
-      __$$SignOutSuccessStateImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$SignOutSuccessStateImplCopyWithImpl<$Res>
-    extends _$SignOutStateCopyWithImpl<$Res, _$SignOutSuccessStateImpl>
-    implements _$$SignOutSuccessStateImplCopyWith<$Res> {
-  __$$SignOutSuccessStateImplCopyWithImpl(_$SignOutSuccessStateImpl _value,
-      $Res Function(_$SignOutSuccessStateImpl) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$SignOutSuccessStateImpl implements SignOutSuccessState {
-  const _$SignOutSuccessStateImpl();
-
-  @override
-  String toString() {
-    return 'SignOutState.success()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$SignOutSuccessStateImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function() success,
-    required TResult Function() error,
-  }) {
-    return success();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function()? success,
-    TResult? Function()? error,
-  }) {
-    return success?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function()? success,
-    TResult Function()? error,
-    required TResult orElse(),
-  }) {
-    if (success != null) {
-      return success();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(SignOutInitialState value) initial,
-    required TResult Function(SignOutLoadingState value) loading,
-    required TResult Function(SignOutSuccessState value) success,
-    required TResult Function(SignOutErrorState value) error,
-  }) {
-    return success(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(SignOutInitialState value)? initial,
-    TResult? Function(SignOutLoadingState value)? loading,
-    TResult? Function(SignOutSuccessState value)? success,
-    TResult? Function(SignOutErrorState value)? error,
-  }) {
-    return success?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(SignOutInitialState value)? initial,
-    TResult Function(SignOutLoadingState value)? loading,
-    TResult Function(SignOutSuccessState value)? success,
-    TResult Function(SignOutErrorState value)? error,
-    required TResult orElse(),
-  }) {
-    if (success != null) {
-      return success(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class SignOutSuccessState implements SignOutState {
-  const factory SignOutSuccessState() = _$SignOutSuccessStateImpl;
 }
 
 /// @nodoc
@@ -641,7 +508,6 @@ class _$SignOutErrorStateImpl implements SignOutErrorState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() success,
     required TResult Function() error,
   }) {
     return error();
@@ -652,7 +518,6 @@ class _$SignOutErrorStateImpl implements SignOutErrorState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? success,
     TResult? Function()? error,
   }) {
     return error?.call();
@@ -663,7 +528,6 @@ class _$SignOutErrorStateImpl implements SignOutErrorState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? success,
     TResult Function()? error,
     required TResult orElse(),
   }) {
@@ -678,7 +542,6 @@ class _$SignOutErrorStateImpl implements SignOutErrorState {
   TResult map<TResult extends Object?>({
     required TResult Function(SignOutInitialState value) initial,
     required TResult Function(SignOutLoadingState value) loading,
-    required TResult Function(SignOutSuccessState value) success,
     required TResult Function(SignOutErrorState value) error,
   }) {
     return error(this);
@@ -689,7 +552,6 @@ class _$SignOutErrorStateImpl implements SignOutErrorState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(SignOutInitialState value)? initial,
     TResult? Function(SignOutLoadingState value)? loading,
-    TResult? Function(SignOutSuccessState value)? success,
     TResult? Function(SignOutErrorState value)? error,
   }) {
     return error?.call(this);
@@ -700,7 +562,6 @@ class _$SignOutErrorStateImpl implements SignOutErrorState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SignOutInitialState value)? initial,
     TResult Function(SignOutLoadingState value)? loading,
-    TResult Function(SignOutSuccessState value)? success,
     TResult Function(SignOutErrorState value)? error,
     required TResult orElse(),
   }) {

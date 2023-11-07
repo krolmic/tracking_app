@@ -13,14 +13,12 @@ class SettingsState with _$SettingsState {
 class SignOutState with _$SignOutState {
   const factory SignOutState.initial() = SignOutInitialState;
   const factory SignOutState.loading() = SignOutLoadingState;
-  const factory SignOutState.success() = SignOutSuccessState;
   const factory SignOutState.error() = SignOutErrorState;
 }
 
 extension SignOutStateX on SignOutState {
   bool get isInitial => this is SignOutInitialState;
   bool get isLoading => this is SignOutLoadingState;
-  bool get isSuccess => this is SignOutSuccessState;
   bool get isError => this is SignOutErrorState;
 }
 

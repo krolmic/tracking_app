@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_fimber/flutter_fimber.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -21,10 +20,7 @@ class UserProfileCubit extends Cubit<UserProfileState> {
 
   Future<void> loadUserProfile() async {
     try {
-      // throw 'Out of llamas!';
       emit(const UserProfileState.loading());
-
-      safePrint('loading user profile');
 
       final userProfile = await _userProfileRepository.fetchUserProfile();
 
