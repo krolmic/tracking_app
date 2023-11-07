@@ -1,5 +1,6 @@
 import 'package:account_repository/account_repository.dart';
 import 'package:animated_emoji/animated_emoji.dart';
+import 'package:email_repository/email_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -9,6 +10,7 @@ import 'package:tracking_app/main.dart';
 import 'package:tracking_app/settings/cubit/settings_cubit.dart';
 import 'package:tracking_app/shared/constants/colors.dart';
 import 'package:tracking_app/shared/constants/layout.dart';
+import 'package:tracking_app/shared/constants/misc.dart';
 import 'package:tracking_app/shared/router.dart';
 import 'package:tracking_app/shared/view/base_view.dart';
 import 'package:tracking_app/shared/widgets/error_message.dart';
@@ -32,6 +34,7 @@ class SettingsScreen extends StatelessWidget {
           userProfileRepository: getIt.get<UserProfileRepository>(),
           moodRepository: getIt.get<MoodRepository>(),
           accountRepository: getIt.get<AccountRepository>(),
+          emailRepository: getIt.get<EmailRepository>(),
         );
       },
       child: Scaffold(
@@ -125,7 +128,8 @@ class _SettingsView extends StatelessWidget {
         return BlocConsumer<SettingsCubit, SettingsState>(
           listener: (context, settingsState) {
             if (settingsState.signOutState.isError ||
-                settingsState.accountDeletionState.isError) {
+                settingsState.accountDeletionState.isError ||
+                settingsState.sendEmailState.isError) {
               ScaffoldMessenger.of(context)
                 ..hideCurrentSnackBar()
                 ..showSnackBar(
@@ -138,7 +142,8 @@ class _SettingsView extends StatelessWidget {
           },
           listenWhen: (previous, current) =>
               previous.signOutState != current.signOutState ||
-              previous.accountDeletionState != current.accountDeletionState,
+              previous.accountDeletionState != current.accountDeletionState ||
+              previous.sendEmailState != current.sendEmailState,
           builder: (context, state) {
             return BaseView(
               child: userProfileState.maybeWhen(
@@ -243,8 +248,21 @@ class _SettingsView extends StatelessWidget {
                               ),
                             ),
                             title: Text(translations.support),
-                            trailing: const Icon(Icons.mail),
-                            onTap: () {},
+                            trailing: state.sendEmailState.maybeWhen(
+                              loading: () => const SizedBox(
+                                height: 16,
+                                width: 16,
+                                child: CircularProgressIndicator(),
+                              ),
+                              orElse: () => const Icon(Icons.mail),
+                            ),
+                            onTap: state.sendEmailState.isLoading
+                                ? null
+                                : () => context.read<SettingsCubit>().sendEmail(
+                                      recipient: supportEmailAddress,
+                                      subject: '',
+                                      body: '',
+                                    ),
                           ),
                         ),
                         const SizedBox(

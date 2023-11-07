@@ -1,5 +1,6 @@
 import 'package:account_repository/account_repository.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
+import 'package:email_repository/email_repository.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -51,5 +52,8 @@ void registerSingletons() {
       () => AccountRepository(
         amplifyAuth: Amplify.Auth,
       ),
+    )
+    ..registerLazySingleton<EmailRepository>(
+      EmailRepository.new,
     );
 }

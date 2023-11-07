@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:account_repository/account_repository.dart';
+import 'package:email_repository/email_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_fimber/flutter_fimber.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -17,9 +18,11 @@ class SettingsCubit extends Cubit<SettingsState> {
         userProfileRepository,
     required AccountRepository accountRepository,
     required MoodRepository moodRepository,
+    required EmailRepository emailRepository,
   })  : _userProfileRepository = userProfileRepository,
         _accountRepository = accountRepository,
         _moodRepository = moodRepository,
+        _emailRepository = emailRepository,
         super(const SettingsState());
 
   final user_profile_repository.UserProfileRepository _userProfileRepository;
@@ -27,6 +30,8 @@ class SettingsCubit extends Cubit<SettingsState> {
   final AccountRepository _accountRepository;
 
   final MoodRepository _moodRepository;
+
+  final EmailRepository _emailRepository;
 
   Future<void> signOut() async {
     try {
@@ -73,6 +78,40 @@ class SettingsCubit extends Cubit<SettingsState> {
       emit(
         state.copyWith(
           accountDeletionState: const AccountDeletionState.error(),
+        ),
+      );
+    }
+  }
+
+  Future<void> sendEmail({
+    required String recipient,
+    required String subject,
+    required String body,
+  }) async {
+    try {
+      emit(
+        state.copyWith(
+          sendEmailState: const SendEmailState.loading(),
+        ),
+      );
+
+      await _emailRepository.sendEmail(
+        recipient: recipient,
+        subject: subject,
+        body: body,
+      );
+
+      emit(
+        state.copyWith(
+          sendEmailState: const SendEmailState.success(),
+        ),
+      );
+    } catch (e, stackTrace) {
+      Fimber.e('Sending email failed', ex: e, stacktrace: stackTrace);
+
+      emit(
+        state.copyWith(
+          sendEmailState: const SendEmailState.error(),
         ),
       );
     }

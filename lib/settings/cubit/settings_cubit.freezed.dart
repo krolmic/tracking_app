@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$SettingsState {
+  SendEmailState get sendEmailState => throw _privateConstructorUsedError;
   SignOutState get signOutState => throw _privateConstructorUsedError;
   AccountDeletionState get accountDeletionState =>
       throw _privateConstructorUsedError;
@@ -32,8 +33,11 @@ abstract class $SettingsStateCopyWith<$Res> {
       _$SettingsStateCopyWithImpl<$Res, SettingsState>;
   @useResult
   $Res call(
-      {SignOutState signOutState, AccountDeletionState accountDeletionState});
+      {SendEmailState sendEmailState,
+      SignOutState signOutState,
+      AccountDeletionState accountDeletionState});
 
+  $SendEmailStateCopyWith<$Res> get sendEmailState;
   $SignOutStateCopyWith<$Res> get signOutState;
   $AccountDeletionStateCopyWith<$Res> get accountDeletionState;
 }
@@ -51,10 +55,15 @@ class _$SettingsStateCopyWithImpl<$Res, $Val extends SettingsState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? sendEmailState = null,
     Object? signOutState = null,
     Object? accountDeletionState = null,
   }) {
     return _then(_value.copyWith(
+      sendEmailState: null == sendEmailState
+          ? _value.sendEmailState
+          : sendEmailState // ignore: cast_nullable_to_non_nullable
+              as SendEmailState,
       signOutState: null == signOutState
           ? _value.signOutState
           : signOutState // ignore: cast_nullable_to_non_nullable
@@ -64,6 +73,14 @@ class _$SettingsStateCopyWithImpl<$Res, $Val extends SettingsState>
           : accountDeletionState // ignore: cast_nullable_to_non_nullable
               as AccountDeletionState,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SendEmailStateCopyWith<$Res> get sendEmailState {
+    return $SendEmailStateCopyWith<$Res>(_value.sendEmailState, (value) {
+      return _then(_value.copyWith(sendEmailState: value) as $Val);
+    });
   }
 
   @override
@@ -93,8 +110,12 @@ abstract class _$$SettingsStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {SignOutState signOutState, AccountDeletionState accountDeletionState});
+      {SendEmailState sendEmailState,
+      SignOutState signOutState,
+      AccountDeletionState accountDeletionState});
 
+  @override
+  $SendEmailStateCopyWith<$Res> get sendEmailState;
   @override
   $SignOutStateCopyWith<$Res> get signOutState;
   @override
@@ -112,10 +133,15 @@ class __$$SettingsStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? sendEmailState = null,
     Object? signOutState = null,
     Object? accountDeletionState = null,
   }) {
     return _then(_$SettingsStateImpl(
+      sendEmailState: null == sendEmailState
+          ? _value.sendEmailState
+          : sendEmailState // ignore: cast_nullable_to_non_nullable
+              as SendEmailState,
       signOutState: null == signOutState
           ? _value.signOutState
           : signOutState // ignore: cast_nullable_to_non_nullable
@@ -132,9 +158,13 @@ class __$$SettingsStateImplCopyWithImpl<$Res>
 
 class _$SettingsStateImpl implements _SettingsState {
   const _$SettingsStateImpl(
-      {this.signOutState = const SignOutState.initial(),
+      {this.sendEmailState = const SendEmailState.initial(),
+      this.signOutState = const SignOutState.initial(),
       this.accountDeletionState = const AccountDeletionState.initial()});
 
+  @override
+  @JsonKey()
+  final SendEmailState sendEmailState;
   @override
   @JsonKey()
   final SignOutState signOutState;
@@ -144,7 +174,7 @@ class _$SettingsStateImpl implements _SettingsState {
 
   @override
   String toString() {
-    return 'SettingsState(signOutState: $signOutState, accountDeletionState: $accountDeletionState)';
+    return 'SettingsState(sendEmailState: $sendEmailState, signOutState: $signOutState, accountDeletionState: $accountDeletionState)';
   }
 
   @override
@@ -152,6 +182,8 @@ class _$SettingsStateImpl implements _SettingsState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SettingsStateImpl &&
+            (identical(other.sendEmailState, sendEmailState) ||
+                other.sendEmailState == sendEmailState) &&
             (identical(other.signOutState, signOutState) ||
                 other.signOutState == signOutState) &&
             (identical(other.accountDeletionState, accountDeletionState) ||
@@ -159,8 +191,8 @@ class _$SettingsStateImpl implements _SettingsState {
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, signOutState, accountDeletionState);
+  int get hashCode => Object.hash(
+      runtimeType, sendEmailState, signOutState, accountDeletionState);
 
   @JsonKey(ignore: true)
   @override
@@ -171,9 +203,12 @@ class _$SettingsStateImpl implements _SettingsState {
 
 abstract class _SettingsState implements SettingsState {
   const factory _SettingsState(
-      {final SignOutState signOutState,
+      {final SendEmailState sendEmailState,
+      final SignOutState signOutState,
       final AccountDeletionState accountDeletionState}) = _$SettingsStateImpl;
 
+  @override
+  SendEmailState get sendEmailState;
   @override
   SignOutState get signOutState;
   @override
@@ -1122,4 +1157,544 @@ class _$AccountDeletionErrorStateImpl implements AccountDeletionErrorState {
 
 abstract class AccountDeletionErrorState implements AccountDeletionState {
   const factory AccountDeletionErrorState() = _$AccountDeletionErrorStateImpl;
+}
+
+/// @nodoc
+mixin _$SendEmailState {
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() success,
+    required TResult Function() error,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function()? success,
+    TResult? Function()? error,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? success,
+    TResult Function()? error,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(SendEmailStateInitialState value) initial,
+    required TResult Function(SendEmailStateLoadingState value) loading,
+    required TResult Function(SendEmailStateSuccessState value) success,
+    required TResult Function(SendEmailStateErrorState value) error,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(SendEmailStateInitialState value)? initial,
+    TResult? Function(SendEmailStateLoadingState value)? loading,
+    TResult? Function(SendEmailStateSuccessState value)? success,
+    TResult? Function(SendEmailStateErrorState value)? error,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(SendEmailStateInitialState value)? initial,
+    TResult Function(SendEmailStateLoadingState value)? loading,
+    TResult Function(SendEmailStateSuccessState value)? success,
+    TResult Function(SendEmailStateErrorState value)? error,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $SendEmailStateCopyWith<$Res> {
+  factory $SendEmailStateCopyWith(
+          SendEmailState value, $Res Function(SendEmailState) then) =
+      _$SendEmailStateCopyWithImpl<$Res, SendEmailState>;
+}
+
+/// @nodoc
+class _$SendEmailStateCopyWithImpl<$Res, $Val extends SendEmailState>
+    implements $SendEmailStateCopyWith<$Res> {
+  _$SendEmailStateCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+}
+
+/// @nodoc
+abstract class _$$SendEmailStateInitialStateImplCopyWith<$Res> {
+  factory _$$SendEmailStateInitialStateImplCopyWith(
+          _$SendEmailStateInitialStateImpl value,
+          $Res Function(_$SendEmailStateInitialStateImpl) then) =
+      __$$SendEmailStateInitialStateImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$SendEmailStateInitialStateImplCopyWithImpl<$Res>
+    extends _$SendEmailStateCopyWithImpl<$Res, _$SendEmailStateInitialStateImpl>
+    implements _$$SendEmailStateInitialStateImplCopyWith<$Res> {
+  __$$SendEmailStateInitialStateImplCopyWithImpl(
+      _$SendEmailStateInitialStateImpl _value,
+      $Res Function(_$SendEmailStateInitialStateImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$SendEmailStateInitialStateImpl implements SendEmailStateInitialState {
+  const _$SendEmailStateInitialStateImpl();
+
+  @override
+  String toString() {
+    return 'SendEmailState.initial()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SendEmailStateInitialStateImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() success,
+    required TResult Function() error,
+  }) {
+    return initial();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function()? success,
+    TResult? Function()? error,
+  }) {
+    return initial?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? success,
+    TResult Function()? error,
+    required TResult orElse(),
+  }) {
+    if (initial != null) {
+      return initial();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(SendEmailStateInitialState value) initial,
+    required TResult Function(SendEmailStateLoadingState value) loading,
+    required TResult Function(SendEmailStateSuccessState value) success,
+    required TResult Function(SendEmailStateErrorState value) error,
+  }) {
+    return initial(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(SendEmailStateInitialState value)? initial,
+    TResult? Function(SendEmailStateLoadingState value)? loading,
+    TResult? Function(SendEmailStateSuccessState value)? success,
+    TResult? Function(SendEmailStateErrorState value)? error,
+  }) {
+    return initial?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(SendEmailStateInitialState value)? initial,
+    TResult Function(SendEmailStateLoadingState value)? loading,
+    TResult Function(SendEmailStateSuccessState value)? success,
+    TResult Function(SendEmailStateErrorState value)? error,
+    required TResult orElse(),
+  }) {
+    if (initial != null) {
+      return initial(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SendEmailStateInitialState implements SendEmailState {
+  const factory SendEmailStateInitialState() = _$SendEmailStateInitialStateImpl;
+}
+
+/// @nodoc
+abstract class _$$SendEmailStateLoadingStateImplCopyWith<$Res> {
+  factory _$$SendEmailStateLoadingStateImplCopyWith(
+          _$SendEmailStateLoadingStateImpl value,
+          $Res Function(_$SendEmailStateLoadingStateImpl) then) =
+      __$$SendEmailStateLoadingStateImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$SendEmailStateLoadingStateImplCopyWithImpl<$Res>
+    extends _$SendEmailStateCopyWithImpl<$Res, _$SendEmailStateLoadingStateImpl>
+    implements _$$SendEmailStateLoadingStateImplCopyWith<$Res> {
+  __$$SendEmailStateLoadingStateImplCopyWithImpl(
+      _$SendEmailStateLoadingStateImpl _value,
+      $Res Function(_$SendEmailStateLoadingStateImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$SendEmailStateLoadingStateImpl implements SendEmailStateLoadingState {
+  const _$SendEmailStateLoadingStateImpl();
+
+  @override
+  String toString() {
+    return 'SendEmailState.loading()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SendEmailStateLoadingStateImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() success,
+    required TResult Function() error,
+  }) {
+    return loading();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function()? success,
+    TResult? Function()? error,
+  }) {
+    return loading?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? success,
+    TResult Function()? error,
+    required TResult orElse(),
+  }) {
+    if (loading != null) {
+      return loading();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(SendEmailStateInitialState value) initial,
+    required TResult Function(SendEmailStateLoadingState value) loading,
+    required TResult Function(SendEmailStateSuccessState value) success,
+    required TResult Function(SendEmailStateErrorState value) error,
+  }) {
+    return loading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(SendEmailStateInitialState value)? initial,
+    TResult? Function(SendEmailStateLoadingState value)? loading,
+    TResult? Function(SendEmailStateSuccessState value)? success,
+    TResult? Function(SendEmailStateErrorState value)? error,
+  }) {
+    return loading?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(SendEmailStateInitialState value)? initial,
+    TResult Function(SendEmailStateLoadingState value)? loading,
+    TResult Function(SendEmailStateSuccessState value)? success,
+    TResult Function(SendEmailStateErrorState value)? error,
+    required TResult orElse(),
+  }) {
+    if (loading != null) {
+      return loading(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SendEmailStateLoadingState implements SendEmailState {
+  const factory SendEmailStateLoadingState() = _$SendEmailStateLoadingStateImpl;
+}
+
+/// @nodoc
+abstract class _$$SendEmailStateSuccessStateImplCopyWith<$Res> {
+  factory _$$SendEmailStateSuccessStateImplCopyWith(
+          _$SendEmailStateSuccessStateImpl value,
+          $Res Function(_$SendEmailStateSuccessStateImpl) then) =
+      __$$SendEmailStateSuccessStateImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$SendEmailStateSuccessStateImplCopyWithImpl<$Res>
+    extends _$SendEmailStateCopyWithImpl<$Res, _$SendEmailStateSuccessStateImpl>
+    implements _$$SendEmailStateSuccessStateImplCopyWith<$Res> {
+  __$$SendEmailStateSuccessStateImplCopyWithImpl(
+      _$SendEmailStateSuccessStateImpl _value,
+      $Res Function(_$SendEmailStateSuccessStateImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$SendEmailStateSuccessStateImpl implements SendEmailStateSuccessState {
+  const _$SendEmailStateSuccessStateImpl();
+
+  @override
+  String toString() {
+    return 'SendEmailState.success()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SendEmailStateSuccessStateImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() success,
+    required TResult Function() error,
+  }) {
+    return success();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function()? success,
+    TResult? Function()? error,
+  }) {
+    return success?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? success,
+    TResult Function()? error,
+    required TResult orElse(),
+  }) {
+    if (success != null) {
+      return success();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(SendEmailStateInitialState value) initial,
+    required TResult Function(SendEmailStateLoadingState value) loading,
+    required TResult Function(SendEmailStateSuccessState value) success,
+    required TResult Function(SendEmailStateErrorState value) error,
+  }) {
+    return success(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(SendEmailStateInitialState value)? initial,
+    TResult? Function(SendEmailStateLoadingState value)? loading,
+    TResult? Function(SendEmailStateSuccessState value)? success,
+    TResult? Function(SendEmailStateErrorState value)? error,
+  }) {
+    return success?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(SendEmailStateInitialState value)? initial,
+    TResult Function(SendEmailStateLoadingState value)? loading,
+    TResult Function(SendEmailStateSuccessState value)? success,
+    TResult Function(SendEmailStateErrorState value)? error,
+    required TResult orElse(),
+  }) {
+    if (success != null) {
+      return success(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SendEmailStateSuccessState implements SendEmailState {
+  const factory SendEmailStateSuccessState() = _$SendEmailStateSuccessStateImpl;
+}
+
+/// @nodoc
+abstract class _$$SendEmailStateErrorStateImplCopyWith<$Res> {
+  factory _$$SendEmailStateErrorStateImplCopyWith(
+          _$SendEmailStateErrorStateImpl value,
+          $Res Function(_$SendEmailStateErrorStateImpl) then) =
+      __$$SendEmailStateErrorStateImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$SendEmailStateErrorStateImplCopyWithImpl<$Res>
+    extends _$SendEmailStateCopyWithImpl<$Res, _$SendEmailStateErrorStateImpl>
+    implements _$$SendEmailStateErrorStateImplCopyWith<$Res> {
+  __$$SendEmailStateErrorStateImplCopyWithImpl(
+      _$SendEmailStateErrorStateImpl _value,
+      $Res Function(_$SendEmailStateErrorStateImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$SendEmailStateErrorStateImpl implements SendEmailStateErrorState {
+  const _$SendEmailStateErrorStateImpl();
+
+  @override
+  String toString() {
+    return 'SendEmailState.error()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SendEmailStateErrorStateImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() success,
+    required TResult Function() error,
+  }) {
+    return error();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function()? success,
+    TResult? Function()? error,
+  }) {
+    return error?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? success,
+    TResult Function()? error,
+    required TResult orElse(),
+  }) {
+    if (error != null) {
+      return error();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(SendEmailStateInitialState value) initial,
+    required TResult Function(SendEmailStateLoadingState value) loading,
+    required TResult Function(SendEmailStateSuccessState value) success,
+    required TResult Function(SendEmailStateErrorState value) error,
+  }) {
+    return error(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(SendEmailStateInitialState value)? initial,
+    TResult? Function(SendEmailStateLoadingState value)? loading,
+    TResult? Function(SendEmailStateSuccessState value)? success,
+    TResult? Function(SendEmailStateErrorState value)? error,
+  }) {
+    return error?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(SendEmailStateInitialState value)? initial,
+    TResult Function(SendEmailStateLoadingState value)? loading,
+    TResult Function(SendEmailStateSuccessState value)? success,
+    TResult Function(SendEmailStateErrorState value)? error,
+    required TResult orElse(),
+  }) {
+    if (error != null) {
+      return error(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SendEmailStateErrorState implements SendEmailState {
+  const factory SendEmailStateErrorState() = _$SendEmailStateErrorStateImpl;
 }

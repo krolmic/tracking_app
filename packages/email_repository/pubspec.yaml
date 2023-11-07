@@ -1,0 +1,13 @@
+name: email_repository
+description: A Dart Repository which manages sending emails.
+version: 1.0.0
+
+environment:
+  sdk: ^3.0.6
+
+dependencies:
+  flutter_email_sender: ^6.0.2
+
+dev_dependencies:
+  test: ^1.16.4
+  very_good_analysis: ^5.0.0+1
