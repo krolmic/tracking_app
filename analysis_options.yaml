@@ -8,4 +8,4 @@ analyzer:
     - "**/*.freezed.dart"
     - "**/*.g.dart"
     - "lib/models/*"
-    - "lib/amplify_configuration/amplifyconfiguration.dart"
+    - "lib/amplifyconfiguration.dart"
