@@ -4,8 +4,10 @@ import 'package:go_router/go_router.dart';
 import 'package:mood_repository/mood_repository.dart';
 import 'package:tracking_app/create_mood/view/create_mood_screen.dart';
 import 'package:tracking_app/home/view/home_screen.dart';
+import 'package:tracking_app/privacy_policy/view/privacy_policy_screen.dart';
 import 'package:tracking_app/settings/view/settings_screen.dart';
 import 'package:tracking_app/shared/navigation.dart';
+import 'package:tracking_app/terms_of_service/view/terms_of_service_screen.dart';
 import 'package:tracking_app/update_mood/view/update_mood_screen.dart';
 import 'package:tracking_app/update_user_profile/view/update_user_profile_screen.dart';
 
@@ -83,6 +85,20 @@ final goRouter = GoRouter(
                       firstName:
                           (state.extra! as UpdateUserProfileParams).firstName,
                     ),
+                  ),
+                ),
+                GoRoute(
+                  name: 'terms-of-service',
+                  path: 'terms-of-service',
+                  pageBuilder: (context, state) => const NoTransitionPage(
+                    child: TermsOfServiceScreen(),
+                  ),
+                ),
+                GoRoute(
+                  name: 'privacy-policy',
+                  path: 'privacy-policy',
+                  pageBuilder: (context, state) => const NoTransitionPage(
+                    child: PrivacyPolicyScreen(),
                   ),
                 ),
               ],

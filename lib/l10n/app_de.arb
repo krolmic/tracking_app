@@ -45,6 +45,7 @@
     "general": "Allgemein",
     "support": "Support",
     "termsOfService": "Nutzungsbedingungen",
+    "privacyPolicy": "Datenschutz",
     "moodUpdatedSuccessfully": "Stimmung erfolgreich editiert!",
     "moodDeletedSuccessfully": "Stimmung erfolgreich gelöscht!",
     "updateMood": "Stimmung aktualisieren",

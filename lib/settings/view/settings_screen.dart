@@ -281,9 +281,36 @@ class _SettingsView extends StatelessWidget {
                             ),
                             title: Text(translations.termsOfService),
                             trailing: const Icon(Icons.description),
-                            onTap: () {},
+                            onTap: () {
+                              context.go('/settings/terms-of-service');
+                            },
                           ),
                         ),
+                        const SizedBox(
+                          height: verticalPaddingMedium,
+                        ),
+                        Card(
+                          elevation: 5,
+                          shadowColor: primarySwatch.shade100,
+                          child: ListTile(
+                            textColor: primarySwatch,
+                            iconColor: primarySwatch,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(10),
+                              ),
+                            ),
+                            title: Text(translations.privacyPolicy),
+                            trailing: const Icon(Icons.description),
+                            onTap: () {
+                              context.go('/settings/privacy-policy');
+                            },
+                          ),
+                        ),
+                        const SizedBox(
+                          height: verticalPaddingLarge,
+                        ),
+                        const Divider(),
                         const SizedBox(
                           height: verticalPaddingLarge,
                         ),

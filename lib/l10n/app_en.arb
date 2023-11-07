@@ -45,6 +45,7 @@
     "general": "General",
     "support": "Support",
     "termsOfService": "Terms of service",
+    "privacyPolicy": "Privacy policy",
     "moodUpdatedSuccessfully": "Mood updated successfully!",
     "moodDeletedSuccessfully": "Mood deleted successfully!",
     "updateMood": "Update mood",
