@@ -34,6 +34,8 @@ class App extends StatelessWidget {
         ),
       ],
       child: BlocBuilder<AppCubit, AppState>(
+        buildWhen: (previousState, currentState) =>
+            previousState != currentState,
         builder: (context, state) {
           if (state.isInitialOrLoading) {
             return const ColoredBox(

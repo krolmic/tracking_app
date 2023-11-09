@@ -175,6 +175,8 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
     final translations = AppLocalizations.of(context)!;
 
     return BlocConsumer<CreateMoodCubit, FormzSubmissionStatus>(
+      listenWhen: (previousState, currentState) =>
+          previousState != currentState,
       listener: (context, state) {
         if (state.isSuccess) {
           _showSuccessMessage();
@@ -186,6 +188,7 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
           _showErrorMessage();
         }
       },
+      buildWhen: (previousState, currentState) => previousState != currentState,
       builder: (context, state) {
         return Form(
           key: _formKey,

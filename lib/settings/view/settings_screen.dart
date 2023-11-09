@@ -124,8 +124,15 @@ class _SettingsView extends StatelessWidget {
     final translations = AppLocalizations.of(context)!;
 
     return BlocBuilder<UserProfileCubit, UserProfileState>(
+      buildWhen: (previousUserProfileState, currentUserProfileState) =>
+          previousUserProfileState != currentUserProfileState,
       builder: (context, userProfileState) {
         return BlocConsumer<SettingsCubit, SettingsState>(
+          listenWhen: (previousState, currentState) =>
+              previousState.signOutState != currentState.signOutState ||
+              previousState.accountDeletionState !=
+                  currentState.accountDeletionState ||
+              previousState.sendEmailState != currentState.sendEmailState,
           listener: (context, settingsState) {
             if (settingsState.signOutState.isError ||
                 settingsState.accountDeletionState.isError ||
@@ -140,11 +147,12 @@ class _SettingsView extends StatelessWidget {
                 );
             }
           },
-          listenWhen: (previous, current) =>
-              previous.signOutState != current.signOutState ||
-              previous.accountDeletionState != current.accountDeletionState ||
-              previous.sendEmailState != current.sendEmailState,
-          builder: (context, state) {
+          buildWhen: (previousState, currentState) =>
+              previousState.signOutState != currentState.signOutState ||
+              previousState.accountDeletionState !=
+                  currentState.accountDeletionState ||
+              previousState.sendEmailState != currentState.sendEmailState,
+          builder: (context, settingsState) {
             return BaseView(
               child: userProfileState.maybeWhen(
                 orElse: () => const LoadingIndicator(),
@@ -248,7 +256,7 @@ class _SettingsView extends StatelessWidget {
                               ),
                             ),
                             title: Text(translations.support),
-                            trailing: state.sendEmailState.maybeWhen(
+                            trailing: settingsState.sendEmailState.maybeWhen(
                               loading: () => const SizedBox(
                                 height: 16,
                                 width: 16,
@@ -256,7 +264,7 @@ class _SettingsView extends StatelessWidget {
                               ),
                               orElse: () => const Icon(Icons.mail),
                             ),
-                            onTap: state.sendEmailState.isLoading
+                            onTap: settingsState.sendEmailState.isLoading
                                 ? null
                                 : () => context.read<SettingsCubit>().sendEmail(
                                       recipient: supportEmailAddress,
@@ -320,7 +328,7 @@ class _SettingsView extends StatelessWidget {
                               context,
                               context.read<SettingsCubit>().signOut,
                             ),
-                            child: state.signOutState.maybeWhen(
+                            child: settingsState.signOutState.maybeWhen(
                               orElse: () => Text(translations.signOut),
                               loading: () => const SizedBox(
                                 width: 16,
@@ -336,7 +344,7 @@ class _SettingsView extends StatelessWidget {
                               context,
                               context.read<SettingsCubit>().deleteUserAccount,
                             ),
-                            child: state.accountDeletionState.maybeWhen(
+                            child: settingsState.accountDeletionState.maybeWhen(
                               orElse: () => Text(
                                 translations.deleteAccount,
                                 style: TextStyle(

@@ -97,8 +97,10 @@ class UpdateMoodScreen extends StatelessWidget {
           centerTitle: true,
           actions: [
             BlocBuilder<DeleteMoodCubit, DeleteMoodState>(
-              builder: (context, state) {
-                return state.maybeWhen(
+              buildWhen: (previousDeleteMoodState, currentDeleteMoodState) =>
+                  previousDeleteMoodState != currentDeleteMoodState,
+              builder: (context, deleteMoodState) {
+                return deleteMoodState.maybeWhen(
                   loading: () => SizedBox(
                     width: 16,
                     height: 16,

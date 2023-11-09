@@ -70,8 +70,12 @@ class _HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<UserProfileCubit, UserProfileState>(
+      buildWhen: (previousUserProfileState, currentUserProfileState) =>
+          previousUserProfileState != currentUserProfileState,
       builder: (context, userProfileState) {
         return BlocBuilder<HomeCubit, HomeState>(
+          buildWhen: (previousHomeState, currentHomeState) =>
+              previousHomeState != currentHomeState,
           builder: (context, homeState) {
             return BaseView(
               child: Padding(

@@ -106,6 +106,8 @@ class _UpdateUserProfileFormState extends State<_UpdateUserProfileForm> {
     final translations = AppLocalizations.of(context)!;
 
     return BlocConsumer<UpdateUserProfileCubit, FormzSubmissionStatus>(
+      listenWhen: (previousState, currentState) =>
+          previousState != currentState,
       listener: (context, state) {
         if (state.isSuccess) {
           _showSuccessMessage();
@@ -117,6 +119,7 @@ class _UpdateUserProfileFormState extends State<_UpdateUserProfileForm> {
           _showErrorMessage();
         }
       },
+      buildWhen: (previousState, currentState) => previousState != currentState,
       builder: (context, state) {
         return Form(
           key: _formKey,
@@ -155,6 +158,7 @@ class _UpdateUserProfileFormState extends State<_UpdateUserProfileForm> {
                     _formState.firstName.validator(value ?? '')?.toString(),
                 keyboardType: TextInputType.text,
                 textInputAction: TextInputAction.next,
+                enabled: !state.isInProgress,
               ),
               const SizedBox(
                 height: verticalPaddingLarge,

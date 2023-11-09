@@ -187,6 +187,8 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
     final translations = AppLocalizations.of(context)!;
 
     return BlocConsumer<DeleteMoodCubit, DeleteMoodState>(
+      listenWhen: (previousDeleteMoodState, currentDeleteMoodState) =>
+          previousDeleteMoodState != currentDeleteMoodState,
       listener: (context, deleteMoodState) {
         if (deleteMoodState.isSuccess) {
           _showSuccessMessage(translations.moodDeletedSuccessfully);
@@ -196,8 +198,12 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
           _showErrorMessage();
         }
       },
+      buildWhen: (previousDeleteMoodState, currentDeleteMoodState) =>
+          previousDeleteMoodState != currentDeleteMoodState,
       builder: (context, deleteMoodState) {
         return BlocConsumer<UpdateMoodCubit, FormzSubmissionStatus>(
+          listenWhen: (previousUpdateMoodState, currentUpdateMoodState) =>
+              previousUpdateMoodState != currentUpdateMoodState,
           listener: (context, state) {
             if (state.isSuccess) {
               _showSuccessMessage(translations.moodUpdatedSuccessfully);
@@ -207,6 +213,8 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
               _showErrorMessage();
             }
           },
+          buildWhen: (previousUpdateMoodState, currentUpdateMoodState) =>
+              previousUpdateMoodState != currentUpdateMoodState,
           builder: (context, state) {
             final stateInProgress =
                 state.isInProgress || deleteMoodState.isInProgress;
