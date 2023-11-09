@@ -23,6 +23,8 @@ PODS:
     - SQLite.swift (= 0.13.2)
   - AppSyncRealTimeClient (3.1.1):
     - Starscream (= 4.0.4)
+  - audio_session (0.0.1):
+    - Flutter
   - AWSCore (2.33.4)
   - AWSPluginsCore (1.30.4):
     - Amplify (= 1.30.4)
@@ -37,6 +39,11 @@ PODS:
     - Flutter
   - flutter_fimber (0.0.1):
     - Flutter
+  - FMDB (2.7.5):
+    - FMDB/standard (= 2.7.5)
+  - FMDB/standard (2.7.5)
+  - just_audio (0.0.1):
+    - Flutter
   - package_info_plus (0.4.5):
     - Flutter
   - path_provider_foundation (0.0.1):
@@ -50,26 +57,41 @@ PODS:
     - FlutterMacOS
     - Sentry/HybridSDK (= 8.14.2)
   - SentryPrivate (8.14.2)
+  - sqflite (0.0.3):
+    - Flutter
+    - FMDB (>= 2.7.5)
   - SQLite.swift (0.13.2):
     - SQLite.swift/standard (= 0.13.2)
   - SQLite.swift/standard (0.13.2)
   - Starscream (4.0.4)
   - url_launcher_ios (0.0.1):
     - Flutter
+  - video_player_avfoundation (0.0.1):
+    - Flutter
+  - wakelock_plus (0.0.1):
+    - Flutter
+  - webview_flutter_wkwebview (0.0.1):
+    - Flutter
 
 DEPENDENCIES:
   - amplify_auth_cognito (from `.symlinks/plugins/amplify_auth_cognito/darwin`)
   - amplify_datastore (from `.symlinks/plugins/amplify_datastore/ios`)
   - amplify_secure_storage (from `.symlinks/plugins/amplify_secure_storage/ios`)
+  - audio_session (from `.symlinks/plugins/audio_session/ios`)
   - connectivity_plus (from `.symlinks/plugins/connectivity_plus/ios`)
   - device_info_plus (from `.symlinks/plugins/device_info_plus/ios`)
   - Flutter (from `Flutter`)
   - flutter_email_sender (from `.symlinks/plugins/flutter_email_sender/ios`)
   - flutter_fimber (from `.symlinks/plugins/flutter_fimber/ios`)
+  - just_audio (from `.symlinks/plugins/just_audio/ios`)
   - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
   - sentry_flutter (from `.symlinks/plugins/sentry_flutter/ios`)
+  - sqflite (from `.symlinks/plugins/sqflite/ios`)
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
+  - video_player_avfoundation (from `.symlinks/plugins/video_player_avfoundation/ios`)
+  - wakelock_plus (from `.symlinks/plugins/wakelock_plus/ios`)
+  - webview_flutter_wkwebview (from `.symlinks/plugins/webview_flutter_wkwebview/ios`)
 
 SPEC REPOS:
   trunk:
@@ -78,6 +100,7 @@ SPEC REPOS:
     - AppSyncRealTimeClient
     - AWSCore
     - AWSPluginsCore
+    - FMDB
     - ReachabilitySwift
     - Sentry
     - SentryPrivate
@@ -91,6 +114,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/amplify_datastore/ios"
   amplify_secure_storage:
     :path: ".symlinks/plugins/amplify_secure_storage/ios"
+  audio_session:
+    :path: ".symlinks/plugins/audio_session/ios"
   connectivity_plus:
     :path: ".symlinks/plugins/connectivity_plus/ios"
   device_info_plus:
@@ -101,14 +126,24 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_email_sender/ios"
   flutter_fimber:
     :path: ".symlinks/plugins/flutter_fimber/ios"
+  just_audio:
+    :path: ".symlinks/plugins/just_audio/ios"
   package_info_plus:
     :path: ".symlinks/plugins/package_info_plus/ios"
   path_provider_foundation:
     :path: ".symlinks/plugins/path_provider_foundation/darwin"
   sentry_flutter:
     :path: ".symlinks/plugins/sentry_flutter/ios"
+  sqflite:
+    :path: ".symlinks/plugins/sqflite/ios"
   url_launcher_ios:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
+  video_player_avfoundation:
+    :path: ".symlinks/plugins/video_player_avfoundation/ios"
+  wakelock_plus:
+    :path: ".symlinks/plugins/wakelock_plus/ios"
+  webview_flutter_wkwebview:
+    :path: ".symlinks/plugins/webview_flutter_wkwebview/ios"
 
 SPEC CHECKSUMS:
   Amplify: 4e41668c8801667e174ab50c12bc3099c71a257f
@@ -117,6 +152,7 @@ SPEC CHECKSUMS:
   amplify_secure_storage: 501cbdac671a050090d48dfcc002d5637d3f4a55
   AmplifyPlugins: 1335f0919aa07329df58685a020f2311c75a5176
   AppSyncRealTimeClient: b33e3139fb3e71ee129698aee19de88bc6ddafd8
+  audio_session: 4f3e461722055d21515cf3261b64c973c062f345
   AWSCore: 83e3416d2224ba98b61d8eadcfcb1f90f48fab82
   AWSPluginsCore: f2188458c27e6cb09597c67876f80611d14275d7
   connectivity_plus: bf0076dd84a130856aa636df1c71ccaff908fa1d
@@ -124,15 +160,21 @@ SPEC CHECKSUMS:
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   flutter_email_sender: 02d7443217d8c41483223627972bfdc09f74276b
   flutter_fimber: ec011dfb08d7cbfa16ab6bad8450b99574e6f6a4
+  FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
+  just_audio: baa7252489dbcf47a4c7cc9ca663e9661c99aafa
   package_info_plus: 115f4ad11e0698c8c1c5d8a689390df880f47e85
   path_provider_foundation: 29f094ae23ebbca9d3d0cec13889cd9060c0e943
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   Sentry: e0ea366f95ebb68f26d6030d8c22d6b2e6d23dd0
   sentry_flutter: 9a04c51c373d76ee22167bf1e65bc468c0a91fed
   SentryPrivate: 949a21fa59872427edc73b524c3ec8456761d97f
+  sqflite: 31f7eba61e3074736dff8807a9b41581e4f7f15a
   SQLite.swift: 4fc2be46c36392e3b87afe6fe7f1801c1daa07ef
   Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
   url_launcher_ios: 68d46cc9766d0c41dbdc884310529557e3cd7a86
+  video_player_avfoundation: 81e49bb3d9fb63dccf9fa0f6d877dc3ddbeac126
+  wakelock_plus: 8b09852c8876491e4b6d179e17dfe2a0b5f60d47
+  webview_flutter_wkwebview: 2e2d318f21a5e036e2c3f26171342e95908bd60a
 
 PODFILE CHECKSUM: ade96bceabe3919b69c16573938e4268fe3a6c9d
 
