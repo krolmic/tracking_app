@@ -232,7 +232,7 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
                           height: verticalPaddingLarge,
                         ),
                         Text(
-                          translations.howAreYouFeelingToday,
+                          translations.howAreYouFeeling,
                           style: Theme.of(context).textTheme.headlineSmall,
                         ),
                         const SizedBox(
@@ -262,7 +262,7 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
                           height: verticalPaddingLarge,
                         ),
                         Text(
-                          translations.whatAreYouGreatfulForToday,
+                          translations.whatAreYouGreatfulFor,
                           style: Theme.of(context).textTheme.headlineSmall,
                         ),
                         const SizedBox(

@@ -205,7 +205,7 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
               height: verticalPaddingLarge,
             ),
             Text(
-              translations.howAreYouFeelingToday,
+              translations.howAreYouFeeling,
               style: Theme.of(context).textTheme.headlineSmall,
               textAlign: TextAlign.center,
             ),
@@ -248,7 +248,7 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
               height: verticalPaddingLarge,
             ),
             Text(
-              translations.whatAreYouGreatfulForToday,
+              translations.whatAreYouGreatfulFor,
               style: Theme.of(context).textTheme.headlineSmall,
               textAlign: TextAlign.center,
             ),
