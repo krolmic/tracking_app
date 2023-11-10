@@ -357,47 +357,50 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
   }
 }
 
-class _CreateMoodFormEmoji extends StatelessWidget {
-  const _CreateMoodFormEmoji({
+class _MoodEmoji extends StatelessWidget {
+  const _MoodEmoji({
     required this.moodValue,
   });
 
   final int moodValue;
+
+  static const double emojiSize = 128;
+  static const int animatedOpacityDurationInMs = 500;
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         AnimatedOpacity(
-          duration: const Duration(milliseconds: 500),
+          duration: const Duration(milliseconds: animatedOpacityDurationInMs),
           opacity: moodValue < 4 ? 1 : 0,
           child: const AnimatedEmoji(
             AnimatedEmojis.sad,
-            size: 128,
+            size: emojiSize,
           ),
         ),
         AnimatedOpacity(
-          duration: const Duration(milliseconds: 500),
+          duration: const Duration(milliseconds: animatedOpacityDurationInMs),
           opacity: moodValue >= 4 && moodValue < 6 ? 1 : 0,
           child: const AnimatedEmoji(
             AnimatedEmojis.neutralFace,
-            size: 128,
+            size: emojiSize,
           ),
         ),
         AnimatedOpacity(
-          duration: const Duration(milliseconds: 500),
+          duration: const Duration(milliseconds: animatedOpacityDurationInMs),
           opacity: moodValue >= 6 && moodValue < 9 ? 1 : 0,
           child: const AnimatedEmoji(
             AnimatedEmojis.warmSmile,
-            size: 128,
+            size: emojiSize,
           ),
         ),
         AnimatedOpacity(
-          duration: const Duration(milliseconds: 500),
+          duration: const Duration(milliseconds: animatedOpacityDurationInMs),
           opacity: moodValue >= 9 ? 1 : 0,
           child: const AnimatedEmoji(
             AnimatedEmojis.sunglassesFace,
-            size: 128,
+            size: emojiSize,
           ),
         ),
       ],
