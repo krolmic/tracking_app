@@ -1,15 +1,5 @@
 part of '../create_mood_screen.dart';
 
-/// [_CreateMoodFormState] builds a form including the fields that follow.
-///
-/// - today's mood estimation
-///   (awaits integer value in the range 1-10, input for [Mood.value])
-///
-/// - 3 fields for things I am greatful about
-///   (await string values, input for [Mood.thingsIAmGratefulAbout])
-///
-/// - diary
-///   (awaits string value, input for [Mood.diary])
 class _CreateMoodForm extends StatefulWidget {
   const _CreateMoodForm({
     super.key,
