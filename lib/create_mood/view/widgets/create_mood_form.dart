@@ -172,8 +172,6 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
 
   @override
   Widget build(BuildContext context) {
-    final translations = AppLocalizations.of(context)!;
-
     return BlocConsumer<CreateMoodCubit, FormzSubmissionStatus>(
       listenWhen: (previousState, currentState) =>
           previousState != currentState,
@@ -194,33 +192,24 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
           key: _formKey,
           child: state.isInProgress
               ? const LoadingIndicator()
-              : CustomCoolStepper(
-                  showErrorSnackbar: true,
+              : _CreateMoodStepper(
                   onCompleted: _onSubmit,
-                  steps: _getSteps(),
-                  config: CoolStepperConfig(
-                    iconColor: Colors.blue,
-                    isHeaderEnabled: false,
-                    backText: translations.previousStep.toUpperCase(),
-                    nextText: translations.nextStep.toUpperCase(),
-                    stepText: translations.step.toUpperCase(),
-                    ofText: translations.ofStep.toUpperCase(),
-                    finalText: translations.done.toUpperCase(),
-                  ),
+                  pages: _getStepperPages(),
                 ),
         );
       },
     );
   }
 
-  List<CoolStep> _getSteps() {
+  List<Widget> _getStepperPages() {
     final translations = AppLocalizations.of(context)!;
 
     return [
-      CoolStep(
-        title: '',
-        subtitle: '',
-        content: Column(
+      _CreateMoodStepperPage(
+        key: const Key(
+          'Create mood stepper page 1',
+        ),
+        child: Column(
           children: [
             const SizedBox(
               height: verticalPaddingLarge,
@@ -253,19 +242,17 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
             const SizedBox(
               height: verticalPaddingLarge,
             ),
-            _CreateMoodFormEmoji(
+            _MoodEmoji(
               moodValue: _formState.moodValue.value,
             ),
           ],
         ),
-        validation: () {
-          return null;
-        },
       ),
-      CoolStep(
-        title: '',
-        subtitle: '',
-        content: Column(
+      _CreateMoodStepperPage(
+        key: const Key(
+          'Create mood stepper page 2',
+        ),
+        child: Column(
           children: <Widget>[
             const SizedBox(
               height: verticalPaddingLarge,
@@ -327,41 +314,12 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
             ),
           ],
         ),
-        validation: () {
-          var validationResult = '';
-          final validationResult1 = _formState.thingsIAmGreatfulAbout1
-              .validator(_formState.thingsIAmGreatfulAbout1.value)
-              ?.toString();
-          final validationResult2 = _formState.thingsIAmGreatfulAbout1
-              .validator(_formState.thingsIAmGreatfulAbout1.value)
-              ?.toString();
-          final validationResult3 = _formState.thingsIAmGreatfulAbout1
-              .validator(_formState.thingsIAmGreatfulAbout1.value)
-              ?.toString();
-
-          if (validationResult1 != null) {
-            validationResult += '$validationResult1\n';
-          }
-
-          if (validationResult2 != null) {
-            validationResult += '$validationResult2\n';
-          }
-
-          if (validationResult3 != null) {
-            validationResult += '$validationResult3\n';
-          }
-
-          if (validationResult.isNotEmpty) {
-            return validationResult;
-          }
-
-          return null;
-        },
       ),
-      CoolStep(
-        title: '',
-        subtitle: '',
-        content: Column(
+      _CreateMoodStepperPage(
+        key: const Key(
+          'Create mood stepper page 3',
+        ),
+        child: Column(
           children: <Widget>[
             const SizedBox(
               height: verticalPaddingLarge,
@@ -394,9 +352,6 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
             ),
           ],
         ),
-        validation: () {
-          return null;
-        },
       ),
     ];
   }
@@ -446,183 +401,6 @@ class _CreateMoodFormEmoji extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-}
-
-class CustomCoolStepper extends StatefulWidget {
-  const CustomCoolStepper({
-    required this.steps,
-    required this.onCompleted,
-    super.key,
-    this.contentPadding = const EdgeInsets.symmetric(
-      horizontal: 20,
-    ),
-    this.config = const CoolStepperConfig(),
-    this.showErrorSnackbar = false,
-  });
-
-  final List<CoolStep> steps;
-
-  final VoidCallback onCompleted;
-
-  final EdgeInsetsGeometry contentPadding;
-
-  final CoolStepperConfig config;
-
-  final bool showErrorSnackbar;
-
-  @override
-  CustomCoolStepperState createState() => CustomCoolStepperState();
-}
-
-class CustomCoolStepperState extends State<CustomCoolStepper> {
-  PageController? _controller = PageController();
-
-  int currentStep = 0;
-
-  @override
-  void dispose() {
-    _controller!.dispose();
-    _controller = null;
-    super.dispose();
-  }
-
-  Future<void>? switchToPage(int page) {
-    _controller!.animateToPage(
-      page,
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.ease,
-    );
-
-    return null;
-  }
-
-  bool _isFirst(int index) {
-    return index == 0;
-  }
-
-  bool _isLast(int index) {
-    return widget.steps.length - 1 == index;
-  }
-
-  void onStepNext() {
-    final validation = widget.steps[currentStep].validation!();
-
-    if (validation == null) {
-      if (!_isLast(currentStep)) {
-        setState(() {
-          currentStep++;
-        });
-        FocusScope.of(context).unfocus();
-        switchToPage(currentStep);
-      } else {
-        widget.onCompleted();
-      }
-    } else {
-      if (widget.showErrorSnackbar) {
-        Flushbar<dynamic>(
-          message: validation,
-          margin: const EdgeInsets.all(8),
-          borderRadius: const BorderRadius.all(Radius.circular(8)),
-          icon: Icon(
-            Icons.info_outline,
-            size: 28,
-            color: Theme.of(context).primaryColor,
-          ),
-          duration: const Duration(seconds: 2),
-          leftBarIndicatorColor: Theme.of(context).primaryColor,
-        ).show(context);
-      }
-    }
-  }
-
-  void onStepBack() {
-    if (!_isFirst(currentStep)) {
-      setState(() {
-        currentStep--;
-      });
-      switchToPage(currentStep);
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final content = Expanded(
-      child: PageView(
-        controller: _controller,
-        physics: const NeverScrollableScrollPhysics(),
-        children: widget.steps.map((step) {
-          return CoolStepperView(
-            step: step,
-            contentPadding: widget.contentPadding,
-            config: widget.config,
-          );
-        }).toList(),
-      ),
-    );
-
-    final counter = Text(
-      "${widget.config.stepText ?? 'STEP'} ${currentStep + 1} "
-      "${widget.config.ofText ?? 'OF'} ${widget.steps.length}",
-      style: const TextStyle(
-        fontWeight: FontWeight.bold,
-      ),
-    );
-
-    String getNextLabel() {
-      String nextLabel;
-      if (_isLast(currentStep)) {
-        nextLabel = widget.config.finalText ?? 'FINISH';
-      } else {
-        if (widget.config.nextTextList != null) {
-          nextLabel = widget.config.nextTextList![currentStep];
-        } else {
-          nextLabel = widget.config.nextText ?? 'NEXT';
-        }
-      }
-      return nextLabel;
-    }
-
-    String getPrevLabel() {
-      String backLabel;
-      if (_isFirst(currentStep)) {
-        backLabel = '';
-      } else {
-        if (widget.config.backTextList != null) {
-          backLabel = widget.config.backTextList![currentStep - 1];
-        } else {
-          backLabel = widget.config.backText ?? 'PREV';
-        }
-      }
-      return backLabel;
-    }
-
-    final buttons = Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        TextButton(
-          onPressed: onStepBack,
-          child: Text(
-            getPrevLabel(),
-            style: TextStyle(color: primarySwatch.shade300),
-          ),
-        ),
-        counter,
-        TextButton(
-          onPressed: onStepNext,
-          child: Text(
-            getNextLabel(),
-            style: const TextStyle(
-              color: primarySwatch,
-            ),
-          ),
-        ),
-      ],
-    );
-
-    return Column(
-      children: [content, buttons],
     );
   }
 }

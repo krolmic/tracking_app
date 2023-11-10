@@ -1,9 +1,4 @@
 import 'package:animated_emoji/animated_emoji.dart';
-import 'package:another_flushbar/flushbar.dart';
-import 'package:cool_stepper/cool_stepper.dart';
-// TODO(username): change
-// ignore: implementation_imports
-import 'package:cool_stepper/src/widgets/cool_stepper_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -19,6 +14,7 @@ import 'package:tracking_app/shared/widgets/loading_indicator.dart';
 import 'package:user_profile_repository/user_profile_repository.dart';
 
 part 'widgets/create_mood_form.dart';
+part 'widgets/create_mood_stepper.dart';
 
 class CreateMoodScreen extends StatelessWidget {
   const CreateMoodScreen({super.key});
