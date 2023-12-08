@@ -1,6 +1,8 @@
+import 'dart:convert';
+
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_fimber/flutter_fimber.dart';
-import 'package:sentry_flutter/sentry_flutter.dart';
 
 class LoggingBlocObserver extends BlocObserver {
   @override
@@ -43,7 +45,7 @@ class LoggingBlocObserver extends BlocObserver {
   }
 }
 
-class SentryTree extends LogTree {
+class CrashlyticsTree extends LogTree {
   @override
   List<String> getLevels() => ['I', 'W', 'E'];
 
@@ -56,16 +58,30 @@ class SentryTree extends LogTree {
     StackTrace? stacktrace,
   }) {
     if (level == 'E') {
-      Sentry.captureException(
+      // Use message as reason if exception is given.
+      FirebaseCrashlytics.instance.recordError(
         ex ?? message,
-        stackTrace: stacktrace,
+        // If no stacktrace is given, get custom stacktrace
+        // excluding the first 4 lines so Fimber and CrashlyticsTree
+        // are excluded.
+        stacktrace ?? _getCustomStackTrace(),
+        reason: ex != null ? message : null,
       );
     } else {
-      Sentry.captureMessage(message);
+      FirebaseCrashlytics.instance.log(message);
 
       if (ex != null || stacktrace != null) {
-        Sentry.captureMessage('exception: $ex, stacktrace: $stacktrace');
+        FirebaseCrashlytics.instance
+            .log('exception: $ex, stacktrace: $stacktrace');
       }
     }
+  }
+
+  StackTrace _getCustomStackTrace() {
+    final currentStackTraceAsString = StackTrace.current.toString();
+    final currentStackTraceLines =
+        const LineSplitter().convert(currentStackTraceAsString).toList();
+    final cleanedStackTraceLines = currentStackTraceLines..removeRange(0, 4);
+    return StackTrace.fromString(cleanedStackTraceLines.join('\n'));
   }
 }

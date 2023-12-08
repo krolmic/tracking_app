@@ -17,7 +17,7 @@ Project's long term goal is not only to offer tracking mood, but to offer tools 
 ## 🎯 Short term goals
 
 - [ ] Create terms and conditions, privacy policy
-- [ ] Replace Sentry with Crashlytics
+- [x] Replace Sentry with Crashlytics
 - [ ] Clean up the codebase
 - [ ] Add app's launcher icon
 - [ ] Release for Android

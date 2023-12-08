@@ -63,7 +63,6 @@ dependencies:
   jiffy: ^6.2.1
   mood_repository:
     path: packages/mood_repository/
-  sentry_flutter: ^7.12.0
   user_profile_repository:
     path: packages/user_profile_repository/
 
