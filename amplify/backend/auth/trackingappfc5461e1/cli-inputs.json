@@ -2,7 +2,7 @@
   "version": "1",
   "cognitoConfig": {
     "identityPoolName": "trackingappfc5461e1_identitypool_fc5461e1",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "trackifc5461e1",
     "userPoolName": "trackingappfc5461e1_userpool_fc5461e1",
     "autoVerifiedAttributes": [
