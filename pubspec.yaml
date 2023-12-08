@@ -44,6 +44,7 @@ dependencies:
     path: packages/email_repository/
   error_text_widget: ^2.0.3
   firebase_core: ^2.24.2
+  firebase_crashlytics: ^3.4.8
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.3
