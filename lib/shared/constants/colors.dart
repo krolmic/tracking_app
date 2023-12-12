@@ -17,3 +17,5 @@ const MaterialColor primarySwatch = MaterialColor(
 );
 
 const Color lightBackgroundColor = Color(0xFFccccff);
+
+const Color lightToastBackgroundColor = Colors.white;

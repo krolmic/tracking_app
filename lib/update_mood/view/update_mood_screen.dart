@@ -10,6 +10,7 @@ import 'package:tracking_app/main.dart';
 import 'package:tracking_app/shared/constants/colors.dart';
 import 'package:tracking_app/shared/constants/layout.dart';
 import 'package:tracking_app/shared/formz.dart';
+import 'package:tracking_app/shared/toast.dart';
 import 'package:tracking_app/shared/view/base_view.dart';
 import 'package:tracking_app/shared/widgets/app_elevated_button.dart';
 import 'package:tracking_app/update_mood/cubit/update_mood_cubit.dart';
@@ -84,12 +85,19 @@ class UpdateMoodScreen extends StatelessWidget {
                 previousUpdateMoodState != currentUpdateMoodState,
             listener: (context, state) {
               if (state.isSuccess) {
-                _showSuccessMessage(
-                    translations.moodUpdatedSuccessfully, context);
+                showToast(
+                  context,
+                  Icons.done_rounded,
+                  translations.moodUpdatedSuccessfully,
+                );
 
                 context.go('/home');
               } else if (state.isFailure) {
-                _showErrorMessage(context);
+                showToast(
+                  context,
+                  Icons.error_rounded,
+                  translations.somethingWentWrong,
+                );
               }
             },
           ),
@@ -98,12 +106,19 @@ class UpdateMoodScreen extends StatelessWidget {
                 previousDeleteMoodState != currentDeleteMoodState,
             listener: (context, deleteMoodState) {
               if (deleteMoodState.isSuccess) {
-                _showSuccessMessage(
-                    translations.moodDeletedSuccessfully, context);
+                showToast(
+                  context,
+                  Icons.delete_outline_rounded,
+                  translations.moodDeletedSuccessfully,
+                );
 
                 context.go('/home');
               } else if (deleteMoodState.isError) {
-                _showErrorMessage(context);
+                showToast(
+                  context,
+                  Icons.error_rounded,
+                  translations.somethingWentWrong,
+                );
               }
             },
           ),
@@ -164,31 +179,6 @@ class UpdateMoodScreen extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  void _showSuccessMessage(String text, BuildContext context) {
-    ScaffoldMessenger.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(
-        SnackBar(
-          content: Text(
-            '$text 🎉',
-          ),
-          duration: const Duration(seconds: 6),
-        ),
-      );
-  }
-
-  void _showErrorMessage(BuildContext context) {
-    ScaffoldMessenger.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(
-        SnackBar(
-          content: Text(
-            '${AppLocalizations.of(context)!.somethingWentWrong} 🚨',
-          ),
-        ),
-      );
   }
 }
 

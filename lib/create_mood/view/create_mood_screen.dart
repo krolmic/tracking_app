@@ -10,6 +10,7 @@ import 'package:tracking_app/main.dart';
 import 'package:tracking_app/shared/constants/colors.dart';
 import 'package:tracking_app/shared/constants/layout.dart';
 import 'package:tracking_app/shared/formz.dart';
+import 'package:tracking_app/shared/toast.dart';
 import 'package:tracking_app/shared/widgets/loading_indicator.dart';
 import 'package:user_profile_repository/user_profile_repository.dart';
 
@@ -21,6 +22,8 @@ class CreateMoodScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final translations = AppLocalizations.of(context)!;
+
     return BlocProvider(
       create: (context) => CreateMoodCubit(
         moodRepository: getIt.get<MoodRepository>(),
@@ -31,47 +34,30 @@ class CreateMoodScreen extends StatelessWidget {
             previousState != currentState,
         listener: (context, state) {
           if (state.isSuccess) {
-            _showSuccessMessage(context);
+            showToast(
+              context,
+              Icons.done_rounded,
+              translations.moodTrackedSuccessfully,
+            );
 
             context.go('/home');
           } else if (state.isFailure) {
-            _showErrorMessage(context);
+            showToast(
+              context,
+              Icons.error_rounded,
+              translations.somethingWentWrong,
+            );
           }
         },
         child: Scaffold(
           appBar: AppBar(
-            title: Text(AppLocalizations.of(context)!.trackMood),
+            title: Text(translations.trackMood),
             centerTitle: true,
           ),
           body: const _CreateMoodView(),
         ),
       ),
     );
-  }
-
-  void _showSuccessMessage(BuildContext context) {
-    ScaffoldMessenger.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(
-        SnackBar(
-          content: Text(
-            '${AppLocalizations.of(context)!.moodTrackedSuccessfully} 🎉',
-          ),
-          duration: const Duration(seconds: 6),
-        ),
-      );
-  }
-
-  void _showErrorMessage(BuildContext context) {
-    ScaffoldMessenger.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(
-        SnackBar(
-          content: Text(
-            '${AppLocalizations.of(context)!.somethingWentWrong} 🚨',
-          ),
-        ),
-      );
   }
 }
 

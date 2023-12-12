@@ -5,6 +5,7 @@ import 'package:formz/formz.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tracking_app/main.dart';
 import 'package:tracking_app/shared/constants/layout.dart';
+import 'package:tracking_app/shared/toast.dart';
 import 'package:tracking_app/shared/view/base_view.dart';
 import 'package:tracking_app/shared/widgets/app_elevated_button.dart';
 import 'package:tracking_app/update_user_profile/cubit/update_user_profile_cubit.dart';
@@ -29,6 +30,8 @@ class UpdateUserProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final translations = AppLocalizations.of(context)!;
+
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -42,19 +45,27 @@ class UpdateUserProfileScreen extends StatelessWidget {
             previousState != currentState,
         listener: (context, state) {
           if (state.isSuccess) {
-            _showSuccessMessage(context);
+            showToast(
+              context,
+              Icons.done_rounded,
+              translations.profileUpdatedSuccessfully,
+            );
 
             context.read<UserProfileCubit>().loadUserProfile();
 
             context.pop();
           } else if (state.isFailure) {
-            _showErrorMessage(context);
+            showToast(
+              context,
+              Icons.error_rounded,
+              translations.somethingWentWrong,
+            );
           }
         },
         child: Scaffold(
           appBar: AppBar(
             title: Text(
-              AppLocalizations.of(context)!.personalDetails,
+              translations.personalDetails,
             ),
             centerTitle: true,
           ),
@@ -65,31 +76,6 @@ class UpdateUserProfileScreen extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  void _showSuccessMessage(BuildContext context) {
-    ScaffoldMessenger.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(
-        SnackBar(
-          content: Text(
-            '${AppLocalizations.of(context)!.profileUpdatedSuccessfully} 🎉',
-          ),
-          duration: const Duration(seconds: 6),
-        ),
-      );
-  }
-
-  void _showErrorMessage(BuildContext context) {
-    ScaffoldMessenger.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(
-        SnackBar(
-          content: Text(
-            '${AppLocalizations.of(context)!.somethingWentWrong} 🚨',
-          ),
-        ),
-      );
   }
 }
 

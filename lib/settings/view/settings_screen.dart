@@ -12,6 +12,7 @@ import 'package:tracking_app/shared/constants/colors.dart';
 import 'package:tracking_app/shared/constants/layout.dart';
 import 'package:tracking_app/shared/constants/misc.dart';
 import 'package:tracking_app/shared/router.dart';
+import 'package:tracking_app/shared/toast.dart';
 import 'package:tracking_app/shared/view/base_view.dart';
 import 'package:tracking_app/shared/widgets/error_message.dart';
 import 'package:tracking_app/shared/widgets/loading_indicator.dart';
@@ -23,6 +24,8 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final translations = AppLocalizations.of(context)!;
+
     return BlocProvider<SettingsCubit>(
       create: (context) {
         final userProfileCubit = context.read<UserProfileCubit>();
@@ -37,31 +40,53 @@ class SettingsScreen extends StatelessWidget {
           emailRepository: getIt.get<EmailRepository>(),
         );
       },
-      child: BlocListener<SettingsCubit, SettingsState>(
-        listenWhen: (previousState, currentState) =>
-            previousState.signOutState != currentState.signOutState ||
-            previousState.accountDeletionState !=
-                currentState.accountDeletionState ||
-            previousState.sendEmailState != currentState.sendEmailState,
-        listener: (context, settingsState) {
-          if (settingsState.signOutState.isError ||
-              settingsState.accountDeletionState.isError ||
-              settingsState.sendEmailState.isError) {
-            ScaffoldMessenger.of(context)
-              ..hideCurrentSnackBar()
-              ..showSnackBar(
-                SnackBar(
-                  content:
-                      Text(AppLocalizations.of(context)!.somethingWentWrong),
-                  duration: const Duration(seconds: 6),
-                ),
-              );
-          }
-        },
+      child: MultiBlocListener(
+        listeners: [
+          BlocListener<SettingsCubit, SettingsState>(
+            listenWhen: (previousState, currentState) =>
+                previousState.signOutState != currentState.signOutState,
+            listener: (context, settingsState) {
+              if (settingsState.signOutState.isError) {
+                showToast(
+                  context,
+                  Icons.error_rounded,
+                  translations.somethingWentWrong,
+                );
+              }
+            },
+          ),
+          BlocListener<SettingsCubit, SettingsState>(
+            listenWhen: (previousState, currentState) =>
+                previousState.accountDeletionState !=
+                currentState.accountDeletionState,
+            listener: (context, settingsState) {
+              if (settingsState.accountDeletionState.isError) {
+                showToast(
+                  context,
+                  Icons.error_rounded,
+                  translations.somethingWentWrong,
+                );
+              }
+            },
+          ),
+          BlocListener<SettingsCubit, SettingsState>(
+            listenWhen: (previousState, currentState) =>
+                previousState.sendEmailState != currentState.sendEmailState,
+            listener: (context, settingsState) {
+              if (settingsState.sendEmailState.isError) {
+                showToast(
+                  context,
+                  Icons.error_rounded,
+                  translations.somethingWentWrong,
+                );
+              }
+            },
+          ),
+        ],
         child: Scaffold(
           appBar: AppBar(
             title: Text(
-              AppLocalizations.of(context)!.settings,
+              translations.settings,
             ),
             centerTitle: true,
           ),
