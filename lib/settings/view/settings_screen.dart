@@ -14,6 +14,7 @@ import 'package:tracking_app/shared/constants/misc.dart';
 import 'package:tracking_app/shared/router.dart';
 import 'package:tracking_app/shared/toast.dart';
 import 'package:tracking_app/shared/view/base_view.dart';
+import 'package:tracking_app/shared/widgets/app_dialog.dart';
 import 'package:tracking_app/shared/widgets/error_message.dart';
 import 'package:tracking_app/shared/widgets/loading_indicator.dart';
 import 'package:tracking_app/user_profile/cubit/user_profile_cubit.dart';
@@ -109,25 +110,11 @@ class _SettingsView extends StatelessWidget {
       builder: (BuildContext context) {
         final translations = AppLocalizations.of(context)!;
 
-        return AlertDialog(
-          title: Text(translations.signOut),
-          content: Text(translations.signOutMessage),
-          actions: <Widget>[
-            TextButton(
-              style: TextButton.styleFrom(
-                textStyle: Theme.of(context).textTheme.labelLarge,
-              ),
-              onPressed: Navigator.of(context).pop,
-              child: Text(translations.cancel.toUpperCase()),
-            ),
-            TextButton(
-              style: TextButton.styleFrom(
-                textStyle: Theme.of(context).textTheme.labelLarge,
-              ),
-              onPressed: onConfirm,
-              child: Text(translations.signOut.toUpperCase()),
-            ),
-          ],
+        return AppDialog(
+          title: translations.signOut,
+          subTitle: translations.signOutMessage,
+          confirmButtonText: translations.signOut.toUpperCase(),
+          onConfirm: onConfirm,
         );
       },
     );
@@ -142,25 +129,11 @@ class _SettingsView extends StatelessWidget {
       builder: (BuildContext context) {
         final translations = AppLocalizations.of(context)!;
 
-        return AlertDialog(
-          title: Text(translations.accountDeletion),
-          content: Text(translations.accountDeletionMessage),
-          actions: <Widget>[
-            TextButton(
-              style: TextButton.styleFrom(
-                textStyle: Theme.of(context).textTheme.labelLarge,
-              ),
-              onPressed: Navigator.of(context).pop,
-              child: Text(translations.cancel.toUpperCase()),
-            ),
-            TextButton(
-              style: TextButton.styleFrom(
-                textStyle: Theme.of(context).textTheme.labelLarge,
-              ),
-              onPressed: onConfirm,
-              child: Text(translations.delete.toUpperCase()),
-            ),
-          ],
+        return AppDialog(
+          title: translations.accountDeletion,
+          subTitle: translations.accountDeletionMessage,
+          confirmButtonText: translations.delete.toUpperCase(),
+          onConfirm: onConfirm,
         );
       },
     );

@@ -12,6 +12,7 @@ import 'package:tracking_app/shared/constants/layout.dart';
 import 'package:tracking_app/shared/formz.dart';
 import 'package:tracking_app/shared/toast.dart';
 import 'package:tracking_app/shared/view/base_view.dart';
+import 'package:tracking_app/shared/widgets/app_dialog.dart';
 import 'package:tracking_app/shared/widgets/app_elevated_button.dart';
 import 'package:tracking_app/update_mood/cubit/update_mood_cubit.dart';
 
@@ -34,28 +35,14 @@ class UpdateMoodScreen extends StatelessWidget {
       builder: (BuildContext context) {
         final translations = AppLocalizations.of(context)!;
 
-        return AlertDialog(
-          title: Text(translations.deleteMood),
-          content: Text(translations.deleteMoodMessage),
-          actions: <Widget>[
-            TextButton(
-              style: TextButton.styleFrom(
-                textStyle: Theme.of(context).textTheme.labelLarge,
-              ),
-              onPressed: Navigator.of(context).pop,
-              child: Text(translations.cancel.toUpperCase()),
-            ),
-            TextButton(
-              style: TextButton.styleFrom(
-                textStyle: Theme.of(context).textTheme.labelLarge,
-              ),
-              onPressed: () {
-                onConfirm();
-                Navigator.of(context).pop();
-              },
-              child: Text(translations.delete.toUpperCase()),
-            ),
-          ],
+        return AppDialog(
+          title: translations.deleteMood,
+          subTitle: translations.deleteMoodMessage,
+          confirmButtonText: translations.delete.toUpperCase(),
+          onConfirm: () {
+            onConfirm();
+            Navigator.of(context).pop();
+          },
         );
       },
     );
