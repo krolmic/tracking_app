@@ -25,10 +25,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Jiffy.setLocale(
-      Localizations.localeOf(context).languageCode,
-    );
-
     return BlocProvider<HomeCubit>(
       create: (context) {
         final userProfileCubit = context.read<UserProfileCubit>();

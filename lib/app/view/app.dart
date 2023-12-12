@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:jiffy/jiffy.dart';
 import 'package:tracking_app/app/cubit/app_cubit.dart';
 import 'package:tracking_app/l10n/amplify_resolvers.dart';
 import 'package:tracking_app/main.dart';
@@ -58,6 +59,14 @@ class App extends StatelessWidget {
             initialStep: AuthenticatorStep.onboarding,
             authenticatorBuilder:
                 (BuildContext context, AuthenticatorState state) {
+              if (state.currentStep == AuthenticatorStep.loading) {
+                Jiffy.setLocale(
+                  Localizations.localeOf(context).languageCode,
+                );
+
+                return const LoadingIndicator();
+              }
+
               if (state.currentStep == AuthenticatorStep.onboarding) {
                 return SafeArea(
                   child: OnboardingSlider(
