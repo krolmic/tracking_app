@@ -148,31 +148,6 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
     )..addListener(_onDiaryChanged);
   }
 
-  void _showSuccessMessage(String text) {
-    ScaffoldMessenger.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(
-        SnackBar(
-          content: Text(
-            '$text 🎉',
-          ),
-          duration: const Duration(seconds: 6),
-        ),
-      );
-  }
-
-  void _showErrorMessage() {
-    ScaffoldMessenger.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(
-        SnackBar(
-          content: Text(
-            '${AppLocalizations.of(context)!.somethingWentWrong} 🚨',
-          ),
-        ),
-      );
-  }
-
   @override
   void dispose() {
     _thingIAmGreatfulAbout1Controller.dispose();
@@ -186,33 +161,11 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
   Widget build(BuildContext context) {
     final translations = AppLocalizations.of(context)!;
 
-    return BlocConsumer<DeleteMoodCubit, DeleteMoodState>(
-      listenWhen: (previousDeleteMoodState, currentDeleteMoodState) =>
-          previousDeleteMoodState != currentDeleteMoodState,
-      listener: (context, deleteMoodState) {
-        if (deleteMoodState.isSuccess) {
-          _showSuccessMessage(translations.moodDeletedSuccessfully);
-
-          context.go('/home');
-        } else if (deleteMoodState.isError) {
-          _showErrorMessage();
-        }
-      },
+    return BlocBuilder<DeleteMoodCubit, DeleteMoodState>(
       buildWhen: (previousDeleteMoodState, currentDeleteMoodState) =>
           previousDeleteMoodState != currentDeleteMoodState,
       builder: (context, deleteMoodState) {
-        return BlocConsumer<UpdateMoodCubit, FormzSubmissionStatus>(
-          listenWhen: (previousUpdateMoodState, currentUpdateMoodState) =>
-              previousUpdateMoodState != currentUpdateMoodState,
-          listener: (context, state) {
-            if (state.isSuccess) {
-              _showSuccessMessage(translations.moodUpdatedSuccessfully);
-
-              context.go('/home');
-            } else if (state.isFailure) {
-              _showErrorMessage();
-            }
-          },
+        return BlocBuilder<UpdateMoodCubit, FormzSubmissionStatus>(
           buildWhen: (previousUpdateMoodState, currentUpdateMoodState) =>
               previousUpdateMoodState != currentUpdateMoodState,
           builder: (context, state) {

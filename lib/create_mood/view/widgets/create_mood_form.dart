@@ -126,31 +126,6 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
     )..addListener(_onDiaryChanged);
   }
 
-  void _showSuccessMessage() {
-    ScaffoldMessenger.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(
-        SnackBar(
-          content: Text(
-            '${AppLocalizations.of(context)!.moodTrackedSuccessfully} 🎉',
-          ),
-          duration: const Duration(seconds: 6),
-        ),
-      );
-  }
-
-  void _showErrorMessage() {
-    ScaffoldMessenger.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(
-        SnackBar(
-          content: Text(
-            '${AppLocalizations.of(context)!.somethingWentWrong} 🚨',
-          ),
-        ),
-      );
-  }
-
   @override
   void dispose() {
     _thingIAmGreatfulAbout1Controller.dispose();
@@ -162,20 +137,7 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<CreateMoodCubit, FormzSubmissionStatus>(
-      listenWhen: (previousState, currentState) =>
-          previousState != currentState,
-      listener: (context, state) {
-        if (state.isSuccess) {
-          _showSuccessMessage();
-
-          _resetForm();
-
-          context.go('/home');
-        } else if (state.isFailure) {
-          _showErrorMessage();
-        }
-      },
+    return BlocBuilder<CreateMoodCubit, FormzSubmissionStatus>(
       buildWhen: (previousState, currentState) => previousState != currentState,
       builder: (context, state) {
         return Form(

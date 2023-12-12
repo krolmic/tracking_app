@@ -37,19 +37,59 @@ class UpdateUserProfileScreen extends StatelessWidget {
           ),
         ),
       ],
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            AppLocalizations.of(context)!.personalDetails,
+      child: BlocListener<UpdateUserProfileCubit, FormzSubmissionStatus>(
+        listenWhen: (previousState, currentState) =>
+            previousState != currentState,
+        listener: (context, state) {
+          if (state.isSuccess) {
+            _showSuccessMessage(context);
+
+            context.read<UserProfileCubit>().loadUserProfile();
+
+            context.pop();
+          } else if (state.isFailure) {
+            _showErrorMessage(context);
+          }
+        },
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text(
+              AppLocalizations.of(context)!.personalDetails,
+            ),
+            centerTitle: true,
           ),
-          centerTitle: true,
-        ),
-        body: _UpdateUserProfileView(
-          email: email,
-          firstName: firstName,
+          body: _UpdateUserProfileView(
+            email: email,
+            firstName: firstName,
+          ),
         ),
       ),
     );
+  }
+
+  void _showSuccessMessage(BuildContext context) {
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(
+        SnackBar(
+          content: Text(
+            '${AppLocalizations.of(context)!.profileUpdatedSuccessfully} 🎉',
+          ),
+          duration: const Duration(seconds: 6),
+        ),
+      );
+  }
+
+  void _showErrorMessage(BuildContext context) {
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(
+        SnackBar(
+          content: Text(
+            '${AppLocalizations.of(context)!.somethingWentWrong} 🚨',
+          ),
+        ),
+      );
   }
 }
 

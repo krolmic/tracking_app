@@ -69,31 +69,6 @@ class _UpdateUserProfileFormState extends State<_UpdateUserProfileForm> {
     )..addListener(_onFirstNameChanged);
   }
 
-  void _showSuccessMessage() {
-    ScaffoldMessenger.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(
-        SnackBar(
-          content: Text(
-            '${AppLocalizations.of(context)!.profileUpdatedSuccessfully} 🎉',
-          ),
-          duration: const Duration(seconds: 6),
-        ),
-      );
-  }
-
-  void _showErrorMessage() {
-    ScaffoldMessenger.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(
-        SnackBar(
-          content: Text(
-            '${AppLocalizations.of(context)!.somethingWentWrong} 🚨',
-          ),
-        ),
-      );
-  }
-
   @override
   void dispose() {
     _emailController.dispose();
@@ -105,20 +80,7 @@ class _UpdateUserProfileFormState extends State<_UpdateUserProfileForm> {
   Widget build(BuildContext context) {
     final translations = AppLocalizations.of(context)!;
 
-    return BlocConsumer<UpdateUserProfileCubit, FormzSubmissionStatus>(
-      listenWhen: (previousState, currentState) =>
-          previousState != currentState,
-      listener: (context, state) {
-        if (state.isSuccess) {
-          _showSuccessMessage();
-
-          context.read<UserProfileCubit>().loadUserProfile();
-
-          context.pop();
-        } else if (state.isFailure) {
-          _showErrorMessage();
-        }
-      },
+    return BlocBuilder<UpdateUserProfileCubit, FormzSubmissionStatus>(
       buildWhen: (previousState, currentState) => previousState != currentState,
       builder: (context, state) {
         return Form(

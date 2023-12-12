@@ -62,6 +62,8 @@ class UpdateMoodScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final translations = AppLocalizations.of(context)!;
+
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -75,61 +77,118 @@ class UpdateMoodScreen extends StatelessWidget {
           ),
         ),
       ],
-      child: Scaffold(
-        appBar: AppBar(
-          title: Column(
-            children: [
-              Text(
-                Jiffy.parseFromDateTime(mood.createdOn).yMMMMd,
-                maxLines: 1,
-              ),
-              Text(
-                Jiffy.parseFromDateTime(mood.createdOn).jm,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                  color: primarySwatch.shade400,
-                  fontSize: 18,
+      child: MultiBlocListener(
+        listeners: [
+          BlocListener<UpdateMoodCubit, FormzSubmissionStatus>(
+            listenWhen: (previousUpdateMoodState, currentUpdateMoodState) =>
+                previousUpdateMoodState != currentUpdateMoodState,
+            listener: (context, state) {
+              if (state.isSuccess) {
+                _showSuccessMessage(
+                    translations.moodUpdatedSuccessfully, context);
+
+                context.go('/home');
+              } else if (state.isFailure) {
+                _showErrorMessage(context);
+              }
+            },
+          ),
+          BlocListener<DeleteMoodCubit, DeleteMoodState>(
+            listenWhen: (previousDeleteMoodState, currentDeleteMoodState) =>
+                previousDeleteMoodState != currentDeleteMoodState,
+            listener: (context, deleteMoodState) {
+              if (deleteMoodState.isSuccess) {
+                _showSuccessMessage(
+                    translations.moodDeletedSuccessfully, context);
+
+                context.go('/home');
+              } else if (deleteMoodState.isError) {
+                _showErrorMessage(context);
+              }
+            },
+          ),
+        ],
+        child: Scaffold(
+          appBar: AppBar(
+            title: Column(
+              children: [
+                Text(
+                  Jiffy.parseFromDateTime(mood.createdOn).yMMMMd,
+                  maxLines: 1,
                 ),
+                Text(
+                  Jiffy.parseFromDateTime(mood.createdOn).jm,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    color: primarySwatch.shade400,
+                    fontSize: 18,
+                  ),
+                ),
+              ],
+            ),
+            centerTitle: true,
+            actions: [
+              BlocBuilder<DeleteMoodCubit, DeleteMoodState>(
+                buildWhen: (previousDeleteMoodState, currentDeleteMoodState) =>
+                    previousDeleteMoodState != currentDeleteMoodState,
+                builder: (context, deleteMoodState) {
+                  return deleteMoodState.maybeWhen(
+                    loading: () => SizedBox(
+                      width: 16,
+                      height: 16,
+                      child: CircularProgressIndicator(
+                        color: primarySwatch.shade300,
+                      ),
+                    ),
+                    orElse: () => IconButton(
+                      icon: Icon(
+                        Icons.delete,
+                        color: primarySwatch.shade300,
+                      ),
+                      onPressed: () {
+                        _showMoodDeletionDialog(
+                          context,
+                          () {
+                            context.read<DeleteMoodCubit>().deleteMood(mood);
+                          },
+                        );
+                      },
+                    ),
+                  );
+                },
               ),
             ],
           ),
-          centerTitle: true,
-          actions: [
-            BlocBuilder<DeleteMoodCubit, DeleteMoodState>(
-              buildWhen: (previousDeleteMoodState, currentDeleteMoodState) =>
-                  previousDeleteMoodState != currentDeleteMoodState,
-              builder: (context, deleteMoodState) {
-                return deleteMoodState.maybeWhen(
-                  loading: () => SizedBox(
-                    width: 16,
-                    height: 16,
-                    child: CircularProgressIndicator(
-                      color: primarySwatch.shade300,
-                    ),
-                  ),
-                  orElse: () => IconButton(
-                    icon: Icon(
-                      Icons.delete,
-                      color: primarySwatch.shade300,
-                    ),
-                    onPressed: () {
-                      _showMoodDeletionDialog(
-                        context,
-                        () {
-                          context.read<DeleteMoodCubit>().deleteMood(mood);
-                        },
-                      );
-                    },
-                  ),
-                );
-              },
-            ),
-          ],
+          body: _UpdateMoodView(mood),
         ),
-        body: _UpdateMoodView(mood),
       ),
     );
+  }
+
+  void _showSuccessMessage(String text, BuildContext context) {
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(
+        SnackBar(
+          content: Text(
+            '$text 🎉',
+          ),
+          duration: const Duration(seconds: 6),
+        ),
+      );
+  }
+
+  void _showErrorMessage(BuildContext context) {
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(
+        SnackBar(
+          content: Text(
+            '${AppLocalizations.of(context)!.somethingWentWrong} 🚨',
+          ),
+        ),
+      );
   }
 }
 

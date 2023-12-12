@@ -26,14 +26,52 @@ class CreateMoodScreen extends StatelessWidget {
         moodRepository: getIt.get<MoodRepository>(),
         userProfileRepository: getIt.get<UserProfileRepository>(),
       ),
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(AppLocalizations.of(context)!.trackMood),
-          centerTitle: true,
+      child: BlocListener<CreateMoodCubit, FormzSubmissionStatus>(
+        listenWhen: (previousState, currentState) =>
+            previousState != currentState,
+        listener: (context, state) {
+          if (state.isSuccess) {
+            _showSuccessMessage(context);
+
+            context.go('/home');
+          } else if (state.isFailure) {
+            _showErrorMessage(context);
+          }
+        },
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text(AppLocalizations.of(context)!.trackMood),
+            centerTitle: true,
+          ),
+          body: const _CreateMoodView(),
         ),
-        body: const _CreateMoodView(),
       ),
     );
+  }
+
+  void _showSuccessMessage(BuildContext context) {
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(
+        SnackBar(
+          content: Text(
+            '${AppLocalizations.of(context)!.moodTrackedSuccessfully} 🎉',
+          ),
+          duration: const Duration(seconds: 6),
+        ),
+      );
+  }
+
+  void _showErrorMessage(BuildContext context) {
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(
+        SnackBar(
+          content: Text(
+            '${AppLocalizations.of(context)!.somethingWentWrong} 🚨',
+          ),
+        ),
+      );
   }
 }
 

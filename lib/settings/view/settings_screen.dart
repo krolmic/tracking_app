@@ -37,14 +37,36 @@ class SettingsScreen extends StatelessWidget {
           emailRepository: getIt.get<EmailRepository>(),
         );
       },
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            AppLocalizations.of(context)!.settings,
+      child: BlocListener<SettingsCubit, SettingsState>(
+        listenWhen: (previousState, currentState) =>
+            previousState.signOutState != currentState.signOutState ||
+            previousState.accountDeletionState !=
+                currentState.accountDeletionState ||
+            previousState.sendEmailState != currentState.sendEmailState,
+        listener: (context, settingsState) {
+          if (settingsState.signOutState.isError ||
+              settingsState.accountDeletionState.isError ||
+              settingsState.sendEmailState.isError) {
+            ScaffoldMessenger.of(context)
+              ..hideCurrentSnackBar()
+              ..showSnackBar(
+                SnackBar(
+                  content:
+                      Text(AppLocalizations.of(context)!.somethingWentWrong),
+                  duration: const Duration(seconds: 6),
+                ),
+              );
+          }
+        },
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text(
+              AppLocalizations.of(context)!.settings,
+            ),
+            centerTitle: true,
           ),
-          centerTitle: true,
+          body: const _SettingsView(),
         ),
-        body: const _SettingsView(),
       ),
     );
   }
@@ -127,26 +149,7 @@ class _SettingsView extends StatelessWidget {
       buildWhen: (previousUserProfileState, currentUserProfileState) =>
           previousUserProfileState != currentUserProfileState,
       builder: (context, userProfileState) {
-        return BlocConsumer<SettingsCubit, SettingsState>(
-          listenWhen: (previousState, currentState) =>
-              previousState.signOutState != currentState.signOutState ||
-              previousState.accountDeletionState !=
-                  currentState.accountDeletionState ||
-              previousState.sendEmailState != currentState.sendEmailState,
-          listener: (context, settingsState) {
-            if (settingsState.signOutState.isError ||
-                settingsState.accountDeletionState.isError ||
-                settingsState.sendEmailState.isError) {
-              ScaffoldMessenger.of(context)
-                ..hideCurrentSnackBar()
-                ..showSnackBar(
-                  SnackBar(
-                    content: Text(translations.somethingWentWrong),
-                    duration: const Duration(seconds: 6),
-                  ),
-                );
-            }
-          },
+        return BlocBuilder<SettingsCubit, SettingsState>(
           buildWhen: (previousState, currentState) =>
               previousState.signOutState != currentState.signOutState ||
               previousState.accountDeletionState !=
