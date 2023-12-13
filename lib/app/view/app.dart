@@ -41,7 +41,7 @@ class App extends StatelessWidget {
           if (state.isInitialOrLoading) {
             return const ColoredBox(
               color: lightBackgroundColor,
-              child: LoadingIndicator(),
+              child: Center(child: LoadingIndicator()),
             );
           } else if (state.isError) {
             final translations = AppLocalizations.of(context)!;
@@ -64,7 +64,7 @@ class App extends StatelessWidget {
                   Localizations.localeOf(context).languageCode,
                 );
 
-                return const LoadingIndicator();
+                return const Center(child: LoadingIndicator());
               }
 
               if (state.currentStep == AuthenticatorStep.onboarding) {

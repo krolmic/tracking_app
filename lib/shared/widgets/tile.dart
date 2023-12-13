@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tracking_app/shared/theme/colors.dart';
+import 'package:tracking_app/shared/widgets/loading_indicator.dart';
 
 class Tile extends StatelessWidget {
   const Tile({
@@ -45,12 +46,8 @@ class Tile extends StatelessWidget {
               )
             : null,
         trailing: isLoading
-            ? SizedBox(
-                height: 16,
-                width: 16,
-                child: CircularProgressIndicator(
-                  color: primarySwatch.shade200,
-                ),
+            ? TinyLoadingIndicator(
+                color: primarySwatch.shade200,
               )
             : const Icon(
                 Icons.chevron_right,

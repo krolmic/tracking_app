@@ -157,7 +157,7 @@ class _SettingsView extends StatelessWidget {
           builder: (context, settingsState) {
             return BaseView(
               child: userProfileState.maybeWhen(
-                orElse: () => const LoadingIndicator(),
+                orElse: () => const Center(child: LoadingIndicator()),
                 error: () => ErrorMessage(
                   onRefresh: context.read<UserProfileCubit>().loadUserProfile,
                 ),
@@ -276,11 +276,7 @@ class _SettingsView extends StatelessWidget {
                             ),
                             child: settingsState.signOutState.maybeWhen(
                               orElse: () => Text(translations.signOut),
-                              loading: () => const SizedBox(
-                                width: 16,
-                                height: 16,
-                                child: CircularProgressIndicator(),
-                              ),
+                              loading: () => const TinyLoadingIndicator(),
                             ),
                           ),
                         ),
@@ -297,11 +293,7 @@ class _SettingsView extends StatelessWidget {
                                   color: primarySwatch.shade300,
                                 ),
                               ),
-                              loading: () => const SizedBox(
-                                width: 16,
-                                height: 16,
-                                child: CircularProgressIndicator(),
-                              ),
+                              loading: () => const TinyLoadingIndicator(),
                             ),
                           ),
                         ),

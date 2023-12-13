@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tracking_app/shared/theme/colors.dart';
+import 'package:tracking_app/shared/widgets/loading_indicator.dart';
 
 class AppElevatedButton extends StatelessWidget {
   const AppElevatedButton({
@@ -21,11 +22,7 @@ class AppElevatedButton extends StatelessWidget {
       key: key,
       onPressed: isLoading ? null : onPressed,
       icon: isLoading
-          ? const SizedBox(
-              width: 16,
-              height: 16,
-              child: CircularProgressIndicator(),
-            )
+          ? const TinyLoadingIndicator(color: Colors.white)
           : const Icon(
               Icons.edit,
               color: Colors.white,

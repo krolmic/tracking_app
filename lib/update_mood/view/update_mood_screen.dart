@@ -14,6 +14,7 @@ import 'package:tracking_app/shared/toast.dart';
 import 'package:tracking_app/shared/view/base_view.dart';
 import 'package:tracking_app/shared/widgets/app_dialog.dart';
 import 'package:tracking_app/shared/widgets/app_elevated_button.dart';
+import 'package:tracking_app/shared/widgets/loading_indicator.dart';
 import 'package:tracking_app/update_mood/cubit/update_mood_cubit.dart';
 
 part 'widgets/update_mood_form.dart';
@@ -136,17 +137,13 @@ class UpdateMoodScreen extends StatelessWidget {
                     previousDeleteMoodState != currentDeleteMoodState,
                 builder: (context, deleteMoodState) {
                   return deleteMoodState.maybeWhen(
-                    loading: () => SizedBox(
-                      width: 16,
-                      height: 16,
-                      child: CircularProgressIndicator(
-                        color: primarySwatch.shade300,
-                      ),
+                    loading: () => TinyLoadingIndicator(
+                      color: primarySwatch.shade200,
                     ),
                     orElse: () => IconButton(
                       icon: Icon(
                         Icons.delete,
-                        color: primarySwatch.shade300,
+                        color: primarySwatch.shade200,
                       ),
                       onPressed: () {
                         _showMoodDeletionDialog(

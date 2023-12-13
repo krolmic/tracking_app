@@ -81,7 +81,7 @@ class _HomeView extends StatelessWidget {
                   builder: (context) {
                     if (userProfileState.isInitialOrLoading ||
                         homeState.isInitialOrLoading) {
-                      return const LoadingIndicator();
+                      return const Center(child: LoadingIndicator());
                     } else if (userProfileState.isError || homeState.isError) {
                       return ErrorMessage(
                         onRefresh: () {
@@ -218,7 +218,7 @@ class _HomeContentViewState extends State<_HomeContentView> {
             padding: EdgeInsets.only(
               top: verticalPaddingMedium,
             ),
-            child: LoadingIndicator(),
+            child: Center(child: LoadingIndicator()),
           );
         }
 

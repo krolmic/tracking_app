@@ -143,7 +143,7 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
         return Form(
           key: _formKey,
           child: state.isInProgress
-              ? const LoadingIndicator()
+              ? const Center(child: LoadingIndicator())
               : _CreateMoodStepper(
                   onCompleted: _onSubmit,
                   pages: _getStepperPages(),
