@@ -120,6 +120,7 @@ class _UpdateUserProfileFormState extends State<_UpdateUserProfileForm> {
               ),
               const VerticalSpacing.large(),
               AppElevatedButton(
+                isDisabled: _firstNameController.text.isEmpty,
                 isLoading: state.isInProgress,
                 icon: Icons.edit,
                 onPressed: _onSubmit,
