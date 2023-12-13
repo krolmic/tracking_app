@@ -94,15 +94,6 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
       ..unfocus();
   }
 
-  void _resetForm() {
-    _formKey.currentState!.reset();
-    _thingIAmGreatfulAbout1Controller.clear();
-    _thingIAmGreatfulAbout2Controller.clear();
-    _thingIAmGreatfulAbout3Controller.clear();
-    _diaryController.clear();
-    setState(() => _formState = MoodFormzState());
-  }
-
   @override
   void initState() {
     super.initState();
