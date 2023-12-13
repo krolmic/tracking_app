@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_onboarding_slider/flutter_onboarding_slider.dart';
 import 'package:tracking_app/gen/assets.gen.dart';
-import 'package:tracking_app/shared/constants/colors.dart';
-import 'package:tracking_app/shared/constants/layout.dart';
+import 'package:tracking_app/shared/theme/colors.dart';
+import 'package:tracking_app/shared/theme/layout.dart';
 
 class OnboardingSlider extends StatelessWidget {
   const OnboardingSlider({

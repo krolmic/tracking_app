@@ -1,7 +1,7 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:tracking_app/shared/constants/colors.dart';
+import 'package:tracking_app/shared/theme/colors.dart';
 
 /// Main navigation widget
 class ScaffoldWithNestedNavigation extends StatelessWidget {

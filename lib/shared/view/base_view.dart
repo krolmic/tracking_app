@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tracking_app/shared/constants/layout.dart';
+import 'package:tracking_app/shared/theme/layout.dart';
 
 class BaseView extends StatelessWidget {
   const BaseView({
