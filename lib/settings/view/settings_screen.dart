@@ -172,7 +172,7 @@ class _SettingsView extends StatelessWidget {
                           child: SizedBox(
                             height: 200,
                             child: CircleAvatar(
-                              backgroundColor: primarySwatch.shade300,
+                              backgroundColor: primarySwatch.shade200,
                               radius: 100,
                               child: const AnimatedEmoji(
                                 AnimatedEmojis.otter,
