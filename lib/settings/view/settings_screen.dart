@@ -17,6 +17,7 @@ import 'package:tracking_app/shared/view/base_view.dart';
 import 'package:tracking_app/shared/widgets/app_dialog.dart';
 import 'package:tracking_app/shared/widgets/error_message.dart';
 import 'package:tracking_app/shared/widgets/loading_indicator.dart';
+import 'package:tracking_app/shared/widgets/spacing.dart';
 import 'package:tracking_app/shared/widgets/tile.dart';
 import 'package:tracking_app/user_profile/cubit/user_profile_cubit.dart';
 import 'package:user_profile_repository/user_profile_repository.dart';
@@ -166,9 +167,7 @@ class _SettingsView extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const SizedBox(
-                          height: verticalPaddingLarge,
-                        ),
+                        const VerticalSpacing.large(),
                         Center(
                           child: SizedBox(
                             height: 200,
@@ -182,9 +181,7 @@ class _SettingsView extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const SizedBox(
-                          height: verticalPaddingLarge,
-                        ),
+                        const VerticalSpacing.large(),
                         Center(
                           child: Text(
                             email,
@@ -200,16 +197,12 @@ class _SettingsView extends StatelessWidget {
                             style: Theme.of(context).textTheme.titleLarge,
                           ),
                         ),
-                        const SizedBox(
-                          height: verticalPaddingLarge,
-                        ),
+                        const VerticalSpacing.large(),
                         Text(
                           translations.account,
                           style: Theme.of(context).textTheme.headlineMedium,
                         ),
-                        const SizedBox(
-                          height: verticalPaddingLarge,
-                        ),
+                        const VerticalSpacing.large(),
                         Tile(
                           title: translations.personalDetails,
                           leading: const Icon(Icons.person),
@@ -221,20 +214,14 @@ class _SettingsView extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const SizedBox(
-                          height: verticalPaddingLarge,
-                        ),
+                        const VerticalSpacing.large(),
                         const Divider(),
-                        const SizedBox(
-                          height: verticalPaddingLarge,
-                        ),
+                        const VerticalSpacing.large(),
                         Text(
                           translations.general,
                           style: Theme.of(context).textTheme.headlineMedium,
                         ),
-                        const SizedBox(
-                          height: verticalPaddingLarge,
-                        ),
+                        const VerticalSpacing.large(),
                         Tile(
                           title: translations.support,
                           leading: const Icon(Icons.mail),
@@ -245,29 +232,21 @@ class _SettingsView extends StatelessWidget {
                               ),
                           isLoading: settingsState.sendEmailState.isLoading,
                         ),
-                        const SizedBox(
-                          height: verticalPaddingMedium,
-                        ),
+                        const VerticalSpacing.medium(),
                         Tile(
                           title: translations.termsOfService,
                           leading: const Icon(Icons.description),
                           onTap: () => context.go('/settings/terms-of-service'),
                         ),
-                        const SizedBox(
-                          height: verticalPaddingMedium,
-                        ),
+                        const VerticalSpacing.medium(),
                         Tile(
                           title: translations.privacyPolicy,
                           leading: const Icon(Icons.description),
                           onTap: () => context.go('/settings/privacy-policy'),
                         ),
-                        const SizedBox(
-                          height: verticalPaddingLarge,
-                        ),
+                        const VerticalSpacing.large(),
                         const Divider(),
-                        const SizedBox(
-                          height: verticalPaddingLarge,
-                        ),
+                        const VerticalSpacing.large(),
                         Center(
                           child: TextButton(
                             onPressed: () => _showSignOutDialog(
@@ -297,9 +276,7 @@ class _SettingsView extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const SizedBox(
-                          height: verticalPaddingLarge,
-                        ),
+                        const VerticalSpacing.large(),
                       ],
                     ),
                   );

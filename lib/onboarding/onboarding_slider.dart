@@ -4,6 +4,7 @@ import 'package:flutter_onboarding_slider/flutter_onboarding_slider.dart';
 import 'package:tracking_app/gen/assets.gen.dart';
 import 'package:tracking_app/shared/theme/colors.dart';
 import 'package:tracking_app/shared/theme/layout.dart';
+import 'package:tracking_app/shared/widgets/spacing.dart';
 
 class OnboardingSlider extends StatelessWidget {
   const OnboardingSlider({
@@ -114,17 +115,13 @@ class _OnboardingSliderPageBody extends StatelessWidget {
             Expanded(
               child: Column(
                 children: [
-                  const SizedBox(
-                    height: verticalPaddingLarge,
-                  ),
+                  const VerticalSpacing.large(),
                   Text(
                     title,
                     style: Theme.of(context).textTheme.headlineSmall,
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(
-                    height: verticalPaddingSmall,
-                  ),
+                  const VerticalSpacing.small(),
                   Text(
                     subtitle,
                     style: Theme.of(context).textTheme.bodyLarge,

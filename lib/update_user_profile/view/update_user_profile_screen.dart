@@ -8,6 +8,7 @@ import 'package:tracking_app/shared/theme/layout.dart';
 import 'package:tracking_app/shared/toast.dart';
 import 'package:tracking_app/shared/view/base_view.dart';
 import 'package:tracking_app/shared/widgets/app_elevated_button.dart';
+import 'package:tracking_app/shared/widgets/spacing.dart';
 import 'package:tracking_app/update_user_profile/cubit/update_user_profile_cubit.dart';
 import 'package:tracking_app/user_profile/cubit/user_profile_cubit.dart';
 import 'package:user_profile_repository/user_profile_repository.dart';

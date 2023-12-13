@@ -88,9 +88,7 @@ class _UpdateUserProfileFormState extends State<_UpdateUserProfileForm> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(
-                height: verticalPaddingLarge,
-              ),
+              const VerticalSpacing.large(),
               TextFormField(
                 key: const Key('Update user profile form email input'),
                 controller: _emailController,
@@ -105,9 +103,7 @@ class _UpdateUserProfileFormState extends State<_UpdateUserProfileForm> {
                 textInputAction: TextInputAction.next,
                 enabled: false,
               ),
-              const SizedBox(
-                height: verticalPaddingMedium,
-              ),
+              const VerticalSpacing.medium(),
               TextFormField(
                 key: const Key('Update user profile form first name input'),
                 controller: _firstNameController,
@@ -122,9 +118,7 @@ class _UpdateUserProfileFormState extends State<_UpdateUserProfileForm> {
                 textInputAction: TextInputAction.next,
                 enabled: !state.isInProgress,
               ),
-              const SizedBox(
-                height: verticalPaddingLarge,
-              ),
+              const VerticalSpacing.large(),
               AppElevatedButton(
                 isLoading: state.isInProgress,
                 icon: Icons.edit,

@@ -14,6 +14,7 @@ import 'package:tracking_app/shared/view/base_view.dart';
 import 'package:tracking_app/shared/widgets/app_elevated_button.dart';
 import 'package:tracking_app/shared/widgets/error_message.dart';
 import 'package:tracking_app/shared/widgets/loading_indicator.dart';
+import 'package:tracking_app/shared/widgets/spacing.dart';
 import 'package:tracking_app/shared/widgets/tile.dart';
 import 'package:tracking_app/user_profile/cubit/user_profile_cubit.dart';
 import 'package:user_profile_repository/user_profile_repository.dart';
@@ -172,30 +173,22 @@ class _HomeContentViewState extends State<_HomeContentView> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(
-          height: verticalPaddingLarge,
-        ),
+        const VerticalSpacing.large(),
         Text(
           translations.hello(widget.firstName),
           style: Theme.of(context).textTheme.headlineSmall,
         ),
-        const SizedBox(
-          height: verticalPaddingMedium,
-        ),
+        const VerticalSpacing.medium(),
         Text(
           translations.moodHistoryTitle,
           style: Theme.of(context).textTheme.headlineMedium,
         ),
-        const SizedBox(
-          height: verticalPaddingMedium,
-        ),
+        const VerticalSpacing.medium(),
         Text(
           translations.moodHistoryDescription,
           style: Theme.of(context).textTheme.bodyMedium,
         ),
-        const SizedBox(
-          height: verticalPaddingLarge,
-        ),
+        const VerticalSpacing.large(),
         SizedBox(
           height: moodsListViewHeight,
           child: _MoodsShaderMask(
@@ -254,9 +247,7 @@ class _HomeContentWithNoMoods extends StatelessWidget {
           AnimatedEmojis.warmSmile,
           size: 128,
         ),
-        const SizedBox(
-          height: verticalPaddingSmall,
-        ),
+        const VerticalSpacing.small(),
         Center(
           child: Text(
             translations.hello(firstName),
@@ -264,9 +255,7 @@ class _HomeContentWithNoMoods extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
         ),
-        const SizedBox(
-          height: verticalPaddingSmall,
-        ),
+        const VerticalSpacing.small(),
         Center(
           child: Text(
             translations.noMoodsYet,

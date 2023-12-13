@@ -181,23 +181,17 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const SizedBox(
-                          height: verticalPaddingLarge,
-                        ),
+                        const VerticalSpacing.large(),
                         Text(
                           translations.howAreYouFeeling,
                           style: Theme.of(context).textTheme.headlineSmall,
                         ),
-                        const SizedBox(
-                          height: verticalPaddingMedium,
-                        ),
+                        const VerticalSpacing.medium(),
                         Text(
                           translations.estimateYourMood,
                           style: Theme.of(context).textTheme.bodyMedium,
                         ),
-                        const SizedBox(
-                          height: verticalPaddingLarge,
-                        ),
+                        const VerticalSpacing.large(),
                         Slider(
                           autofocus: true,
                           value: _formState.moodValue.value.toDouble(),
@@ -211,23 +205,17 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
                                 }
                               : _onMoodValueChanged,
                         ),
-                        const SizedBox(
-                          height: verticalPaddingLarge,
-                        ),
+                        const VerticalSpacing.large(),
                         Text(
                           translations.whatAreYouGreatfulFor,
                           style: Theme.of(context).textTheme.headlineSmall,
                         ),
-                        const SizedBox(
-                          height: verticalPaddingMedium,
-                        ),
+                        const VerticalSpacing.medium(),
                         Text(
                           translations.writeDownThingsYouAreGreatfulFor,
                           style: Theme.of(context).textTheme.bodyMedium,
                         ),
-                        const SizedBox(
-                          height: verticalPaddingLarge,
-                        ),
+                        const VerticalSpacing.large(),
                         TextFormField(
                           key: const Key(
                             'Update mood form thingIAmGreatfulAbout1 input',
@@ -279,19 +267,13 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
                           keyboardType: TextInputType.text,
                           textInputAction: TextInputAction.next,
                         ),
-                        const SizedBox(
-                          height: verticalPaddingLarge,
-                        ),
-                        const SizedBox(
-                          height: verticalPaddingLarge,
-                        ),
+                        const VerticalSpacing.large(),
+                        const VerticalSpacing.large(),
                         Text(
                           translations.whatIsOnYourMind,
                           style: Theme.of(context).textTheme.headlineSmall,
                         ),
-                        const SizedBox(
-                          height: verticalPaddingSmall,
-                        ),
+                        const VerticalSpacing.small(),
                         Text(
                           translations.whatIsOnYourMindDescription,
                           style: Theme.of(context).textTheme.bodyMedium,
