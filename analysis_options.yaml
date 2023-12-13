@@ -9,3 +9,4 @@ analyzer:
     - "**/*.g.dart"
     - "lib/models/*"
     - "lib/amplifyconfiguration.dart"
+    - "lib/firebase_options.dart"
