@@ -1,7 +1,7 @@
 part of '../home_screen.dart';
 
-class _MoodCard extends StatelessWidget {
-  const _MoodCard({
+class _MoodTile extends StatelessWidget {
+  const _MoodTile({
     required this.mood,
   });
 
@@ -12,7 +12,7 @@ class _MoodCard extends StatelessWidget {
     return Tile(
       leading: CircleAvatar(
         radius: 20,
-        backgroundColor: primarySwatch.shade300,
+        backgroundColor: primarySwatch.shade200,
         child: Center(
           child: _MoodEmoji(
             moodValue: mood.value,

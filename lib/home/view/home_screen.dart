@@ -18,7 +18,7 @@ import 'package:tracking_app/shared/widgets/tile.dart';
 import 'package:tracking_app/user_profile/cubit/user_profile_cubit.dart';
 import 'package:user_profile_repository/user_profile_repository.dart';
 
-part 'widgets/mood_card.dart';
+part 'widgets/mood_tile.dart';
 part 'widgets/moods_shader_mask.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -229,7 +229,7 @@ class _HomeContentViewState extends State<_HomeContentView> {
           padding: const EdgeInsets.only(
             bottom: verticalPaddingMedium,
           ),
-          child: _MoodCard(mood: mood),
+          child: _MoodTile(mood: mood),
         );
       },
     );
