@@ -8,10 +8,12 @@ class AppElevatedButton extends StatelessWidget {
     required this.icon,
     required this.label,
     required this.onPressed,
+    this.isDisabled = false,
     super.key,
   });
 
   final bool isLoading;
+  final bool isDisabled;
   final IconData icon;
   final VoidCallback onPressed;
   final String label;
@@ -20,7 +22,7 @@ class AppElevatedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
       key: key,
-      onPressed: isLoading ? null : onPressed,
+      onPressed: isDisabled || isLoading ? null : onPressed,
       icon: isLoading
           ? const TinyLoadingIndicator(color: Colors.white)
           : const Icon(
