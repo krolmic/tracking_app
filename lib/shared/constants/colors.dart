@@ -19,3 +19,8 @@ const MaterialColor primarySwatch = MaterialColor(
 const Color lightBackgroundColor = Color(0xFFccccff);
 
 const Color lightToastBackgroundColor = Colors.white;
+
+Color tileShadowColor = primarySwatch.shade100;
+Color tileIconColor = primarySwatch.shade200;
+const Color tileTitleColor = primarySwatch;
+Color tileSubtitleColor = primarySwatch.shade400;

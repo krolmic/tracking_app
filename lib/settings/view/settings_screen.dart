@@ -17,6 +17,7 @@ import 'package:tracking_app/shared/view/base_view.dart';
 import 'package:tracking_app/shared/widgets/app_dialog.dart';
 import 'package:tracking_app/shared/widgets/error_message.dart';
 import 'package:tracking_app/shared/widgets/loading_indicator.dart';
+import 'package:tracking_app/shared/widgets/tile.dart';
 import 'package:tracking_app/user_profile/cubit/user_profile_cubit.dart';
 import 'package:user_profile_repository/user_profile_repository.dart';
 
@@ -209,25 +210,14 @@ class _SettingsView extends StatelessWidget {
                         const SizedBox(
                           height: verticalPaddingLarge,
                         ),
-                        Card(
-                          elevation: 5,
-                          shadowColor: primarySwatch.shade100,
-                          child: ListTile(
-                            textColor: primarySwatch,
-                            iconColor: primarySwatch,
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(10),
-                              ),
-                            ),
-                            title: Text(translations.personalDetails),
-                            trailing: const Icon(Icons.edit),
-                            onTap: () => context.push(
-                              '/settings/update-user-profile',
-                              extra: UpdateUserProfileParams(
-                                email: email,
-                                firstName: firstName,
-                              ),
+                        Tile(
+                          title: translations.personalDetails,
+                          leading: const Icon(Icons.person),
+                          onTap: () => context.push(
+                            '/settings/update-user-profile',
+                            extra: UpdateUserProfileParams(
+                              email: email,
+                              firstName: firstName,
                             ),
                           ),
                         ),
@@ -245,76 +235,31 @@ class _SettingsView extends StatelessWidget {
                         const SizedBox(
                           height: verticalPaddingLarge,
                         ),
-                        Card(
-                          elevation: 5,
-                          shadowColor: primarySwatch.shade100,
-                          child: ListTile(
-                            textColor: primarySwatch,
-                            iconColor: primarySwatch,
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(10),
+                        Tile(
+                          title: translations.support,
+                          leading: const Icon(Icons.mail),
+                          onTap: () => context.read<SettingsCubit>().sendEmail(
+                                recipient: supportEmailAddress,
+                                subject: '',
+                                body: '',
                               ),
-                            ),
-                            title: Text(translations.support),
-                            trailing: settingsState.sendEmailState.maybeWhen(
-                              loading: () => const SizedBox(
-                                height: 16,
-                                width: 16,
-                                child: CircularProgressIndicator(),
-                              ),
-                              orElse: () => const Icon(Icons.mail),
-                            ),
-                            onTap: settingsState.sendEmailState.isLoading
-                                ? null
-                                : () => context.read<SettingsCubit>().sendEmail(
-                                      recipient: supportEmailAddress,
-                                      subject: '',
-                                      body: '',
-                                    ),
-                          ),
+                          isLoading: settingsState.sendEmailState.isLoading,
                         ),
                         const SizedBox(
                           height: verticalPaddingMedium,
                         ),
-                        Card(
-                          elevation: 5,
-                          shadowColor: primarySwatch.shade100,
-                          child: ListTile(
-                            textColor: primarySwatch,
-                            iconColor: primarySwatch,
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(10),
-                              ),
-                            ),
-                            title: Text(translations.termsOfService),
-                            trailing: const Icon(Icons.description),
-                            onTap: () {
-                              context.go('/settings/terms-of-service');
-                            },
-                          ),
+                        Tile(
+                          title: translations.termsOfService,
+                          leading: const Icon(Icons.description),
+                          onTap: () => context.go('/settings/terms-of-service'),
                         ),
                         const SizedBox(
                           height: verticalPaddingMedium,
                         ),
-                        Card(
-                          elevation: 5,
-                          shadowColor: primarySwatch.shade100,
-                          child: ListTile(
-                            textColor: primarySwatch,
-                            iconColor: primarySwatch,
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(10),
-                              ),
-                            ),
-                            title: Text(translations.privacyPolicy),
-                            trailing: const Icon(Icons.description),
-                            onTap: () {
-                              context.go('/settings/privacy-policy');
-                            },
-                          ),
+                        Tile(
+                          title: translations.privacyPolicy,
+                          leading: const Icon(Icons.description),
+                          onTap: () => context.go('/settings/privacy-policy'),
                         ),
                         const SizedBox(
                           height: verticalPaddingLarge,

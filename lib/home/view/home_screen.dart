@@ -14,6 +14,7 @@ import 'package:tracking_app/shared/view/base_view.dart';
 import 'package:tracking_app/shared/widgets/app_elevated_button.dart';
 import 'package:tracking_app/shared/widgets/error_message.dart';
 import 'package:tracking_app/shared/widgets/loading_indicator.dart';
+import 'package:tracking_app/shared/widgets/tile.dart';
 import 'package:tracking_app/user_profile/cubit/user_profile_cubit.dart';
 import 'package:user_profile_repository/user_profile_repository.dart';
 
