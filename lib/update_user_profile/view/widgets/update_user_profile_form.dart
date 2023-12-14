@@ -94,7 +94,7 @@ class _UpdateUserProfileFormState extends State<_UpdateUserProfileForm> {
                 controller: _emailController,
                 decoration: InputDecoration(
                   icon: const Icon(Icons.email),
-                  iconColor: Theme.of(context).primaryColor,
+                  iconColor: primarySwatch.shade200,
                   label: Text(translations.email),
                 ),
                 validator: (value) =>
@@ -109,7 +109,7 @@ class _UpdateUserProfileFormState extends State<_UpdateUserProfileForm> {
                 controller: _firstNameController,
                 decoration: InputDecoration(
                   icon: const Icon(Icons.person),
-                  iconColor: Theme.of(context).primaryColor,
+                  iconColor: primarySwatch.shade200,
                   label: Text(translations.givenName),
                 ),
                 validator: (value) =>
