@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "493902487548",
-    "project_id": "tracking-app-4f63b",
-    "storage_bucket": "tracking-app-4f63b.appspot.com"
+    "project_number": "679937544462",
+    "project_id": "mindful-me-project",
+    "storage_bucket": "mindful-me-project.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:493902487548:android:3f9cc1ab778f14e9a35c79",
+        "mobilesdk_app_id": "1:679937544462:android:3ffe7d9811a491c40fc75f",
         "android_client_info": {
-          "package_name": "com.example.tracking_app"
+          "package_name": "app.mindfulme"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDhYcKq74EAVLTYH0x6vkkGCLm5Luardho"
+          "current_key": "AIzaSyCKVoTfCEgOp0GkPO1JvDIU45ryBucIJKI"
         }
       ],
       "services": {

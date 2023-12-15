@@ -1,7 +1,7 @@
 {
   "file_generated_by": "FlutterFire CLI",
   "purpose": "FirebaseAppID & ProjectID for this Firebase app in this directory",
-  "GOOGLE_APP_ID": "1:493902487548:ios:a0d738922afbd9ada35c79",
-  "FIREBASE_PROJECT_ID": "tracking-app-4f63b",
-  "GCM_SENDER_ID": "493902487548"
+  "GOOGLE_APP_ID": "1:679937544462:ios:d20604c1c04f7b040fc75f",
+  "FIREBASE_PROJECT_ID": "mindful-me-project",
+  "GCM_SENDER_ID": "679937544462"
 }

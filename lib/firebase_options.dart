@@ -28,7 +28,10 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -47,28 +50,19 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDhYcKq74EAVLTYH0x6vkkGCLm5Luardho',
-    appId: '1:493902487548:android:3f9cc1ab778f14e9a35c79',
-    messagingSenderId: '493902487548',
-    projectId: 'tracking-app-4f63b',
-    storageBucket: 'tracking-app-4f63b.appspot.com',
+    apiKey: 'AIzaSyCKVoTfCEgOp0GkPO1JvDIU45ryBucIJKI',
+    appId: '1:679937544462:android:3ffe7d9811a491c40fc75f',
+    messagingSenderId: '679937544462',
+    projectId: 'mindful-me-project',
+    storageBucket: 'mindful-me-project.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyD2zMDXGJptKb5zV99u4n2XD7m8Zqt78Vk',
-    appId: '1:493902487548:ios:a0d738922afbd9ada35c79',
-    messagingSenderId: '493902487548',
-    projectId: 'tracking-app-4f63b',
-    storageBucket: 'tracking-app-4f63b.appspot.com',
+    apiKey: 'AIzaSyB_Ntnqxr_UcLs9UCB9DgPjEul_zAt_1kg',
+    appId: '1:679937544462:ios:d20604c1c04f7b040fc75f',
+    messagingSenderId: '679937544462',
+    projectId: 'mindful-me-project',
+    storageBucket: 'mindful-me-project.appspot.com',
     iosBundleId: 'com.example.trackingApp',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyD2zMDXGJptKb5zV99u4n2XD7m8Zqt78Vk',
-    appId: '1:493902487548:ios:c7b6c0e119c78314a35c79',
-    messagingSenderId: '493902487548',
-    projectId: 'tracking-app-4f63b',
-    storageBucket: 'tracking-app-4f63b.appspot.com',
-    iosBundleId: 'com.example.trackingApp.RunnerTests',
   );
 }
