@@ -3,11 +3,11 @@ import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:jiffy/jiffy.dart';
 import 'package:tracking_app/app/cubit/app_cubit.dart';
 import 'package:tracking_app/l10n/amplify_resolvers.dart';
 import 'package:tracking_app/main.dart';
 import 'package:tracking_app/onboarding/onboarding_slider.dart';
+import 'package:tracking_app/shared/date_time.dart';
 import 'package:tracking_app/shared/router.dart';
 import 'package:tracking_app/shared/theme/colors.dart';
 import 'package:tracking_app/shared/theme/theme.dart';
@@ -60,9 +60,7 @@ class App extends StatelessWidget {
             authenticatorBuilder:
                 (BuildContext context, AuthenticatorState state) {
               if (state.currentStep == AuthenticatorStep.loading) {
-                Jiffy.setLocale(
-                  Localizations.localeOf(context).languageCode,
-                );
+                setDateTimeLocale(context);
 
                 return const Center(child: LoadingIndicator());
               }

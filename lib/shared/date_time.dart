@@ -2,6 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:jiffy/jiffy.dart';
 
+/// Sets the [Jiffy] locale used for [DateTime] formatting
+/// based on the passed [context].
+void setDateTimeLocale(BuildContext context) {
+  Jiffy.setLocale(
+    Localizations.localeOf(context).languageCode,
+  );
+}
+
 /// Returns a formatted date string based on the date of the passed [dateTime].
 String getDateString(BuildContext context, DateTime dateTime) {
   if (_dateIsToday(dateTime)) {
