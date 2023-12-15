@@ -1,4 +1,4 @@
-package com.example.tracking_app
+package app.mindfulme
 
 import io.flutter.embedding.android.FlutterActivity
 
