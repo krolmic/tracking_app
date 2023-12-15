@@ -3,13 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:formz/formz.dart';
 import 'package:go_router/go_router.dart';
-import 'package:jiffy/jiffy.dart';
 import 'package:mood_repository/mood_repository.dart';
 import 'package:tracking_app/delete_mood/cubit/delete_mood_cubit.dart';
 import 'package:tracking_app/main.dart';
+import 'package:tracking_app/shared/date_time.dart';
 import 'package:tracking_app/shared/formz.dart';
 import 'package:tracking_app/shared/theme/colors.dart';
-import 'package:tracking_app/shared/theme/layout.dart';
 import 'package:tracking_app/shared/toast.dart';
 import 'package:tracking_app/shared/view/base_view.dart';
 import 'package:tracking_app/shared/widgets/app_dialog.dart';
@@ -117,11 +116,11 @@ class UpdateMoodScreen extends StatelessWidget {
             title: Column(
               children: [
                 Text(
-                  Jiffy.parseFromDateTime(mood.createdOn).yMMMMd,
+                  getDateString(context, mood.createdOn),
                   maxLines: 1,
                 ),
                 Text(
-                  Jiffy.parseFromDateTime(mood.createdOn).jm,
+                  getTimeString(mood.createdOn),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
