@@ -23,8 +23,26 @@
     "whatIsOnYourMindDescription": "Here is a space for writing down your thoughts.",
     "moodHistoryTitle": "Your mood history",
     "moodHistoryDescription": "Tap on an element to see your diary and things you are grateful for.",
-    "hello": "Hello {firstName}!",
-    "@hello": {
+    "goodMorning": "👋 Good morning {firstName}!",
+    "@goodMorning": {
+        "placeholders": {
+            "firstName": {
+                "type": "String",
+                "example": "Bob"
+            }
+        }
+    },
+    "goodAfternoon": "👋 Good afternoon {firstName}!",
+    "@goodAfternoon": {
+        "placeholders": {
+            "firstName": {
+                "type": "String",
+                "example": "Bob"
+            }
+        }
+    },
+    "goodEvening": "👋 Good evening {firstName}!",
+    "@goodEvening": {
         "placeholders": {
             "firstName": {
                 "type": "String",

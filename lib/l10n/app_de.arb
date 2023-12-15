@@ -23,8 +23,26 @@
     "whatIsOnYourMindDescription": "Hier kannst du deine Gedanken aufschrieben.",
     "moodHistoryTitle": "Deine Stimmungshistorie",
     "moodHistoryDescription": "Tappe auf einen Eintrag um Dinge für die du dankbar bist und deine Tagebücher zu sehen.",
-    "hello": "Hallo {firstName}!",
-    "@hello": {
+    "goodMorning": "👋 Guten Morgen {firstName}!",
+    "@goodMorning": {
+        "placeholders": {
+            "firstName": {
+                "type": "String",
+                "example": "Bob"
+            }
+        }
+    },
+    "goodAfternoon": "👋 Guten Tag {firstName}!",
+    "@goodAfternoon": {
+        "placeholders": {
+            "firstName": {
+                "type": "String",
+                "example": "Bob"
+            }
+        }
+    },
+    "goodEvening": "👋 Guten Abend {firstName}!",
+    "@goodEvening": {
         "placeholders": {
             "firstName": {
                 "type": "String",

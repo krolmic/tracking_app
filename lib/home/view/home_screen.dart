@@ -170,7 +170,7 @@ class _HomeContentViewState extends State<_HomeContentView> {
       children: [
         const VerticalSpacing.large(),
         Text(
-          '👋 ${translations.hello(widget.firstName)}',
+          getGreetingString(context, DateTime.now(), widget.firstName),
           style: Theme.of(context).textTheme.headlineSmall,
         ),
         const VerticalSpacing.medium(),
@@ -244,7 +244,7 @@ class _HomeContentWithNoMoods extends StatelessWidget {
         const VerticalSpacing.small(),
         Center(
           child: Text(
-            translations.hello(firstName),
+            getGreetingString(context, DateTime.now(), firstName),
             style: Theme.of(context).textTheme.headlineLarge,
             textAlign: TextAlign.center,
           ),
