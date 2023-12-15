@@ -19,10 +19,30 @@ class _MoodTile extends StatelessWidget {
           ),
         ),
       ),
-      title: Jiffy.parseFromDateTime(mood.createdOn).yMMMMd,
-      subTitle: Jiffy.parseFromDateTime(mood.createdOn).jm,
+      title: _getDateString(context),
+      subTitle: _getTimeString(),
       onTap: () => context.go('/home/update', extra: mood),
     );
+  }
+
+  String _getDateString(BuildContext context) {
+    if (_dateIsToday(mood.createdOn)) {
+      return AppLocalizations.of(context)!.today;
+    }
+
+    return Jiffy.parseFromDateTime(mood.createdOn).yMMMMd;
+  }
+
+  String _getTimeString() {
+    return Jiffy.parseFromDateTime(mood.createdOn).jm;
+  }
+
+  bool _dateIsToday(DateTime date) {
+    final now = DateTime.now();
+
+    return date.day == now.day &&
+        date.month == now.month &&
+        date.year == now.year;
   }
 }
 
