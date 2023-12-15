@@ -33,7 +33,9 @@ class SettingsCubit extends Cubit<SettingsState> {
 
   final EmailRepository _emailRepository;
 
-  Future<void> signOut() async {
+  /// Signs out the current user.
+  /// Returns `true` if the sign out was successful, `false` otherwise.
+  Future<bool> signOut() async {
     try {
       emit(
         state.copyWith(
@@ -42,6 +44,8 @@ class SettingsCubit extends Cubit<SettingsState> {
       );
 
       await _accountRepository.signOut();
+
+      return true;
     } catch (e, stackTrace) {
       Fimber.e('Sign out failed', ex: e, stacktrace: stackTrace);
 
@@ -50,10 +54,14 @@ class SettingsCubit extends Cubit<SettingsState> {
           signOutState: const SignOutState.error(),
         ),
       );
+
+      return false;
     }
   }
 
-  Future<void> deleteUserAccount() async {
+  /// Deletes the current user account and all associated data.
+  /// Returns `true` if the account deletion was successful, `false` otherwise.
+  Future<bool> deleteUserAccount() async {
     try {
       emit(
         state.copyWith(
@@ -72,6 +80,8 @@ class SettingsCubit extends Cubit<SettingsState> {
           accountDeletionState: const AccountDeletionState.success(),
         ),
       );
+
+      return true;
     } catch (e, stackTrace) {
       Fimber.e('Failed to delete user account', ex: e, stacktrace: stackTrace);
 
@@ -80,6 +90,8 @@ class SettingsCubit extends Cubit<SettingsState> {
           accountDeletionState: const AccountDeletionState.error(),
         ),
       );
+
+      return false;
     }
   }
 

@@ -141,6 +141,36 @@ class _SettingsView extends StatelessWidget {
     );
   }
 
+  Future<void> _onSignOutPressed(BuildContext context) async {
+    await _showSignOutDialog(
+      context,
+      () async {
+        final userProfileCubit = context.read<UserProfileCubit>();
+        final settingsCubit = context.read<SettingsCubit>();
+
+        final userIsSignedOut = await settingsCubit.signOut();
+        if (userIsSignedOut) {
+          userProfileCubit.cleanUserProfile();
+        }
+      },
+    );
+  }
+
+  Future<void> _onDeleteAccountPressed(BuildContext context) async {
+    await _showSignOutDialog(
+      context,
+      () async {
+        final userProfileCubit = context.read<UserProfileCubit>();
+        final settingsCubit = context.read<SettingsCubit>();
+
+        final userAccountIsDeleted = await settingsCubit.deleteUserAccount();
+        if (userAccountIsDeleted) {
+          userProfileCubit.cleanUserProfile();
+        }
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final translations = AppLocalizations.of(context)!;
@@ -249,10 +279,7 @@ class _SettingsView extends StatelessWidget {
                         const VerticalSpacing.large(),
                         Center(
                           child: TextButton(
-                            onPressed: () => _showSignOutDialog(
-                              context,
-                              context.read<SettingsCubit>().signOut,
-                            ),
+                            onPressed: () => _onSignOutPressed(context),
                             child: settingsState.signOutState.maybeWhen(
                               orElse: () => Text(translations.signOut),
                               loading: () => const TinyLoadingIndicator(),
@@ -261,10 +288,7 @@ class _SettingsView extends StatelessWidget {
                         ),
                         Center(
                           child: TextButton(
-                            onPressed: () => _showAccountDeletionDialog(
-                              context,
-                              context.read<SettingsCubit>().deleteUserAccount,
-                            ),
+                            onPressed: () => _onDeleteAccountPressed(context),
                             child: settingsState.accountDeletionState.maybeWhen(
                               orElse: () => Text(
                                 translations.deleteAccount,

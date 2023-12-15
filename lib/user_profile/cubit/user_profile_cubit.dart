@@ -37,4 +37,8 @@ class UserProfileCubit extends Cubit<UserProfileState> {
       emit(const UserProfileState.error());
     }
   }
+
+  void cleanUserProfile() {
+    emit(const UserProfileState.initial());
+  }
 }
