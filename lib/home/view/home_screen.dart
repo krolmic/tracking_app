@@ -170,7 +170,7 @@ class _HomeContentViewState extends State<_HomeContentView> {
       children: [
         const VerticalSpacing.large(),
         Text(
-          translations.hello(widget.firstName),
+          '👋 ${translations.hello(widget.firstName)}',
           style: Theme.of(context).textTheme.headlineSmall,
         ),
         const VerticalSpacing.medium(),
