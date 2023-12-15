@@ -165,11 +165,6 @@ class _HomeContentViewState extends State<_HomeContentView> {
       );
     }
 
-    final mediaQuery = MediaQuery.of(context);
-    final screenPadding = mediaQuery.padding;
-    final moodsListViewHeight =
-        (mediaQuery.size.height - screenPadding.top - screenPadding.bottom) / 2;
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -189,8 +184,7 @@ class _HomeContentViewState extends State<_HomeContentView> {
           style: Theme.of(context).textTheme.bodyMedium,
         ),
         const VerticalSpacing.large(),
-        SizedBox(
-          height: moodsListViewHeight,
+        Expanded(
           child: _MoodsShaderMask(
             child: _buildMoods(),
           ),
