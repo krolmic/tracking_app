@@ -157,7 +157,7 @@ class _SettingsView extends StatelessWidget {
   }
 
   Future<void> _onDeleteAccountPressed(BuildContext context) async {
-    await _showSignOutDialog(
+    await _showAccountDeletionDialog(
       context,
       () async {
         final userProfileCubit = context.read<UserProfileCubit>();
