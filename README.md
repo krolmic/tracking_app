@@ -1,11 +1,9 @@
 # Mood tracking app
 
-<img src="screenshots/onboarding.png" width="33%" />
-<img src="screenshots/sign-in.png" width="33%" />
-<img src="screenshots/home.png" width="33%" />
-<img src="screenshots/track-mood.png" width="33%" />
-<img src="screenshots/update-mood.png" width="33%" />
-<img src="screenshots/settings.png" width="33%" />
+<img src="screenshots/onboarding.png" width="30%" /> <img src="screenshots/sign-in.png" width="30%" /> <img src="screenshots/home.png" width="30%" />
+<img src="screenshots/track-mood.png" width="30%" /> <img src="screenshots/update-mood.png" width="30%" /> <img src="screenshots/settings.png" width="30%" />
+
+
 
 ## 📱 App
 
