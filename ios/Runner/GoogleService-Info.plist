@@ -3,17 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>API_KEY</key>
-	<string>AIzaSyD2zMDXGJptKb5zV99u4n2XD7m8Zqt78Vk</string>
+	<string>AIzaSyB_Ntnqxr_UcLs9UCB9DgPjEul_zAt_1kg</string>
 	<key>GCM_SENDER_ID</key>
-	<string>493902487548</string>
+	<string>679937544462</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.example.trackingApp</string>
 	<key>PROJECT_ID</key>
-	<string>tracking-app-4f63b</string>
+	<string>mindful-me-project</string>
 	<key>STORAGE_BUCKET</key>
-	<string>tracking-app-4f63b.appspot.com</string>
+	<string>mindful-me-project.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:493902487548:ios:a0d738922afbd9ada35c79</string>
+	<string>1:679937544462:ios:d20604c1c04f7b040fc75f</string>
 </dict>
 </plist>
