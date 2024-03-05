@@ -1,0 +1,34 @@
+{
+  "actions": [
+    {
+      "type": "alterTable",
+      "alterTable": {
+        "name": "mood_entry",
+        "schema": "public",
+        "addColumns": [],
+        "deleteColumns": [],
+        "modifyColumns": [
+          {
+            "columnName": "thingsIAmGratefulFor",
+            "addNullable": true,
+            "removeNullable": false,
+            "changeDefault": false
+          },
+          {
+            "columnName": "diary",
+            "addNullable": true,
+            "removeNullable": false,
+            "changeDefault": false
+          }
+        ],
+        "addIndexes": [],
+        "deleteIndexes": [],
+        "addForeignKeys": [],
+        "deleteForeignKeys": [],
+        "warnings": []
+      }
+    }
+  ],
+  "warnings": [],
+  "migrationApiVersion": 1
+}
