@@ -1,0 +1,6 @@
+moodEntries:
+  - getMoodEntries:
+  - createMoodEntry:
+  - updateMoodEntry:
+  - deleteMoodEntry:
+  - deleteMoodEntries:

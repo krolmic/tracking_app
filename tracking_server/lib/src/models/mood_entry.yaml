@@ -1,0 +1,9 @@
+class: MoodEntry
+table: mood_entry
+
+fields:
+  userId: String
+  value: int
+  thingsIAmGratefulFor: List<String>?
+  diary: String?
+  createdOn: DateTime
