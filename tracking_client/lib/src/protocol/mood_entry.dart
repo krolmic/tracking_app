@@ -10,7 +10,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 
-abstract class MoodEntry extends _i1.SerializableEntity {
+abstract class MoodEntry implements _i1.SerializableModel {
   MoodEntry._({
     this.id,
     required this.userId,
@@ -29,21 +29,17 @@ abstract class MoodEntry extends _i1.SerializableEntity {
     required DateTime createdOn,
   }) = _MoodEntryImpl;
 
-  factory MoodEntry.fromJson(
-    Map<String, dynamic> jsonSerialization,
-    _i1.SerializationManager serializationManager,
-  ) {
+  factory MoodEntry.fromJson(Map<String, dynamic> jsonSerialization) {
     return MoodEntry(
-      id: serializationManager.deserialize<int?>(jsonSerialization['id']),
-      userId:
-          serializationManager.deserialize<String>(jsonSerialization['userId']),
-      value: serializationManager.deserialize<int>(jsonSerialization['value']),
-      thingsIAmGratefulFor: serializationManager.deserialize<List<String>?>(
-          jsonSerialization['thingsIAmGratefulFor']),
-      diary:
-          serializationManager.deserialize<String?>(jsonSerialization['diary']),
-      createdOn: serializationManager
-          .deserialize<DateTime>(jsonSerialization['createdOn']),
+      id: jsonSerialization['id'] as int?,
+      userId: jsonSerialization['userId'] as String,
+      value: jsonSerialization['value'] as int,
+      thingsIAmGratefulFor: (jsonSerialization['thingsIAmGratefulFor'] as List?)
+          ?.map((e) => e as String)
+          .toList(),
+      diary: jsonSerialization['diary'] as String?,
+      createdOn:
+          _i1.DateTimeJsonExtension.fromJson(jsonSerialization['createdOn']),
     );
   }
 
@@ -81,6 +77,11 @@ abstract class MoodEntry extends _i1.SerializableEntity {
       if (diary != null) 'diary': diary,
       'createdOn': createdOn.toJson(),
     };
+  }
+
+  @override
+  String toString() {
+    return _i1.SerializationManager.encode(this);
   }
 }
 
