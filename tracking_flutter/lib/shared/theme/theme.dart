@@ -7,6 +7,8 @@ ThemeData get theme => ThemeData.from(
       colorScheme: ColorScheme.fromSwatch(
         primarySwatch: primarySwatch,
         backgroundColor: lightBackgroundColor,
+      ).copyWith(
+        surface: lightBackgroundColor,
       ),
       textTheme: GoogleFonts.latoTextTheme(),
     );
