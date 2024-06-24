@@ -43,7 +43,7 @@ class HomeScreen extends StatelessWidget {
         )..init();
       },
       child: Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.background,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         floatingActionButton: Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: viewPaddingHorizontal,
