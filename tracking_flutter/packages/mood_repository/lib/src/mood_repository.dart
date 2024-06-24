@@ -63,10 +63,14 @@ class MoodRepository {
     List<String>? thingsIAmGratefulAbout,
   }) async {
     try {
+      // As no timezone info is passed to the server,
+      // add the local timezone offset to the createdOn date.
+      final createdOnWithOffset = createdOn.add(createdOn.timeZoneOffset);
+
       final moodEntryToCreate = MoodEntry(
         userId: userId,
         value: value,
-        createdOn: createdOn,
+        createdOn: createdOnWithOffset,
         diary: diary != null && diary.isNotEmpty ? diary : null,
         thingsIAmGratefulFor: thingsIAmGratefulAbout,
       );
