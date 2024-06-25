@@ -1,8 +1,0 @@
-type MoodEntry @model @auth(rules: [{ allow: owner }]) {
-  id: ID! 
-  userId: String!
-  value: Int!
-  thingsIamGratefulAbout: [String]
-  diary: String
-  createdOn: AWSDateTime!
-}
