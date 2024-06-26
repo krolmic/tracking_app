@@ -62,6 +62,7 @@ dependencies:
   jiffy: ^6.2.1
   mood_repository:
     path: packages/mood_repository/
+  serverpod_auth_shared_flutter: 2.0.1
   serverpod_flutter: 2.0.1
   tracking_client:
     path: ../tracking_client

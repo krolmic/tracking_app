@@ -5,6 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mood_repository/mood_repository.dart';
+import 'package:serverpod_auth_shared_flutter/serverpod_auth_shared_flutter.dart';
 import 'package:serverpod_flutter/serverpod_flutter.dart';
 import 'package:tracking_app/app/view/app.dart';
 import 'package:tracking_app/firebase_options.dart';
@@ -33,9 +34,11 @@ void registerSingletons() {
     // Repositories
     ..registerLazySingleton<MoodRepository>(
       () => MoodRepository(
-        serverpodClient: Client('http://$localhost:8080/')
-          ..connectivityMonitor = FlutterConnectivityMonitor(),
-      ),
+        serverpodClient: Client(
+          'http://$localhost:8080/',
+          authenticationKeyManager: FlutterAuthenticationKeyManager(),
+        )..connectivityMonitor = FlutterConnectivityMonitor(),
+      )..init(),
     )
     ..registerLazySingleton<UserProfileRepository>(
       () => UserProfileRepository(
