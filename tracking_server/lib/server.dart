@@ -1,9 +1,8 @@
 import 'package:serverpod/serverpod.dart';
-
 import 'package:tracking_server/src/web/routes/root.dart';
 
-import 'src/generated/protocol.dart';
 import 'src/generated/endpoints.dart';
+import 'src/generated/protocol.dart';
 
 // This is the starting point of your Serverpod server. In most cases, you will
 // only need to make additions to this file if you add future calls,  are
@@ -15,6 +14,11 @@ void run(List<String> args) async {
     args,
     Protocol(),
     Endpoints(),
+    authenticationHandler: (Session session, String token) async {
+      if (token != 'valid') return null;
+
+      return AuthenticationInfo(1, <Scope>{});
+    },
   );
 
   // If you are using any future calls, they need to be registered here.

@@ -5,6 +5,9 @@ import '../generated/protocol.dart';
 class MoodEntriesEndpoint extends Endpoint {
   static const int moodEntriesPerPage = 15;
 
+  @override
+  bool get requireLogin => true;
+
   Future<List<MoodEntry>> getMoodEntries(
     Session session, {
     required int page,
