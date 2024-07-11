@@ -1,4 +1,4 @@
-# Mood tracking app
+# Healthy Hussle
 
 <img src="tracking_flutter/screenshots/onboarding.png" width="33%" /> <img src="tracking_flutter/screenshots/sign-in.png" width="33%" />
 <img src="tracking_flutter/screenshots/home.png" width="33%" /> <img src="tracking_flutter/screenshots/track-mood.png" width="33%" />
@@ -6,19 +6,14 @@
 
 ## 📱 App
 
-The Flutter app (currently supporting Android and iOS) provides tracking mood consisting of a method that helped me a lot with freeing my mind from negativity and getting more clarity.
-It includes estimating your current mood, affirmations by writing down things you're grateful about, a diary to write about thoughts keeping your mind busy.
+The app provides estimating your current mood, affirmations by writing down things you're grateful about and a diary to write about thoughts keeping your mind busy.
+Additionally users are able to track their daily revenue and working hours so they are able to evaluate data to identify how the tracked factors are connected with each other.
 
-Project's long term goal is not only to offer tracking mood, but to offer tools analysing it in order to prevent mental issues like depressions.
+The long-term vision is to offer tracking other things besides work related factors that may be connected to users' mood e.g. sport sessions, selfcare time, etc. which all can be tracked personally so users who want to track additionally things not related to their work are able to identify connections betweed tracked factors and their mood based on their personal demands.
 
 ## 🎯 Short term goals
 
-- [ ] Create terms and conditions, privacy policy
-- [x] Replace Sentry with Crashlytics
-- [ ] Clean up the codebase
-- [ ] Add app's launcher icon
-- [ ] Release for Android
-- [ ] Release for iOS
+[Kanban board](https://github.com/users/krolmic/projects/2)
 
 ## 🧑‍🏭 Contribution
 
