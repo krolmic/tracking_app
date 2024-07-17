@@ -49,3 +49,9 @@ String getGreetingString(
 
   return translations.goodMorning(firstName);
 }
+
+extension DateTimeX on DateTime {
+  DateTime get startOfMonth => DateTime(year, month);
+  DateTime get endOfMonth => DateTime(year, month + 1, 0);
+  DateTime get dateOnly => DateTime(year, month, day);
+}

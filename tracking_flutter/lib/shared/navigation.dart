@@ -35,6 +35,7 @@ class ScaffoldWithNestedNavigation extends StatelessWidget {
         ),
         icons: const [
           Icons.home,
+          Icons.calendar_today,
           Icons.settings,
         ],
         activeIndex: navigationShell.currentIndex,

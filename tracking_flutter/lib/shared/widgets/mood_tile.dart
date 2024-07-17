@@ -1,8 +1,14 @@
-part of '../home_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mood_repository/mood_repository.dart';
+import 'package:tracking_app/shared/date_time.dart';
+import 'package:tracking_app/shared/theme/colors.dart';
+import 'package:tracking_app/shared/widgets/tile.dart';
 
-class _MoodTile extends StatelessWidget {
-  const _MoodTile({
+class MoodTile extends StatelessWidget {
+  const MoodTile({
     required this.mood,
+    super.key,
   });
 
   final Mood mood;

@@ -1,8 +1,10 @@
-part of '../home_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:tracking_app/shared/theme/colors.dart';
 
-class _MoodsShaderMask extends StatelessWidget {
-  const _MoodsShaderMask({
+class MoodsShaderMask extends StatelessWidget {
+  const MoodsShaderMask({
     required this.child,
+    super.key,
   });
 
   final Widget child;
