@@ -1,5 +1,6 @@
 moodEntries:
   - getMoodEntries:
+  - getMoodEntriesInTimeRange:
   - createMoodEntry:
   - updateMoodEntry:
   - deleteMoodEntry:

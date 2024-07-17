@@ -52,6 +52,37 @@ class Endpoints extends _i1.EndpointDispatch {
             userId: params['userId'],
           ),
         ),
+        'getMoodEntriesInTimeRange': _i1.MethodConnector(
+          name: 'getMoodEntriesInTimeRange',
+          params: {
+            'userId': _i1.ParameterDescription(
+              name: 'userId',
+              type: _i1.getType<String>(),
+              nullable: false,
+            ),
+            'from': _i1.ParameterDescription(
+              name: 'from',
+              type: _i1.getType<DateTime>(),
+              nullable: false,
+            ),
+            'to': _i1.ParameterDescription(
+              name: 'to',
+              type: _i1.getType<DateTime>(),
+              nullable: false,
+            ),
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['moodEntries'] as _i2.MoodEntriesEndpoint)
+                  .getMoodEntriesInTimeRange(
+            session,
+            userId: params['userId'],
+            from: params['from'],
+            to: params['to'],
+          ),
+        ),
         'createMoodEntry': _i1.MethodConnector(
           name: 'createMoodEntry',
           params: {

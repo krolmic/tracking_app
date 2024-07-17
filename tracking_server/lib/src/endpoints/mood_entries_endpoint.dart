@@ -23,6 +23,22 @@ class MoodEntriesEndpoint extends Endpoint {
     );
   }
 
+  Future<List<MoodEntry>> getMoodEntriesInTimeRange(
+    Session session, {
+    required String userId,
+    required DateTime from,
+    required DateTime to,
+  }) async {
+    return await MoodEntry.db.find(
+      session,
+      orderBy: (moodEntry) => moodEntry.createdOn,
+      orderDescending: true,
+      where: (moodEntry) =>
+          moodEntry.userId.equals(userId) &
+          moodEntry.createdOn.between(from, to),
+    );
+  }
+
   Future<MoodEntry> createMoodEntry(
     Session session,
     MoodEntry moodEntry,
