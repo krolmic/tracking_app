@@ -59,6 +59,43 @@ class MoodRepository {
     }
   }
 
+  Future<List<Mood>> getMoodsInTimeRange({
+    required DateTime from,
+    required DateTime to,
+    required String userId,
+  }) async {
+    try {
+      final fromDate = DateTime(from.year, from.month, from.day);
+      final toDate = DateTime(to.year, to.month, to.day);
+
+      final moodEntries =
+          await _serverpodClient.moodEntries.getMoodEntriesInTimeRange(
+        userId: userId,
+        from: fromDate,
+        to: toDate,
+      );
+
+      final moods = <Mood>[];
+
+      if (moodEntries.isNotEmpty) {
+        for (final moodEntry in moodEntries) {
+          moods.add(Mood.fromMoodEntry(moodEntry));
+        }
+      }
+
+      return moods;
+    } catch (e, stackTrace) {
+      Error.throwWithStackTrace(
+        MoodRepositoryException(
+          message: 'MoodEntry query for time range ${from.toIso8601String()}'
+              '- ${to.toIso8601String()} failed.',
+          cause: e,
+        ),
+        stackTrace,
+      );
+    }
+  }
+
   Future<Mood> createMood({
     required String userId,
     required int value,
