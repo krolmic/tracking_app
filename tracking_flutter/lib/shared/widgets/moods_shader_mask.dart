@@ -5,9 +5,13 @@ class MoodsShaderMask extends StatelessWidget {
   const MoodsShaderMask({
     required this.child,
     super.key,
+    this.begin = Alignment.topCenter,
+    this.end = Alignment.bottomCenter,
   });
 
   final Widget child;
+  final AlignmentGeometry begin;
+  final AlignmentGeometry end;
 
   @override
   Widget build(BuildContext context) {

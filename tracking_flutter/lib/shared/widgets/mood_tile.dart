@@ -20,7 +20,7 @@ class MoodTile extends StatelessWidget {
         radius: 20,
         backgroundColor: primarySwatch.shade200,
         child: Center(
-          child: _MoodEmoji(
+          child: MoodEmoji(
             moodValue: mood.value,
           ),
         ),
@@ -32,8 +32,8 @@ class MoodTile extends StatelessWidget {
   }
 }
 
-class _MoodEmoji extends StatelessWidget {
-  const _MoodEmoji({
+class MoodEmoji extends StatelessWidget {
+  const MoodEmoji({
     required this.moodValue,
   });
 
