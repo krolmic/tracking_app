@@ -82,7 +82,7 @@ final goRouter = GoRouter(
               ),
               routes: [
                 GoRoute(
-                  name: 'update',
+                  name: 'update-mood-from-calendar',
                   path: 'update',
                   pageBuilder: (context, state) => NoTransitionPage(
                     child: AuthenticatedView(
