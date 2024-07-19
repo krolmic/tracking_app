@@ -61,6 +61,7 @@ final goRouter = GoRouter(
                     child: AuthenticatedView(
                       child: UpdateMoodScreen(
                         mood: state.extra! as Mood,
+                        routeOrigin: '/home',
                       ),
                     ),
                   ),
@@ -88,6 +89,7 @@ final goRouter = GoRouter(
                     child: AuthenticatedView(
                       child: UpdateMoodScreen(
                         mood: state.extra! as Mood,
+                        routeOrigin: '/calendar',
                       ),
                     ),
                   ),

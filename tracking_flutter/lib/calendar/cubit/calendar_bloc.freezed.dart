@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'calendar_cubit.dart';
+part of 'calendar_bloc.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -13,6 +13,460 @@ T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+
+/// @nodoc
+mixin _$CalendarEvent {
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() calendarInitialized,
+    required TResult Function(DateTime date) targetDateChanged,
+    required TResult Function() moodsUpdated,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? calendarInitialized,
+    TResult? Function(DateTime date)? targetDateChanged,
+    TResult? Function()? moodsUpdated,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? calendarInitialized,
+    TResult Function(DateTime date)? targetDateChanged,
+    TResult Function()? moodsUpdated,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_CalendarEventCalendarInitialized value)
+        calendarInitialized,
+    required TResult Function(_CalendarEventTargetDateChanged value)
+        targetDateChanged,
+    required TResult Function(_CalendarEventMoodsUpdated value) moodsUpdated,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_CalendarEventCalendarInitialized value)?
+        calendarInitialized,
+    TResult? Function(_CalendarEventTargetDateChanged value)? targetDateChanged,
+    TResult? Function(_CalendarEventMoodsUpdated value)? moodsUpdated,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_CalendarEventCalendarInitialized value)?
+        calendarInitialized,
+    TResult Function(_CalendarEventTargetDateChanged value)? targetDateChanged,
+    TResult Function(_CalendarEventMoodsUpdated value)? moodsUpdated,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $CalendarEventCopyWith<$Res> {
+  factory $CalendarEventCopyWith(
+          CalendarEvent value, $Res Function(CalendarEvent) then) =
+      _$CalendarEventCopyWithImpl<$Res, CalendarEvent>;
+}
+
+/// @nodoc
+class _$CalendarEventCopyWithImpl<$Res, $Val extends CalendarEvent>
+    implements $CalendarEventCopyWith<$Res> {
+  _$CalendarEventCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+}
+
+/// @nodoc
+abstract class _$$CalendarEventCalendarInitializedImplCopyWith<$Res> {
+  factory _$$CalendarEventCalendarInitializedImplCopyWith(
+          _$CalendarEventCalendarInitializedImpl value,
+          $Res Function(_$CalendarEventCalendarInitializedImpl) then) =
+      __$$CalendarEventCalendarInitializedImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$CalendarEventCalendarInitializedImplCopyWithImpl<$Res>
+    extends _$CalendarEventCopyWithImpl<$Res,
+        _$CalendarEventCalendarInitializedImpl>
+    implements _$$CalendarEventCalendarInitializedImplCopyWith<$Res> {
+  __$$CalendarEventCalendarInitializedImplCopyWithImpl(
+      _$CalendarEventCalendarInitializedImpl _value,
+      $Res Function(_$CalendarEventCalendarInitializedImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$CalendarEventCalendarInitializedImpl
+    implements _CalendarEventCalendarInitialized {
+  const _$CalendarEventCalendarInitializedImpl();
+
+  @override
+  String toString() {
+    return 'CalendarEvent.calendarInitialized()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CalendarEventCalendarInitializedImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() calendarInitialized,
+    required TResult Function(DateTime date) targetDateChanged,
+    required TResult Function() moodsUpdated,
+  }) {
+    return calendarInitialized();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? calendarInitialized,
+    TResult? Function(DateTime date)? targetDateChanged,
+    TResult? Function()? moodsUpdated,
+  }) {
+    return calendarInitialized?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? calendarInitialized,
+    TResult Function(DateTime date)? targetDateChanged,
+    TResult Function()? moodsUpdated,
+    required TResult orElse(),
+  }) {
+    if (calendarInitialized != null) {
+      return calendarInitialized();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_CalendarEventCalendarInitialized value)
+        calendarInitialized,
+    required TResult Function(_CalendarEventTargetDateChanged value)
+        targetDateChanged,
+    required TResult Function(_CalendarEventMoodsUpdated value) moodsUpdated,
+  }) {
+    return calendarInitialized(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_CalendarEventCalendarInitialized value)?
+        calendarInitialized,
+    TResult? Function(_CalendarEventTargetDateChanged value)? targetDateChanged,
+    TResult? Function(_CalendarEventMoodsUpdated value)? moodsUpdated,
+  }) {
+    return calendarInitialized?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_CalendarEventCalendarInitialized value)?
+        calendarInitialized,
+    TResult Function(_CalendarEventTargetDateChanged value)? targetDateChanged,
+    TResult Function(_CalendarEventMoodsUpdated value)? moodsUpdated,
+    required TResult orElse(),
+  }) {
+    if (calendarInitialized != null) {
+      return calendarInitialized(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _CalendarEventCalendarInitialized implements CalendarEvent {
+  const factory _CalendarEventCalendarInitialized() =
+      _$CalendarEventCalendarInitializedImpl;
+}
+
+/// @nodoc
+abstract class _$$CalendarEventTargetDateChangedImplCopyWith<$Res> {
+  factory _$$CalendarEventTargetDateChangedImplCopyWith(
+          _$CalendarEventTargetDateChangedImpl value,
+          $Res Function(_$CalendarEventTargetDateChangedImpl) then) =
+      __$$CalendarEventTargetDateChangedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({DateTime date});
+}
+
+/// @nodoc
+class __$$CalendarEventTargetDateChangedImplCopyWithImpl<$Res>
+    extends _$CalendarEventCopyWithImpl<$Res,
+        _$CalendarEventTargetDateChangedImpl>
+    implements _$$CalendarEventTargetDateChangedImplCopyWith<$Res> {
+  __$$CalendarEventTargetDateChangedImplCopyWithImpl(
+      _$CalendarEventTargetDateChangedImpl _value,
+      $Res Function(_$CalendarEventTargetDateChangedImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? date = null,
+  }) {
+    return _then(_$CalendarEventTargetDateChangedImpl(
+      date: null == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$CalendarEventTargetDateChangedImpl
+    implements _CalendarEventTargetDateChanged {
+  const _$CalendarEventTargetDateChangedImpl({required this.date});
+
+  @override
+  final DateTime date;
+
+  @override
+  String toString() {
+    return 'CalendarEvent.targetDateChanged(date: $date)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CalendarEventTargetDateChangedImpl &&
+            (identical(other.date, date) || other.date == date));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, date);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CalendarEventTargetDateChangedImplCopyWith<
+          _$CalendarEventTargetDateChangedImpl>
+      get copyWith => __$$CalendarEventTargetDateChangedImplCopyWithImpl<
+          _$CalendarEventTargetDateChangedImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() calendarInitialized,
+    required TResult Function(DateTime date) targetDateChanged,
+    required TResult Function() moodsUpdated,
+  }) {
+    return targetDateChanged(date);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? calendarInitialized,
+    TResult? Function(DateTime date)? targetDateChanged,
+    TResult? Function()? moodsUpdated,
+  }) {
+    return targetDateChanged?.call(date);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? calendarInitialized,
+    TResult Function(DateTime date)? targetDateChanged,
+    TResult Function()? moodsUpdated,
+    required TResult orElse(),
+  }) {
+    if (targetDateChanged != null) {
+      return targetDateChanged(date);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_CalendarEventCalendarInitialized value)
+        calendarInitialized,
+    required TResult Function(_CalendarEventTargetDateChanged value)
+        targetDateChanged,
+    required TResult Function(_CalendarEventMoodsUpdated value) moodsUpdated,
+  }) {
+    return targetDateChanged(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_CalendarEventCalendarInitialized value)?
+        calendarInitialized,
+    TResult? Function(_CalendarEventTargetDateChanged value)? targetDateChanged,
+    TResult? Function(_CalendarEventMoodsUpdated value)? moodsUpdated,
+  }) {
+    return targetDateChanged?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_CalendarEventCalendarInitialized value)?
+        calendarInitialized,
+    TResult Function(_CalendarEventTargetDateChanged value)? targetDateChanged,
+    TResult Function(_CalendarEventMoodsUpdated value)? moodsUpdated,
+    required TResult orElse(),
+  }) {
+    if (targetDateChanged != null) {
+      return targetDateChanged(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _CalendarEventTargetDateChanged implements CalendarEvent {
+  const factory _CalendarEventTargetDateChanged(
+      {required final DateTime date}) = _$CalendarEventTargetDateChangedImpl;
+
+  DateTime get date;
+  @JsonKey(ignore: true)
+  _$$CalendarEventTargetDateChangedImplCopyWith<
+          _$CalendarEventTargetDateChangedImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$CalendarEventMoodsUpdatedImplCopyWith<$Res> {
+  factory _$$CalendarEventMoodsUpdatedImplCopyWith(
+          _$CalendarEventMoodsUpdatedImpl value,
+          $Res Function(_$CalendarEventMoodsUpdatedImpl) then) =
+      __$$CalendarEventMoodsUpdatedImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$CalendarEventMoodsUpdatedImplCopyWithImpl<$Res>
+    extends _$CalendarEventCopyWithImpl<$Res, _$CalendarEventMoodsUpdatedImpl>
+    implements _$$CalendarEventMoodsUpdatedImplCopyWith<$Res> {
+  __$$CalendarEventMoodsUpdatedImplCopyWithImpl(
+      _$CalendarEventMoodsUpdatedImpl _value,
+      $Res Function(_$CalendarEventMoodsUpdatedImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$CalendarEventMoodsUpdatedImpl implements _CalendarEventMoodsUpdated {
+  const _$CalendarEventMoodsUpdatedImpl();
+
+  @override
+  String toString() {
+    return 'CalendarEvent.moodsUpdated()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CalendarEventMoodsUpdatedImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() calendarInitialized,
+    required TResult Function(DateTime date) targetDateChanged,
+    required TResult Function() moodsUpdated,
+  }) {
+    return moodsUpdated();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? calendarInitialized,
+    TResult? Function(DateTime date)? targetDateChanged,
+    TResult? Function()? moodsUpdated,
+  }) {
+    return moodsUpdated?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? calendarInitialized,
+    TResult Function(DateTime date)? targetDateChanged,
+    TResult Function()? moodsUpdated,
+    required TResult orElse(),
+  }) {
+    if (moodsUpdated != null) {
+      return moodsUpdated();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_CalendarEventCalendarInitialized value)
+        calendarInitialized,
+    required TResult Function(_CalendarEventTargetDateChanged value)
+        targetDateChanged,
+    required TResult Function(_CalendarEventMoodsUpdated value) moodsUpdated,
+  }) {
+    return moodsUpdated(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_CalendarEventCalendarInitialized value)?
+        calendarInitialized,
+    TResult? Function(_CalendarEventTargetDateChanged value)? targetDateChanged,
+    TResult? Function(_CalendarEventMoodsUpdated value)? moodsUpdated,
+  }) {
+    return moodsUpdated?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_CalendarEventCalendarInitialized value)?
+        calendarInitialized,
+    TResult Function(_CalendarEventTargetDateChanged value)? targetDateChanged,
+    TResult Function(_CalendarEventMoodsUpdated value)? moodsUpdated,
+    required TResult orElse(),
+  }) {
+    if (moodsUpdated != null) {
+      return moodsUpdated(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _CalendarEventMoodsUpdated implements CalendarEvent {
+  const factory _CalendarEventMoodsUpdated() = _$CalendarEventMoodsUpdatedImpl;
+}
 
 /// @nodoc
 mixin _$CalendarState {

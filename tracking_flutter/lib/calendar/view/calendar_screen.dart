@@ -3,17 +3,21 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_calendar_carousel/classes/event.dart';
 import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:formz/formz.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mood_repository/mood_repository.dart';
-import 'package:tracking_app/calendar/cubit/calendar_cubit.dart';
+import 'package:tracking_app/calendar/cubit/calendar_bloc.dart';
+import 'package:tracking_app/calendar/view/widgets/tracked_mood.dart';
+import 'package:tracking_app/create_mood/cubit/create_mood_cubit.dart';
+import 'package:tracking_app/delete_mood/cubit/delete_mood_cubit.dart';
 import 'package:tracking_app/main.dart';
 import 'package:tracking_app/shared/date_time.dart';
 import 'package:tracking_app/shared/theme/colors.dart';
 import 'package:tracking_app/shared/theme/layout.dart';
 import 'package:tracking_app/shared/toast.dart';
 import 'package:tracking_app/shared/widgets/loading_indicator.dart';
-import 'package:tracking_app/shared/widgets/mood_tile.dart';
 import 'package:tracking_app/shared/widgets/spacing.dart';
+import 'package:tracking_app/update_mood/cubit/update_mood_cubit.dart';
 import 'package:user_profile_repository/user_profile_repository.dart';
 
 class CalendarScreen extends StatelessWidget {
@@ -23,21 +27,14 @@ class CalendarScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final translations = AppLocalizations.of(context)!;
 
-    return BlocProvider<CalendarCubit>(
-      create: (context) => CalendarCubit(
+    return BlocProvider<CalendarBloc>(
+      create: (context) => CalendarBloc(
         moodRepository: getIt.get<MoodRepository>(),
         userProfileRepository: getIt.get<UserProfileRepository>(),
-      )..init(),
+      )..add(const CalendarEvent.calendarInitialized()),
       child: MultiBlocListener(
         listeners: [
-          BlocListener<CalendarCubit, CalendarState>(
-            listenWhen: (previous, current) =>
-                previous.targetDate != current.targetDate,
-            listener: (context, state) {
-              context.read<CalendarCubit>().loadMoodsInMonth();
-            },
-          ),
-          BlocListener<CalendarCubit, CalendarState>(
+          BlocListener<CalendarBloc, CalendarState>(
             listenWhen: (previousState, currentState) =>
                 previousState.moodsState != currentState.moodsState,
             listener: (context, calendarState) {
@@ -47,6 +44,39 @@ class CalendarScreen extends StatelessWidget {
                   Icons.error_rounded,
                   translations.somethingWentWrong,
                 );
+              }
+            },
+          ),
+          BlocListener<CreateMoodCubit, FormzSubmissionStatus>(
+            listenWhen: (previousCreateMoodState, currentCreateMoodState) =>
+                previousCreateMoodState != currentCreateMoodState,
+            listener: (context, state) {
+              if (state.isSuccess) {
+                context
+                    .read<CalendarBloc>()
+                    .add(const CalendarEvent.moodsUpdated());
+              }
+            },
+          ),
+          BlocListener<UpdateMoodCubit, FormzSubmissionStatus>(
+            listenWhen: (previousUpdateMoodState, currentUpdateMoodState) =>
+                previousUpdateMoodState != currentUpdateMoodState,
+            listener: (context, updateMoodState) {
+              if (updateMoodState.isSuccess) {
+                context
+                    .read<CalendarBloc>()
+                    .add(const CalendarEvent.moodsUpdated());
+              }
+            },
+          ),
+          BlocListener<DeleteMoodCubit, DeleteMoodState>(
+            listenWhen: (previousDeleteMoodState, currentDeleteMoodState) =>
+                previousDeleteMoodState != currentDeleteMoodState,
+            listener: (context, deleteMoodState) {
+              if (deleteMoodState.isSuccess) {
+                context
+                    .read<CalendarBloc>()
+                    .add(const CalendarEvent.moodsUpdated());
               }
             },
           ),
@@ -74,36 +104,10 @@ class _CalendarView extends StatelessWidget {
 
     return SafeArea(
       child: SingleChildScrollView(
-        child: BlocBuilder<CalendarCubit, CalendarState>(
+        child: BlocBuilder<CalendarBloc, CalendarState>(
           buildWhen: (previous, current) =>
               previous.moodsState != current.moodsState,
           builder: (context, state) {
-            final markedDates = EventList<Event>(
-              events: state.moodsState.moods
-                  .map(
-                (mood) => <DateTime, List<Event>>{
-                  mood.createdOn.dateOnly: [
-                    Event(
-                      date: mood.createdOn.dateOnly,
-                      dot: Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 1),
-                        color: primarySwatch.shade500,
-                        height: 5,
-                        width: 5,
-                      ),
-                    ),
-                  ],
-                },
-              )
-                  .fold(
-                <DateTime, List<Event>>{},
-                (map, event) {
-                  map.addAll(event);
-                  return map;
-                },
-              ),
-            );
-
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -112,7 +116,9 @@ class _CalendarView extends StatelessWidget {
                     horizontal: viewPaddingHorizontal,
                   ),
                   child: CalendarCarousel<Event>(
+                    firstDayOfWeek: (0 + 1) % 7,
                     height: 380,
+                    todayButtonColor: primarySwatch.shade500,
                     prevDaysTextStyle: TextStyle(
                       color: primarySwatch.shade100,
                     ),
@@ -137,11 +143,22 @@ class _CalendarView extends StatelessWidget {
                     weekdayTextStyle: TextStyle(
                       color: primarySwatch.shade800,
                     ),
-                    markedDatesMap: markedDates,
+                    markedDatesMap: getMarkedDates(state.moodsState.moods),
                     targetDateTime:
                         state.targetDate.isSet ? state.targetDate.date : null,
-                    onCalendarChanged:
-                        context.read<CalendarCubit>().setTargetDate,
+                    onCalendarChanged: (date) => context
+                        .read<CalendarBloc>()
+                        .add(CalendarEvent.targetDateChanged(date: date)),
+                    onDayPressed: (date, events) {
+                      if (events.isNotEmpty) {
+                        final mood =
+                            context.read<CalendarBloc>().getMoodForDate(date);
+                        if (mood != null) {
+                          context.go('/calendar/update', extra: mood);
+                        }
+                      }
+                    },
+                    locale: Localizations.localeOf(context).languageCode,
                   ),
                 ),
                 const VerticalSpacing.medium(),
@@ -172,67 +189,68 @@ class _CalendarView extends StatelessWidget {
                     ),
                   )
                 else if (state.moodsState.isSuccess)
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: [
-                        const SizedBox(width: viewPaddingHorizontal),
-                        for (final mood in state.moodsState.moods)
-                          Padding(
-                            key: ValueKey(mood),
-                            padding: const EdgeInsets.only(
-                              bottom: verticalPaddingMedium,
-                            ),
-                            child: GestureDetector(
-                              onTap: () =>
-                                  context.go('/calendar/update', extra: mood),
-                              child: Card(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                child: Container(
-                                  width: 100,
-                                  height: 125,
-                                  padding: const EdgeInsets.all(8),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      CircleAvatar(
-                                        radius: 20,
-                                        backgroundColor: primarySwatch.shade200,
-                                        child: Center(
-                                          child: MoodEmoji(
-                                            moodValue: mood.value,
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(height: 8),
-                                      Text(
-                                        getDateString(
-                                          context,
-                                          mood.createdOn,
-                                          includeYear: false,
-                                        ),
-                                        maxLines: 2,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: const TextStyle(
-                                          color: tileTitleColor,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        const SizedBox(width: viewPaddingHorizontal),
-                      ],
-                    ),
-                  ),
+                  _MoodsInMonth(moods: state.moodsState.moods),
               ],
             );
           },
         ),
+      ),
+    );
+  }
+
+  EventList<Event> getMarkedDates(List<Mood> moods) {
+    return EventList<Event>(
+      events: moods
+          .map(
+        (mood) => <DateTime, List<Event>>{
+          mood.createdOn.dateOnly: [
+            Event(
+              date: mood.createdOn.dateOnly,
+              dot: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 1),
+                color: primarySwatch.shade500,
+                height: 5,
+                width: 5,
+              ),
+            ),
+          ],
+        },
+      )
+          .fold(
+        <DateTime, List<Event>>{},
+        (map, event) {
+          map.addAll(event);
+          return map;
+        },
+      ),
+    );
+  }
+}
+
+class _MoodsInMonth extends StatelessWidget {
+  const _MoodsInMonth({
+    required this.moods,
+  });
+
+  final List<Mood> moods;
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: [
+          const SizedBox(width: viewPaddingHorizontal),
+          for (final mood in moods)
+            Padding(
+              key: ValueKey(mood),
+              padding: const EdgeInsets.only(
+                right: verticalPaddingSmall,
+              ),
+              child: TrackedMood(mood: mood),
+            ),
+          const SizedBox(width: viewPaddingHorizontal),
+        ],
       ),
     );
   }
