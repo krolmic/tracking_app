@@ -1,8 +1,9 @@
 part of '../home_screen.dart';
 
-class _MoodsShaderMask extends StatelessWidget {
-  const _MoodsShaderMask({
+class MoodsShaderMask extends StatelessWidget {
+  const MoodsShaderMask({
     required this.child,
+    super.key,
   });
 
   final Widget child;

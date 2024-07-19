@@ -16,6 +16,7 @@ import 'package:tracking_app/shared/view/base_view.dart';
 import 'package:tracking_app/shared/widgets/app_elevated_button.dart';
 import 'package:tracking_app/shared/widgets/error_message.dart';
 import 'package:tracking_app/shared/widgets/loading_indicator.dart';
+import 'package:tracking_app/shared/widgets/mood_emoji.dart';
 import 'package:tracking_app/shared/widgets/spacing.dart';
 import 'package:tracking_app/shared/widgets/tile.dart';
 import 'package:tracking_app/update_mood/cubit/update_mood_cubit.dart';
@@ -221,7 +222,7 @@ class _HomeContentViewState extends State<_HomeContentView> {
         ),
         const VerticalSpacing.large(),
         Expanded(
-          child: _MoodsShaderMask(
+          child: MoodsShaderMask(
             child: _buildMoods(),
           ),
         ),

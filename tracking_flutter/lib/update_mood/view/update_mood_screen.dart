@@ -21,10 +21,12 @@ part 'widgets/update_mood_form.dart';
 class UpdateMoodScreen extends StatelessWidget {
   const UpdateMoodScreen({
     required this.mood,
+    required this.routeOrigin,
     super.key,
   });
 
   final Mood mood;
+  final String routeOrigin;
 
   Future<void> _showMoodDeletionDialog(
     BuildContext context,
@@ -65,7 +67,7 @@ class UpdateMoodScreen extends StatelessWidget {
                 translations.moodUpdatedSuccessfully,
               );
 
-              context.go('/home');
+              context.go(routeOrigin);
             } else if (state.isFailure) {
               showToast(
                 context,
@@ -86,7 +88,7 @@ class UpdateMoodScreen extends StatelessWidget {
                 translations.moodDeletedSuccessfully,
               );
 
-              context.go('/home');
+              context.go(routeOrigin);
             } else if (deleteMoodState.isError) {
               showToast(
                 context,

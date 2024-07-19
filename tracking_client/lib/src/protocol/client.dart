@@ -33,6 +33,21 @@ class EndpointMoodEntries extends _i1.EndpointRef {
         },
       );
 
+  _i2.Future<List<_i3.MoodEntry>> getMoodEntriesInTimeRange({
+    required String userId,
+    required DateTime from,
+    required DateTime to,
+  }) =>
+      caller.callServerEndpoint<List<_i3.MoodEntry>>(
+        'moodEntries',
+        'getMoodEntriesInTimeRange',
+        {
+          'userId': userId,
+          'from': from,
+          'to': to,
+        },
+      );
+
   _i2.Future<_i3.MoodEntry> createMoodEntry(_i3.MoodEntry moodEntry) =>
       caller.callServerEndpoint<_i3.MoodEntry>(
         'moodEntries',
