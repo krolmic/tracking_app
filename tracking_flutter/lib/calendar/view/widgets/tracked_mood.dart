@@ -59,7 +59,7 @@ class TrackedMood extends StatelessWidget {
               ),
               const VerticalSpacing.medium(),
               Icon(
-                Icons.edit,
+                Icons.edit_outlined,
                 size: 20,
                 color: tileIconColor,
               ),
