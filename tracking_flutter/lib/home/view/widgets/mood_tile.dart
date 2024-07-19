@@ -3,7 +3,6 @@ part of '../home_screen.dart';
 class _MoodTile extends StatelessWidget {
   const _MoodTile({
     required this.mood,
-    super.key,
   });
 
   final Mood mood;
