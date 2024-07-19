@@ -16,6 +16,8 @@ class UpdateMoodCubit extends Cubit<FormzSubmissionStatus> {
     int? value,
     List<String>? thingsIAmGratefulAbout,
     String? diary,
+    double? revenue,
+    Duration? workTime,
   }) async {
     try {
       emit(FormzSubmissionStatus.inProgress);
@@ -25,6 +27,8 @@ class UpdateMoodCubit extends Cubit<FormzSubmissionStatus> {
         value: value,
         diary: diary,
         thingsIAmGratefulAbout: thingsIAmGratefulAbout,
+        revenue: revenue,
+        workTime: workTime,
       );
 
       emit(FormzSubmissionStatus.success);

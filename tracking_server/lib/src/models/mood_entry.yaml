@@ -6,4 +6,6 @@ fields:
   value: int
   thingsIAmGratefulFor: List<String>?
   diary: String?
+  revenue: double?
+  workTime: Duration?
   createdOn: DateTime

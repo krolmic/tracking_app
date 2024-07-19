@@ -21,6 +21,9 @@
     "writeDownThingsYouAreGreatfulFor": "Schreibe 3 Dinge auf, für die du heute dankbar bist.",
     "whatIsOnYourMind": "Was geht dir durch den Kopf?",
     "whatIsOnYourMindDescription": "Hier kannst du deine Gedanken aufschrieben.",
+    "howMuchDidYouEarn": "Wie viel hast du heute verdient?",
+    "howMuchDidYouEarnDescription": "Achte darauf, dass alle Einnahmen in einer Währung sind, damit du deine Stimmung und Einnahnen optimal auswerten kannst.",
+    "howLongDidYouWork": "Wie lange hast du heute gearbeitet?",
     "moodHistoryTitle": "Deine Stimmungshistorie",
     "moodHistoryDescription": "Tappe auf einen Eintrag um Dinge für die du dankbar bist und deine Tagebücher zu sehen.",
     "goodMorning": "👋 Guten Morgen {firstName}!",
@@ -51,6 +54,7 @@
         }
     },
     "noMoodsYet": "Nutze 'Stimmung tracken' um neue Einträge zu deiner Stimmungshistorie hinzuzufügen.",
+    "hoursUnit": "h",
     "today": "Heute",
     "settings": "Einstellungen",
     "signOutMessage": "Bist du dir sicher, dass du dich ausloggen möchtest?",

@@ -8,3 +8,4 @@
 20240304213139452-add-mood-entry
 20240305144706450-update-mood-entry
 20240623165558485-upgrade-to-serverpod-2
+20240719142802346-add-revenue-and-working-time-to-mood

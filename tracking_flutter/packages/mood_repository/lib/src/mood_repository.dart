@@ -102,6 +102,8 @@ class MoodRepository {
     required DateTime createdOn,
     String? diary,
     List<String>? thingsIAmGratefulAbout,
+    double? revenue,
+    Duration? workTime,
   }) async {
     try {
       final createdOnDate = createdOn.add(createdOn.timeZoneOffset);
@@ -112,6 +114,8 @@ class MoodRepository {
         createdOn: createdOnDate,
         diary: diary != null && diary.isNotEmpty ? diary : null,
         thingsIAmGratefulFor: thingsIAmGratefulAbout,
+        revenue: revenue,
+        workTime: workTime,
       );
 
       final createdMoodEntry =
@@ -134,6 +138,8 @@ class MoodRepository {
     int? value,
     String? diary,
     List<String>? thingsIAmGratefulAbout,
+    double? revenue,
+    Duration? workTime,
   }) async {
     try {
       final updatedMoodEntry =
@@ -142,6 +148,8 @@ class MoodRepository {
         value: value,
         diary: diary,
         thingsIAmGratefulFor: thingsIAmGratefulAbout,
+        revenue: revenue,
+        workTime: workTime,
       );
 
       return Mood.fromMoodEntry(updatedMoodEntry);

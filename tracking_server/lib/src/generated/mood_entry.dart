@@ -19,6 +19,8 @@ abstract class MoodEntry extends _i1.TableRow
     required this.value,
     this.thingsIAmGratefulFor,
     this.diary,
+    this.revenue,
+    this.workTime,
     required this.createdOn,
   }) : super(id);
 
@@ -28,6 +30,8 @@ abstract class MoodEntry extends _i1.TableRow
     required int value,
     List<String>? thingsIAmGratefulFor,
     String? diary,
+    double? revenue,
+    Duration? workTime,
     required DateTime createdOn,
   }) = _MoodEntryImpl;
 
@@ -40,6 +44,10 @@ abstract class MoodEntry extends _i1.TableRow
           ?.map((e) => e as String)
           .toList(),
       diary: jsonSerialization['diary'] as String?,
+      revenue: (jsonSerialization['revenue'] as num?)?.toDouble(),
+      workTime: jsonSerialization['workTime'] == null
+          ? null
+          : _i1.DurationJsonExtension.fromJson(jsonSerialization['workTime']),
       createdOn:
           _i1.DateTimeJsonExtension.fromJson(jsonSerialization['createdOn']),
     );
@@ -57,6 +65,10 @@ abstract class MoodEntry extends _i1.TableRow
 
   String? diary;
 
+  double? revenue;
+
+  Duration? workTime;
+
   DateTime createdOn;
 
   @override
@@ -68,6 +80,8 @@ abstract class MoodEntry extends _i1.TableRow
     int? value,
     List<String>? thingsIAmGratefulFor,
     String? diary,
+    double? revenue,
+    Duration? workTime,
     DateTime? createdOn,
   });
   @override
@@ -79,6 +93,8 @@ abstract class MoodEntry extends _i1.TableRow
       if (thingsIAmGratefulFor != null)
         'thingsIAmGratefulFor': thingsIAmGratefulFor?.toJson(),
       if (diary != null) 'diary': diary,
+      if (revenue != null) 'revenue': revenue,
+      if (workTime != null) 'workTime': workTime?.toJson(),
       'createdOn': createdOn.toJson(),
     };
   }
@@ -92,6 +108,8 @@ abstract class MoodEntry extends _i1.TableRow
       if (thingsIAmGratefulFor != null)
         'thingsIAmGratefulFor': thingsIAmGratefulFor?.toJson(),
       if (diary != null) 'diary': diary,
+      if (revenue != null) 'revenue': revenue,
+      if (workTime != null) 'workTime': workTime?.toJson(),
       'createdOn': createdOn.toJson(),
     };
   }
@@ -135,6 +153,8 @@ class _MoodEntryImpl extends MoodEntry {
     required int value,
     List<String>? thingsIAmGratefulFor,
     String? diary,
+    double? revenue,
+    Duration? workTime,
     required DateTime createdOn,
   }) : super._(
           id: id,
@@ -142,6 +162,8 @@ class _MoodEntryImpl extends MoodEntry {
           value: value,
           thingsIAmGratefulFor: thingsIAmGratefulFor,
           diary: diary,
+          revenue: revenue,
+          workTime: workTime,
           createdOn: createdOn,
         );
 
@@ -152,6 +174,8 @@ class _MoodEntryImpl extends MoodEntry {
     int? value,
     Object? thingsIAmGratefulFor = _Undefined,
     Object? diary = _Undefined,
+    Object? revenue = _Undefined,
+    Object? workTime = _Undefined,
     DateTime? createdOn,
   }) {
     return MoodEntry(
@@ -162,6 +186,8 @@ class _MoodEntryImpl extends MoodEntry {
           ? thingsIAmGratefulFor
           : this.thingsIAmGratefulFor?.clone(),
       diary: diary is String? ? diary : this.diary,
+      revenue: revenue is double? ? revenue : this.revenue,
+      workTime: workTime is Duration? ? workTime : this.workTime,
       createdOn: createdOn ?? this.createdOn,
     );
   }
@@ -185,6 +211,14 @@ class MoodEntryTable extends _i1.Table {
       'diary',
       this,
     );
+    revenue = _i1.ColumnDouble(
+      'revenue',
+      this,
+    );
+    workTime = _i1.ColumnDuration(
+      'workTime',
+      this,
+    );
     createdOn = _i1.ColumnDateTime(
       'createdOn',
       this,
@@ -199,6 +233,10 @@ class MoodEntryTable extends _i1.Table {
 
   late final _i1.ColumnString diary;
 
+  late final _i1.ColumnDouble revenue;
+
+  late final _i1.ColumnDuration workTime;
+
   late final _i1.ColumnDateTime createdOn;
 
   @override
@@ -208,6 +246,8 @@ class MoodEntryTable extends _i1.Table {
         value,
         thingsIAmGratefulFor,
         diary,
+        revenue,
+        workTime,
         createdOn,
       ];
 }

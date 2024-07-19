@@ -64,6 +64,37 @@ class DiaryInput extends FormzInput<String, DiaryInputError> {
   }
 }
 
+enum RevenueInputError {
+  invalid,
+}
+
+class RevenueInput extends FormzInput<double, RevenueInputError> {
+  const RevenueInput.pure() : super.pure(0);
+
+  const RevenueInput.dirty({double value = 0.0}) : super.dirty(value);
+
+  @override
+  RevenueInputError? validator(double value) {
+    return null;
+  }
+}
+
+enum WorkingTimeInputError {
+  invalid,
+}
+
+class WorkTimeInput extends FormzInput<Duration, WorkingTimeInputError> {
+  const WorkTimeInput.pure() : super.pure(Duration.zero);
+
+  const WorkTimeInput.dirty({Duration value = Duration.zero})
+      : super.dirty(value);
+
+  @override
+  WorkingTimeInputError? validator(Duration value) {
+    return null;
+  }
+}
+
 class MoodFormzState with FormzMixin {
   MoodFormzState({
     this.moodValue = const MoodValueInput.pure(),
@@ -71,6 +102,8 @@ class MoodFormzState with FormzMixin {
     this.thingsIAmGreatfulAbout2 = const ThingsIAmGreatfulAboutInput.pure(),
     this.thingsIAmGreatfulAbout3 = const ThingsIAmGreatfulAboutInput.pure(),
     this.diary = const DiaryInput.pure(),
+    this.revenue = const RevenueInput.pure(),
+    this.workTime = const WorkTimeInput.pure(),
   });
 
   final MoodValueInput moodValue;
@@ -78,6 +111,8 @@ class MoodFormzState with FormzMixin {
   final ThingsIAmGreatfulAboutInput thingsIAmGreatfulAbout2;
   final ThingsIAmGreatfulAboutInput thingsIAmGreatfulAbout3;
   final DiaryInput diary;
+  final RevenueInput revenue;
+  final WorkTimeInput workTime;
 
   MoodFormzState copyWith({
     MoodValueInput? moodValue,
@@ -85,6 +120,8 @@ class MoodFormzState with FormzMixin {
     ThingsIAmGreatfulAboutInput? thingsIAmGreatfulAbout2,
     ThingsIAmGreatfulAboutInput? thingsIAmGreatfulAbout3,
     DiaryInput? diary,
+    RevenueInput? revenue,
+    WorkTimeInput? workTime,
     FormzSubmissionStatus? status,
   }) {
     return MoodFormzState(
@@ -96,6 +133,8 @@ class MoodFormzState with FormzMixin {
       thingsIAmGreatfulAbout3:
           thingsIAmGreatfulAbout3 ?? this.thingsIAmGreatfulAbout3,
       diary: diary ?? this.diary,
+      revenue: revenue ?? this.revenue,
+      workTime: workTime ?? this.workTime,
     );
   }
 
@@ -106,5 +145,7 @@ class MoodFormzState with FormzMixin {
         thingsIAmGreatfulAbout2,
         thingsIAmGreatfulAbout3,
         diary,
+        revenue,
+        workTime,
       ];
 }

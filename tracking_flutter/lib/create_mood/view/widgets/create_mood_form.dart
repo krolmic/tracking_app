@@ -18,6 +18,7 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
   late final TextEditingController _thingIAmGreatfulAbout2Controller;
   late final TextEditingController _thingIAmGreatfulAbout3Controller;
   late final TextEditingController _diaryController;
+  late final TextEditingController _revenueController;
 
   void _onMoodValueChanged(double value) {
     setState(() {
@@ -69,21 +70,45 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
     });
   }
 
+  void _onRevenueChanged() {
+    setState(() {
+      _formState = _formState.copyWith(
+        revenue: RevenueInput.dirty(
+          value: _revenueController.text.isNotEmpty
+              ? double.parse(_revenueController.text)
+              : 0,
+        ),
+      );
+    });
+  }
+
+  void _onWorkingTimeChanged(Duration workingTime) {
+    setState(() {
+      _formState = _formState.copyWith(
+        workTime: WorkTimeInput.dirty(
+          value: workingTime,
+        ),
+      );
+    });
+  }
+
   Future<void> _onSubmit() async {
     if (!_formKey.currentState!.validate()) return;
 
     await context.read<CreateMoodCubit>().createMood(
-      value: _formState.moodValue.value,
-      diary: _formState.diary.value,
-      thingsIAmGratefulAbout: [
-        if (_formState.thingsIAmGreatfulAbout1.value.isNotEmpty)
-          _formState.thingsIAmGreatfulAbout1.value,
-        if (_formState.thingsIAmGreatfulAbout2.value.isNotEmpty)
-          _formState.thingsIAmGreatfulAbout2.value,
-        if (_formState.thingsIAmGreatfulAbout3.value.isNotEmpty)
-          _formState.thingsIAmGreatfulAbout3.value,
-      ],
-    );
+          value: _formState.moodValue.value,
+          diary: _formState.diary.value,
+          thingsIAmGratefulAbout: [
+            if (_formState.thingsIAmGreatfulAbout1.value.isNotEmpty)
+              _formState.thingsIAmGreatfulAbout1.value,
+            if (_formState.thingsIAmGreatfulAbout2.value.isNotEmpty)
+              _formState.thingsIAmGreatfulAbout2.value,
+            if (_formState.thingsIAmGreatfulAbout3.value.isNotEmpty)
+              _formState.thingsIAmGreatfulAbout3.value,
+          ],
+          revenue: _formState.revenue.value,
+          workTime: _formState.workTime.value,
+        );
 
     if (!mounted) return;
 
@@ -115,6 +140,10 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
     _diaryController = TextEditingController(
       text: _formState.diary.value,
     )..addListener(_onDiaryChanged);
+
+    _revenueController = TextEditingController(
+      text: '',
+    )..addListener(_onRevenueChanged);
   }
 
   @override
@@ -123,6 +152,7 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
     _thingIAmGreatfulAbout2Controller.dispose();
     _thingIAmGreatfulAbout3Controller.dispose();
     _diaryController.dispose();
+    _revenueController.dispose();
     super.dispose();
   }
 
@@ -272,6 +302,68 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
               textInputAction: TextInputAction.next,
               minLines: 5,
               maxLines: null,
+            ),
+          ],
+        ),
+      ),
+      _CreateMoodStepperPage(
+        key: const Key(
+          'Create mood stepper page 4',
+        ),
+        child: Column(
+          children: <Widget>[
+            const VerticalSpacing.large(),
+            Text(
+              translations.howMuchDidYouEarn,
+              style: Theme.of(context).textTheme.headlineSmall,
+              textAlign: TextAlign.center,
+            ),
+            const VerticalSpacing.medium(),
+            Text(
+              translations.howMuchDidYouEarnDescription,
+              style: Theme.of(context).textTheme.bodyMedium,
+              textAlign: TextAlign.center,
+            ),
+            const VerticalSpacing.large(),
+            TextFormField(
+              key: const Key('Create mood form revenue input'),
+              controller: _revenueController,
+              validator: (value) => _formState.revenue
+                  .validator(value != null ? double.parse(value) : 0)
+                  ?.toString(),
+              keyboardType: TextInputType.number,
+              inputFormatters: [
+                FilteringTextInputFormatter.allow(RegExp('[0-9.]')),
+              ],
+              textInputAction: TextInputAction.next,
+              decoration: InputDecoration(
+                icon: const Icon(Icons.attach_money_rounded,
+                    color: primarySwatch),
+                hintText: '0.0',
+                helperText: 'Revenue in your currency',
+                helperStyle: TextStyle(color: primarySwatch.shade300),
+              ),
+            ),
+          ],
+        ),
+      ),
+      _CreateMoodStepperPage(
+        key: const Key(
+          'Create mood stepper page 5',
+        ),
+        child: Column(
+          children: <Widget>[
+            const VerticalSpacing.large(),
+            Text(
+              translations.howLongDidYouWork,
+              style: Theme.of(context).textTheme.headlineSmall,
+              textAlign: TextAlign.center,
+            ),
+            const VerticalSpacing.large(),
+            DurationPicker(
+              key: const Key('Create mood form workTime input'),
+              duration: _formState.workTime.value,
+              onChange: _onWorkingTimeChanged,
             ),
           ],
         ),

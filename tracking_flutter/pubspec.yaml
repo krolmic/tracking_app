@@ -39,6 +39,7 @@ dependencies:
   carousel_slider: ^4.2.1
   cupertino_icons: ^1.0.2
   delightful_toast: ^1.1.0
+  duration_picker: ^1.2.0
   email_repository:
     path: packages/email_repository/
   error_text_widget: ^2.0.3

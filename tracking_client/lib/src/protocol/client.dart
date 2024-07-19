@@ -60,6 +60,8 @@ class EndpointMoodEntries extends _i1.EndpointRef {
     int? value,
     String? diary,
     List<String>? thingsIAmGratefulFor,
+    double? revenue,
+    Duration? workTime,
   }) =>
       caller.callServerEndpoint<_i3.MoodEntry>(
         'moodEntries',
@@ -69,6 +71,8 @@ class EndpointMoodEntries extends _i1.EndpointRef {
           'value': value,
           'diary': diary,
           'thingsIAmGratefulFor': thingsIAmGratefulFor,
+          'revenue': revenue,
+          'workTime': workTime,
         },
       );
 

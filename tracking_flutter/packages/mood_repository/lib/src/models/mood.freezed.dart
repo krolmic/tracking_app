@@ -22,6 +22,8 @@ mixin _$Mood {
   String? get diary => throw _privateConstructorUsedError;
   List<String>? get thingsIAmGratefulAbout =>
       throw _privateConstructorUsedError;
+  double? get revenue => throw _privateConstructorUsedError;
+  Duration? get workTime => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MoodCopyWith<Mood> get copyWith => throw _privateConstructorUsedError;
@@ -37,7 +39,9 @@ abstract class $MoodCopyWith<$Res> {
       DateTime createdOn,
       int value,
       String? diary,
-      List<String>? thingsIAmGratefulAbout});
+      List<String>? thingsIAmGratefulAbout,
+      double? revenue,
+      Duration? workTime});
 }
 
 /// @nodoc
@@ -58,6 +62,8 @@ class _$MoodCopyWithImpl<$Res, $Val extends Mood>
     Object? value = null,
     Object? diary = freezed,
     Object? thingsIAmGratefulAbout = freezed,
+    Object? revenue = freezed,
+    Object? workTime = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -80,6 +86,14 @@ class _$MoodCopyWithImpl<$Res, $Val extends Mood>
           ? _value.thingsIAmGratefulAbout
           : thingsIAmGratefulAbout // ignore: cast_nullable_to_non_nullable
               as List<String>?,
+      revenue: freezed == revenue
+          ? _value.revenue
+          : revenue // ignore: cast_nullable_to_non_nullable
+              as double?,
+      workTime: freezed == workTime
+          ? _value.workTime
+          : workTime // ignore: cast_nullable_to_non_nullable
+              as Duration?,
     ) as $Val);
   }
 }
@@ -95,7 +109,9 @@ abstract class _$$_MoodCopyWith<$Res> implements $MoodCopyWith<$Res> {
       DateTime createdOn,
       int value,
       String? diary,
-      List<String>? thingsIAmGratefulAbout});
+      List<String>? thingsIAmGratefulAbout,
+      double? revenue,
+      Duration? workTime});
 }
 
 /// @nodoc
@@ -112,6 +128,8 @@ class __$$_MoodCopyWithImpl<$Res> extends _$MoodCopyWithImpl<$Res, _$_Mood>
     Object? value = null,
     Object? diary = freezed,
     Object? thingsIAmGratefulAbout = freezed,
+    Object? revenue = freezed,
+    Object? workTime = freezed,
   }) {
     return _then(_$_Mood(
       id: null == id
@@ -134,6 +152,14 @@ class __$$_MoodCopyWithImpl<$Res> extends _$MoodCopyWithImpl<$Res, _$_Mood>
           ? _value._thingsIAmGratefulAbout
           : thingsIAmGratefulAbout // ignore: cast_nullable_to_non_nullable
               as List<String>?,
+      revenue: freezed == revenue
+          ? _value.revenue
+          : revenue // ignore: cast_nullable_to_non_nullable
+              as double?,
+      workTime: freezed == workTime
+          ? _value.workTime
+          : workTime // ignore: cast_nullable_to_non_nullable
+              as Duration?,
     ));
   }
 }
@@ -146,7 +172,9 @@ class _$_Mood extends _Mood {
       required this.createdOn,
       required this.value,
       this.diary,
-      final List<String>? thingsIAmGratefulAbout})
+      final List<String>? thingsIAmGratefulAbout,
+      this.revenue,
+      this.workTime})
       : _thingsIAmGratefulAbout = thingsIAmGratefulAbout,
         super._();
 
@@ -170,8 +198,13 @@ class _$_Mood extends _Mood {
   }
 
   @override
+  final double? revenue;
+  @override
+  final Duration? workTime;
+
+  @override
   String toString() {
-    return 'Mood(id: $id, createdOn: $createdOn, value: $value, diary: $diary, thingsIAmGratefulAbout: $thingsIAmGratefulAbout)';
+    return 'Mood(id: $id, createdOn: $createdOn, value: $value, diary: $diary, thingsIAmGratefulAbout: $thingsIAmGratefulAbout, revenue: $revenue, workTime: $workTime)';
   }
 
   @override
@@ -185,12 +218,22 @@ class _$_Mood extends _Mood {
             (identical(other.value, value) || other.value == value) &&
             (identical(other.diary, diary) || other.diary == diary) &&
             const DeepCollectionEquality().equals(
-                other._thingsIAmGratefulAbout, _thingsIAmGratefulAbout));
+                other._thingsIAmGratefulAbout, _thingsIAmGratefulAbout) &&
+            (identical(other.revenue, revenue) || other.revenue == revenue) &&
+            (identical(other.workTime, workTime) ||
+                other.workTime == workTime));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, createdOn, value, diary,
-      const DeepCollectionEquality().hash(_thingsIAmGratefulAbout));
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      createdOn,
+      value,
+      diary,
+      const DeepCollectionEquality().hash(_thingsIAmGratefulAbout),
+      revenue,
+      workTime);
 
   @JsonKey(ignore: true)
   @override
@@ -205,7 +248,9 @@ abstract class _Mood extends Mood {
       required final DateTime createdOn,
       required final int value,
       final String? diary,
-      final List<String>? thingsIAmGratefulAbout}) = _$_Mood;
+      final List<String>? thingsIAmGratefulAbout,
+      final double? revenue,
+      final Duration? workTime}) = _$_Mood;
   _Mood._() : super._();
 
   @override
@@ -218,6 +263,10 @@ abstract class _Mood extends Mood {
   String? get diary;
   @override
   List<String>? get thingsIAmGratefulAbout;
+  @override
+  double? get revenue;
+  @override
+  Duration? get workTime;
   @override
   @JsonKey(ignore: true)
   _$$_MoodCopyWith<_$_Mood> get copyWith => throw _privateConstructorUsedError;
