@@ -55,7 +55,7 @@ final goRouter = GoRouter(
                   ),
                 ),
                 GoRoute(
-                  name: 'update',
+                  name: 'update-mood-from-home',
                   path: 'update',
                   pageBuilder: (context, state) => NoTransitionPage(
                     child: AuthenticatedView(
