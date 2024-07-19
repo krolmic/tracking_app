@@ -234,7 +234,7 @@ class _SettingsView extends StatelessWidget {
                         ),
                         const VerticalSpacing.large(),
                         Tile(
-                          icon: Icons.edit,
+                          icon: Icons.edit_outlined,
                           title: translations.personalDetails,
                           leading: const Icon(Icons.person),
                           onTap: () => context.push(

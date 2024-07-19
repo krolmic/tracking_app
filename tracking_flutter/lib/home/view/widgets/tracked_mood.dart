@@ -10,7 +10,7 @@ class _TrackedMood extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Tile(
-      icon: Icons.edit,
+      icon: Icons.edit_outlined,
       iconSize: 20,
       leading: CircleAvatar(
         radius: 20,
