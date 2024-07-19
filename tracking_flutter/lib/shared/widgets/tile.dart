@@ -10,6 +10,8 @@ class Tile extends StatelessWidget {
     this.subTitle,
     this.isLoading = false,
     super.key,
+    this.icon,
+    this.iconSize,
   });
 
   final Widget leading;
@@ -17,6 +19,8 @@ class Tile extends StatelessWidget {
   final VoidCallback onTap;
   final String? subTitle;
   final bool isLoading;
+  final IconData? icon;
+  final double? iconSize;
 
   @override
   Widget build(BuildContext context) {
@@ -49,8 +53,9 @@ class Tile extends StatelessWidget {
             ? TinyLoadingIndicator(
                 color: primarySwatch.shade200,
               )
-            : const Icon(
-                Icons.chevron_right,
+            : Icon(
+                icon ?? Icons.chevron_right,
+                size: iconSize ?? 20,
               ),
         onTap: isLoading ? null : onTap,
       ),

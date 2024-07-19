@@ -1,7 +1,7 @@
 part of '../home_screen.dart';
 
-class _MoodTile extends StatelessWidget {
-  const _MoodTile({
+class _TrackedMood extends StatelessWidget {
+  const _TrackedMood({
     required this.mood,
   });
 
@@ -10,6 +10,8 @@ class _MoodTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Tile(
+      icon: Icons.edit,
+      iconSize: 20,
       leading: CircleAvatar(
         radius: 20,
         backgroundColor: primarySwatch.shade200,

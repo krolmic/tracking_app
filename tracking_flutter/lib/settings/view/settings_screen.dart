@@ -234,6 +234,7 @@ class _SettingsView extends StatelessWidget {
                         ),
                         const VerticalSpacing.large(),
                         Tile(
+                          icon: Icons.edit,
                           title: translations.personalDetails,
                           leading: const Icon(Icons.person),
                           onTap: () => context.push(
@@ -253,8 +254,9 @@ class _SettingsView extends StatelessWidget {
                         ),
                         const VerticalSpacing.large(),
                         Tile(
+                          icon: Icons.mail_outline,
                           title: translations.support,
-                          leading: const Icon(Icons.mail),
+                          leading: const Icon(Icons.support_agent),
                           onTap: () => context.read<SettingsCubit>().sendEmail(
                                 recipient: supportEmailAddress,
                                 subject: '',
