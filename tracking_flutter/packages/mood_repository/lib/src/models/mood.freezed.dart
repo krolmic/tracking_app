@@ -140,14 +140,15 @@ class __$$_MoodCopyWithImpl<$Res> extends _$MoodCopyWithImpl<$Res, _$_Mood>
 
 /// @nodoc
 
-class _$_Mood implements _Mood {
+class _$_Mood extends _Mood {
   _$_Mood(
       {required this.id,
       required this.createdOn,
       required this.value,
       this.diary,
       final List<String>? thingsIAmGratefulAbout})
-      : _thingsIAmGratefulAbout = thingsIAmGratefulAbout;
+      : _thingsIAmGratefulAbout = thingsIAmGratefulAbout,
+        super._();
 
   @override
   final int id;
@@ -198,13 +199,14 @@ class _$_Mood implements _Mood {
       __$$_MoodCopyWithImpl<_$_Mood>(this, _$identity);
 }
 
-abstract class _Mood implements Mood {
+abstract class _Mood extends Mood {
   factory _Mood(
       {required final int id,
       required final DateTime createdOn,
       required final int value,
       final String? diary,
       final List<String>? thingsIAmGratefulAbout}) = _$_Mood;
+  _Mood._() : super._();
 
   @override
   int get id;
