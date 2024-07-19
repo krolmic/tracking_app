@@ -23,8 +23,8 @@ import 'package:tracking_app/update_mood/cubit/update_mood_cubit.dart';
 import 'package:tracking_app/user_profile/cubit/user_profile_cubit.dart';
 import 'package:user_profile_repository/user_profile_repository.dart';
 
-part 'widgets/mood_tile.dart';
 part 'widgets/moods_shader_mask.dart';
+part 'widgets/tracked_mood.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -275,9 +275,9 @@ class _HomeContentViewState extends State<_HomeContentView> {
         return Padding(
           key: ValueKey(mood),
           padding: const EdgeInsets.only(
-            bottom: verticalPaddingMedium,
+            bottom: verticalPaddingSmall,
           ),
-          child: _MoodTile(mood: mood),
+          child: _TrackedMood(mood: mood),
         );
       },
     );
