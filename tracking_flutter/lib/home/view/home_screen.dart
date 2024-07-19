@@ -31,6 +31,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final translations = AppLocalizations.of(context)!;
+
     return BlocProvider<HomeCubit>(
       create: (context) {
         final userProfileCubit = context.read<UserProfileCubit>();
@@ -49,13 +51,35 @@ class HomeScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(
             horizontal: viewPaddingHorizontal,
           ),
-          child: AppElevatedButton(
-            icon: Icons.add,
-            label: AppLocalizations.of(context)!.trackMood,
-            onPressed: () {
-              context.go('/home/create');
+          child: BlocBuilder<HomeCubit, HomeState>(
+            buildWhen: (previousHomeState, currentHomeState) =>
+                previousHomeState != currentHomeState,
+            builder: (context, homeState) {
+              if (homeState.isError) {
+                return const SizedBox.shrink();
+              }
+
+              final todaysMoodIsTracked =
+                  homeState.moodsState.containsTodayMood;
+
+              return AppElevatedButton(
+                icon: todaysMoodIsTracked ? Icons.edit : Icons.add,
+                label: todaysMoodIsTracked
+                    ? translations.updateMood
+                    : translations.trackMood,
+                onPressed: () {
+                  if (todaysMoodIsTracked) {
+                    context.go(
+                      '/home/update',
+                      extra: homeState.moodsState.todaysMood,
+                    );
+                  } else {
+                    context.go('/home/create');
+                  }
+                },
+                isLoading: homeState.isInitialOrLoading,
+              );
             },
-            isLoading: false,
           ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

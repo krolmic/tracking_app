@@ -104,11 +104,7 @@ class MoodRepository {
     List<String>? thingsIAmGratefulAbout,
   }) async {
     try {
-      final createdOnDate = DateTime(
-        createdOn.year,
-        createdOn.month,
-        createdOn.day,
-      );
+      final createdOnDate = createdOn.add(createdOn.timeZoneOffset);
 
       final moodEntryToCreate = MoodEntry(
         userId: userId,

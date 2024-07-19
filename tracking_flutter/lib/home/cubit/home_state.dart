@@ -31,4 +31,27 @@ extension HomeMoodsStateX on HomeMoodsState {
   bool get isLoading => this is HomeMoodsLoadingState;
   bool get isError => this is HomeMoodsErrorState;
   bool get isSuccess => this is HomeMoodsSuccessState;
+
+  bool get containsTodayMood {
+    return maybeWhen(
+      loaded: (moods, _, __, ___) {
+        return moods.any((mood) => mood.isToday);
+      },
+      orElse: () => false,
+    );
+  }
+
+  Mood? get todaysMood {
+    if (isSuccess) {
+      try {
+        return (this as HomeMoodsSuccessState).moods.firstWhere(
+              (mood) => mood.isToday,
+            );
+      } catch (e) {
+        return null;
+      }
+    } else {
+      return null;
+    }
+  }
 }

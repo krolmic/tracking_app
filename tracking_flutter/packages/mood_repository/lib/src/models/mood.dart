@@ -15,9 +15,18 @@ class Mood with _$Mood {
     List<String>? thingsIAmGratefulAbout,
   }) = _Mood;
 
+  const Mood._();
+
   /// [Mood] constructor awaiting Serverpod's client model [MoodEntry] object
   factory Mood.fromMoodEntry(MoodEntry moodEntry) =>
       MoodCoverter().convert(moodEntry);
+
+  bool get isToday {
+    final now = DateTime.now();
+    return createdOn.year == now.year &&
+        createdOn.month == now.month &&
+        createdOn.day == now.day;
+  }
 }
 
 /// Converts [MoodEntry] to [Mood]
