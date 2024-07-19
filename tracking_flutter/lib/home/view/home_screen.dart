@@ -8,19 +8,23 @@ import 'package:mood_repository/mood_repository.dart';
 import 'package:tracking_app/create_mood/cubit/create_mood_cubit.dart';
 import 'package:tracking_app/delete_mood/cubit/delete_mood_cubit.dart';
 import 'package:tracking_app/home/cubit/home_cubit.dart';
-import 'package:tracking_app/home/view/widgets/mood_tile.dart';
 import 'package:tracking_app/main.dart';
 import 'package:tracking_app/shared/date_time.dart';
+import 'package:tracking_app/shared/theme/colors.dart';
 import 'package:tracking_app/shared/theme/layout.dart';
 import 'package:tracking_app/shared/view/base_view.dart';
 import 'package:tracking_app/shared/widgets/app_elevated_button.dart';
 import 'package:tracking_app/shared/widgets/error_message.dart';
 import 'package:tracking_app/shared/widgets/loading_indicator.dart';
-import 'package:tracking_app/shared/widgets/moods_shader_mask.dart';
+import 'package:tracking_app/shared/widgets/mood_emoji.dart';
 import 'package:tracking_app/shared/widgets/spacing.dart';
+import 'package:tracking_app/shared/widgets/tile.dart';
 import 'package:tracking_app/update_mood/cubit/update_mood_cubit.dart';
 import 'package:tracking_app/user_profile/cubit/user_profile_cubit.dart';
 import 'package:user_profile_repository/user_profile_repository.dart';
+
+part 'widgets/mood_tile.dart';
+part 'widgets/moods_shader_mask.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -249,7 +253,7 @@ class _HomeContentViewState extends State<_HomeContentView> {
           padding: const EdgeInsets.only(
             bottom: verticalPaddingMedium,
           ),
-          child: MoodTile(mood: mood),
+          child: _MoodTile(mood: mood),
         );
       },
     );
