@@ -25,10 +25,6 @@ class MoodRepository {
 
   static const paginationLimit = 15;
 
-  Future<void> init() async {
-    await _serverpodClient.authenticationKeyManager!.put('valid');
-  }
-
   Future<List<Mood>> getMoods({
     required int page,
     required String userId,
