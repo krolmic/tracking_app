@@ -31,7 +31,6 @@ Future<void> registerSingletons() async {
   final sharedPreferences = await SharedPreferences.getInstance();
   final serverpodClient = await initServerpodClient();
 
-  // Third party dependencies
   getIt
     ..registerSingleton<AmplifyClass>(Amplify)
     ..registerSingleton<AuthCategory>(Amplify.Auth)
