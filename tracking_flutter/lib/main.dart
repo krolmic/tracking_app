@@ -18,18 +18,20 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  registerSingletons();
+  await registerSingletons();
 
   runApp(const App());
 }
 
 final GetIt getIt = GetIt.instance;
 
-void registerSingletons() {
+Future<void> registerSingletons() async {
+  final sharedPreferences = await SharedPreferences.getInstance();
   // Third party dependencies
   getIt
     ..registerSingleton<AmplifyClass>(Amplify)
     ..registerSingleton<AuthCategory>(Amplify.Auth)
+    ..registerSingleton<SharedPreferences>(sharedPreferences)
 
     // Repositories
     ..registerLazySingleton<MoodRepository>(
@@ -52,5 +54,10 @@ void registerSingletons() {
     )
     ..registerLazySingleton<EmailRepository>(
       EmailRepository.new,
+    )
+    ..registerLazySingleton<SettingsRepository>(
+      () => SettingsRepository(
+        preferences: getIt<SharedPreferences>(),
+      ),
     );
 }
