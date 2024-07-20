@@ -1,0 +1,13 @@
+name: settings_repository
+description: A Dart Repository which manages settings data
+version: 1.0.0
+
+environment:
+  sdk: ^3.0.6
+
+dependencies:
+  shared_preferences: ^2.2.3
+
+dev_dependencies:
+  test: ^1.16.4
+  very_good_analysis: ^5.0.0+1
