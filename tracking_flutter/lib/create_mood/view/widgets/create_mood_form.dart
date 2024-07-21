@@ -109,7 +109,9 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
     )..addListener(_onDiaryChanged);
 
     _revenueController = TextEditingController(
-      text: moodFormState.revenue.value.toString(),
+      text: moodFormState.revenue.value != 0
+          ? moodFormState.revenue.value.toString()
+          : '',
     )..addListener(_onRevenueChanged);
   }
 
