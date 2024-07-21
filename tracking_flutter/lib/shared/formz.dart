@@ -96,7 +96,7 @@ class WorkTimeInput extends FormzInput<Duration, WorkingTimeInputError> {
 }
 
 class MoodFormzState with FormzMixin {
-  MoodFormzState({
+  const MoodFormzState({
     this.moodValue = const MoodValueInput.pure(),
     this.thingsIAmGreatfulAbout1 = const ThingsIAmGreatfulAboutInput.pure(),
     this.thingsIAmGreatfulAbout2 = const ThingsIAmGreatfulAboutInput.pure(),

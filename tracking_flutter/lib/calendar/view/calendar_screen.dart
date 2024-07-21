@@ -8,7 +8,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mood_repository/mood_repository.dart';
 import 'package:tracking_app/calendar/cubit/calendar_bloc.dart';
 import 'package:tracking_app/calendar/view/widgets/tracked_mood.dart';
-import 'package:tracking_app/create_mood/cubit/create_mood_cubit.dart';
+import 'package:tracking_app/create_mood/bloc/create_mood_bloc.dart';
 import 'package:tracking_app/delete_mood/cubit/delete_mood_cubit.dart';
 import 'package:tracking_app/main.dart';
 import 'package:tracking_app/shared/date_time.dart';
@@ -47,11 +47,12 @@ class CalendarScreen extends StatelessWidget {
               }
             },
           ),
-          BlocListener<CreateMoodCubit, FormzSubmissionStatus>(
+          BlocListener<CreateMoodBloc, CreateMoodState>(
             listenWhen: (previousCreateMoodState, currentCreateMoodState) =>
-                previousCreateMoodState != currentCreateMoodState,
+                previousCreateMoodState.formStatus !=
+                currentCreateMoodState.formStatus,
             listener: (context, state) {
-              if (state.isSuccess) {
+              if (state.formStatus.isSuccess) {
                 context
                     .read<CalendarBloc>()
                     .add(const CalendarEvent.moodsUpdated());

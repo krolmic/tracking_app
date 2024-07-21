@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mood_repository/mood_repository.dart';
 import 'package:tracking_app/app/cubit/app_cubit.dart';
-import 'package:tracking_app/create_mood/cubit/create_mood_cubit.dart';
+import 'package:tracking_app/create_mood/bloc/create_mood_bloc.dart';
 import 'package:tracking_app/delete_mood/cubit/delete_mood_cubit.dart';
 import 'package:tracking_app/l10n/amplify_resolvers.dart';
 import 'package:tracking_app/main.dart';
@@ -38,7 +38,7 @@ class App extends StatelessWidget {
           ),
         ),
         BlocProvider(
-          create: (context) => CreateMoodCubit(
+          create: (context) => CreateMoodBloc(
             moodRepository: getIt.get<MoodRepository>(),
             userProfileRepository: getIt.get<UserProfileRepository>(),
           ),

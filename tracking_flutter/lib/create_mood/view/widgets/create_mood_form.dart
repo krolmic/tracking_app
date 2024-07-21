@@ -12,8 +12,6 @@ class _CreateMoodForm extends StatefulWidget {
 class _CreateMoodFormState extends State<_CreateMoodForm> {
   final _formKey = GlobalKey<FormState>();
 
-  late MoodFormzState _formState;
-
   late final TextEditingController _thingIAmGreatfulAbout1Controller;
   late final TextEditingController _thingIAmGreatfulAbout2Controller;
   late final TextEditingController _thingIAmGreatfulAbout3Controller;
@@ -21,94 +19,63 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
   late final TextEditingController _revenueController;
 
   void _onMoodValueChanged(double value) {
-    setState(() {
-      _formState = _formState.copyWith(
-        moodValue: MoodValueInput.dirty(
-          value: value.toInt(),
-        ),
-      );
-    });
+    context.read<CreateMoodBloc>().add(CreateMoodEvent.moodValueChanged(value));
   }
 
   void _onThingIAmGreatfulAbout1Changed() {
-    setState(() {
-      _formState = _formState.copyWith(
-        thingsIAmGreatfulAbout1: ThingsIAmGreatfulAboutInput.dirty(
-          value: _thingIAmGreatfulAbout1Controller.text,
-        ),
-      );
-    });
+    context.read<CreateMoodBloc>().add(
+          CreateMoodEvent.thingsIAmGratefulFor1Changed(
+            _thingIAmGreatfulAbout1Controller.text,
+          ),
+        );
   }
 
   void _onThingIAmGreatfulAbout2Changed() {
-    setState(() {
-      _formState = _formState.copyWith(
-        thingsIAmGreatfulAbout2: ThingsIAmGreatfulAboutInput.dirty(
-          value: _thingIAmGreatfulAbout2Controller.text,
-        ),
-      );
-    });
+    context.read<CreateMoodBloc>().add(
+          CreateMoodEvent.thingsIAmGratefulFor2Changed(
+            _thingIAmGreatfulAbout2Controller.text,
+          ),
+        );
   }
 
   void _onThingIAmGreatfulAbout3Changed() {
-    setState(() {
-      _formState = _formState.copyWith(
-        thingsIAmGreatfulAbout3: ThingsIAmGreatfulAboutInput.dirty(
-          value: _thingIAmGreatfulAbout3Controller.text,
-        ),
-      );
-    });
+    context.read<CreateMoodBloc>().add(
+          CreateMoodEvent.thingsIAmGratefulFor3Changed(
+            _thingIAmGreatfulAbout3Controller.text,
+          ),
+        );
   }
 
   void _onDiaryChanged() {
-    setState(() {
-      _formState = _formState.copyWith(
-        diary: DiaryInput.dirty(
-          value: _diaryController.text,
-        ),
-      );
-    });
+    context.read<CreateMoodBloc>().add(
+          CreateMoodEvent.diaryChanged(
+            _diaryController.text,
+          ),
+        );
   }
 
   void _onRevenueChanged() {
-    setState(() {
-      _formState = _formState.copyWith(
-        revenue: RevenueInput.dirty(
-          value: _revenueController.text.isNotEmpty
-              ? double.parse(_revenueController.text)
-              : 0,
-        ),
-      );
-    });
+    context.read<CreateMoodBloc>().add(
+          CreateMoodEvent.revenueChanged(
+            _revenueController.text,
+          ),
+        );
   }
 
-  void _onWorkingTimeChanged(Duration workingTime) {
-    setState(() {
-      _formState = _formState.copyWith(
-        workTime: WorkTimeInput.dirty(
-          value: workingTime,
-        ),
-      );
-    });
+  void _onWorkTimeChanged(Duration workTime) {
+    context.read<CreateMoodBloc>().add(
+          CreateMoodEvent.workTimeChanged(
+            workTime,
+          ),
+        );
   }
 
   Future<void> _onSubmit() async {
     if (!_formKey.currentState!.validate()) return;
 
-    await context.read<CreateMoodCubit>().createMood(
-          value: _formState.moodValue.value,
-          diary: _formState.diary.value,
-          thingsIAmGratefulAbout: [
-            if (_formState.thingsIAmGreatfulAbout1.value.isNotEmpty)
-              _formState.thingsIAmGreatfulAbout1.value,
-            if (_formState.thingsIAmGreatfulAbout2.value.isNotEmpty)
-              _formState.thingsIAmGreatfulAbout2.value,
-            if (_formState.thingsIAmGreatfulAbout3.value.isNotEmpty)
-              _formState.thingsIAmGreatfulAbout3.value,
-          ],
-          revenue: _formState.revenue.value,
-          workTime: _formState.workTime.value,
-        );
+    context
+        .read<CreateMoodBloc>()
+        .add(const CreateMoodEvent.creationSubmitted());
 
     if (!mounted) return;
 
@@ -123,27 +90,19 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
   void initState() {
     super.initState();
 
-    _formState = MoodFormzState();
+    _thingIAmGreatfulAbout1Controller = TextEditingController()
+      ..addListener(_onThingIAmGreatfulAbout1Changed);
 
-    _thingIAmGreatfulAbout1Controller = TextEditingController(
-      text: _formState.thingsIAmGreatfulAbout1.value,
-    )..addListener(_onThingIAmGreatfulAbout1Changed);
+    _thingIAmGreatfulAbout2Controller = TextEditingController()
+      ..addListener(_onThingIAmGreatfulAbout2Changed);
 
-    _thingIAmGreatfulAbout2Controller = TextEditingController(
-      text: _formState.thingsIAmGreatfulAbout2.value,
-    )..addListener(_onThingIAmGreatfulAbout2Changed);
+    _thingIAmGreatfulAbout3Controller = TextEditingController()
+      ..addListener(_onThingIAmGreatfulAbout3Changed);
 
-    _thingIAmGreatfulAbout3Controller = TextEditingController(
-      text: _formState.thingsIAmGreatfulAbout3.value,
-    )..addListener(_onThingIAmGreatfulAbout3Changed);
+    _diaryController = TextEditingController()..addListener(_onDiaryChanged);
 
-    _diaryController = TextEditingController(
-      text: _formState.diary.value,
-    )..addListener(_onDiaryChanged);
-
-    _revenueController = TextEditingController(
-      text: '',
-    )..addListener(_onRevenueChanged);
+    _revenueController = TextEditingController()
+      ..addListener(_onRevenueChanged);
   }
 
   @override
@@ -158,24 +117,19 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CreateMoodCubit, FormzSubmissionStatus>(
-      buildWhen: (previousState, currentState) => previousState != currentState,
-      builder: (context, state) {
-        return Form(
-          key: _formKey,
-          child: state.isInProgress
-              ? const Center(child: LoadingIndicator())
-              : _CreateMoodStepper(
-                  onCompleted: _onSubmit,
-                  pages: _getStepperPages(),
-                ),
-        );
-      },
+    return Form(
+      key: _formKey,
+      child: _CreateMoodStepper(
+        onCompleted: _onSubmit,
+        pages: _getStepperPages(),
+      ),
     );
   }
 
   List<Widget> _getStepperPages() {
     final translations = AppLocalizations.of(context)!;
+
+    final createMoodBloc = context.read<CreateMoodBloc>();
 
     return [
       _CreateMoodStepperPage(
@@ -197,18 +151,32 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
               textAlign: TextAlign.center,
             ),
             const VerticalSpacing.large(),
-            Slider(
-              autofocus: true,
-              value: _formState.moodValue.value.toDouble(),
-              min: MoodValueInput.minValue.toDouble(),
-              max: MoodValueInput.maxValue.toDouble(),
-              divisions: MoodValueInput.maxValue - 1,
-              label: _formState.moodValue.value.toString(),
-              onChanged: _onMoodValueChanged,
+            BlocBuilder<CreateMoodBloc, CreateMoodState>(
+              buildWhen: (previousState, currentState) =>
+                  previousState.moodFormState.moodValue !=
+                  currentState.moodFormState.moodValue,
+              builder: (context, state) {
+                return Slider(
+                  autofocus: true,
+                  value: state.moodFormState.moodValue.value.toDouble(),
+                  min: MoodValueInput.minValue.toDouble(),
+                  max: MoodValueInput.maxValue.toDouble(),
+                  divisions: MoodValueInput.maxValue - 1,
+                  label: state.moodFormState.moodValue.value.toString(),
+                  onChanged: _onMoodValueChanged,
+                );
+              },
             ),
             const VerticalSpacing.large(),
-            _MoodEmoji(
-              moodValue: _formState.moodValue.value,
+            BlocBuilder<CreateMoodBloc, CreateMoodState>(
+              buildWhen: (previousState, currentState) =>
+                  previousState.moodFormState.moodValue !=
+                  currentState.moodFormState.moodValue,
+              builder: (context, state) {
+                return _MoodEmoji(
+                  moodValue: state.moodFormState.moodValue.value,
+                );
+              },
             ),
           ],
         ),
@@ -239,7 +207,8 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
                 icon: const Icon(Icons.favorite_rounded),
                 iconColor: Theme.of(context).primaryColor,
               ),
-              validator: (value) => _formState.thingsIAmGreatfulAbout1
+              validator: (value) => createMoodBloc
+                  .state.moodFormState.thingsIAmGreatfulAbout1
                   .validator(value ?? '')
                   ?.toString(),
               keyboardType: TextInputType.text,
@@ -252,7 +221,8 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
                 icon: const Icon(Icons.favorite_rounded),
                 iconColor: Theme.of(context).primaryColor,
               ),
-              validator: (value) => _formState.thingsIAmGreatfulAbout2
+              validator: (value) => createMoodBloc
+                  .state.moodFormState.thingsIAmGreatfulAbout2
                   .validator(value ?? '')
                   ?.toString(),
               keyboardType: TextInputType.text,
@@ -265,7 +235,8 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
                 icon: const Icon(Icons.favorite_rounded),
                 iconColor: Theme.of(context).primaryColor,
               ),
-              validator: (value) => _formState.thingsIAmGreatfulAbout3
+              validator: (value) => createMoodBloc
+                  .state.moodFormState.thingsIAmGreatfulAbout3
                   .validator(value ?? '')
                   ?.toString(),
               keyboardType: TextInputType.text,
@@ -296,8 +267,9 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
             TextFormField(
               key: const Key('Create mood form diary input'),
               controller: _diaryController,
-              validator: (value) =>
-                  _formState.diary.validator(value ?? '')?.toString(),
+              validator: (value) => createMoodBloc.state.moodFormState.diary
+                  .validator(value ?? '')
+                  ?.toString(),
               keyboardType: TextInputType.text,
               textInputAction: TextInputAction.next,
               minLines: 5,
@@ -328,7 +300,7 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
             TextFormField(
               key: const Key('Create mood form revenue input'),
               controller: _revenueController,
-              validator: (value) => _formState.revenue
+              validator: (value) => createMoodBloc.state.moodFormState.revenue
                   .validator(value != null ? double.parse(value) : 0)
                   ?.toString(),
               keyboardType: TextInputType.number,
@@ -337,8 +309,10 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
               ],
               textInputAction: TextInputAction.next,
               decoration: InputDecoration(
-                icon: const Icon(Icons.attach_money_rounded,
-                    color: primarySwatch),
+                icon: const Icon(
+                  Icons.attach_money_rounded,
+                  color: primarySwatch,
+                ),
                 hintText: '0.0',
                 helperText: 'Revenue in your currency',
                 helperStyle: TextStyle(color: primarySwatch.shade300),
@@ -360,10 +334,17 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
               textAlign: TextAlign.center,
             ),
             const VerticalSpacing.large(),
-            DurationPicker(
-              key: const Key('Create mood form workTime input'),
-              duration: _formState.workTime.value,
-              onChange: _onWorkingTimeChanged,
+            BlocBuilder<CreateMoodBloc, CreateMoodState>(
+              buildWhen: (previousState, currentState) =>
+                  previousState.moodFormState.workTime !=
+                  currentState.moodFormState.workTime,
+              builder: (context, state) {
+                return DurationPicker(
+                  key: const Key('Create mood form workTime input'),
+                  duration: state.moodFormState.workTime.value,
+                  onChange: _onWorkTimeChanged,
+                );
+              },
             ),
           ],
         ),
