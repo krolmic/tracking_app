@@ -92,7 +92,7 @@ class MoodRepository {
     }
   }
 
-  Future<Mood> createMood({
+  Future<void> createMood({
     required String userId,
     required int value,
     required DateTime createdOn,
@@ -114,10 +114,7 @@ class MoodRepository {
         workTime: workTime,
       );
 
-      final createdMoodEntry =
-          await _serverpodClient.moodEntries.createMoodEntry(moodEntryToCreate);
-
-      return Mood.fromMoodEntry(createdMoodEntry);
+      await _serverpodClient.moodEntries.createMoodEntry(moodEntryToCreate);
     } catch (e, stackTrace) {
       Error.throwWithStackTrace(
         MoodRepositoryException(
