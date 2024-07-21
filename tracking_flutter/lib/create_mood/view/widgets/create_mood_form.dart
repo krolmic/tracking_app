@@ -311,7 +311,9 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
               key: const Key('Create mood form revenue input'),
               controller: _revenueController,
               validator: (value) => createMoodBloc.state.moodFormState.revenue
-                  .validator(value != null ? double.parse(value) : 0)
+                  .validator(
+                    value != null && value != '' ? double.parse(value) : 0,
+                  )
                   ?.toString(),
               keyboardType: TextInputType.number,
               inputFormatters: [
