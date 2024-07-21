@@ -90,19 +90,27 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
   void initState() {
     super.initState();
 
-    _thingIAmGreatfulAbout1Controller = TextEditingController()
-      ..addListener(_onThingIAmGreatfulAbout1Changed);
+    final moodFormState = context.read<CreateMoodBloc>().state.moodFormState;
 
-    _thingIAmGreatfulAbout2Controller = TextEditingController()
-      ..addListener(_onThingIAmGreatfulAbout2Changed);
+    _thingIAmGreatfulAbout1Controller = TextEditingController(
+      text: moodFormState.thingsIAmGreatfulAbout1.value,
+    )..addListener(_onThingIAmGreatfulAbout1Changed);
 
-    _thingIAmGreatfulAbout3Controller = TextEditingController()
-      ..addListener(_onThingIAmGreatfulAbout3Changed);
+    _thingIAmGreatfulAbout2Controller = TextEditingController(
+      text: moodFormState.thingsIAmGreatfulAbout2.value,
+    )..addListener(_onThingIAmGreatfulAbout2Changed);
 
-    _diaryController = TextEditingController()..addListener(_onDiaryChanged);
+    _thingIAmGreatfulAbout3Controller = TextEditingController(
+      text: moodFormState.thingsIAmGreatfulAbout3.value,
+    )..addListener(_onThingIAmGreatfulAbout3Changed);
 
-    _revenueController = TextEditingController()
-      ..addListener(_onRevenueChanged);
+    _diaryController = TextEditingController(
+      text: moodFormState.diary.value,
+    )..addListener(_onDiaryChanged);
+
+    _revenueController = TextEditingController(
+      text: moodFormState.revenue.value.toString(),
+    )..addListener(_onRevenueChanged);
   }
 
   @override
