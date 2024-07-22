@@ -15,79 +15,70 @@ class _UpdateMoodForm extends StatefulWidget {
 class _UpdateMoodFormState extends State<_UpdateMoodForm> {
   final _formKey = GlobalKey<FormState>();
 
-  late MoodFormzState _formState;
-
   late final TextEditingController _thingIAmGreatfulAbout1Controller;
   late final TextEditingController _thingIAmGreatfulAbout2Controller;
   late final TextEditingController _thingIAmGreatfulAbout3Controller;
   late final TextEditingController _diaryController;
+  late final TextEditingController _revenueController;
 
   void _onMoodValueChanged(double value) {
-    setState(() {
-      _formState = _formState.copyWith(
-        moodValue: MoodValueInput.dirty(
-          value: value.toInt(),
-        ),
-      );
-    });
+    context.read<UpdateMoodBloc>().add(UpdateMoodEvent.moodValueChanged(value));
   }
 
   void _onThingIAmGreatfulAbout1Changed() {
-    setState(() {
-      _formState = _formState.copyWith(
-        thingsIAmGreatfulAbout1: ThingsIAmGreatfulAboutInput.dirty(
-          value: _thingIAmGreatfulAbout1Controller.text,
-        ),
-      );
-    });
+    context.read<UpdateMoodBloc>().add(
+          UpdateMoodEvent.thingsIAmGratefulFor1Changed(
+            _thingIAmGreatfulAbout1Controller.text,
+          ),
+        );
   }
 
   void _onThingIAmGreatfulAbout2Changed() {
-    setState(() {
-      _formState = _formState.copyWith(
-        thingsIAmGreatfulAbout2: ThingsIAmGreatfulAboutInput.dirty(
-          value: _thingIAmGreatfulAbout2Controller.text,
-        ),
-      );
-    });
+    context.read<UpdateMoodBloc>().add(
+          UpdateMoodEvent.thingsIAmGratefulFor2Changed(
+            _thingIAmGreatfulAbout2Controller.text,
+          ),
+        );
   }
 
   void _onThingIAmGreatfulAbout3Changed() {
-    setState(() {
-      _formState = _formState.copyWith(
-        thingsIAmGreatfulAbout3: ThingsIAmGreatfulAboutInput.dirty(
-          value: _thingIAmGreatfulAbout3Controller.text,
-        ),
-      );
-    });
+    context.read<UpdateMoodBloc>().add(
+          UpdateMoodEvent.thingsIAmGratefulFor3Changed(
+            _thingIAmGreatfulAbout3Controller.text,
+          ),
+        );
   }
 
   void _onDiaryChanged() {
-    setState(() {
-      _formState = _formState.copyWith(
-        diary: DiaryInput.dirty(
-          value: _diaryController.text,
-        ),
-      );
-    });
+    context.read<UpdateMoodBloc>().add(
+          UpdateMoodEvent.diaryChanged(
+            _diaryController.text,
+          ),
+        );
+  }
+
+  void _onRevenueChanged() {
+    context.read<UpdateMoodBloc>().add(
+          UpdateMoodEvent.revenueChanged(
+            _revenueController.text,
+          ),
+        );
+  }
+
+  void _onWorkTimeChanged(Duration value) {
+    context.read<UpdateMoodBloc>().add(
+          UpdateMoodEvent.workTimeChanged(
+            value,
+          ),
+        );
   }
 
   Future<void> _onSubmit() async {
     if (!_formKey.currentState!.validate()) return;
 
-    await context.read<UpdateMoodCubit>().updateMood(
-      widget.mood,
-      value: _formState.moodValue.value,
-      diary: _formState.diary.value,
-      thingsIAmGratefulAbout: [
-        if (_formState.thingsIAmGreatfulAbout1.value.isNotEmpty)
-          _formState.thingsIAmGreatfulAbout1.value,
-        if (_formState.thingsIAmGreatfulAbout2.value.isNotEmpty)
-          _formState.thingsIAmGreatfulAbout2.value,
-        if (_formState.thingsIAmGreatfulAbout3.value.isNotEmpty)
-          _formState.thingsIAmGreatfulAbout3.value,
-      ],
-    );
+    context
+        .read<UpdateMoodBloc>()
+        .add(UpdateMoodEvent.updateSubmitted(widget.mood));
 
     if (!mounted) return;
 
@@ -102,50 +93,29 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
   void initState() {
     super.initState();
 
-    final mood = widget.mood;
-
-    final thingsIAmGratefulAbout = mood.thingsIAmGratefulAbout;
-    final thingsIAmGreatfulAboutIsSet =
-        thingsIAmGratefulAbout != null && thingsIAmGratefulAbout.isNotEmpty;
-
-    _formState = MoodFormzState(
-      moodValue: MoodValueInput.dirty(
-        value: mood.value,
-      ),
-      thingsIAmGreatfulAbout1: ThingsIAmGreatfulAboutInput.dirty(
-        value:
-            thingsIAmGreatfulAboutIsSet ? mood.thingsIAmGratefulAbout![0] : '',
-      ),
-      thingsIAmGreatfulAbout2: ThingsIAmGreatfulAboutInput.dirty(
-        value: thingsIAmGreatfulAboutIsSet && thingsIAmGratefulAbout.length >= 2
-            ? mood.thingsIAmGratefulAbout![1]
-            : '',
-      ),
-      thingsIAmGreatfulAbout3: ThingsIAmGreatfulAboutInput.dirty(
-        value: thingsIAmGreatfulAboutIsSet && thingsIAmGratefulAbout.length >= 3
-            ? mood.thingsIAmGratefulAbout![2]
-            : '',
-      ),
-      diary: DiaryInput.dirty(
-        value: mood.diary ?? '',
-      ),
-    );
+    final moodFormState = context.read<UpdateMoodBloc>().state.moodFormState;
 
     _thingIAmGreatfulAbout1Controller = TextEditingController(
-      text: _formState.thingsIAmGreatfulAbout1.value,
+      text: moodFormState.thingsIAmGreatfulAbout1.value,
     )..addListener(_onThingIAmGreatfulAbout1Changed);
 
     _thingIAmGreatfulAbout2Controller = TextEditingController(
-      text: _formState.thingsIAmGreatfulAbout2.value,
+      text: moodFormState.thingsIAmGreatfulAbout2.value,
     )..addListener(_onThingIAmGreatfulAbout2Changed);
 
     _thingIAmGreatfulAbout3Controller = TextEditingController(
-      text: _formState.thingsIAmGreatfulAbout3.value,
+      text: moodFormState.thingsIAmGreatfulAbout3.value,
     )..addListener(_onThingIAmGreatfulAbout3Changed);
 
     _diaryController = TextEditingController(
-      text: _formState.diary.value,
+      text: moodFormState.diary.value,
     )..addListener(_onDiaryChanged);
+
+    _revenueController = TextEditingController(
+      text: moodFormState.revenue.value != 0
+          ? moodFormState.revenue.value.toString()
+          : '',
+    )..addListener(_onRevenueChanged);
   }
 
   @override
@@ -154,6 +124,7 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
     _thingIAmGreatfulAbout2Controller.dispose();
     _thingIAmGreatfulAbout3Controller.dispose();
     _diaryController.dispose();
+    _revenueController.dispose();
     super.dispose();
   }
 
@@ -161,156 +132,147 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
   Widget build(BuildContext context) {
     final translations = AppLocalizations.of(context)!;
 
-    return BlocBuilder<DeleteMoodCubit, DeleteMoodState>(
-      buildWhen: (previousDeleteMoodState, currentDeleteMoodState) =>
-          previousDeleteMoodState != currentDeleteMoodState,
-      builder: (context, deleteMoodState) {
-        return BlocBuilder<UpdateMoodCubit, FormzSubmissionStatus>(
-          buildWhen: (previousUpdateMoodState, currentUpdateMoodState) =>
-              previousUpdateMoodState != currentUpdateMoodState,
-          builder: (context, state) {
-            final stateInProgress =
-                state.isInProgress || deleteMoodState.isInProgress;
+    final updateMoodBloc = context.read<UpdateMoodBloc>();
 
-            return Stack(
-              alignment: Alignment.bottomCenter,
+    return Stack(
+      alignment: Alignment.bottomCenter,
+      children: [
+        SingleChildScrollView(
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SingleChildScrollView(
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const VerticalSpacing.large(),
-                        Text(
-                          translations.howAreYouFeeling,
-                          style: Theme.of(context).textTheme.headlineSmall,
-                        ),
-                        const VerticalSpacing.medium(),
-                        Text(
-                          translations.estimateYourMood,
-                          style: Theme.of(context).textTheme.bodyMedium,
-                        ),
-                        const VerticalSpacing.large(),
-                        Slider(
-                          autofocus: true,
-                          value: _formState.moodValue.value.toDouble(),
-                          min: MoodValueInput.minValue.toDouble(),
-                          max: MoodValueInput.maxValue.toDouble(),
-                          divisions: MoodValueInput.maxValue - 1,
-                          label: _formState.moodValue.value.toString(),
-                          onChanged: stateInProgress
-                              ? (value) {
-                                  // Do nothing while submitting
-                                }
-                              : _onMoodValueChanged,
-                        ),
-                        const VerticalSpacing.large(),
-                        Text(
-                          translations.whatAreYouGreatfulFor,
-                          style: Theme.of(context).textTheme.headlineSmall,
-                        ),
-                        const VerticalSpacing.medium(),
-                        Text(
-                          translations.writeDownThingsYouAreGreatfulFor,
-                          style: Theme.of(context).textTheme.bodyMedium,
-                        ),
-                        const VerticalSpacing.large(),
-                        TextFormField(
-                          key: const Key(
-                            'Update mood form thingIAmGreatfulAbout1 input',
-                          ),
-                          enabled: !stateInProgress,
-                          controller: _thingIAmGreatfulAbout1Controller,
-                          decoration: InputDecoration(
-                            icon: const Icon(Icons.favorite_rounded),
-                            iconColor: Theme.of(context).primaryColor,
-                          ),
-                          validator: (value) => _formState
-                              .thingsIAmGreatfulAbout1
-                              .validator(value ?? '')
-                              ?.toString(),
-                          keyboardType: TextInputType.text,
-                          textInputAction: TextInputAction.next,
-                        ),
-                        TextFormField(
-                          key: const Key(
-                            'Update mood form thingIAmGreatfulAbout2 input',
-                          ),
-                          enabled: !stateInProgress,
-                          controller: _thingIAmGreatfulAbout2Controller,
-                          decoration: InputDecoration(
-                            icon: const Icon(Icons.favorite_rounded),
-                            iconColor: Theme.of(context).primaryColor,
-                          ),
-                          validator: (value) => _formState
-                              .thingsIAmGreatfulAbout2
-                              .validator(value ?? '')
-                              ?.toString(),
-                          keyboardType: TextInputType.text,
-                          textInputAction: TextInputAction.next,
-                        ),
-                        TextFormField(
-                          key: const Key(
-                            'Update mood form thingIAmGreatfulAbout3 input',
-                          ),
-                          enabled: !stateInProgress,
-                          controller: _thingIAmGreatfulAbout3Controller,
-                          decoration: InputDecoration(
-                            icon: const Icon(Icons.favorite_rounded),
-                            iconColor: Theme.of(context).primaryColor,
-                          ),
-                          validator: (value) => _formState
-                              .thingsIAmGreatfulAbout3
-                              .validator(value ?? '')
-                              ?.toString(),
-                          keyboardType: TextInputType.text,
-                          textInputAction: TextInputAction.next,
-                        ),
-                        const VerticalSpacing.large(),
-                        const VerticalSpacing.large(),
-                        Text(
-                          translations.whatIsOnYourMind,
-                          style: Theme.of(context).textTheme.headlineSmall,
-                        ),
-                        const VerticalSpacing.small(),
-                        Text(
-                          translations.whatIsOnYourMindDescription,
-                          style: Theme.of(context).textTheme.bodyMedium,
-                        ),
-                        TextFormField(
-                          key: const Key('Update mood form diary input'),
-                          enabled: !stateInProgress,
-                          controller: _diaryController,
-                          validator: (value) => _formState.diary
-                              .validator(value ?? '')
-                              ?.toString(),
-                          keyboardType: TextInputType.text,
-                          textInputAction: TextInputAction.next,
-                          minLines: 5,
-                          maxLines: null,
-                        ),
-                        const SizedBox(
-                          height: 100,
-                        ),
-                      ],
-                    ),
-                  ),
+                const VerticalSpacing.large(),
+                Text(
+                  translations.howAreYouFeeling,
+                  style: Theme.of(context).textTheme.headlineSmall,
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 15),
-                  child: AppElevatedButton(
-                    isLoading: stateInProgress,
-                    icon: Icons.edit,
-                    onPressed: _onSubmit,
-                    label: translations.updateMood,
+                const VerticalSpacing.medium(),
+                Text(
+                  translations.estimateYourMood,
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                const VerticalSpacing.large(),
+                BlocBuilder<UpdateMoodBloc, UpdateMoodState>(
+                  buildWhen: (previousState, currentState) =>
+                      previousState.moodFormState.moodValue !=
+                      currentState.moodFormState.moodValue,
+                  builder: (context, state) {
+                    return Slider(
+                      autofocus: true,
+                      value: state.moodFormState.moodValue.value.toDouble(),
+                      min: MoodValueInput.minValue.toDouble(),
+                      max: MoodValueInput.maxValue.toDouble(),
+                      divisions: MoodValueInput.maxValue - 1,
+                      label: state.moodFormState.moodValue.value.toString(),
+                      onChanged: _onMoodValueChanged,
+                    );
+                  },
+                ),
+                const VerticalSpacing.large(),
+                Text(
+                  translations.whatAreYouGreatfulFor,
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
+                const VerticalSpacing.medium(),
+                Text(
+                  translations.writeDownThingsYouAreGreatfulFor,
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                const VerticalSpacing.large(),
+                TextFormField(
+                  key: const Key(
+                    'Update mood form thingIAmGreatfulAbout1 input',
                   ),
+                  controller: _thingIAmGreatfulAbout1Controller,
+                  decoration: InputDecoration(
+                    icon: const Icon(Icons.favorite_rounded),
+                    iconColor: Theme.of(context).primaryColor,
+                  ),
+                  validator: (value) => updateMoodBloc
+                      .state.moodFormState.thingsIAmGreatfulAbout1
+                      .validator(value ?? '')
+                      ?.toString(),
+                  keyboardType: TextInputType.text,
+                  textInputAction: TextInputAction.next,
+                ),
+                TextFormField(
+                  key: const Key(
+                    'Update mood form thingIAmGreatfulAbout2 input',
+                  ),
+                  controller: _thingIAmGreatfulAbout2Controller,
+                  decoration: InputDecoration(
+                    icon: const Icon(Icons.favorite_rounded),
+                    iconColor: Theme.of(context).primaryColor,
+                  ),
+                  validator: (value) => updateMoodBloc
+                      .state.moodFormState.thingsIAmGreatfulAbout2
+                      .validator(value ?? '')
+                      ?.toString(),
+                  keyboardType: TextInputType.text,
+                  textInputAction: TextInputAction.next,
+                ),
+                TextFormField(
+                  key: const Key(
+                    'Update mood form thingIAmGreatfulAbout3 input',
+                  ),
+                  controller: _thingIAmGreatfulAbout3Controller,
+                  decoration: InputDecoration(
+                    icon: const Icon(Icons.favorite_rounded),
+                    iconColor: Theme.of(context).primaryColor,
+                  ),
+                  validator: (value) => updateMoodBloc
+                      .state.moodFormState.thingsIAmGreatfulAbout3
+                      .validator(value ?? '')
+                      ?.toString(),
+                  keyboardType: TextInputType.text,
+                  textInputAction: TextInputAction.next,
+                ),
+                const VerticalSpacing.extraLarge(),
+                Text(
+                  translations.whatIsOnYourMind,
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
+                const VerticalSpacing.small(),
+                Text(
+                  translations.whatIsOnYourMindDescription,
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                TextFormField(
+                  key: const Key('Update mood form diary input'),
+                  controller: _diaryController,
+                  validator: (value) => updateMoodBloc.state.moodFormState.diary
+                      .validator(value ?? '')
+                      ?.toString(),
+                  keyboardType: TextInputType.text,
+                  textInputAction: TextInputAction.next,
+                  minLines: 5,
+                  maxLines: null,
+                ),
+                const SizedBox(
+                  height: 100,
                 ),
               ],
-            );
-          },
-        );
-      },
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 15),
+          child: BlocBuilder<UpdateMoodBloc, UpdateMoodState>(
+            buildWhen: (previousState, currentState) =>
+                previousState.formStatus != currentState.formStatus,
+            builder: (context, state) {
+              return AppElevatedButton(
+                isLoading: state.formStatus.isInProgress,
+                icon: Icons.edit,
+                onPressed: _onSubmit,
+                label: translations.updateMood,
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 }

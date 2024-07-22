@@ -62,10 +62,10 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
         );
   }
 
-  void _onWorkTimeChanged(Duration workTime) {
+  void _onWorkTimeChanged(Duration value) {
     context.read<CreateMoodBloc>().add(
           CreateMoodEvent.workTimeChanged(
-            workTime,
+            value,
           ),
         );
   }

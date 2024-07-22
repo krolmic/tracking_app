@@ -17,7 +17,7 @@ import 'package:tracking_app/shared/theme/layout.dart';
 import 'package:tracking_app/shared/toast.dart';
 import 'package:tracking_app/shared/widgets/loading_indicator.dart';
 import 'package:tracking_app/shared/widgets/spacing.dart';
-import 'package:tracking_app/update_mood/cubit/update_mood_cubit.dart';
+import 'package:tracking_app/update_mood/bloc/update_mood_bloc.dart';
 import 'package:user_profile_repository/user_profile_repository.dart';
 
 class CalendarScreen extends StatelessWidget {
@@ -59,11 +59,12 @@ class CalendarScreen extends StatelessWidget {
               }
             },
           ),
-          BlocListener<UpdateMoodCubit, FormzSubmissionStatus>(
+          BlocListener<UpdateMoodBloc, UpdateMoodState>(
             listenWhen: (previousUpdateMoodState, currentUpdateMoodState) =>
-                previousUpdateMoodState != currentUpdateMoodState,
+                previousUpdateMoodState.formStatus !=
+                currentUpdateMoodState.formStatus,
             listener: (context, updateMoodState) {
-              if (updateMoodState.isSuccess) {
+              if (updateMoodState.formStatus.isSuccess) {
                 context
                     .read<CalendarBloc>()
                     .add(const CalendarEvent.moodsUpdated());

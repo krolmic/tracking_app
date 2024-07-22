@@ -16,7 +16,7 @@ import 'package:tracking_app/shared/theme/colors.dart';
 import 'package:tracking_app/shared/theme/theme.dart';
 import 'package:tracking_app/shared/widgets/error_message.dart';
 import 'package:tracking_app/shared/widgets/loading_indicator.dart';
-import 'package:tracking_app/update_mood/cubit/update_mood_cubit.dart';
+import 'package:tracking_app/update_mood/bloc/update_mood_bloc.dart';
 import 'package:tracking_app/user_profile/cubit/user_profile_cubit.dart';
 import 'package:user_profile_repository/user_profile_repository.dart';
 
@@ -44,7 +44,7 @@ class App extends StatelessWidget {
           ),
         ),
         BlocProvider(
-          create: (context) => UpdateMoodCubit(
+          create: (context) => UpdateMoodBloc(
             moodRepository: getIt.get<MoodRepository>(),
           ),
         ),
