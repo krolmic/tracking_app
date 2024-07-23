@@ -13,6 +13,8 @@ class Mood with _$Mood {
     required int value,
     String? diary,
     List<String>? thingsIAmGratefulAbout,
+    double? revenue,
+    Duration? workTime,
   }) = _Mood;
 
   const Mood._();
@@ -39,6 +41,8 @@ class MoodCoverter extends Converter<MoodEntry, Mood> {
       createdOn: input.createdOn,
       thingsIAmGratefulAbout: input.thingsIAmGratefulFor,
       value: input.value,
+      revenue: input.revenue,
+      workTime: input.workTime,
     );
   }
 }

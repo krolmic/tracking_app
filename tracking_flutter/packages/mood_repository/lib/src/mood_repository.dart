@@ -25,10 +25,6 @@ class MoodRepository {
 
   static const paginationLimit = 15;
 
-  Future<void> init() async {
-    await _serverpodClient.authenticationKeyManager!.put('valid');
-  }
-
   Future<List<Mood>> getMoods({
     required int page,
     required String userId,
@@ -96,12 +92,14 @@ class MoodRepository {
     }
   }
 
-  Future<Mood> createMood({
+  Future<void> createMood({
     required String userId,
     required int value,
     required DateTime createdOn,
     String? diary,
     List<String>? thingsIAmGratefulAbout,
+    double? revenue,
+    Duration? workTime,
   }) async {
     try {
       final createdOnDate = createdOn.add(createdOn.timeZoneOffset);
@@ -112,12 +110,11 @@ class MoodRepository {
         createdOn: createdOnDate,
         diary: diary != null && diary.isNotEmpty ? diary : null,
         thingsIAmGratefulFor: thingsIAmGratefulAbout,
+        revenue: revenue,
+        workTime: workTime,
       );
 
-      final createdMoodEntry =
-          await _serverpodClient.moodEntries.createMoodEntry(moodEntryToCreate);
-
-      return Mood.fromMoodEntry(createdMoodEntry);
+      await _serverpodClient.moodEntries.createMoodEntry(moodEntryToCreate);
     } catch (e, stackTrace) {
       Error.throwWithStackTrace(
         MoodRepositoryException(
@@ -134,6 +131,8 @@ class MoodRepository {
     int? value,
     String? diary,
     List<String>? thingsIAmGratefulAbout,
+    double? revenue,
+    Duration? workTime,
   }) async {
     try {
       final updatedMoodEntry =
@@ -142,6 +141,8 @@ class MoodRepository {
         value: value,
         diary: diary,
         thingsIAmGratefulFor: thingsIAmGratefulAbout,
+        revenue: revenue,
+        workTime: workTime,
       );
 
       return Mood.fromMoodEntry(updatedMoodEntry);

@@ -1,4 +1,6 @@
+import 'package:duration_picker/duration_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:formz/formz.dart';
@@ -14,18 +16,16 @@ import 'package:tracking_app/shared/widgets/app_dialog.dart';
 import 'package:tracking_app/shared/widgets/app_elevated_button.dart';
 import 'package:tracking_app/shared/widgets/loading_indicator.dart';
 import 'package:tracking_app/shared/widgets/spacing.dart';
-import 'package:tracking_app/update_mood/cubit/update_mood_cubit.dart';
+import 'package:tracking_app/update_mood/bloc/update_mood_bloc.dart';
 
 part 'widgets/update_mood_form.dart';
 
 class UpdateMoodScreen extends StatelessWidget {
   const UpdateMoodScreen({
-    required this.mood,
     required this.routeOrigin,
     super.key,
   });
 
-  final Mood mood;
   final String routeOrigin;
 
   Future<void> _showMoodDeletionDialog(
@@ -56,11 +56,12 @@ class UpdateMoodScreen extends StatelessWidget {
 
     return MultiBlocListener(
       listeners: [
-        BlocListener<UpdateMoodCubit, FormzSubmissionStatus>(
+        BlocListener<UpdateMoodBloc, UpdateMoodState>(
           listenWhen: (previousUpdateMoodState, currentUpdateMoodState) =>
-              previousUpdateMoodState != currentUpdateMoodState,
+              previousUpdateMoodState.formStatus !=
+              currentUpdateMoodState.formStatus,
           listener: (context, state) {
-            if (state.isSuccess) {
+            if (state.formStatus.isSuccess) {
               showToast(
                 context,
                 Icons.done_rounded,
@@ -68,7 +69,7 @@ class UpdateMoodScreen extends StatelessWidget {
               );
 
               context.go(routeOrigin);
-            } else if (state.isFailure) {
+            } else if (state.formStatus.isFailure) {
               showToast(
                 context,
                 Icons.error_rounded,
@@ -101,22 +102,28 @@ class UpdateMoodScreen extends StatelessWidget {
       ],
       child: Scaffold(
         appBar: AppBar(
-          title: Column(
-            children: [
-              Text(
-                getDateString(context, mood.createdOn),
-                maxLines: 1,
-              ),
-              Text(
-                getTimeString(mood.createdOn),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                  color: primarySwatch.shade400,
-                  fontSize: 18,
-                ),
-              ),
-            ],
+          title: BlocBuilder<UpdateMoodBloc, UpdateMoodState>(
+            buildWhen: (previousUpdateMoodState, currentUpdateMoodState) =>
+                previousUpdateMoodState.mood != currentUpdateMoodState.mood,
+            builder: (context, state) {
+              return Column(
+                children: [
+                  Text(
+                    getDateString(context, state.mood!.createdOn),
+                    maxLines: 1,
+                  ),
+                  Text(
+                    getTimeString(state.mood!.createdOn),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      color: primarySwatch.shade400,
+                      fontSize: 18,
+                    ),
+                  ),
+                ],
+              );
+            },
           ),
           centerTitle: true,
           actions: [
@@ -128,16 +135,26 @@ class UpdateMoodScreen extends StatelessWidget {
                   loading: () => TinyLoadingIndicator(
                     color: primarySwatch.shade200,
                   ),
-                  orElse: () => IconButton(
-                    icon: Icon(
-                      Icons.delete,
-                      color: primarySwatch.shade200,
-                    ),
-                    onPressed: () {
-                      _showMoodDeletionDialog(
-                        context,
-                        () {
-                          context.read<DeleteMoodCubit>().deleteMood(mood);
+                  orElse: () => BlocBuilder<UpdateMoodBloc, UpdateMoodState>(
+                    buildWhen:
+                        (previousUpdateMoodState, currentUpdateMoodState) =>
+                            previousUpdateMoodState.mood !=
+                            currentUpdateMoodState.mood,
+                    builder: (context, state) {
+                      return IconButton(
+                        icon: Icon(
+                          Icons.delete,
+                          color: primarySwatch.shade200,
+                        ),
+                        onPressed: () {
+                          _showMoodDeletionDialog(
+                            context,
+                            () {
+                              context
+                                  .read<DeleteMoodCubit>()
+                                  .deleteMood(state.mood!);
+                            },
+                          );
                         },
                       );
                     },
@@ -147,23 +164,27 @@ class UpdateMoodScreen extends StatelessWidget {
             ),
           ],
         ),
-        body: _UpdateMoodView(mood),
+        body: const _UpdateMoodView(),
       ),
     );
   }
 }
 
 class _UpdateMoodView extends StatelessWidget {
-  const _UpdateMoodView(this.mood);
-
-  final Mood mood;
+  const _UpdateMoodView();
 
   @override
   Widget build(BuildContext context) {
     return BaseView(
-      child: _UpdateMoodForm(
-        key: const Key('Update mood form'),
-        mood: mood,
+      child: BlocBuilder<UpdateMoodBloc, UpdateMoodState>(
+        buildWhen: (previousState, currentState) =>
+            previousState.mood != currentState.mood,
+        builder: (context, state) {
+          return _UpdateMoodForm(
+            key: const Key('Update mood form'),
+            mood: state.mood!,
+          );
+        },
       ),
     );
   }

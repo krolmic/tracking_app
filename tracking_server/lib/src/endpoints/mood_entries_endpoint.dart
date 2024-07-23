@@ -52,6 +52,8 @@ class MoodEntriesEndpoint extends Endpoint {
     int? value,
     String? diary,
     List<String>? thingsIAmGratefulFor,
+    double? revenue,
+    Duration? workTime,
   }) async {
     var moodEntry = await MoodEntry.db.findById(session, id);
     if (moodEntry == null) {
@@ -66,6 +68,12 @@ class MoodEntriesEndpoint extends Endpoint {
     }
     if (thingsIAmGratefulFor != null) {
       moodEntry.thingsIAmGratefulFor = thingsIAmGratefulFor;
+    }
+    if (revenue != null) {
+      moodEntry.revenue = revenue;
+    }
+    if (workTime != null) {
+      moodEntry.workTime = workTime;
     }
 
     return await MoodEntry.db.updateRow(session, moodEntry);

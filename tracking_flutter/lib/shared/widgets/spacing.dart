@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tracking_app/shared/theme/layout.dart';
 
-enum VerticalSpacingSize { small, medium, large }
+enum VerticalSpacingSize { small, medium, large, extraLarge }
 
 class VerticalSpacing extends StatelessWidget {
   const VerticalSpacing({
@@ -12,6 +12,8 @@ class VerticalSpacing extends StatelessWidget {
   const VerticalSpacing.small({super.key}) : size = VerticalSpacingSize.small;
   const VerticalSpacing.medium({super.key}) : size = VerticalSpacingSize.medium;
   const VerticalSpacing.large({super.key}) : size = VerticalSpacingSize.large;
+  const VerticalSpacing.extraLarge({super.key})
+      : size = VerticalSpacingSize.extraLarge;
 
   final VerticalSpacingSize size;
 
@@ -30,6 +32,8 @@ class VerticalSpacing extends StatelessWidget {
         return verticalPaddingMedium;
       case VerticalSpacingSize.large:
         return verticalPaddingLarge;
+      case VerticalSpacingSize.extraLarge:
+        return verticalPaddingExtraLarge;
     }
   }
 }

@@ -125,6 +125,16 @@ class Endpoints extends _i1.EndpointDispatch {
               type: _i1.getType<List<String>?>(),
               nullable: true,
             ),
+            'revenue': _i1.ParameterDescription(
+              name: 'revenue',
+              type: _i1.getType<double?>(),
+              nullable: true,
+            ),
+            'workTime': _i1.ParameterDescription(
+              name: 'workTime',
+              type: _i1.getType<Duration?>(),
+              nullable: true,
+            ),
           },
           call: (
             _i1.Session session,
@@ -137,6 +147,8 @@ class Endpoints extends _i1.EndpointDispatch {
             value: params['value'],
             diary: params['diary'],
             thingsIAmGratefulFor: params['thingsIAmGratefulFor'],
+            revenue: params['revenue'],
+            workTime: params['workTime'],
           ),
         ),
         'deleteMoodEntry': _i1.MethodConnector(

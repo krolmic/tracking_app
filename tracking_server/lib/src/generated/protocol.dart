@@ -61,6 +61,18 @@ class Protocol extends _i1.SerializationManagerServer {
           dartType: 'String?',
         ),
         _i2.ColumnDefinition(
+          name: 'revenue',
+          columnType: _i2.ColumnType.doublePrecision,
+          isNullable: true,
+          dartType: 'double?',
+        ),
+        _i2.ColumnDefinition(
+          name: 'workTime',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: true,
+          dartType: 'Duration?',
+        ),
+        _i2.ColumnDefinition(
           name: 'createdOn',
           columnType: _i2.ColumnType.timestampWithoutTimeZone,
           isNullable: false,

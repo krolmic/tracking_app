@@ -17,6 +17,8 @@ abstract class MoodEntry implements _i1.SerializableModel {
     required this.value,
     this.thingsIAmGratefulFor,
     this.diary,
+    this.revenue,
+    this.workTime,
     required this.createdOn,
   });
 
@@ -26,6 +28,8 @@ abstract class MoodEntry implements _i1.SerializableModel {
     required int value,
     List<String>? thingsIAmGratefulFor,
     String? diary,
+    double? revenue,
+    Duration? workTime,
     required DateTime createdOn,
   }) = _MoodEntryImpl;
 
@@ -38,6 +42,10 @@ abstract class MoodEntry implements _i1.SerializableModel {
           ?.map((e) => e as String)
           .toList(),
       diary: jsonSerialization['diary'] as String?,
+      revenue: (jsonSerialization['revenue'] as num?)?.toDouble(),
+      workTime: jsonSerialization['workTime'] == null
+          ? null
+          : _i1.DurationJsonExtension.fromJson(jsonSerialization['workTime']),
       createdOn:
           _i1.DateTimeJsonExtension.fromJson(jsonSerialization['createdOn']),
     );
@@ -56,6 +64,10 @@ abstract class MoodEntry implements _i1.SerializableModel {
 
   String? diary;
 
+  double? revenue;
+
+  Duration? workTime;
+
   DateTime createdOn;
 
   MoodEntry copyWith({
@@ -64,6 +76,8 @@ abstract class MoodEntry implements _i1.SerializableModel {
     int? value,
     List<String>? thingsIAmGratefulFor,
     String? diary,
+    double? revenue,
+    Duration? workTime,
     DateTime? createdOn,
   });
   @override
@@ -75,6 +89,8 @@ abstract class MoodEntry implements _i1.SerializableModel {
       if (thingsIAmGratefulFor != null)
         'thingsIAmGratefulFor': thingsIAmGratefulFor?.toJson(),
       if (diary != null) 'diary': diary,
+      if (revenue != null) 'revenue': revenue,
+      if (workTime != null) 'workTime': workTime?.toJson(),
       'createdOn': createdOn.toJson(),
     };
   }
@@ -94,6 +110,8 @@ class _MoodEntryImpl extends MoodEntry {
     required int value,
     List<String>? thingsIAmGratefulFor,
     String? diary,
+    double? revenue,
+    Duration? workTime,
     required DateTime createdOn,
   }) : super._(
           id: id,
@@ -101,6 +119,8 @@ class _MoodEntryImpl extends MoodEntry {
           value: value,
           thingsIAmGratefulFor: thingsIAmGratefulFor,
           diary: diary,
+          revenue: revenue,
+          workTime: workTime,
           createdOn: createdOn,
         );
 
@@ -111,6 +131,8 @@ class _MoodEntryImpl extends MoodEntry {
     int? value,
     Object? thingsIAmGratefulFor = _Undefined,
     Object? diary = _Undefined,
+    Object? revenue = _Undefined,
+    Object? workTime = _Undefined,
     DateTime? createdOn,
   }) {
     return MoodEntry(
@@ -121,6 +143,8 @@ class _MoodEntryImpl extends MoodEntry {
           ? thingsIAmGratefulFor
           : this.thingsIAmGratefulFor?.clone(),
       diary: diary is String? ? diary : this.diary,
+      revenue: revenue is double? ? revenue : this.revenue,
+      workTime: workTime is Duration? ? workTime : this.workTime,
       createdOn: createdOn ?? this.createdOn,
     );
   }

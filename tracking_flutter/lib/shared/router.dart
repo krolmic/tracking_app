@@ -1,5 +1,6 @@
 import 'package:amplify_authenticator/amplify_authenticator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mood_repository/mood_repository.dart';
 import 'package:tracking_app/calendar/view/calendar_screen.dart';
@@ -9,6 +10,7 @@ import 'package:tracking_app/privacy_policy/view/privacy_policy_screen.dart';
 import 'package:tracking_app/settings/view/settings_screen.dart';
 import 'package:tracking_app/shared/navigation.dart';
 import 'package:tracking_app/terms_of_service/view/terms_of_service_screen.dart';
+import 'package:tracking_app/update_mood/bloc/update_mood_bloc.dart';
 import 'package:tracking_app/update_mood/view/update_mood_screen.dart';
 import 'package:tracking_app/update_user_profile/view/update_user_profile_screen.dart';
 
@@ -57,14 +59,22 @@ final goRouter = GoRouter(
                 GoRoute(
                   name: 'update-mood-from-home',
                   path: 'update',
-                  pageBuilder: (context, state) => NoTransitionPage(
-                    child: AuthenticatedView(
-                      child: UpdateMoodScreen(
-                        mood: state.extra! as Mood,
-                        routeOrigin: '/home',
+                  pageBuilder: (context, state) {
+                    if (state.extra != null) {
+                      final mood = state.extra! as Mood;
+                      context.read<UpdateMoodBloc>().add(
+                            UpdateMoodEvent.moodSelected(mood),
+                          );
+                    }
+
+                    return const NoTransitionPage(
+                      child: AuthenticatedView(
+                        child: UpdateMoodScreen(
+                          routeOrigin: '/home',
+                        ),
                       ),
-                    ),
-                  ),
+                    );
+                  },
                 ),
               ],
             ),
@@ -85,14 +95,22 @@ final goRouter = GoRouter(
                 GoRoute(
                   name: 'update-mood-from-calendar',
                   path: 'update',
-                  pageBuilder: (context, state) => NoTransitionPage(
-                    child: AuthenticatedView(
-                      child: UpdateMoodScreen(
-                        mood: state.extra! as Mood,
-                        routeOrigin: '/calendar',
+                  pageBuilder: (context, state) {
+                    if (state.extra != null) {
+                      final mood = state.extra! as Mood;
+                      context.read<UpdateMoodBloc>().add(
+                            UpdateMoodEvent.moodSelected(mood),
+                          );
+                    }
+
+                    return const NoTransitionPage(
+                      child: AuthenticatedView(
+                        child: UpdateMoodScreen(
+                          routeOrigin: '/calendar',
+                        ),
                       ),
-                    ),
-                  ),
+                    );
+                  },
                 ),
               ],
             ),

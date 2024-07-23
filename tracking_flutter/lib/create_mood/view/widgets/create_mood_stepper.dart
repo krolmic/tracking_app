@@ -85,35 +85,49 @@ class _CreateMoodStepperState extends State<_CreateMoodStepper> {
       ),
     );
 
-    final buttons = Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        TextButton(
-          onPressed: onStepBack,
-          child: Text(
-            translations.previousStep.toUpperCase(),
-            style: TextStyle(
-              color: primarySwatch.shade300,
-            ),
-          ),
-        ),
-        counter,
-        TextButton(
-          onPressed: onStepNext,
-          child: Text(
-            translations.nextStep.toUpperCase(),
-            style: const TextStyle(
-              color: primarySwatch,
-            ),
-          ),
-        ),
-      ],
-    );
-
     return Column(
       children: [
         content,
-        buttons,
+        BlocBuilder<CreateMoodBloc, CreateMoodState>(
+          buildWhen: (previousState, currentState) =>
+              previousState.formStatus != currentState.formStatus,
+          builder: (context, state) {
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                TextButton(
+                  onPressed:
+                      _isFirst(currentStep) || state.formStatus.isInProgress
+                          ? null
+                          : onStepBack,
+                  child: Text(
+                    translations.previousStep.toUpperCase(),
+                    style: TextStyle(
+                      color:
+                          _isFirst(currentStep) || state.formStatus.isInProgress
+                              ? primarySwatch.shade300
+                              : primarySwatch,
+                    ),
+                  ),
+                ),
+                counter,
+                TextButton(
+                  onPressed: onStepNext,
+                  child: state.formStatus.isInProgress
+                      ? const TinyLoadingIndicator()
+                      : Text(
+                          _isLast(currentStep)
+                              ? translations.done.toUpperCase()
+                              : translations.nextStep.toUpperCase(),
+                          style: const TextStyle(
+                            color: primarySwatch,
+                          ),
+                        ),
+                ),
+              ],
+            );
+          },
+        ),
       ],
     );
   }

@@ -7,6 +7,8 @@ import 'package:get_it/get_it.dart';
 import 'package:mood_repository/mood_repository.dart';
 import 'package:serverpod_auth_shared_flutter/serverpod_auth_shared_flutter.dart';
 import 'package:serverpod_flutter/serverpod_flutter.dart';
+import 'package:settings_repository/settings_repository.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tracking_app/app/view/app.dart';
 import 'package:tracking_app/firebase_options.dart';
 import 'package:tracking_client/tracking_client.dart';
@@ -18,39 +20,56 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  registerSingletons();
+  await registerSingletons();
 
   runApp(const App());
 }
 
 final GetIt getIt = GetIt.instance;
 
-void registerSingletons() {
-  // Third party dependencies
+Future<void> registerSingletons() async {
+  final sharedPreferences = await SharedPreferences.getInstance();
+  final serverpodClient = await initServerpodClient();
+
   getIt
     ..registerSingleton<AmplifyClass>(Amplify)
     ..registerSingleton<AuthCategory>(Amplify.Auth)
+    ..registerSingleton<SharedPreferences>(sharedPreferences)
+    ..registerSingleton<Client>(serverpodClient)
 
     // Repositories
     ..registerLazySingleton<MoodRepository>(
       () => MoodRepository(
-        serverpodClient: Client(
-          'http://$localhost:8080/',
-          authenticationKeyManager: FlutterAuthenticationKeyManager(),
-        )..connectivityMonitor = FlutterConnectivityMonitor(),
-      )..init(),
+        serverpodClient: getIt<Client>(),
+      ),
     )
     ..registerLazySingleton<UserProfileRepository>(
       () => UserProfileRepository(
-        amplifyAuth: Amplify.Auth,
+        amplifyAuth: getIt<AuthCategory>(),
       ),
     )
     ..registerLazySingleton<AccountRepository>(
       () => AccountRepository(
-        amplifyAuth: Amplify.Auth,
+        amplifyAuth: getIt<AuthCategory>(),
       ),
     )
     ..registerLazySingleton<EmailRepository>(
       EmailRepository.new,
+    )
+    ..registerLazySingleton<SettingsRepository>(
+      () => SettingsRepository(
+        preferences: getIt<SharedPreferences>(),
+      ),
     );
+}
+
+Future<Client> initServerpodClient() async {
+  final serverpodClient = Client(
+    'http://$localhost:8080/',
+    authenticationKeyManager: FlutterAuthenticationKeyManager(),
+  )..connectivityMonitor = FlutterConnectivityMonitor();
+
+  await serverpodClient.authenticationKeyManager!.put('valid');
+
+  return serverpodClient;
 }
