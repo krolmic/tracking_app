@@ -321,10 +321,6 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
               ],
               textInputAction: TextInputAction.next,
               decoration: InputDecoration(
-                icon: const Icon(
-                  Icons.attach_money_rounded,
-                  color: primarySwatch,
-                ),
                 hintText: '0.0',
                 helperText: 'Revenue in your currency',
                 helperStyle: TextStyle(color: primarySwatch.shade300),
@@ -354,6 +350,7 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
                 return DurationPicker(
                   key: const Key('Create mood form workTime input'),
                   duration: state.moodFormState.workTime.value,
+                  upperBound: const Duration(hours: 24),
                   onChange: _onWorkTimeChanged,
                 );
               },
