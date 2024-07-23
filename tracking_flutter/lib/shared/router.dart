@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mood_repository/mood_repository.dart';
 import 'package:tracking_app/calendar/view/calendar_screen.dart';
 import 'package:tracking_app/create_mood/view/create_mood_screen.dart';
-import 'package:tracking_app/home/view/home_screen.dart';
+import 'package:tracking_app/moods/view/moods_screen.dart';
 import 'package:tracking_app/privacy_policy/view/privacy_policy_screen.dart';
 import 'package:tracking_app/settings/view/settings_screen.dart';
 import 'package:tracking_app/shared/navigation.dart';
@@ -43,7 +43,7 @@ final goRouter = GoRouter(
               path: '/home',
               pageBuilder: (context, state) => const NoTransitionPage(
                 child: AuthenticatedView(
-                  child: HomeScreen(),
+                  child: MoodsScreen(),
                 ),
               ),
               routes: [

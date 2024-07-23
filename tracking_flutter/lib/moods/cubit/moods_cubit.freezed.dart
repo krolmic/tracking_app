@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'home_cubit.dart';
+part of 'moods_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,28 +15,29 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$HomeState {
-  HomeMoodsState get moodsState => throw _privateConstructorUsedError;
+mixin _$MoodsState {
+  MoodsListState get moodsListState => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $HomeStateCopyWith<HomeState> get copyWith =>
+  $MoodsStateCopyWith<MoodsState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $HomeStateCopyWith<$Res> {
-  factory $HomeStateCopyWith(HomeState value, $Res Function(HomeState) then) =
-      _$HomeStateCopyWithImpl<$Res, HomeState>;
+abstract class $MoodsStateCopyWith<$Res> {
+  factory $MoodsStateCopyWith(
+          MoodsState value, $Res Function(MoodsState) then) =
+      _$MoodsStateCopyWithImpl<$Res, MoodsState>;
   @useResult
-  $Res call({HomeMoodsState moodsState});
+  $Res call({MoodsListState moodsListState});
 
-  $HomeMoodsStateCopyWith<$Res> get moodsState;
+  $MoodsListStateCopyWith<$Res> get moodsListState;
 }
 
 /// @nodoc
-class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
-    implements $HomeStateCopyWith<$Res> {
-  _$HomeStateCopyWithImpl(this._value, this._then);
+class _$MoodsStateCopyWithImpl<$Res, $Val extends MoodsState>
+    implements $MoodsStateCopyWith<$Res> {
+  _$MoodsStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -46,107 +47,109 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? moodsState = null,
+    Object? moodsListState = null,
   }) {
     return _then(_value.copyWith(
-      moodsState: null == moodsState
-          ? _value.moodsState
-          : moodsState // ignore: cast_nullable_to_non_nullable
-              as HomeMoodsState,
+      moodsListState: null == moodsListState
+          ? _value.moodsListState
+          : moodsListState // ignore: cast_nullable_to_non_nullable
+              as MoodsListState,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $HomeMoodsStateCopyWith<$Res> get moodsState {
-    return $HomeMoodsStateCopyWith<$Res>(_value.moodsState, (value) {
-      return _then(_value.copyWith(moodsState: value) as $Val);
+  $MoodsListStateCopyWith<$Res> get moodsListState {
+    return $MoodsListStateCopyWith<$Res>(_value.moodsListState, (value) {
+      return _then(_value.copyWith(moodsListState: value) as $Val);
     });
   }
 }
 
 /// @nodoc
-abstract class _$$HomeStateImplCopyWith<$Res>
-    implements $HomeStateCopyWith<$Res> {
-  factory _$$HomeStateImplCopyWith(
-          _$HomeStateImpl value, $Res Function(_$HomeStateImpl) then) =
-      __$$HomeStateImplCopyWithImpl<$Res>;
+abstract class _$$MoodsStateImplCopyWith<$Res>
+    implements $MoodsStateCopyWith<$Res> {
+  factory _$$MoodsStateImplCopyWith(
+          _$MoodsStateImpl value, $Res Function(_$MoodsStateImpl) then) =
+      __$$MoodsStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({HomeMoodsState moodsState});
+  $Res call({MoodsListState moodsListState});
 
   @override
-  $HomeMoodsStateCopyWith<$Res> get moodsState;
+  $MoodsListStateCopyWith<$Res> get moodsListState;
 }
 
 /// @nodoc
-class __$$HomeStateImplCopyWithImpl<$Res>
-    extends _$HomeStateCopyWithImpl<$Res, _$HomeStateImpl>
-    implements _$$HomeStateImplCopyWith<$Res> {
-  __$$HomeStateImplCopyWithImpl(
-      _$HomeStateImpl _value, $Res Function(_$HomeStateImpl) _then)
+class __$$MoodsStateImplCopyWithImpl<$Res>
+    extends _$MoodsStateCopyWithImpl<$Res, _$MoodsStateImpl>
+    implements _$$MoodsStateImplCopyWith<$Res> {
+  __$$MoodsStateImplCopyWithImpl(
+      _$MoodsStateImpl _value, $Res Function(_$MoodsStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? moodsState = null,
+    Object? moodsListState = null,
   }) {
-    return _then(_$HomeStateImpl(
-      moodsState: null == moodsState
-          ? _value.moodsState
-          : moodsState // ignore: cast_nullable_to_non_nullable
-              as HomeMoodsState,
+    return _then(_$MoodsStateImpl(
+      moodsListState: null == moodsListState
+          ? _value.moodsListState
+          : moodsListState // ignore: cast_nullable_to_non_nullable
+              as MoodsListState,
     ));
   }
 }
 
 /// @nodoc
 
-class _$HomeStateImpl implements _HomeState {
-  const _$HomeStateImpl({this.moodsState = const HomeMoodsState.initial()});
+class _$MoodsStateImpl implements _MoodsState {
+  const _$MoodsStateImpl(
+      {this.moodsListState = const MoodsListState.initial()});
 
   @override
   @JsonKey()
-  final HomeMoodsState moodsState;
+  final MoodsListState moodsListState;
 
   @override
   String toString() {
-    return 'HomeState(moodsState: $moodsState)';
+    return 'MoodsState(moodsListState: $moodsListState)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$HomeStateImpl &&
-            (identical(other.moodsState, moodsState) ||
-                other.moodsState == moodsState));
+            other is _$MoodsStateImpl &&
+            (identical(other.moodsListState, moodsListState) ||
+                other.moodsListState == moodsListState));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, moodsState);
+  int get hashCode => Object.hash(runtimeType, moodsListState);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$HomeStateImplCopyWith<_$HomeStateImpl> get copyWith =>
-      __$$HomeStateImplCopyWithImpl<_$HomeStateImpl>(this, _$identity);
+  _$$MoodsStateImplCopyWith<_$MoodsStateImpl> get copyWith =>
+      __$$MoodsStateImplCopyWithImpl<_$MoodsStateImpl>(this, _$identity);
 }
 
-abstract class _HomeState implements HomeState {
-  const factory _HomeState({final HomeMoodsState moodsState}) = _$HomeStateImpl;
+abstract class _MoodsState implements MoodsState {
+  const factory _MoodsState({final MoodsListState moodsListState}) =
+      _$MoodsStateImpl;
 
   @override
-  HomeMoodsState get moodsState;
+  MoodsListState get moodsListState;
   @override
   @JsonKey(ignore: true)
-  _$$HomeStateImplCopyWith<_$HomeStateImpl> get copyWith =>
+  _$$MoodsStateImplCopyWith<_$MoodsStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-mixin _$HomeMoodsState {
+mixin _$MoodsListState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
@@ -180,42 +183,42 @@ mixin _$HomeMoodsState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(HomeMoodsInitialState value) initial,
-    required TResult Function(HomeMoodsLoadingState value) loading,
-    required TResult Function(HomeMoodsSuccessState value) loaded,
-    required TResult Function(HomeMoodsErrorState value) error,
+    required TResult Function(MoodsListInitialState value) initial,
+    required TResult Function(MoodsListLoadingState value) loading,
+    required TResult Function(MoodsListSuccessState value) loaded,
+    required TResult Function(MoodsListErrorState value) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(HomeMoodsInitialState value)? initial,
-    TResult? Function(HomeMoodsLoadingState value)? loading,
-    TResult? Function(HomeMoodsSuccessState value)? loaded,
-    TResult? Function(HomeMoodsErrorState value)? error,
+    TResult? Function(MoodsListInitialState value)? initial,
+    TResult? Function(MoodsListLoadingState value)? loading,
+    TResult? Function(MoodsListSuccessState value)? loaded,
+    TResult? Function(MoodsListErrorState value)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(HomeMoodsInitialState value)? initial,
-    TResult Function(HomeMoodsLoadingState value)? loading,
-    TResult Function(HomeMoodsSuccessState value)? loaded,
-    TResult Function(HomeMoodsErrorState value)? error,
+    TResult Function(MoodsListInitialState value)? initial,
+    TResult Function(MoodsListLoadingState value)? loading,
+    TResult Function(MoodsListSuccessState value)? loaded,
+    TResult Function(MoodsListErrorState value)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $HomeMoodsStateCopyWith<$Res> {
-  factory $HomeMoodsStateCopyWith(
-          HomeMoodsState value, $Res Function(HomeMoodsState) then) =
-      _$HomeMoodsStateCopyWithImpl<$Res, HomeMoodsState>;
+abstract class $MoodsListStateCopyWith<$Res> {
+  factory $MoodsListStateCopyWith(
+          MoodsListState value, $Res Function(MoodsListState) then) =
+      _$MoodsListStateCopyWithImpl<$Res, MoodsListState>;
 }
 
 /// @nodoc
-class _$HomeMoodsStateCopyWithImpl<$Res, $Val extends HomeMoodsState>
-    implements $HomeMoodsStateCopyWith<$Res> {
-  _$HomeMoodsStateCopyWithImpl(this._value, this._then);
+class _$MoodsListStateCopyWithImpl<$Res, $Val extends MoodsListState>
+    implements $MoodsListStateCopyWith<$Res> {
+  _$MoodsListStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -224,37 +227,37 @@ class _$HomeMoodsStateCopyWithImpl<$Res, $Val extends HomeMoodsState>
 }
 
 /// @nodoc
-abstract class _$$HomeMoodsInitialStateImplCopyWith<$Res> {
-  factory _$$HomeMoodsInitialStateImplCopyWith(
-          _$HomeMoodsInitialStateImpl value,
-          $Res Function(_$HomeMoodsInitialStateImpl) then) =
-      __$$HomeMoodsInitialStateImplCopyWithImpl<$Res>;
+abstract class _$$MoodsListInitialStateImplCopyWith<$Res> {
+  factory _$$MoodsListInitialStateImplCopyWith(
+          _$MoodsListInitialStateImpl value,
+          $Res Function(_$MoodsListInitialStateImpl) then) =
+      __$$MoodsListInitialStateImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$HomeMoodsInitialStateImplCopyWithImpl<$Res>
-    extends _$HomeMoodsStateCopyWithImpl<$Res, _$HomeMoodsInitialStateImpl>
-    implements _$$HomeMoodsInitialStateImplCopyWith<$Res> {
-  __$$HomeMoodsInitialStateImplCopyWithImpl(_$HomeMoodsInitialStateImpl _value,
-      $Res Function(_$HomeMoodsInitialStateImpl) _then)
+class __$$MoodsListInitialStateImplCopyWithImpl<$Res>
+    extends _$MoodsListStateCopyWithImpl<$Res, _$MoodsListInitialStateImpl>
+    implements _$$MoodsListInitialStateImplCopyWith<$Res> {
+  __$$MoodsListInitialStateImplCopyWithImpl(_$MoodsListInitialStateImpl _value,
+      $Res Function(_$MoodsListInitialStateImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$HomeMoodsInitialStateImpl implements HomeMoodsInitialState {
-  const _$HomeMoodsInitialStateImpl();
+class _$MoodsListInitialStateImpl implements MoodsListInitialState {
+  const _$MoodsListInitialStateImpl();
 
   @override
   String toString() {
-    return 'HomeMoodsState.initial()';
+    return 'MoodsListState.initial()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$HomeMoodsInitialStateImpl);
+            other is _$MoodsListInitialStateImpl);
   }
 
   @override
@@ -306,10 +309,10 @@ class _$HomeMoodsInitialStateImpl implements HomeMoodsInitialState {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(HomeMoodsInitialState value) initial,
-    required TResult Function(HomeMoodsLoadingState value) loading,
-    required TResult Function(HomeMoodsSuccessState value) loaded,
-    required TResult Function(HomeMoodsErrorState value) error,
+    required TResult Function(MoodsListInitialState value) initial,
+    required TResult Function(MoodsListLoadingState value) loading,
+    required TResult Function(MoodsListSuccessState value) loaded,
+    required TResult Function(MoodsListErrorState value) error,
   }) {
     return initial(this);
   }
@@ -317,10 +320,10 @@ class _$HomeMoodsInitialStateImpl implements HomeMoodsInitialState {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(HomeMoodsInitialState value)? initial,
-    TResult? Function(HomeMoodsLoadingState value)? loading,
-    TResult? Function(HomeMoodsSuccessState value)? loaded,
-    TResult? Function(HomeMoodsErrorState value)? error,
+    TResult? Function(MoodsListInitialState value)? initial,
+    TResult? Function(MoodsListLoadingState value)? loading,
+    TResult? Function(MoodsListSuccessState value)? loaded,
+    TResult? Function(MoodsListErrorState value)? error,
   }) {
     return initial?.call(this);
   }
@@ -328,10 +331,10 @@ class _$HomeMoodsInitialStateImpl implements HomeMoodsInitialState {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(HomeMoodsInitialState value)? initial,
-    TResult Function(HomeMoodsLoadingState value)? loading,
-    TResult Function(HomeMoodsSuccessState value)? loaded,
-    TResult Function(HomeMoodsErrorState value)? error,
+    TResult Function(MoodsListInitialState value)? initial,
+    TResult Function(MoodsListLoadingState value)? loading,
+    TResult Function(MoodsListSuccessState value)? loaded,
+    TResult Function(MoodsListErrorState value)? error,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -341,42 +344,42 @@ class _$HomeMoodsInitialStateImpl implements HomeMoodsInitialState {
   }
 }
 
-abstract class HomeMoodsInitialState implements HomeMoodsState {
-  const factory HomeMoodsInitialState() = _$HomeMoodsInitialStateImpl;
+abstract class MoodsListInitialState implements MoodsListState {
+  const factory MoodsListInitialState() = _$MoodsListInitialStateImpl;
 }
 
 /// @nodoc
-abstract class _$$HomeMoodsLoadingStateImplCopyWith<$Res> {
-  factory _$$HomeMoodsLoadingStateImplCopyWith(
-          _$HomeMoodsLoadingStateImpl value,
-          $Res Function(_$HomeMoodsLoadingStateImpl) then) =
-      __$$HomeMoodsLoadingStateImplCopyWithImpl<$Res>;
+abstract class _$$MoodsListLoadingStateImplCopyWith<$Res> {
+  factory _$$MoodsListLoadingStateImplCopyWith(
+          _$MoodsListLoadingStateImpl value,
+          $Res Function(_$MoodsListLoadingStateImpl) then) =
+      __$$MoodsListLoadingStateImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$HomeMoodsLoadingStateImplCopyWithImpl<$Res>
-    extends _$HomeMoodsStateCopyWithImpl<$Res, _$HomeMoodsLoadingStateImpl>
-    implements _$$HomeMoodsLoadingStateImplCopyWith<$Res> {
-  __$$HomeMoodsLoadingStateImplCopyWithImpl(_$HomeMoodsLoadingStateImpl _value,
-      $Res Function(_$HomeMoodsLoadingStateImpl) _then)
+class __$$MoodsListLoadingStateImplCopyWithImpl<$Res>
+    extends _$MoodsListStateCopyWithImpl<$Res, _$MoodsListLoadingStateImpl>
+    implements _$$MoodsListLoadingStateImplCopyWith<$Res> {
+  __$$MoodsListLoadingStateImplCopyWithImpl(_$MoodsListLoadingStateImpl _value,
+      $Res Function(_$MoodsListLoadingStateImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$HomeMoodsLoadingStateImpl implements HomeMoodsLoadingState {
-  const _$HomeMoodsLoadingStateImpl();
+class _$MoodsListLoadingStateImpl implements MoodsListLoadingState {
+  const _$MoodsListLoadingStateImpl();
 
   @override
   String toString() {
-    return 'HomeMoodsState.loading()';
+    return 'MoodsListState.loading()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$HomeMoodsLoadingStateImpl);
+            other is _$MoodsListLoadingStateImpl);
   }
 
   @override
@@ -428,10 +431,10 @@ class _$HomeMoodsLoadingStateImpl implements HomeMoodsLoadingState {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(HomeMoodsInitialState value) initial,
-    required TResult Function(HomeMoodsLoadingState value) loading,
-    required TResult Function(HomeMoodsSuccessState value) loaded,
-    required TResult Function(HomeMoodsErrorState value) error,
+    required TResult Function(MoodsListInitialState value) initial,
+    required TResult Function(MoodsListLoadingState value) loading,
+    required TResult Function(MoodsListSuccessState value) loaded,
+    required TResult Function(MoodsListErrorState value) error,
   }) {
     return loading(this);
   }
@@ -439,10 +442,10 @@ class _$HomeMoodsLoadingStateImpl implements HomeMoodsLoadingState {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(HomeMoodsInitialState value)? initial,
-    TResult? Function(HomeMoodsLoadingState value)? loading,
-    TResult? Function(HomeMoodsSuccessState value)? loaded,
-    TResult? Function(HomeMoodsErrorState value)? error,
+    TResult? Function(MoodsListInitialState value)? initial,
+    TResult? Function(MoodsListLoadingState value)? loading,
+    TResult? Function(MoodsListSuccessState value)? loaded,
+    TResult? Function(MoodsListErrorState value)? error,
   }) {
     return loading?.call(this);
   }
@@ -450,10 +453,10 @@ class _$HomeMoodsLoadingStateImpl implements HomeMoodsLoadingState {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(HomeMoodsInitialState value)? initial,
-    TResult Function(HomeMoodsLoadingState value)? loading,
-    TResult Function(HomeMoodsSuccessState value)? loaded,
-    TResult Function(HomeMoodsErrorState value)? error,
+    TResult Function(MoodsListInitialState value)? initial,
+    TResult Function(MoodsListLoadingState value)? loading,
+    TResult Function(MoodsListSuccessState value)? loaded,
+    TResult Function(MoodsListErrorState value)? error,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -463,16 +466,16 @@ class _$HomeMoodsLoadingStateImpl implements HomeMoodsLoadingState {
   }
 }
 
-abstract class HomeMoodsLoadingState implements HomeMoodsState {
-  const factory HomeMoodsLoadingState() = _$HomeMoodsLoadingStateImpl;
+abstract class MoodsListLoadingState implements MoodsListState {
+  const factory MoodsListLoadingState() = _$MoodsListLoadingStateImpl;
 }
 
 /// @nodoc
-abstract class _$$HomeMoodsSuccessStateImplCopyWith<$Res> {
-  factory _$$HomeMoodsSuccessStateImplCopyWith(
-          _$HomeMoodsSuccessStateImpl value,
-          $Res Function(_$HomeMoodsSuccessStateImpl) then) =
-      __$$HomeMoodsSuccessStateImplCopyWithImpl<$Res>;
+abstract class _$$MoodsListSuccessStateImplCopyWith<$Res> {
+  factory _$$MoodsListSuccessStateImplCopyWith(
+          _$MoodsListSuccessStateImpl value,
+          $Res Function(_$MoodsListSuccessStateImpl) then) =
+      __$$MoodsListSuccessStateImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {List<Mood> moods,
@@ -482,11 +485,11 @@ abstract class _$$HomeMoodsSuccessStateImplCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$HomeMoodsSuccessStateImplCopyWithImpl<$Res>
-    extends _$HomeMoodsStateCopyWithImpl<$Res, _$HomeMoodsSuccessStateImpl>
-    implements _$$HomeMoodsSuccessStateImplCopyWith<$Res> {
-  __$$HomeMoodsSuccessStateImplCopyWithImpl(_$HomeMoodsSuccessStateImpl _value,
-      $Res Function(_$HomeMoodsSuccessStateImpl) _then)
+class __$$MoodsListSuccessStateImplCopyWithImpl<$Res>
+    extends _$MoodsListStateCopyWithImpl<$Res, _$MoodsListSuccessStateImpl>
+    implements _$$MoodsListSuccessStateImplCopyWith<$Res> {
+  __$$MoodsListSuccessStateImplCopyWithImpl(_$MoodsListSuccessStateImpl _value,
+      $Res Function(_$MoodsListSuccessStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -497,7 +500,7 @@ class __$$HomeMoodsSuccessStateImplCopyWithImpl<$Res>
     Object? hasReachedMax = null,
     Object? nextPageToLoad = null,
   }) {
-    return _then(_$HomeMoodsSuccessStateImpl(
+    return _then(_$MoodsListSuccessStateImpl(
       moods: null == moods
           ? _value._moods
           : moods // ignore: cast_nullable_to_non_nullable
@@ -520,8 +523,8 @@ class __$$HomeMoodsSuccessStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$HomeMoodsSuccessStateImpl implements HomeMoodsSuccessState {
-  const _$HomeMoodsSuccessStateImpl(
+class _$MoodsListSuccessStateImpl implements MoodsListSuccessState {
+  const _$MoodsListSuccessStateImpl(
       {required final List<Mood> moods,
       required this.loadingMore,
       required this.hasReachedMax,
@@ -545,14 +548,14 @@ class _$HomeMoodsSuccessStateImpl implements HomeMoodsSuccessState {
 
   @override
   String toString() {
-    return 'HomeMoodsState.loaded(moods: $moods, loadingMore: $loadingMore, hasReachedMax: $hasReachedMax, nextPageToLoad: $nextPageToLoad)';
+    return 'MoodsListState.loaded(moods: $moods, loadingMore: $loadingMore, hasReachedMax: $hasReachedMax, nextPageToLoad: $nextPageToLoad)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$HomeMoodsSuccessStateImpl &&
+            other is _$MoodsListSuccessStateImpl &&
             const DeepCollectionEquality().equals(other._moods, _moods) &&
             (identical(other.loadingMore, loadingMore) ||
                 other.loadingMore == loadingMore) &&
@@ -573,9 +576,9 @@ class _$HomeMoodsSuccessStateImpl implements HomeMoodsSuccessState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$HomeMoodsSuccessStateImplCopyWith<_$HomeMoodsSuccessStateImpl>
-      get copyWith => __$$HomeMoodsSuccessStateImplCopyWithImpl<
-          _$HomeMoodsSuccessStateImpl>(this, _$identity);
+  _$$MoodsListSuccessStateImplCopyWith<_$MoodsListSuccessStateImpl>
+      get copyWith => __$$MoodsListSuccessStateImplCopyWithImpl<
+          _$MoodsListSuccessStateImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -623,10 +626,10 @@ class _$HomeMoodsSuccessStateImpl implements HomeMoodsSuccessState {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(HomeMoodsInitialState value) initial,
-    required TResult Function(HomeMoodsLoadingState value) loading,
-    required TResult Function(HomeMoodsSuccessState value) loaded,
-    required TResult Function(HomeMoodsErrorState value) error,
+    required TResult Function(MoodsListInitialState value) initial,
+    required TResult Function(MoodsListLoadingState value) loading,
+    required TResult Function(MoodsListSuccessState value) loaded,
+    required TResult Function(MoodsListErrorState value) error,
   }) {
     return loaded(this);
   }
@@ -634,10 +637,10 @@ class _$HomeMoodsSuccessStateImpl implements HomeMoodsSuccessState {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(HomeMoodsInitialState value)? initial,
-    TResult? Function(HomeMoodsLoadingState value)? loading,
-    TResult? Function(HomeMoodsSuccessState value)? loaded,
-    TResult? Function(HomeMoodsErrorState value)? error,
+    TResult? Function(MoodsListInitialState value)? initial,
+    TResult? Function(MoodsListLoadingState value)? loading,
+    TResult? Function(MoodsListSuccessState value)? loaded,
+    TResult? Function(MoodsListErrorState value)? error,
   }) {
     return loaded?.call(this);
   }
@@ -645,10 +648,10 @@ class _$HomeMoodsSuccessStateImpl implements HomeMoodsSuccessState {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(HomeMoodsInitialState value)? initial,
-    TResult Function(HomeMoodsLoadingState value)? loading,
-    TResult Function(HomeMoodsSuccessState value)? loaded,
-    TResult Function(HomeMoodsErrorState value)? error,
+    TResult Function(MoodsListInitialState value)? initial,
+    TResult Function(MoodsListLoadingState value)? loading,
+    TResult Function(MoodsListSuccessState value)? loaded,
+    TResult Function(MoodsListErrorState value)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -658,53 +661,53 @@ class _$HomeMoodsSuccessStateImpl implements HomeMoodsSuccessState {
   }
 }
 
-abstract class HomeMoodsSuccessState implements HomeMoodsState {
-  const factory HomeMoodsSuccessState(
+abstract class MoodsListSuccessState implements MoodsListState {
+  const factory MoodsListSuccessState(
       {required final List<Mood> moods,
       required final bool loadingMore,
       required final bool hasReachedMax,
-      required final int nextPageToLoad}) = _$HomeMoodsSuccessStateImpl;
+      required final int nextPageToLoad}) = _$MoodsListSuccessStateImpl;
 
   List<Mood> get moods;
   bool get loadingMore;
   bool get hasReachedMax;
   int get nextPageToLoad;
   @JsonKey(ignore: true)
-  _$$HomeMoodsSuccessStateImplCopyWith<_$HomeMoodsSuccessStateImpl>
+  _$$MoodsListSuccessStateImplCopyWith<_$MoodsListSuccessStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$HomeMoodsErrorStateImplCopyWith<$Res> {
-  factory _$$HomeMoodsErrorStateImplCopyWith(_$HomeMoodsErrorStateImpl value,
-          $Res Function(_$HomeMoodsErrorStateImpl) then) =
-      __$$HomeMoodsErrorStateImplCopyWithImpl<$Res>;
+abstract class _$$MoodsListErrorStateImplCopyWith<$Res> {
+  factory _$$MoodsListErrorStateImplCopyWith(_$MoodsListErrorStateImpl value,
+          $Res Function(_$MoodsListErrorStateImpl) then) =
+      __$$MoodsListErrorStateImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$HomeMoodsErrorStateImplCopyWithImpl<$Res>
-    extends _$HomeMoodsStateCopyWithImpl<$Res, _$HomeMoodsErrorStateImpl>
-    implements _$$HomeMoodsErrorStateImplCopyWith<$Res> {
-  __$$HomeMoodsErrorStateImplCopyWithImpl(_$HomeMoodsErrorStateImpl _value,
-      $Res Function(_$HomeMoodsErrorStateImpl) _then)
+class __$$MoodsListErrorStateImplCopyWithImpl<$Res>
+    extends _$MoodsListStateCopyWithImpl<$Res, _$MoodsListErrorStateImpl>
+    implements _$$MoodsListErrorStateImplCopyWith<$Res> {
+  __$$MoodsListErrorStateImplCopyWithImpl(_$MoodsListErrorStateImpl _value,
+      $Res Function(_$MoodsListErrorStateImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$HomeMoodsErrorStateImpl implements HomeMoodsErrorState {
-  const _$HomeMoodsErrorStateImpl();
+class _$MoodsListErrorStateImpl implements MoodsListErrorState {
+  const _$MoodsListErrorStateImpl();
 
   @override
   String toString() {
-    return 'HomeMoodsState.error()';
+    return 'MoodsListState.error()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$HomeMoodsErrorStateImpl);
+            other is _$MoodsListErrorStateImpl);
   }
 
   @override
@@ -756,10 +759,10 @@ class _$HomeMoodsErrorStateImpl implements HomeMoodsErrorState {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(HomeMoodsInitialState value) initial,
-    required TResult Function(HomeMoodsLoadingState value) loading,
-    required TResult Function(HomeMoodsSuccessState value) loaded,
-    required TResult Function(HomeMoodsErrorState value) error,
+    required TResult Function(MoodsListInitialState value) initial,
+    required TResult Function(MoodsListLoadingState value) loading,
+    required TResult Function(MoodsListSuccessState value) loaded,
+    required TResult Function(MoodsListErrorState value) error,
   }) {
     return error(this);
   }
@@ -767,10 +770,10 @@ class _$HomeMoodsErrorStateImpl implements HomeMoodsErrorState {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(HomeMoodsInitialState value)? initial,
-    TResult? Function(HomeMoodsLoadingState value)? loading,
-    TResult? Function(HomeMoodsSuccessState value)? loaded,
-    TResult? Function(HomeMoodsErrorState value)? error,
+    TResult? Function(MoodsListInitialState value)? initial,
+    TResult? Function(MoodsListLoadingState value)? loading,
+    TResult? Function(MoodsListSuccessState value)? loaded,
+    TResult? Function(MoodsListErrorState value)? error,
   }) {
     return error?.call(this);
   }
@@ -778,10 +781,10 @@ class _$HomeMoodsErrorStateImpl implements HomeMoodsErrorState {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(HomeMoodsInitialState value)? initial,
-    TResult Function(HomeMoodsLoadingState value)? loading,
-    TResult Function(HomeMoodsSuccessState value)? loaded,
-    TResult Function(HomeMoodsErrorState value)? error,
+    TResult Function(MoodsListInitialState value)? initial,
+    TResult Function(MoodsListLoadingState value)? loading,
+    TResult Function(MoodsListSuccessState value)? loaded,
+    TResult Function(MoodsListErrorState value)? error,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -791,6 +794,6 @@ class _$HomeMoodsErrorStateImpl implements HomeMoodsErrorState {
   }
 }
 
-abstract class HomeMoodsErrorState implements HomeMoodsState {
-  const factory HomeMoodsErrorState() = _$HomeMoodsErrorStateImpl;
+abstract class MoodsListErrorState implements MoodsListState {
+  const factory MoodsListErrorState() = _$MoodsListErrorStateImpl;
 }

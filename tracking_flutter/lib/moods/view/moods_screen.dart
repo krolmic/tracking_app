@@ -7,8 +7,8 @@ import 'package:go_router/go_router.dart';
 import 'package:mood_repository/mood_repository.dart';
 import 'package:tracking_app/create_mood/bloc/create_mood_bloc.dart';
 import 'package:tracking_app/delete_mood/cubit/delete_mood_cubit.dart';
-import 'package:tracking_app/home/cubit/home_cubit.dart';
 import 'package:tracking_app/main.dart';
+import 'package:tracking_app/moods/cubit/moods_cubit.dart';
 import 'package:tracking_app/shared/date_time.dart';
 import 'package:tracking_app/shared/theme/colors.dart';
 import 'package:tracking_app/shared/theme/layout.dart';
@@ -26,21 +26,21 @@ import 'package:user_profile_repository/user_profile_repository.dart';
 part 'widgets/moods_shader_mask.dart';
 part 'widgets/tracked_mood.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class MoodsScreen extends StatelessWidget {
+  const MoodsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     final translations = AppLocalizations.of(context)!;
 
-    return BlocProvider<HomeCubit>(
+    return BlocProvider<MoodsCubit>(
       create: (context) {
         final userProfileCubit = context.read<UserProfileCubit>();
         if (!userProfileCubit.state.isSuccess) {
           userProfileCubit.loadUserProfile();
         }
 
-        return HomeCubit(
+        return MoodsCubit(
           moodRepository: getIt.get<MoodRepository>(),
           userProfileRepository: getIt.get<UserProfileRepository>(),
         )..init();
@@ -51,16 +51,16 @@ class HomeScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(
             horizontal: viewPaddingHorizontal,
           ),
-          child: BlocBuilder<HomeCubit, HomeState>(
-            buildWhen: (previousHomeState, currentHomeState) =>
-                previousHomeState != currentHomeState,
-            builder: (context, homeState) {
-              if (homeState.isError) {
+          child: BlocBuilder<MoodsCubit, MoodsState>(
+            buildWhen: (previousState, currentState) =>
+                previousState != currentState,
+            builder: (context, state) {
+              if (state.isError) {
                 return const SizedBox.shrink();
               }
 
               final todaysMoodIsTracked =
-                  homeState.moodsState.containsTodayMood;
+                  state.moodsListState.containsTodayMood;
 
               return AppElevatedButton(
                 icon: todaysMoodIsTracked ? Icons.edit : Icons.add,
@@ -71,26 +71,26 @@ class HomeScreen extends StatelessWidget {
                   if (todaysMoodIsTracked) {
                     context.go(
                       '/home/update',
-                      extra: homeState.moodsState.todaysMood,
+                      extra: state.moodsListState.todaysMood,
                     );
                   } else {
                     context.go('/home/create');
                   }
                 },
-                isLoading: homeState.isInitialOrLoading,
+                isLoading: state.isInitialOrLoading,
               );
             },
           ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        body: const _HomeView(),
+        body: const _MoodsView(),
       ),
     );
   }
 }
 
-class _HomeView extends StatelessWidget {
-  const _HomeView();
+class _MoodsView extends StatelessWidget {
+  const _MoodsView();
 
   @override
   Widget build(BuildContext context) {
@@ -102,7 +102,7 @@ class _HomeView extends StatelessWidget {
               currentCreateMoodState.formStatus,
           listener: (context, state) {
             if (state.formStatus.isSuccess) {
-              context.read<HomeCubit>().loadMoods(reloadMoods: true);
+              context.read<MoodsCubit>().loadMoods(reloadMoods: true);
             }
           },
         ),
@@ -112,7 +112,7 @@ class _HomeView extends StatelessWidget {
               currentUpdateMoodState.formStatus,
           listener: (context, state) {
             if (state.formStatus.isSuccess) {
-              context.read<HomeCubit>().loadMoods(reloadMoods: true);
+              context.read<MoodsCubit>().loadMoods(reloadMoods: true);
             }
           },
         ),
@@ -121,7 +121,7 @@ class _HomeView extends StatelessWidget {
               previousDeleteMoodState != currentDeleteMoodState,
           listener: (context, deleteMoodState) {
             if (deleteMoodState.isSuccess) {
-              context.read<HomeCubit>().loadMoods(reloadMoods: true);
+              context.read<MoodsCubit>().loadMoods(reloadMoods: true);
             }
           },
         ),
@@ -130,20 +130,19 @@ class _HomeView extends StatelessWidget {
         buildWhen: (previousUserProfileState, currentUserProfileState) =>
             previousUserProfileState != currentUserProfileState,
         builder: (context, userProfileState) {
-          return BlocBuilder<HomeCubit, HomeState>(
-            buildWhen: (previousHomeState, currentHomeState) =>
-                previousHomeState != currentHomeState,
-            builder: (context, homeState) {
+          return BlocBuilder<MoodsCubit, MoodsState>(
+            buildWhen: (previousState, currentState) =>
+                previousState != currentState,
+            builder: (context, state) {
               return BaseView(
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 60),
                   child: Builder(
                     builder: (context) {
                       if (userProfileState.isInitialOrLoading ||
-                          homeState.isInitialOrLoading) {
+                          state.isInitialOrLoading) {
                         return const Center(child: LoadingIndicator());
-                      } else if (userProfileState.isError ||
-                          homeState.isError) {
+                      } else if (userProfileState.isError || state.isError) {
                         return ErrorMessage(
                           onRefresh: () {
                             if (userProfileState.isError) {
@@ -152,19 +151,19 @@ class _HomeView extends StatelessWidget {
                                   .loadUserProfile();
                             }
 
-                            if (homeState.isError) {
-                              context.read<HomeCubit>().init();
+                            if (state.isError) {
+                              context.read<MoodsCubit>().init();
                             }
                           },
                         );
                       }
 
                       final moodsSuccessState =
-                          homeState.moodsState as HomeMoodsSuccessState;
+                          state.moodsListState as MoodsListSuccessState;
                       final userProfileSuccessState =
                           userProfileState as UserProfileSuccessState;
 
-                      return _HomeContentView(
+                      return _MoodsContentView(
                         firstName: userProfileSuccessState.firstName,
                         moods: moodsSuccessState.moods,
                         hasReachedMaxMoods: moodsSuccessState.hasReachedMax,
@@ -181,8 +180,8 @@ class _HomeView extends StatelessWidget {
   }
 }
 
-class _HomeContentView extends StatefulWidget {
-  const _HomeContentView({
+class _MoodsContentView extends StatefulWidget {
+  const _MoodsContentView({
     required this.firstName,
     required this.moods,
     required this.hasReachedMaxMoods,
@@ -193,10 +192,10 @@ class _HomeContentView extends StatefulWidget {
   final bool hasReachedMaxMoods;
 
   @override
-  State<_HomeContentView> createState() => _HomeContentViewState();
+  State<_MoodsContentView> createState() => _MoodsContentViewState();
 }
 
-class _HomeContentViewState extends State<_HomeContentView> {
+class _MoodsContentViewState extends State<_MoodsContentView> {
   final _scrollController = ScrollController();
   final _scrollThreshold = 50.0;
 
@@ -206,7 +205,7 @@ class _HomeContentViewState extends State<_HomeContentView> {
     _scrollController.addListener(_onScroll);
   }
 
-  /// Calls [HomeCubit.loadMoods] if the current scroll position in pixels
+  /// Calls [MoodsCubit.loadMoods] if the current scroll position in pixels
   /// substracted from maximal scroll position
   /// is less or equal than [_scrollThreshold].
   Future<void> _onScroll() async {
@@ -214,7 +213,7 @@ class _HomeContentViewState extends State<_HomeContentView> {
     final currentScrollPosition = _scrollController.position.pixels;
 
     if (maxScrollPosition - currentScrollPosition <= _scrollThreshold) {
-      await context.read<HomeCubit>().loadMoods();
+      await context.read<MoodsCubit>().loadMoods();
     }
   }
 
@@ -223,7 +222,7 @@ class _HomeContentViewState extends State<_HomeContentView> {
     final translations = AppLocalizations.of(context)!;
 
     if (widget.moods.isEmpty) {
-      return _HomeContentWithNoMoods(
+      return _MoodsContentWithNoMoods(
         firstName: widget.firstName,
       );
     }
@@ -286,8 +285,8 @@ class _HomeContentViewState extends State<_HomeContentView> {
   }
 }
 
-class _HomeContentWithNoMoods extends StatelessWidget {
-  const _HomeContentWithNoMoods({
+class _MoodsContentWithNoMoods extends StatelessWidget {
+  const _MoodsContentWithNoMoods({
     required this.firstName,
   });
 

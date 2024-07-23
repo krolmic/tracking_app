@@ -1,4 +1,4 @@
-part of '../home_screen.dart';
+part of '../moods_screen.dart';
 
 class MoodsShaderMask extends StatelessWidget {
   const MoodsShaderMask({

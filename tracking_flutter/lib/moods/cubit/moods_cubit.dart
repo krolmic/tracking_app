@@ -7,17 +7,17 @@ import 'package:mood_repository/mood_repository.dart';
 import 'package:user_profile_repository/user_profile_repository.dart'
     as user_profile_repository;
 
-part 'home_cubit.freezed.dart';
-part 'home_state.dart';
+part 'moods_cubit.freezed.dart';
+part 'moods_state.dart';
 
-class HomeCubit extends Cubit<HomeState> {
-  HomeCubit({
+class MoodsCubit extends Cubit<MoodsState> {
+  MoodsCubit({
     required MoodRepository moodRepository,
     required user_profile_repository.UserProfileRepository
         userProfileRepository,
   })  : _moodRepository = moodRepository,
         _userProfileRepository = userProfileRepository,
-        super(const HomeState());
+        super(const MoodsState());
 
   final MoodRepository _moodRepository;
 
@@ -29,10 +29,11 @@ class HomeCubit extends Cubit<HomeState> {
 
   Future<void> loadMoods({bool? reloadMoods}) async {
     try {
-      if (state.moodsState.isInitial || (reloadMoods != null && reloadMoods)) {
+      if (state.moodsListState.isInitial ||
+          (reloadMoods != null && reloadMoods)) {
         emit(
           state.copyWith(
-            moodsState: const HomeMoodsState.loading(),
+            moodsListState: const MoodsListState.loading(),
           ),
         );
 
@@ -44,7 +45,7 @@ class HomeCubit extends Cubit<HomeState> {
 
         emit(
           state.copyWith(
-            moodsState: HomeMoodsState.loaded(
+            moodsListState: MoodsListState.loaded(
               moods: moods,
               hasReachedMax: moods.length < MoodRepository.paginationLimit,
               loadingMore: false,
@@ -56,7 +57,7 @@ class HomeCubit extends Cubit<HomeState> {
         return;
       }
 
-      await state.moodsState.whenOrNull(
+      await state.moodsListState.whenOrNull(
         loaded: (moods, loadingMore, hasReachedMax, nextPageToLoad) async {
           if (hasReachedMax || loadingMore) {
             return;
@@ -64,7 +65,7 @@ class HomeCubit extends Cubit<HomeState> {
 
           emit(
             state.copyWith(
-              moodsState: HomeMoodsState.loaded(
+              moodsListState: MoodsListState.loaded(
                 moods: moods,
                 loadingMore: true,
                 hasReachedMax: hasReachedMax,
@@ -81,7 +82,7 @@ class HomeCubit extends Cubit<HomeState> {
 
           emit(
             state.copyWith(
-              moodsState: HomeMoodsState.loaded(
+              moodsListState: MoodsListState.loaded(
                 moods: moods + fetchedMoods,
                 hasReachedMax:
                     fetchedMoods.length < MoodRepository.paginationLimit,
@@ -94,7 +95,7 @@ class HomeCubit extends Cubit<HomeState> {
       );
     } catch (e, stackTrace) {
       Fimber.e('Failed to load moods', ex: e, stacktrace: stackTrace);
-      emit(state.copyWith(moodsState: const HomeMoodsState.error()));
+      emit(state.copyWith(moodsListState: const MoodsListState.error()));
     }
   }
 }

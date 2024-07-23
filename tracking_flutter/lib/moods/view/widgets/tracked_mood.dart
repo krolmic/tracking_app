@@ -1,4 +1,4 @@
-part of '../home_screen.dart';
+part of '../moods_screen.dart';
 
 class _TrackedMood extends StatelessWidget {
   const _TrackedMood({
