@@ -250,8 +250,73 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
                   minLines: 5,
                   maxLines: null,
                 ),
+                const VerticalSpacing.extraLarge(),
+                Text(
+                  translations.howMuchDidYouEarn,
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
+                const VerticalSpacing.small(),
+                Text(
+                  translations.howMuchDidYouEarnDescription,
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                TextFormField(
+                  key: const Key('Update mood form revenue input'),
+                  controller: _revenueController,
+                  decoration: InputDecoration(
+                    hintText: '0.0',
+                    helperText: 'Revenue in your currency',
+                    helperStyle: TextStyle(color: primarySwatch.shade300),
+                  ),
+                  keyboardType: TextInputType.number,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(RegExp('[0-9.]')),
+                  ],
+                  textInputAction: TextInputAction.next,
+                ),
+                const VerticalSpacing.extraLarge(),
+                Text(
+                  translations.howLongDidYouWork,
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
+                const VerticalSpacing.small(),
+                BlocBuilder<UpdateMoodBloc, UpdateMoodState>(
+                  buildWhen: (previousState, currentState) =>
+                      previousState.moodFormState.workTime !=
+                      currentState.moodFormState.workTime,
+                  builder: (context, state) {
+                    final workTime = state.moodFormState.workTime.value;
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          '${workTime.inHours}h '
+                          '${workTime.inMinutes.remainder(60)}min',
+                          style: Theme.of(context).textTheme.bodyLarge,
+                        ),
+                        IconButton(
+                          onPressed: () async {
+                            final updatedWorkTime = await showDurationPicker(
+                              context: context,
+                              initialTime: workTime,
+                              upperBound: const Duration(hours: 24),
+                            );
+
+                            if (updatedWorkTime != null) {
+                              _onWorkTimeChanged(updatedWorkTime);
+                            }
+                          },
+                          icon: Icon(
+                            Icons.edit,
+                            color: primarySwatch.shade200,
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                ),
                 const SizedBox(
-                  height: 100,
+                  height: 90,
                 ),
               ],
             ),
