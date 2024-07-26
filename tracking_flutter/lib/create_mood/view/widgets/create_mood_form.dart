@@ -152,13 +152,11 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
             Text(
               translations.howAreYouFeeling,
               style: Theme.of(context).textTheme.headlineSmall,
-              textAlign: TextAlign.center,
             ),
             const VerticalSpacing.medium(),
             Text(
               translations.estimateYourMood,
               style: Theme.of(context).textTheme.bodyMedium,
-              textAlign: TextAlign.center,
             ),
             const VerticalSpacing.large(),
             BlocBuilder<CreateMoodBloc, CreateMoodState>(
@@ -174,6 +172,8 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
                   divisions: MoodValueInput.maxValue - 1,
                   label: state.moodFormState.moodValue.value.toString(),
                   onChanged: _onMoodValueChanged,
+                  activeColor: blue,
+                  inactiveColor: lightBlue,
                 );
               },
             ),
@@ -214,7 +214,7 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
               key: const Key('Create mood form thingIAmGreatfulAbout1 input'),
               controller: _thingIAmGreatfulAbout1Controller,
               decoration: InputDecoration(
-                icon: const Icon(Icons.favorite_rounded),
+                icon: const Icon(Iconsax.heart_add_outline),
                 iconColor: Theme.of(context).primaryColor,
               ),
               validator: (value) => createMoodBloc
@@ -224,11 +224,12 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
               keyboardType: TextInputType.text,
               textInputAction: TextInputAction.next,
             ),
+            const VerticalSpacing.medium(),
             TextFormField(
               key: const Key('Create mood form thingIAmGreatfulAbout2 input'),
               controller: _thingIAmGreatfulAbout2Controller,
               decoration: InputDecoration(
-                icon: const Icon(Icons.favorite_rounded),
+                icon: const Icon(Iconsax.heart_add_outline),
                 iconColor: Theme.of(context).primaryColor,
               ),
               validator: (value) => createMoodBloc
@@ -238,11 +239,12 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
               keyboardType: TextInputType.text,
               textInputAction: TextInputAction.next,
             ),
+            const VerticalSpacing.medium(),
             TextFormField(
               key: const Key('Create mood form thingIAmGreatfulAbout3 input'),
               controller: _thingIAmGreatfulAbout3Controller,
               decoration: InputDecoration(
-                icon: const Icon(Icons.favorite_rounded),
+                icon: const Icon(Iconsax.heart_add_outline),
                 iconColor: Theme.of(context).primaryColor,
               ),
               validator: (value) => createMoodBloc
@@ -320,10 +322,9 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
                 FilteringTextInputFormatter.allow(RegExp('[0-9.]')),
               ],
               textInputAction: TextInputAction.next,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: '0.0',
                 helperText: 'Revenue in your currency',
-                helperStyle: TextStyle(color: primarySwatch.shade300),
               ),
             ),
           ],

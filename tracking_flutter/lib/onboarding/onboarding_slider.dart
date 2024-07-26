@@ -31,14 +31,16 @@ class OnboardingSlider extends StatelessWidget {
       imageVerticalOffset: verticalPaddingLarge,
       trailingFunction: signInButtonFunction,
       onFinish: signUpButtonFunction,
-      headerBackgroundColor: Colors.white,
-      pageBackgroundColor: lightBackgroundColor,
+      headerBackgroundColor: backgroundColor,
+      pageBackgroundColor: backgroundColor,
       finishButtonText: translations.signUp,
+      finishButtonTextStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(
+            color: contentOnDarkBackgroundColor,
+          ),
       finishButtonStyle: const FinishButtonStyle(
-        backgroundColor: primarySwatch,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
-            Radius.circular(30),
+            Radius.circular(10),
           ),
         ),
       ),
@@ -118,13 +120,13 @@ class _OnboardingSliderPageBody extends StatelessWidget {
                   const VerticalSpacing.large(),
                   Text(
                     title,
-                    style: Theme.of(context).textTheme.headlineSmall,
+                    style: Theme.of(context).textTheme.headlineMedium,
                     textAlign: TextAlign.center,
                   ),
                   const VerticalSpacing.small(),
                   Text(
                     subtitle,
-                    style: Theme.of(context).textTheme.bodyLarge,
+                    style: Theme.of(context).textTheme.bodyMedium,
                     textAlign: TextAlign.center,
                   ),
                 ],

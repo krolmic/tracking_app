@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:formz/formz.dart';
 import 'package:go_router/go_router.dart';
+import 'package:icons_plus/icons_plus.dart';
 import 'package:tracking_app/create_mood/bloc/create_mood_bloc.dart';
 import 'package:tracking_app/shared/formz.dart';
 import 'package:tracking_app/shared/theme/colors.dart';
@@ -31,11 +32,11 @@ class CreateMoodScreen extends StatelessWidget {
         if (state.formStatus.isSuccess) {
           showToast(
             context,
-            Icons.done_rounded,
+            Iconsax.award_bold,
             translations.moodTrackedSuccessfully,
           );
 
-          context.go('/home');
+          context.goNamed('moods');
         } else if (state.formStatus.isFailure) {
           showToast(
             context,
@@ -48,6 +49,10 @@ class CreateMoodScreen extends StatelessWidget {
         appBar: AppBar(
           title: Text(translations.trackMood),
           centerTitle: true,
+          iconTheme: const IconThemeData(
+            color: primarySwatch,
+            size: 18,
+          ),
         ),
         body: const _CreateMoodView(),
       ),

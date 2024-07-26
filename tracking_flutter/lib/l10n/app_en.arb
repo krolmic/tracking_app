@@ -25,35 +25,22 @@
     "howMuchDidYouEarnDescription": "Make sure all earnings you track are in one currency so you can evaluate your mood and earnings optimally.",
     "howLongDidYouWork": "How long did you work today?",
     "home": "Home",
+    "weekProgress": "Your progress this week",
+    "progressDoingGreat": "Be proud of yourself!",
+    "progressDoingGood": "You got this!",
+    "progressTrackedEveryDay": "You have tracked your mood every day this week.",
+    "progressTrackedAlmostEveryDay": "You have tracked your mood almost every day this week.",
+    "progressTrackNow": "Track your mood to evaluate your progress.",
+    "averageMood": "Average mood",
+    "averageWorkHours": "Average work time",
+    "averageRevenue": "Average revenue",
+    "recentlyTracked": "Recently tracked",
+    "seeAll": "See all",
     "moodHistoryTitle": "Your mood history",
     "moodHistoryDescription": "Tap on an element to see your diary and things you are grateful for.",
-    "goodMorning": "👋 Good morning {firstName}!",
-    "@goodMorning": {
-        "placeholders": {
-            "firstName": {
-                "type": "String",
-                "example": "Bob"
-            }
-        }
-    },
-    "goodAfternoon": "👋 Good afternoon {firstName}!",
-    "@goodAfternoon": {
-        "placeholders": {
-            "firstName": {
-                "type": "String",
-                "example": "Bob"
-            }
-        }
-    },
-    "goodEvening": "👋 Good evening {firstName}!",
-    "@goodEvening": {
-        "placeholders": {
-            "firstName": {
-                "type": "String",
-                "example": "Bob"
-            }
-        }
-    },
+    "goodMorning": "Good morning,",
+    "goodAfternoon": "Good afternoon,",
+    "goodEvening": "Good evening,",
     "noMoodsYet": "Use the button below to track your mood.",
     "today": "Today",
     "settings": "Settings",

@@ -3,6 +3,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:icons_plus/icons_plus.dart';
+import 'package:tracking_app/shared/theme/animation.dart';
+import 'package:tracking_app/shared/theme/colors.dart';
 
 /// Main navigation widget
 class ScaffoldWithNestedNavigation extends StatelessWidget {
@@ -26,6 +28,7 @@ class ScaffoldWithNestedNavigation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: contentOnDarkBackgroundColor,
       body: navigationShell,
       bottomNavigationBar: _FloatingBottomNavigationBar(
         key: const ValueKey('FloatingBottomNavigationBar'),
@@ -50,6 +53,16 @@ class _FloatingBottomNavigationBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final translations = AppLocalizations.of(context)!;
 
+    const navigationButtonGradient = LinearGradient(
+      colors: [
+        gradientColor2,
+        gradientColor3,
+        gradientColor4,
+      ],
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+    );
+
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       decoration: BoxDecoration(
@@ -64,51 +77,49 @@ class _FloatingBottomNavigationBar extends StatelessWidget {
       child: SafeArea(
         child: Container(
           decoration: const BoxDecoration(
-            color: Colors.white,
+            color: contentBackgroundColor,
             borderRadius: BorderRadius.all(
               Radius.circular(30),
             ),
           ),
           padding: const EdgeInsets.all(10),
           child: GNav(
-            rippleColor: Colors.black12,
+            rippleColor: darkBlueAccent,
             hoverColor: Colors.grey[100]!,
             gap: 8,
-            activeColor: Colors.black,
-            iconSize: 24,
+            iconSize: 20,
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-            duration: const Duration(milliseconds: 400),
-            tabBackgroundColor: Colors.grey[100]!,
+            duration: animationDuration,
             color: Colors.black,
             tabs: [
               GButton(
-                backgroundColor: Colors.deepPurple,
+                backgroundGradient: navigationButtonGradient,
                 icon: activeIndex == 0
                     ? Iconsax.home_bold
                     : Iconsax.home_1_outline,
-                iconActiveColor: Colors.white,
-                iconColor: Colors.black38,
-                textColor: Colors.white,
+                iconActiveColor: contentBackgroundColor,
+                iconColor: darkBlueAccent,
+                textColor: contentOnDarkBackgroundColor,
                 text: translations.home,
               ),
               GButton(
-                backgroundColor: Colors.deepPurple,
+                backgroundGradient: navigationButtonGradient,
                 icon: activeIndex == 1
                     ? Iconsax.calendar_2_bold
                     : Iconsax.calendar_2_outline,
-                iconActiveColor: Colors.white,
-                iconColor: Colors.black38,
-                textColor: Colors.white,
+                iconActiveColor: contentBackgroundColor,
+                iconColor: darkBlueAccent,
+                textColor: contentOnDarkBackgroundColor,
                 text: translations.calendar,
               ),
               GButton(
-                backgroundColor: Colors.deepPurple,
+                backgroundGradient: navigationButtonGradient,
                 icon: activeIndex == 2
                     ? Iconsax.setting_2_bold
                     : Iconsax.setting_2_outline,
-                iconActiveColor: Colors.white,
-                iconColor: Colors.black38,
-                textColor: Colors.white,
+                iconActiveColor: contentBackgroundColor,
+                iconColor: darkBlueAccent,
+                textColor: contentOnDarkBackgroundColor,
                 text: translations.settings,
               ),
             ],

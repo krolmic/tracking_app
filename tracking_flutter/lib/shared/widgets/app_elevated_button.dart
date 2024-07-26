@@ -24,23 +24,19 @@ class AppElevatedButton extends StatelessWidget {
       key: key,
       onPressed: isDisabled || isLoading ? null : onPressed,
       icon: isLoading
-          ? const TinyLoadingIndicator(color: Colors.white)
+          ? const TinyLoadingIndicator(color: contentOnDarkBackgroundColor)
           : Icon(
               icon,
-              color: Colors.white,
+              color: contentOnDarkBackgroundColor,
             ),
       label: isLoading
           ? const SizedBox.shrink()
           : Text(
               label,
               style: const TextStyle(
-                color: Colors.white,
+                color: contentOnDarkBackgroundColor,
               ),
             ),
-      style: ElevatedButton.styleFrom(
-        minimumSize: const Size.fromHeight(50),
-        backgroundColor: primarySwatch,
-      ),
     );
   }
 }

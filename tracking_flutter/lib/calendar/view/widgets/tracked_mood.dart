@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:icons_plus/icons_plus.dart';
 import 'package:mood_repository/mood_repository.dart';
 import 'package:tracking_app/shared/date_time.dart';
 import 'package:tracking_app/shared/theme/colors.dart';
@@ -28,9 +29,13 @@ class TrackedMood extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              CircleAvatar(
-                radius: 20,
-                backgroundColor: primarySwatch.shade200,
+              Container(
+                width: 50,
+                height: 50,
+                decoration: BoxDecoration(
+                  color: lightBlueAccent,
+                  borderRadius: BorderRadius.circular(10),
+                ),
                 child: Center(
                   child: MoodEmoji(
                     moodValue: mood.value,
@@ -49,17 +54,16 @@ class TrackedMood extends StatelessWidget {
                     ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      color: tileTitleColor,
-                      fontSize: 15,
-                    ),
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
                   ),
                   const HorizontalSpacing.small(),
                 ],
               ),
               const VerticalSpacing.medium(),
               Icon(
-                Icons.edit_outlined,
+                Iconsax.edit_2_outline,
                 size: 20,
                 color: tileIconColor,
               ),

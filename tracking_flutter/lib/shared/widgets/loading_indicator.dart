@@ -12,6 +12,7 @@ class LoadingIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     return CircularProgressIndicator(
       color: color,
+      strokeCap: StrokeCap.round,
     );
   }
 }

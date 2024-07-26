@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:formz/formz.dart';
 import 'package:go_router/go_router.dart';
+import 'package:icons_plus/icons_plus.dart';
 import 'package:tracking_app/main.dart';
 import 'package:tracking_app/shared/theme/colors.dart';
 import 'package:tracking_app/shared/toast.dart';
@@ -48,7 +49,7 @@ class UpdateUserProfileScreen extends StatelessWidget {
           if (state.isSuccess) {
             showToast(
               context,
-              Icons.done_rounded,
+              Iconsax.award_bold,
               translations.profileUpdatedSuccessfully,
             );
 
@@ -58,7 +59,7 @@ class UpdateUserProfileScreen extends StatelessWidget {
           } else if (state.isFailure) {
             showToast(
               context,
-              Icons.error_rounded,
+              Icons.error,
               translations.somethingWentWrong,
             );
           }
@@ -69,6 +70,10 @@ class UpdateUserProfileScreen extends StatelessWidget {
               translations.personalDetails,
             ),
             centerTitle: true,
+            iconTheme: const IconThemeData(
+              color: primarySwatch,
+              size: 18,
+            ),
           ),
           body: _UpdateUserProfileView(
             email: email,

@@ -45,17 +45,16 @@ bool _dateIsToday(DateTime dateTime) {
 String getGreetingString(
   BuildContext context,
   DateTime dateTime,
-  String firstName,
 ) {
   final translations = AppLocalizations.of(context)!;
 
   if (dateTime.hour >= 17) {
-    return translations.goodEvening(firstName);
+    return translations.goodEvening;
   } else if (dateTime.hour >= 12) {
-    return translations.goodAfternoon(firstName);
+    return translations.goodAfternoon;
   }
 
-  return translations.goodMorning(firstName);
+  return translations.goodMorning;
 }
 
 extension DateTimeX on DateTime {

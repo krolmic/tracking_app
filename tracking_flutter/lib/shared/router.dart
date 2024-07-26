@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mood_repository/mood_repository.dart';
 import 'package:tracking_app/calendar/view/calendar_screen.dart';
 import 'package:tracking_app/create_mood/view/create_mood_screen.dart';
+import 'package:tracking_app/home/view/home_screen.dart';
 import 'package:tracking_app/moods/view/moods_screen.dart';
 import 'package:tracking_app/privacy_policy/view/privacy_policy_screen.dart';
 import 'package:tracking_app/settings/view/settings_screen.dart';
@@ -43,19 +44,10 @@ final goRouter = GoRouter(
               path: '/home',
               pageBuilder: (context, state) => const NoTransitionPage(
                 child: AuthenticatedView(
-                  child: MoodsScreen(),
+                  child: HomeScreen(),
                 ),
               ),
               routes: [
-                GoRoute(
-                  name: 'create',
-                  path: 'create',
-                  pageBuilder: (context, state) => const NoTransitionPage(
-                    child: AuthenticatedView(
-                      child: CreateMoodScreen(),
-                    ),
-                  ),
-                ),
                 GoRoute(
                   name: 'update-mood-from-home',
                   path: 'update',
@@ -70,11 +62,51 @@ final goRouter = GoRouter(
                     return const NoTransitionPage(
                       child: AuthenticatedView(
                         child: UpdateMoodScreen(
-                          routeOrigin: '/home',
+                          routeOrigin: 'home',
                         ),
                       ),
                     );
                   },
+                ),
+                GoRoute(
+                  name: 'moods',
+                  path: 'moods',
+                  pageBuilder: (context, state) => const NoTransitionPage(
+                    child: AuthenticatedView(
+                      child: MoodsScreen(),
+                    ),
+                  ),
+                  routes: [
+                    GoRoute(
+                      name: 'create',
+                      path: 'create',
+                      pageBuilder: (context, state) => const NoTransitionPage(
+                        child: AuthenticatedView(
+                          child: CreateMoodScreen(),
+                        ),
+                      ),
+                    ),
+                    GoRoute(
+                      name: 'update-mood-from-moods',
+                      path: 'update',
+                      pageBuilder: (context, state) {
+                        if (state.extra != null) {
+                          final mood = state.extra! as Mood;
+                          context.read<UpdateMoodBloc>().add(
+                                UpdateMoodEvent.moodSelected(mood),
+                              );
+                        }
+
+                        return const NoTransitionPage(
+                          child: AuthenticatedView(
+                            child: UpdateMoodScreen(
+                              routeOrigin: 'moods',
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -106,7 +138,7 @@ final goRouter = GoRouter(
                     return const NoTransitionPage(
                       child: AuthenticatedView(
                         child: UpdateMoodScreen(
-                          routeOrigin: '/calendar',
+                          routeOrigin: 'calendar',
                         ),
                       ),
                     );
