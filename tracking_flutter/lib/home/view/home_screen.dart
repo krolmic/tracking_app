@@ -22,6 +22,7 @@ import 'package:tracking_app/update_mood/bloc/update_mood_bloc.dart';
 import 'package:tracking_app/user_profile/cubit/user_profile_cubit.dart';
 import 'package:user_profile_repository/user_profile_repository.dart';
 
+part 'widgets/average.dart';
 part 'widgets/progress.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -196,99 +197,20 @@ class _HomeContentView extends StatelessWidget {
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: Container(
-                    padding: const EdgeInsets.all(12.5),
-                    decoration: BoxDecoration(
-                      color: contentBackgroundColor,
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
-                          blurRadius: 10,
-                        ),
-                      ],
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(5),
-                          decoration: BoxDecoration(
-                            color: lightBlue,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: const Icon(
-                            Iconsax.heart_bold,
-                            color: primarySwatch,
-                            size: 20,
-                          ),
-                        ),
-                        const VerticalSpacing.small(),
-                        Text(
-                          translations.averageMood,
-                          style:
-                              Theme.of(context).textTheme.bodySmall!.copyWith(
-                                    color: darkBlue,
-                                  ),
-                        ),
-                        const VerticalSpacing.medium(),
-                        Text(
-                          averageMood.toStringAsFixed(2),
-                          style:
-                              Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                        ),
-                      ],
-                    ),
+                  child: _Average(
+                    icon: Iconsax.heart_bold,
+                    label: translations.averageMood,
+                    value: averageMood.toStringAsFixed(2),
                   ).animate().fadeIn(
                         duration: animationDuration,
                       ),
                 ),
                 const HorizontalSpacing.medium(),
                 Expanded(
-                  child: Container(
-                    padding: const EdgeInsets.all(12.5),
-                    decoration: BoxDecoration(
-                      color: contentBackgroundColor,
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
-                          blurRadius: 10,
-                        ),
-                      ],
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(5),
-                          decoration: BoxDecoration(
-                            color: lightBlue,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: const Icon(
-                            Iconsax.timer_bold,
-                            color: gradientColor3,
-                            size: 20,
-                          ),
-                        ),
-                        const VerticalSpacing.small(),
-                        Text(
-                          translations.averageWorkHours,
-                          style: Theme.of(context).textTheme.bodySmall,
-                        ),
-                        const VerticalSpacing.medium(),
-                        Text(
-                          '$averageWorkTimeInHours h',
-                          style:
-                              Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                        ),
-                      ],
-                    ),
+                  child: _Average(
+                    icon: Iconsax.timer_bold,
+                    label: translations.averageWorkHours,
+                    value: '$averageWorkTimeInHours h',
                   ).animate().fadeIn(
                         duration: animationDuration,
                         delay: animationDuration,
@@ -296,48 +218,10 @@ class _HomeContentView extends StatelessWidget {
                 ),
                 const HorizontalSpacing.medium(),
                 Expanded(
-                  child: Container(
-                    padding: const EdgeInsets.all(12.5),
-                    decoration: BoxDecoration(
-                      color: contentBackgroundColor,
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
-                          blurRadius: 10,
-                        ),
-                      ],
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(5),
-                          decoration: BoxDecoration(
-                            color: lightBlue,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: const Icon(
-                            Iconsax.money_4_bold,
-                            color: gradientColor3,
-                            size: 20,
-                          ),
-                        ),
-                        const VerticalSpacing.small(),
-                        Text(
-                          translations.averageRevenue,
-                          style: Theme.of(context).textTheme.bodySmall,
-                        ),
-                        const VerticalSpacing.medium(),
-                        Text(
-                          averageRevenue.toString() + r' $',
-                          style:
-                              Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                        ),
-                      ],
-                    ),
+                  child: _Average(
+                    icon: Iconsax.money_4_bold,
+                    label: translations.averageRevenue,
+                    value: averageRevenue.toString() + r' $',
                   ).animate().fadeIn(
                         duration: animationDuration,
                         delay: animationDuration * 2,
