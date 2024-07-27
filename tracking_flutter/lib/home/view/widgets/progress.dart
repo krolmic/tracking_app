@@ -15,6 +15,10 @@ class _HomeProgress extends StatelessWidget {
   Widget build(BuildContext context) {
     final translations = AppLocalizations.of(context)!;
 
+    final title = trackedEveryDayThisWeek
+        ? translations.progressDoingGreat
+        : translations.progressDoingGood;
+
     var subtitle = '';
     if (trackedEveryDayThisWeek) {
       subtitle = translations.progressTrackedEveryDay;
@@ -43,7 +47,7 @@ class _HomeProgress extends StatelessWidget {
         ),
         boxShadow: [
           BoxShadow(
-            color: tileShadowColor,
+            color: contentShadowColor,
             blurRadius: 10,
           ),
         ],
@@ -96,9 +100,7 @@ class _HomeProgress extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      trackedEveryDayThisWeek
-                          ? translations.progressDoingGreat
-                          : translations.progressDoingGood,
+                      title,
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         color: contentOnDarkBackgroundColor,
                         fontWeight: FontWeight.bold,

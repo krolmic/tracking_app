@@ -21,7 +21,7 @@ class TrackedMood extends StatelessWidget {
       onTap: () => context.go('/calendar/update', extra: mood),
       child: Card(
         elevation: 5,
-        shadowColor: tileShadowColor,
+        shadowColor: contentShadowColor,
         child: Container(
           width: 100,
           height: 125,

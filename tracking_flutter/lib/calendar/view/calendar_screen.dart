@@ -109,6 +109,12 @@ class _CalendarView extends StatelessWidget {
       color: lightGrey,
     );
 
+    const calendarWeekdaysTextStyle = TextStyle(
+      color: darkBlue,
+    );
+
+    const calendarPrevAndNextButtonsColor = grey;
+
     return SafeArea(
       child: SingleChildScrollView(
         child: BlocBuilder<CalendarBloc, CalendarState>(
@@ -137,15 +143,13 @@ class _CalendarView extends StatelessWidget {
                     headerTextStyle: Theme.of(context).textTheme.headlineSmall,
                     rightButtonIcon: const Icon(
                       Icons.chevron_right,
-                      color: grey,
+                      color: calendarPrevAndNextButtonsColor,
                     ),
                     leftButtonIcon: const Icon(
                       Icons.chevron_left,
-                      color: grey,
+                      color: calendarPrevAndNextButtonsColor,
                     ),
-                    weekdayTextStyle: const TextStyle(
-                      color: darkBlue,
-                    ),
+                    weekdayTextStyle: calendarWeekdaysTextStyle,
                     markedDatesMap: getMarkedDates(state.moodsState.moods),
                     targetDateTime:
                         state.targetDate.isSet ? state.targetDate.date : null,

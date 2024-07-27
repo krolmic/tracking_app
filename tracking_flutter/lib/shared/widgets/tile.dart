@@ -26,7 +26,7 @@ class Tile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 5,
-      shadowColor: tileShadowColor,
+      shadowColor: contentShadowColor,
       child: ListTile(
         contentPadding: const EdgeInsets.only(
           left: 10,
