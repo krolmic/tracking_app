@@ -69,7 +69,7 @@ extension MoodsListStateX on MoodsListState {
         final totalDuration = moodsThisWeek
             .map((mood) => mood.workTime ?? Duration.zero)
             .reduce((a, b) => a + b);
-        final averageDuration = totalDuration.inMinutes ~/ moodsThisWeek.length;
+        final averageDuration = totalDuration.inHours ~/ moodsThisWeek.length;
         return averageDuration;
       },
       orElse: () => 0,
