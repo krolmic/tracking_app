@@ -5,7 +5,6 @@ import 'package:formz/formz.dart';
 import 'package:go_router/go_router.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:tracking_app/main.dart';
-import 'package:tracking_app/shared/theme/colors.dart';
 import 'package:tracking_app/shared/toast.dart';
 import 'package:tracking_app/shared/view/base_view.dart';
 import 'package:tracking_app/shared/widgets/app_elevated_button.dart';
@@ -68,11 +67,6 @@ class UpdateUserProfileScreen extends StatelessWidget {
           appBar: AppBar(
             title: Text(
               translations.personalDetails,
-            ),
-            centerTitle: true,
-            iconTheme: const IconThemeData(
-              color: primarySwatch,
-              size: 18,
             ),
           ),
           body: _UpdateUserProfileView(

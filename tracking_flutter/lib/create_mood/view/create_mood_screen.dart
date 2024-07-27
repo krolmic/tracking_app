@@ -48,11 +48,6 @@ class CreateMoodScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text(translations.trackMood),
-          centerTitle: true,
-          iconTheme: const IconThemeData(
-            color: primarySwatch,
-            size: 18,
-          ),
         ),
         body: const _CreateMoodView(),
       ),

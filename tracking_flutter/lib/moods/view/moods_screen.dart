@@ -48,13 +48,8 @@ class MoodsScreen extends StatelessWidget {
           title: Text(
             translations.moodHistoryTitle,
           ),
-          iconTheme: const IconThemeData(
-            color: primarySwatch,
-            size: 18,
-          ),
         ),
         extendBodyBehindAppBar: true,
-        backgroundColor: Theme.of(context).colorScheme.surface,
         floatingActionButton: Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: viewPaddingHorizontal,

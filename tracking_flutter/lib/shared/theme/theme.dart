@@ -15,6 +15,13 @@ ThemeData get theme => ThemeData.from(
       progressIndicatorTheme: const ProgressIndicatorThemeData(
         color: primarySwatch,
       ),
+      appBarTheme: const AppBarTheme(
+        centerTitle: true,
+        iconTheme: IconThemeData(
+          color: primarySwatch,
+          size: 18,
+        ),
+      ),
       dividerTheme: const DividerThemeData(
         color: lightGrey,
         space: 1,

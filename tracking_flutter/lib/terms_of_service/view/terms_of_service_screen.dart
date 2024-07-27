@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
-import 'package:tracking_app/shared/theme/colors.dart';
 import 'package:tracking_app/shared/view/base_view.dart';
 
 class TermsOfServiceContent {
@@ -193,11 +192,6 @@ class TermsOfServiceScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           AppLocalizations.of(context)!.termsOfService,
-        ),
-        centerTitle: true,
-        iconTheme: const IconThemeData(
-          color: primarySwatch,
-          size: 18,
         ),
       ),
       body: BaseView(

@@ -123,11 +123,6 @@ class UpdateMoodScreen extends StatelessWidget {
               );
             },
           ),
-          centerTitle: true,
-          iconTheme: const IconThemeData(
-            color: primarySwatch,
-            size: 18,
-          ),
           actions: [
             BlocBuilder<DeleteMoodCubit, DeleteMoodState>(
               buildWhen: (previousDeleteMoodState, currentDeleteMoodState) =>
