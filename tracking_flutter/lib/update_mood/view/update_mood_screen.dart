@@ -107,6 +107,12 @@ class UpdateMoodScreen extends StatelessWidget {
             buildWhen: (previousUpdateMoodState, currentUpdateMoodState) =>
                 previousUpdateMoodState.mood != currentUpdateMoodState.mood,
             builder: (context, state) {
+              if (state.mood == null) {
+                return const Center(
+                  child: LoadingIndicator(),
+                );
+              }
+
               return Column(
                 children: [
                   Text(
