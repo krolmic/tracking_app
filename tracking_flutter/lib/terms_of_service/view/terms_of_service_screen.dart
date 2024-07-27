@@ -193,7 +193,6 @@ class TermsOfServiceScreen extends StatelessWidget {
         title: Text(
           AppLocalizations.of(context)!.termsOfService,
         ),
-        centerTitle: true,
       ),
       body: BaseView(
         addVerticalPadding: true,

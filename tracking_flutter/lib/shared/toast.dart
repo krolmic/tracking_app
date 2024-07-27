@@ -10,7 +10,7 @@ void showToast(
 ) {
   DelightToastBar(
     builder: (context) => ToastCard(
-      color: lightToastBackgroundColor,
+      color: contentBackgroundColor,
       leading: Icon(icon),
       title: Text(message),
     ),

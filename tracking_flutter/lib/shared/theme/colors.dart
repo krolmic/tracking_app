@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 const MaterialColor primarySwatch = MaterialColor(
-  0xFF000080,
+  0xFF78C4C4,
   {
     50: Color.fromRGBO(0, 0, 128, .1),
     100: Color.fromRGBO(0, 0, 128, .2),
@@ -16,11 +16,31 @@ const MaterialColor primarySwatch = MaterialColor(
   },
 );
 
-const Color lightBackgroundColor = Color(0xFFccccff);
+const Color backgroundColor = Color.fromARGB(255, 247, 252, 249);
 
-const Color lightToastBackgroundColor = Colors.white;
+const Color contentBackgroundColor = Colors.white;
 
-Color tileShadowColor = primarySwatch.shade100;
-Color tileIconColor = primarySwatch.shade200;
-const Color tileTitleColor = primarySwatch;
-Color tileSubtitleColor = primarySwatch.shade400;
+const Color lightBlue = Color(0xFFC9F4E1);
+const Color blue = Color(0xFF78C4C4);
+const Color darkBlue = Color(0xFF5592A0);
+Color lightBlueAccent = lightBlue.withOpacity(0.5);
+Color darkBlueAccent = darkBlue.withOpacity(0.5);
+const Color grey = Colors.black54;
+const Color lightGrey = Colors.black26;
+
+const Color gradientColor1 = Color(0xFFFFFBD7);
+const Color gradientColor2 = lightBlue;
+const Color gradientColor3 = blue;
+const Color gradientColor4 = darkBlue;
+
+const Color bodySmallTextColor = gradientColor4;
+const Color contentOnDarkBackgroundColor = Colors.white;
+Color contentShadowColor = Colors.black.withOpacity(0.2);
+
+const Color buttonsGradientColor1 = gradientColor3;
+const Color buttonsGradientColor2 = gradientColor4;
+const Color buttonsShadowColor = gradientColor3;
+
+Color inputFillColor = blue.withOpacity(0.2);
+
+Color tileIconColor = blue.withOpacity(0.75);

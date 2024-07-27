@@ -24,77 +24,33 @@ class HomeCubit extends Cubit<HomeState> {
   final user_profile_repository.UserProfileRepository _userProfileRepository;
 
   Future<void> init() async {
-    await loadMoods();
+    await _loadMoods();
   }
 
-  Future<void> loadMoods({bool? reloadMoods}) async {
+  Future<void> _loadMoods() async {
     try {
-      if (state.moodsState.isInitial || (reloadMoods != null && reloadMoods)) {
-        emit(
-          state.copyWith(
-            moodsState: const HomeMoodsState.loading(),
+      emit(
+        state.copyWith(
+          moodsListState: const MoodsListState.loading(),
+        ),
+      );
+
+      final userId = await _userProfileRepository.getCurrentUserId();
+      final moods = await _moodRepository.getMoods(
+        page: 0,
+        userId: userId,
+      );
+
+      emit(
+        state.copyWith(
+          moodsListState: MoodsListState.loaded(
+            moods: moods,
           ),
-        );
-
-        final userId = await _userProfileRepository.getCurrentUserId();
-        final moods = await _moodRepository.getMoods(
-          page: 0,
-          userId: userId,
-        );
-
-        emit(
-          state.copyWith(
-            moodsState: HomeMoodsState.loaded(
-              moods: moods,
-              hasReachedMax: moods.length < MoodRepository.paginationLimit,
-              loadingMore: false,
-              nextPageToLoad: 1,
-            ),
-          ),
-        );
-
-        return;
-      }
-
-      await state.moodsState.whenOrNull(
-        loaded: (moods, loadingMore, hasReachedMax, nextPageToLoad) async {
-          if (hasReachedMax || loadingMore) {
-            return;
-          }
-
-          emit(
-            state.copyWith(
-              moodsState: HomeMoodsState.loaded(
-                moods: moods,
-                loadingMore: true,
-                hasReachedMax: hasReachedMax,
-                nextPageToLoad: nextPageToLoad,
-              ),
-            ),
-          );
-
-          final userId = await _userProfileRepository.getCurrentUserId();
-          final fetchedMoods = await _moodRepository.getMoods(
-            page: nextPageToLoad,
-            userId: userId,
-          );
-
-          emit(
-            state.copyWith(
-              moodsState: HomeMoodsState.loaded(
-                moods: moods + fetchedMoods,
-                hasReachedMax:
-                    fetchedMoods.length < MoodRepository.paginationLimit,
-                loadingMore: false,
-                nextPageToLoad: nextPageToLoad + 1,
-              ),
-            ),
-          );
-        },
+        ),
       );
     } catch (e, stackTrace) {
-      Fimber.e('Failed to load moods', ex: e, stacktrace: stackTrace);
-      emit(state.copyWith(moodsState: const HomeMoodsState.error()));
+      Fimber.e('Failed to load moods in home', ex: e, stacktrace: stackTrace);
+      emit(state.copyWith(moodsListState: const MoodsListState.error()));
     }
   }
 }

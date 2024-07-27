@@ -3,55 +3,128 @@ part of 'home_cubit.dart';
 @freezed
 class HomeState with _$HomeState {
   const factory HomeState({
-    @Default(HomeMoodsState.initial()) HomeMoodsState moodsState,
+    @Default(MoodsListState.initial()) MoodsListState moodsListState,
   }) = _HomeState;
 }
 
 extension HomeStateX on HomeState {
-  bool get isInitialOrLoading => moodsState.isInitial || moodsState.isLoading;
-  bool get isError => moodsState.isError;
-  bool get isSuccess => moodsState.isSuccess;
+  bool get isInitialOrLoading => moodsListState.isInitialOrLoading;
+  bool get isError => moodsListState.isError;
+  bool get isSuccess => moodsListState.isSuccess;
 }
 
 @freezed
-class HomeMoodsState with _$HomeMoodsState {
-  const factory HomeMoodsState.initial() = HomeMoodsInitialState;
-  const factory HomeMoodsState.loading() = HomeMoodsLoadingState;
-  const factory HomeMoodsState.loaded({
+class MoodsListState with _$MoodsListState {
+  const factory MoodsListState.initial() = MoodsListInitialState;
+  const factory MoodsListState.loading() = MoodsListLoadingState;
+  const factory MoodsListState.loaded({
     required List<Mood> moods,
-    required bool loadingMore,
-    required bool hasReachedMax,
-    required int nextPageToLoad,
-  }) = HomeMoodsSuccessState;
-  const factory HomeMoodsState.error() = HomeMoodsErrorState;
+  }) = MoodsListSuccessState;
+  const factory MoodsListState.error() = MoodsListErrorState;
 }
 
-extension HomeMoodsStateX on HomeMoodsState {
-  bool get isInitial => this is HomeMoodsInitialState;
-  bool get isLoading => this is HomeMoodsLoadingState;
-  bool get isError => this is HomeMoodsErrorState;
-  bool get isSuccess => this is HomeMoodsSuccessState;
+extension MoodsListStateX on MoodsListState {
+  bool get isInitial => this is MoodsListInitialState;
+  bool get isLoading => this is MoodsListLoadingState;
+  bool get isInitialOrLoading => isInitial || isLoading;
+  bool get isError => this is MoodsListErrorState;
+  bool get isSuccess => this is MoodsListSuccessState;
 
   bool get containsTodayMood {
     return maybeWhen(
-      loaded: (moods, _, __, ___) {
+      loaded: (moods) {
         return moods.any((mood) => mood.isToday);
       },
       orElse: () => false,
     );
   }
 
-  Mood? get todaysMood {
-    if (isSuccess) {
-      try {
-        return (this as HomeMoodsSuccessState).moods.firstWhere(
-              (mood) => mood.isToday,
-            );
-      } catch (e) {
-        return null;
-      }
-    } else {
-      return null;
-    }
+  List<Mood> get moodsThisWeek {
+    return maybeWhen(
+      loaded: (moods) {
+        return moods.where((mood) => mood.isThisWeek).toList();
+      },
+      orElse: () => [],
+    );
+  }
+
+  double get averageMoodThisWeek {
+    return maybeWhen(
+      loaded: (moods) {
+        return moodsThisWeek.isEmpty
+            ? 0
+            : moodsThisWeek.map((mood) => mood.value).reduce((a, b) => a + b) /
+                moodsThisWeek.length;
+      },
+      orElse: () => 0,
+    );
+  }
+
+  int get averageWorkTimeInHoursThisWeek {
+    return maybeWhen(
+      loaded: (moods) {
+        if (moodsThisWeek.isEmpty) {
+          return 0;
+        }
+        final totalDuration = moodsThisWeek
+            .map((mood) => mood.workTime ?? Duration.zero)
+            .reduce((a, b) => a + b);
+        final averageDuration = totalDuration.inHours ~/ moodsThisWeek.length;
+        return averageDuration;
+      },
+      orElse: () => 0,
+    );
+  }
+
+  int get averageRevenueThisWeek {
+    return maybeWhen(
+      loaded: (moods) {
+        if (moodsThisWeek.isEmpty) {
+          return 0;
+        }
+        final totalRevenue = moodsThisWeek
+            .map((mood) => mood.revenue ?? 0)
+            .reduce((a, b) => a + b);
+        final averageRevenue = totalRevenue ~/ moodsThisWeek.length;
+        return averageRevenue;
+      },
+      orElse: () => 0,
+    );
+  }
+
+  bool get trackedEveryDayThisWeek {
+    return maybeWhen(
+      loaded: (moods) {
+        return moodsThisWeek.length == DateTime.now().weekday;
+      },
+      orElse: () => false,
+    );
+  }
+
+  List<Mood> get recentlyAddedMoods {
+    return maybeWhen(
+      loaded: (moods) {
+        return moods.take(3).toList();
+      },
+      orElse: () => [],
+    );
+  }
+
+  double get weeklyProgress {
+    return maybeWhen(
+      loaded: (moods) {
+        return moodsThisWeek.length / 7;
+      },
+      orElse: () => 0,
+    );
+  }
+
+  List<Mood> get moods {
+    return maybeWhen(
+      loaded: (moods) {
+        return moods;
+      },
+      orElse: () => [],
+    );
   }
 }

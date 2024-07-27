@@ -89,27 +89,30 @@ class _UpdateUserProfileFormState extends State<_UpdateUserProfileForm> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const VerticalSpacing.large(),
+              Text(
+                translations.email,
+                style: Theme.of(context).textTheme.titleSmall,
+              ),
+              const VerticalSpacing.small(),
               TextFormField(
                 key: const Key('Update user profile form email input'),
                 controller: _emailController,
-                decoration: InputDecoration(
-                  icon: const Icon(Icons.email),
-                  iconColor: primarySwatch.shade200,
-                  label: Text(translations.email),
-                ),
                 validator: (value) =>
                     _formState.email.validator(value ?? '')?.toString(),
                 keyboardType: TextInputType.emailAddress,
                 textInputAction: TextInputAction.next,
                 enabled: false,
               ),
-              const VerticalSpacing.medium(),
+              const VerticalSpacing.large(),
+              Text(
+                translations.givenName,
+                style: Theme.of(context).textTheme.titleSmall,
+              ),
+              const VerticalSpacing.small(),
               TextFormField(
                 key: const Key('Update user profile form first name input'),
                 controller: _firstNameController,
                 decoration: InputDecoration(
-                  icon: const Icon(Icons.person),
-                  iconColor: primarySwatch.shade200,
                   label: Text(translations.givenName),
                 ),
                 validator: (value) =>
@@ -118,11 +121,11 @@ class _UpdateUserProfileFormState extends State<_UpdateUserProfileForm> {
                 textInputAction: TextInputAction.next,
                 enabled: !state.isInProgress,
               ),
-              const VerticalSpacing.large(),
+              const VerticalSpacing.extraLarge(),
               AppElevatedButton(
                 isDisabled: _firstNameController.text.isEmpty,
                 isLoading: state.isInProgress,
-                icon: Icons.edit,
+                icon: Iconsax.edit_2_bold,
                 onPressed: _onSubmit,
                 label: AppLocalizations.of(context)!.update,
               ),

@@ -105,8 +105,8 @@ class _CreateMoodStepperState extends State<_CreateMoodStepper> {
                     style: TextStyle(
                       color:
                           _isFirst(currentStep) || state.formStatus.isInProgress
-                              ? primarySwatch.shade300
-                              : primarySwatch,
+                              ? lightGrey
+                              : blue,
                     ),
                   ),
                 ),

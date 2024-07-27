@@ -29,6 +29,12 @@ class Mood with _$Mood {
         createdOn.month == now.month &&
         createdOn.day == now.day;
   }
+
+  bool get isThisWeek {
+    final now = DateTime.now();
+    final weekStart = now.subtract(Duration(days: now.weekday - 1));
+    return createdOn.isAfter(weekStart);
+  }
 }
 
 /// Converts [MoodEntry] to [Mood]

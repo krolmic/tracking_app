@@ -24,35 +24,23 @@
     "howMuchDidYouEarn": "Wie viel hast du heute verdient?",
     "howMuchDidYouEarnDescription": "Achte darauf, dass alle Einnahmen in einer Währung sind, damit du deine Stimmung und Einnahnen optimal auswerten kannst.",
     "howLongDidYouWork": "Wie lange hast du heute gearbeitet?",
+    "home": "Home",
+    "weekProgress": "Dein Fortschritt diese Woche",
+    "progressDoingGreat": "Sei stolz auf dich!",
+    "progressDoingGood": "Du schaffst das!",
+    "progressTrackedEveryDay": "Du hast diese Woche jeden Tag deine Stimmung getrackt.",
+    "progressTrackedAlmostEveryDay": "Du hast diese Woche fast jeden Tag deine Stimmung getrackt.",
+    "progressTrackNow": "Tracke deine Stimmung um deinen Fortschritt zu evaluieren.",
+    "averageMood": "Durchschnittliche Stimmung",
+    "averageWorkHours": "Durchschnittliche Arbeitszeit",
+    "recentlyTracked": "Zuletzt getrackt",
+    "seeAll": "Alle anzeigen",
+    "averageRevenue": "Durchschnittlicher Umsatz",
     "moodHistoryTitle": "Deine Stimmungshistorie",
     "moodHistoryDescription": "Tappe auf einen Eintrag um Dinge für die du dankbar bist und deine Tagebücher zu sehen.",
-    "goodMorning": "👋 Guten Morgen {firstName}!",
-    "@goodMorning": {
-        "placeholders": {
-            "firstName": {
-                "type": "String",
-                "example": "Bob"
-            }
-        }
-    },
-    "goodAfternoon": "👋 Guten Tag {firstName}!",
-    "@goodAfternoon": {
-        "placeholders": {
-            "firstName": {
-                "type": "String",
-                "example": "Bob"
-            }
-        }
-    },
-    "goodEvening": "👋 Guten Abend {firstName}!",
-    "@goodEvening": {
-        "placeholders": {
-            "firstName": {
-                "type": "String",
-                "example": "Bob"
-            }
-        }
-    },
+    "goodMorning": "Guten Morgen,",
+    "goodAfternoon": "Guten Tag,",
+    "goodEvening": "Guten Abend,",
     "noMoodsYet": "Nutze 'Stimmung tracken' um neue Einträge zu deiner Stimmungshistorie hinzuzufügen.",
     "today": "Heute",
     "settings": "Einstellungen",

@@ -2,14 +2,17 @@ import 'package:account_repository/account_repository.dart';
 import 'package:animated_emoji/animated_emoji.dart';
 import 'package:email_repository/email_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
+import 'package:icons_plus/icons_plus.dart';
 import 'package:mood_repository/mood_repository.dart';
 import 'package:tracking_app/main.dart';
 import 'package:tracking_app/settings/cubit/settings_cubit.dart';
 import 'package:tracking_app/shared/constants.dart';
 import 'package:tracking_app/shared/router.dart';
+import 'package:tracking_app/shared/theme/animation.dart';
 import 'package:tracking_app/shared/theme/colors.dart';
 import 'package:tracking_app/shared/theme/layout.dart';
 import 'package:tracking_app/shared/toast.dart';
@@ -52,7 +55,7 @@ class SettingsScreen extends StatelessWidget {
               if (settingsState.signOutState.isError) {
                 showToast(
                   context,
-                  Icons.error_rounded,
+                  Icons.error,
                   translations.somethingWentWrong,
                 );
               }
@@ -66,7 +69,7 @@ class SettingsScreen extends StatelessWidget {
               if (settingsState.accountDeletionState.isError) {
                 showToast(
                   context,
-                  Icons.error_rounded,
+                  Icons.error,
                   translations.somethingWentWrong,
                 );
               }
@@ -79,21 +82,15 @@ class SettingsScreen extends StatelessWidget {
               if (settingsState.sendEmailState.isError) {
                 showToast(
                   context,
-                  Icons.error_rounded,
+                  Icons.error,
                   translations.somethingWentWrong,
                 );
               }
             },
           ),
         ],
-        child: Scaffold(
-          appBar: AppBar(
-            title: Text(
-              translations.settings,
-            ),
-            centerTitle: true,
-          ),
-          body: const _SettingsView(),
+        child: const Scaffold(
+          body: _SettingsView(),
         ),
       ),
     );
@@ -202,7 +199,7 @@ class _SettingsView extends StatelessWidget {
                           child: SizedBox(
                             height: 200,
                             child: CircleAvatar(
-                              backgroundColor: primarySwatch.shade200,
+                              backgroundColor: lightBlueAccent,
                               radius: 100,
                               child: const AnimatedEmoji(
                                 AnimatedEmojis.otter,
@@ -215,7 +212,7 @@ class _SettingsView extends StatelessWidget {
                         Center(
                           child: Text(
                             email,
-                            style: Theme.of(context).textTheme.titleMedium,
+                            style: Theme.of(context).textTheme.bodyMedium,
                           ),
                         ),
                         const SizedBox(
@@ -224,19 +221,24 @@ class _SettingsView extends StatelessWidget {
                         Center(
                           child: Text(
                             firstName,
-                            style: Theme.of(context).textTheme.titleLarge,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ),
                           ),
                         ),
-                        const VerticalSpacing.large(),
+                        const VerticalSpacing.extraLarge(),
                         Text(
                           translations.account,
-                          style: Theme.of(context).textTheme.headlineMedium,
+                          style: Theme.of(context).textTheme.headlineSmall,
                         ),
                         const VerticalSpacing.large(),
                         Tile(
-                          icon: Icons.edit_outlined,
+                          icon: Iconsax.edit_2_outline,
                           title: translations.personalDetails,
-                          leading: const Icon(Icons.person),
+                          leading: const Icon(Iconsax.profile_circle_bold),
                           onTap: () => context.push(
                             '/settings/update-user-profile',
                             extra: UpdateUserProfileParams(
@@ -244,41 +246,37 @@ class _SettingsView extends StatelessWidget {
                               firstName: firstName,
                             ),
                           ),
-                        ),
-                        const VerticalSpacing.large(),
-                        const Divider(),
-                        const VerticalSpacing.large(),
+                        ).animate().fadeIn(duration: animationDuration),
+                        const VerticalSpacing.extraLarge(),
                         Text(
                           translations.general,
-                          style: Theme.of(context).textTheme.headlineMedium,
+                          style: Theme.of(context).textTheme.headlineSmall,
                         ),
                         const VerticalSpacing.large(),
                         Tile(
                           icon: Icons.mail_outline,
                           title: translations.support,
-                          leading: const Icon(Icons.support_agent),
+                          leading: const Icon(Iconsax.support_bold),
                           onTap: () => context.read<SettingsCubit>().sendEmail(
                                 recipient: supportEmailAddress,
                                 subject: '',
                                 body: '',
                               ),
                           isLoading: settingsState.sendEmailState.isLoading,
-                        ),
+                        ).animate().fadeIn(duration: animationDuration),
                         const VerticalSpacing.medium(),
                         Tile(
                           title: translations.termsOfService,
-                          leading: const Icon(Icons.description),
+                          leading: const Icon(Iconsax.document_text_1_bold),
                           onTap: () => context.go('/settings/terms-of-service'),
-                        ),
+                        ).animate().fadeIn(duration: animationDuration),
                         const VerticalSpacing.medium(),
                         Tile(
                           title: translations.privacyPolicy,
-                          leading: const Icon(Icons.description),
+                          leading: const Icon(Iconsax.document_text_1_bold),
                           onTap: () => context.go('/settings/privacy-policy'),
-                        ),
-                        const VerticalSpacing.large(),
-                        const Divider(),
-                        const VerticalSpacing.large(),
+                        ).animate().fadeIn(duration: animationDuration),
+                        const VerticalSpacing.extraLarge(),
                         Center(
                           child: TextButton(
                             onPressed: () => _onSignOutPressed(context),
@@ -287,21 +285,21 @@ class _SettingsView extends StatelessWidget {
                               loading: () => const TinyLoadingIndicator(),
                             ),
                           ),
-                        ),
+                        ).animate().fadeIn(duration: animationDuration),
                         Center(
                           child: TextButton(
                             onPressed: () => _onDeleteAccountPressed(context),
                             child: settingsState.accountDeletionState.maybeWhen(
                               orElse: () => Text(
                                 translations.deleteAccount,
-                                style: TextStyle(
-                                  color: primarySwatch.shade300,
+                                style: const TextStyle(
+                                  color: lightGrey,
                                 ),
                               ),
                               loading: () => const TinyLoadingIndicator(),
                             ),
                           ),
-                        ),
+                        ).animate().fadeIn(duration: animationDuration),
                         const VerticalSpacing.large(),
                       ],
                     ),

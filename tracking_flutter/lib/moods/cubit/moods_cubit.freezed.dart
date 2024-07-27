@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'home_cubit.dart';
+part of 'moods_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,18 +15,19 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$HomeState {
+mixin _$MoodsState {
   MoodsListState get moodsListState => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $HomeStateCopyWith<HomeState> get copyWith =>
+  $MoodsStateCopyWith<MoodsState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $HomeStateCopyWith<$Res> {
-  factory $HomeStateCopyWith(HomeState value, $Res Function(HomeState) then) =
-      _$HomeStateCopyWithImpl<$Res, HomeState>;
+abstract class $MoodsStateCopyWith<$Res> {
+  factory $MoodsStateCopyWith(
+          MoodsState value, $Res Function(MoodsState) then) =
+      _$MoodsStateCopyWithImpl<$Res, MoodsState>;
   @useResult
   $Res call({MoodsListState moodsListState});
 
@@ -34,9 +35,9 @@ abstract class $HomeStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
-    implements $HomeStateCopyWith<$Res> {
-  _$HomeStateCopyWithImpl(this._value, this._then);
+class _$MoodsStateCopyWithImpl<$Res, $Val extends MoodsState>
+    implements $MoodsStateCopyWith<$Res> {
+  _$MoodsStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -66,11 +67,11 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
 }
 
 /// @nodoc
-abstract class _$$HomeStateImplCopyWith<$Res>
-    implements $HomeStateCopyWith<$Res> {
-  factory _$$HomeStateImplCopyWith(
-          _$HomeStateImpl value, $Res Function(_$HomeStateImpl) then) =
-      __$$HomeStateImplCopyWithImpl<$Res>;
+abstract class _$$MoodsStateImplCopyWith<$Res>
+    implements $MoodsStateCopyWith<$Res> {
+  factory _$$MoodsStateImplCopyWith(
+          _$MoodsStateImpl value, $Res Function(_$MoodsStateImpl) then) =
+      __$$MoodsStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({MoodsListState moodsListState});
@@ -80,11 +81,11 @@ abstract class _$$HomeStateImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$HomeStateImplCopyWithImpl<$Res>
-    extends _$HomeStateCopyWithImpl<$Res, _$HomeStateImpl>
-    implements _$$HomeStateImplCopyWith<$Res> {
-  __$$HomeStateImplCopyWithImpl(
-      _$HomeStateImpl _value, $Res Function(_$HomeStateImpl) _then)
+class __$$MoodsStateImplCopyWithImpl<$Res>
+    extends _$MoodsStateCopyWithImpl<$Res, _$MoodsStateImpl>
+    implements _$$MoodsStateImplCopyWith<$Res> {
+  __$$MoodsStateImplCopyWithImpl(
+      _$MoodsStateImpl _value, $Res Function(_$MoodsStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -92,7 +93,7 @@ class __$$HomeStateImplCopyWithImpl<$Res>
   $Res call({
     Object? moodsListState = null,
   }) {
-    return _then(_$HomeStateImpl(
+    return _then(_$MoodsStateImpl(
       moodsListState: null == moodsListState
           ? _value.moodsListState
           : moodsListState // ignore: cast_nullable_to_non_nullable
@@ -103,8 +104,9 @@ class __$$HomeStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$HomeStateImpl implements _HomeState {
-  const _$HomeStateImpl({this.moodsListState = const MoodsListState.initial()});
+class _$MoodsStateImpl implements _MoodsState {
+  const _$MoodsStateImpl(
+      {this.moodsListState = const MoodsListState.initial()});
 
   @override
   @JsonKey()
@@ -112,14 +114,14 @@ class _$HomeStateImpl implements _HomeState {
 
   @override
   String toString() {
-    return 'HomeState(moodsListState: $moodsListState)';
+    return 'MoodsState(moodsListState: $moodsListState)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$HomeStateImpl &&
+            other is _$MoodsStateImpl &&
             (identical(other.moodsListState, moodsListState) ||
                 other.moodsListState == moodsListState));
   }
@@ -130,19 +132,19 @@ class _$HomeStateImpl implements _HomeState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$HomeStateImplCopyWith<_$HomeStateImpl> get copyWith =>
-      __$$HomeStateImplCopyWithImpl<_$HomeStateImpl>(this, _$identity);
+  _$$MoodsStateImplCopyWith<_$MoodsStateImpl> get copyWith =>
+      __$$MoodsStateImplCopyWithImpl<_$MoodsStateImpl>(this, _$identity);
 }
 
-abstract class _HomeState implements HomeState {
-  const factory _HomeState({final MoodsListState moodsListState}) =
-      _$HomeStateImpl;
+abstract class _MoodsState implements MoodsState {
+  const factory _MoodsState({final MoodsListState moodsListState}) =
+      _$MoodsStateImpl;
 
   @override
   MoodsListState get moodsListState;
   @override
   @JsonKey(ignore: true)
-  _$$HomeStateImplCopyWith<_$HomeStateImpl> get copyWith =>
+  _$$MoodsStateImplCopyWith<_$MoodsStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -152,7 +154,9 @@ mixin _$MoodsListState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Mood> moods) loaded,
+    required TResult Function(List<Mood> moods, bool loadingMore,
+            bool hasReachedMax, int nextPageToLoad)
+        loaded,
     required TResult Function() error,
   }) =>
       throw _privateConstructorUsedError;
@@ -160,7 +164,9 @@ mixin _$MoodsListState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Mood> moods)? loaded,
+    TResult? Function(List<Mood> moods, bool loadingMore, bool hasReachedMax,
+            int nextPageToLoad)?
+        loaded,
     TResult? Function()? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -168,7 +174,9 @@ mixin _$MoodsListState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Mood> moods)? loaded,
+    TResult Function(List<Mood> moods, bool loadingMore, bool hasReachedMax,
+            int nextPageToLoad)?
+        loaded,
     TResult Function()? error,
     required TResult orElse(),
   }) =>
@@ -260,7 +268,9 @@ class _$MoodsListInitialStateImpl implements MoodsListInitialState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Mood> moods) loaded,
+    required TResult Function(List<Mood> moods, bool loadingMore,
+            bool hasReachedMax, int nextPageToLoad)
+        loaded,
     required TResult Function() error,
   }) {
     return initial();
@@ -271,7 +281,9 @@ class _$MoodsListInitialStateImpl implements MoodsListInitialState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Mood> moods)? loaded,
+    TResult? Function(List<Mood> moods, bool loadingMore, bool hasReachedMax,
+            int nextPageToLoad)?
+        loaded,
     TResult? Function()? error,
   }) {
     return initial?.call();
@@ -282,7 +294,9 @@ class _$MoodsListInitialStateImpl implements MoodsListInitialState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Mood> moods)? loaded,
+    TResult Function(List<Mood> moods, bool loadingMore, bool hasReachedMax,
+            int nextPageToLoad)?
+        loaded,
     TResult Function()? error,
     required TResult orElse(),
   }) {
@@ -376,7 +390,9 @@ class _$MoodsListLoadingStateImpl implements MoodsListLoadingState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Mood> moods) loaded,
+    required TResult Function(List<Mood> moods, bool loadingMore,
+            bool hasReachedMax, int nextPageToLoad)
+        loaded,
     required TResult Function() error,
   }) {
     return loading();
@@ -387,7 +403,9 @@ class _$MoodsListLoadingStateImpl implements MoodsListLoadingState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Mood> moods)? loaded,
+    TResult? Function(List<Mood> moods, bool loadingMore, bool hasReachedMax,
+            int nextPageToLoad)?
+        loaded,
     TResult? Function()? error,
   }) {
     return loading?.call();
@@ -398,7 +416,9 @@ class _$MoodsListLoadingStateImpl implements MoodsListLoadingState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Mood> moods)? loaded,
+    TResult Function(List<Mood> moods, bool loadingMore, bool hasReachedMax,
+            int nextPageToLoad)?
+        loaded,
     TResult Function()? error,
     required TResult orElse(),
   }) {
@@ -457,7 +477,11 @@ abstract class _$$MoodsListSuccessStateImplCopyWith<$Res> {
           $Res Function(_$MoodsListSuccessStateImpl) then) =
       __$$MoodsListSuccessStateImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<Mood> moods});
+  $Res call(
+      {List<Mood> moods,
+      bool loadingMore,
+      bool hasReachedMax,
+      int nextPageToLoad});
 }
 
 /// @nodoc
@@ -472,12 +496,27 @@ class __$$MoodsListSuccessStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? moods = null,
+    Object? loadingMore = null,
+    Object? hasReachedMax = null,
+    Object? nextPageToLoad = null,
   }) {
     return _then(_$MoodsListSuccessStateImpl(
       moods: null == moods
           ? _value._moods
           : moods // ignore: cast_nullable_to_non_nullable
               as List<Mood>,
+      loadingMore: null == loadingMore
+          ? _value.loadingMore
+          : loadingMore // ignore: cast_nullable_to_non_nullable
+              as bool,
+      hasReachedMax: null == hasReachedMax
+          ? _value.hasReachedMax
+          : hasReachedMax // ignore: cast_nullable_to_non_nullable
+              as bool,
+      nextPageToLoad: null == nextPageToLoad
+          ? _value.nextPageToLoad
+          : nextPageToLoad // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -485,7 +524,11 @@ class __$$MoodsListSuccessStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$MoodsListSuccessStateImpl implements MoodsListSuccessState {
-  const _$MoodsListSuccessStateImpl({required final List<Mood> moods})
+  const _$MoodsListSuccessStateImpl(
+      {required final List<Mood> moods,
+      required this.loadingMore,
+      required this.hasReachedMax,
+      required this.nextPageToLoad})
       : _moods = moods;
 
   final List<Mood> _moods;
@@ -497,8 +540,15 @@ class _$MoodsListSuccessStateImpl implements MoodsListSuccessState {
   }
 
   @override
+  final bool loadingMore;
+  @override
+  final bool hasReachedMax;
+  @override
+  final int nextPageToLoad;
+
+  @override
   String toString() {
-    return 'MoodsListState.loaded(moods: $moods)';
+    return 'MoodsListState.loaded(moods: $moods, loadingMore: $loadingMore, hasReachedMax: $hasReachedMax, nextPageToLoad: $nextPageToLoad)';
   }
 
   @override
@@ -506,12 +556,22 @@ class _$MoodsListSuccessStateImpl implements MoodsListSuccessState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MoodsListSuccessStateImpl &&
-            const DeepCollectionEquality().equals(other._moods, _moods));
+            const DeepCollectionEquality().equals(other._moods, _moods) &&
+            (identical(other.loadingMore, loadingMore) ||
+                other.loadingMore == loadingMore) &&
+            (identical(other.hasReachedMax, hasReachedMax) ||
+                other.hasReachedMax == hasReachedMax) &&
+            (identical(other.nextPageToLoad, nextPageToLoad) ||
+                other.nextPageToLoad == nextPageToLoad));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_moods));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_moods),
+      loadingMore,
+      hasReachedMax,
+      nextPageToLoad);
 
   @JsonKey(ignore: true)
   @override
@@ -525,10 +585,12 @@ class _$MoodsListSuccessStateImpl implements MoodsListSuccessState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Mood> moods) loaded,
+    required TResult Function(List<Mood> moods, bool loadingMore,
+            bool hasReachedMax, int nextPageToLoad)
+        loaded,
     required TResult Function() error,
   }) {
-    return loaded(moods);
+    return loaded(moods, loadingMore, hasReachedMax, nextPageToLoad);
   }
 
   @override
@@ -536,10 +598,12 @@ class _$MoodsListSuccessStateImpl implements MoodsListSuccessState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Mood> moods)? loaded,
+    TResult? Function(List<Mood> moods, bool loadingMore, bool hasReachedMax,
+            int nextPageToLoad)?
+        loaded,
     TResult? Function()? error,
   }) {
-    return loaded?.call(moods);
+    return loaded?.call(moods, loadingMore, hasReachedMax, nextPageToLoad);
   }
 
   @override
@@ -547,12 +611,14 @@ class _$MoodsListSuccessStateImpl implements MoodsListSuccessState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Mood> moods)? loaded,
+    TResult Function(List<Mood> moods, bool loadingMore, bool hasReachedMax,
+            int nextPageToLoad)?
+        loaded,
     TResult Function()? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(moods);
+      return loaded(moods, loadingMore, hasReachedMax, nextPageToLoad);
     }
     return orElse();
   }
@@ -596,10 +662,16 @@ class _$MoodsListSuccessStateImpl implements MoodsListSuccessState {
 }
 
 abstract class MoodsListSuccessState implements MoodsListState {
-  const factory MoodsListSuccessState({required final List<Mood> moods}) =
-      _$MoodsListSuccessStateImpl;
+  const factory MoodsListSuccessState(
+      {required final List<Mood> moods,
+      required final bool loadingMore,
+      required final bool hasReachedMax,
+      required final int nextPageToLoad}) = _$MoodsListSuccessStateImpl;
 
   List<Mood> get moods;
+  bool get loadingMore;
+  bool get hasReachedMax;
+  int get nextPageToLoad;
   @JsonKey(ignore: true)
   _$$MoodsListSuccessStateImplCopyWith<_$MoodsListSuccessStateImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -646,7 +718,9 @@ class _$MoodsListErrorStateImpl implements MoodsListErrorState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Mood> moods) loaded,
+    required TResult Function(List<Mood> moods, bool loadingMore,
+            bool hasReachedMax, int nextPageToLoad)
+        loaded,
     required TResult Function() error,
   }) {
     return error();
@@ -657,7 +731,9 @@ class _$MoodsListErrorStateImpl implements MoodsListErrorState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Mood> moods)? loaded,
+    TResult? Function(List<Mood> moods, bool loadingMore, bool hasReachedMax,
+            int nextPageToLoad)?
+        loaded,
     TResult? Function()? error,
   }) {
     return error?.call();
@@ -668,7 +744,9 @@ class _$MoodsListErrorStateImpl implements MoodsListErrorState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Mood> moods)? loaded,
+    TResult Function(List<Mood> moods, bool loadingMore, bool hasReachedMax,
+            int nextPageToLoad)?
+        loaded,
     TResult Function()? error,
     required TResult orElse(),
   }) {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_calendar_carousel/classes/event.dart';
 import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart';
@@ -12,6 +13,7 @@ import 'package:tracking_app/create_mood/bloc/create_mood_bloc.dart';
 import 'package:tracking_app/delete_mood/cubit/delete_mood_cubit.dart';
 import 'package:tracking_app/main.dart';
 import 'package:tracking_app/shared/date_time.dart';
+import 'package:tracking_app/shared/theme/animation.dart';
 import 'package:tracking_app/shared/theme/colors.dart';
 import 'package:tracking_app/shared/theme/layout.dart';
 import 'package:tracking_app/shared/toast.dart';
@@ -83,14 +85,8 @@ class CalendarScreen extends StatelessWidget {
             },
           ),
         ],
-        child: Scaffold(
-          appBar: AppBar(
-            title: Text(
-              translations.calendar,
-            ),
-            centerTitle: true,
-          ),
-          body: const _CalendarView(),
+        child: const Scaffold(
+          body: _CalendarView(),
         ),
       ),
     );
@@ -103,6 +99,21 @@ class _CalendarView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final translations = AppLocalizations.of(context)!;
+
+    const calendarDaysTextStyle = TextStyle(
+      color: Colors.black,
+      fontWeight: FontWeight.bold,
+    );
+
+    const calendarNextAndPrevDaysTextStyle = TextStyle(
+      color: lightGrey,
+    );
+
+    const calendarWeekdaysTextStyle = TextStyle(
+      color: darkBlue,
+    );
+
+    const calendarPrevAndNextButtonsColor = grey;
 
     return SafeArea(
       child: SingleChildScrollView(
@@ -120,31 +131,25 @@ class _CalendarView extends StatelessWidget {
                   child: CalendarCarousel<Event>(
                     firstDayOfWeek: (0 + 1) % 7,
                     height: 380,
-                    todayButtonColor: primarySwatch.shade500,
-                    prevDaysTextStyle: TextStyle(
-                      color: primarySwatch.shade100,
+                    todayButtonColor: primarySwatch,
+                    todayTextStyle: const TextStyle(
+                      color: contentOnDarkBackgroundColor,
+                      fontWeight: FontWeight.bold,
                     ),
-                    weekendTextStyle: TextStyle(
-                      color: primarySwatch.shade600,
-                    ),
-                    nextDaysTextStyle: TextStyle(
-                      color: primarySwatch.shade100,
-                    ),
-                    headerTextStyle: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 20,
-                    ),
+                    daysTextStyle: calendarDaysTextStyle,
+                    prevDaysTextStyle: calendarNextAndPrevDaysTextStyle,
+                    weekendTextStyle: calendarDaysTextStyle,
+                    nextDaysTextStyle: calendarNextAndPrevDaysTextStyle,
+                    headerTextStyle: Theme.of(context).textTheme.headlineSmall,
                     rightButtonIcon: const Icon(
                       Icons.chevron_right,
-                      color: Colors.black,
+                      color: calendarPrevAndNextButtonsColor,
                     ),
                     leftButtonIcon: const Icon(
                       Icons.chevron_left,
-                      color: Colors.black,
+                      color: calendarPrevAndNextButtonsColor,
                     ),
-                    weekdayTextStyle: TextStyle(
-                      color: primarySwatch.shade800,
-                    ),
+                    weekdayTextStyle: calendarWeekdaysTextStyle,
                     markedDatesMap: getMarkedDates(state.moodsState.moods),
                     targetDateTime:
                         state.targetDate.isSet ? state.targetDate.date : null,
@@ -191,7 +196,9 @@ class _CalendarView extends StatelessWidget {
                     ),
                   )
                 else if (state.moodsState.isSuccess)
-                  _MoodsInMonth(moods: state.moodsState.moods),
+                  _MoodsInMonth(moods: state.moodsState.moods)
+                      .animate()
+                      .fadeIn(duration: animationDuration),
               ],
             );
           },
@@ -209,11 +216,16 @@ class _CalendarView extends StatelessWidget {
             Event(
               date: mood.createdOn.dateOnly,
               dot: Container(
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: darkBlue,
+                ),
                 margin: const EdgeInsets.symmetric(horizontal: 1),
-                color: primarySwatch.shade500,
-                height: 5,
-                width: 5,
-              ),
+                height: 6,
+                width: 6,
+              ).animate().fadeIn(
+                    duration: animationDuration,
+                  ),
             ),
           ],
         },

@@ -167,10 +167,12 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
                       divisions: MoodValueInput.maxValue - 1,
                       label: state.moodFormState.moodValue.value.toString(),
                       onChanged: _onMoodValueChanged,
+                      activeColor: blue,
+                      inactiveColor: lightBlue,
                     );
                   },
                 ),
-                const VerticalSpacing.large(),
+                const VerticalSpacing.extraLarge(),
                 Text(
                   translations.whatAreYouGreatfulFor,
                   style: Theme.of(context).textTheme.headlineSmall,
@@ -187,7 +189,7 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
                   ),
                   controller: _thingIAmGreatfulAbout1Controller,
                   decoration: InputDecoration(
-                    icon: const Icon(Icons.favorite_rounded),
+                    icon: const Icon(Iconsax.heart_edit_outline),
                     iconColor: Theme.of(context).primaryColor,
                   ),
                   validator: (value) => updateMoodBloc
@@ -197,13 +199,14 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
                   keyboardType: TextInputType.text,
                   textInputAction: TextInputAction.next,
                 ),
+                const VerticalSpacing.medium(),
                 TextFormField(
                   key: const Key(
                     'Update mood form thingIAmGreatfulAbout2 input',
                   ),
                   controller: _thingIAmGreatfulAbout2Controller,
                   decoration: InputDecoration(
-                    icon: const Icon(Icons.favorite_rounded),
+                    icon: const Icon(Iconsax.heart_edit_outline),
                     iconColor: Theme.of(context).primaryColor,
                   ),
                   validator: (value) => updateMoodBloc
@@ -213,13 +216,14 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
                   keyboardType: TextInputType.text,
                   textInputAction: TextInputAction.next,
                 ),
+                const VerticalSpacing.medium(),
                 TextFormField(
                   key: const Key(
                     'Update mood form thingIAmGreatfulAbout3 input',
                   ),
                   controller: _thingIAmGreatfulAbout3Controller,
                   decoration: InputDecoration(
-                    icon: const Icon(Icons.favorite_rounded),
+                    icon: const Icon(Iconsax.heart_edit_outline),
                     iconColor: Theme.of(context).primaryColor,
                   ),
                   validator: (value) => updateMoodBloc
@@ -234,11 +238,12 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
                   translations.whatIsOnYourMind,
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
-                const VerticalSpacing.small(),
+                const VerticalSpacing.medium(),
                 Text(
                   translations.whatIsOnYourMindDescription,
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
+                const VerticalSpacing.large(),
                 TextFormField(
                   key: const Key('Update mood form diary input'),
                   controller: _diaryController,
@@ -255,18 +260,18 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
                   translations.howMuchDidYouEarn,
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
-                const VerticalSpacing.small(),
+                const VerticalSpacing.medium(),
                 Text(
                   translations.howMuchDidYouEarnDescription,
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
+                const VerticalSpacing.large(),
                 TextFormField(
                   key: const Key('Update mood form revenue input'),
                   controller: _revenueController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: '0.0',
                     helperText: 'Revenue in your currency',
-                    helperStyle: TextStyle(color: primarySwatch.shade300),
                   ),
                   keyboardType: TextInputType.number,
                   inputFormatters: [
@@ -279,7 +284,7 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
                   translations.howLongDidYouWork,
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
-                const VerticalSpacing.small(),
+                const VerticalSpacing.large(),
                 BlocBuilder<UpdateMoodBloc, UpdateMoodState>(
                   buildWhen: (previousState, currentState) =>
                       previousState.moodFormState.workTime !=
@@ -307,8 +312,8 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
                             }
                           },
                           icon: Icon(
-                            Icons.edit,
-                            color: primarySwatch.shade200,
+                            Iconsax.edit_2_outline,
+                            color: Theme.of(context).primaryColor,
                           ),
                         ),
                       ],
@@ -330,7 +335,7 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
             builder: (context, state) {
               return AppElevatedButton(
                 isLoading: state.formStatus.isInProgress,
-                icon: Icons.edit,
+                icon: Iconsax.edit_2_bold,
                 onPressed: _onSubmit,
                 label: translations.updateMood,
               );

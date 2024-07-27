@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:formz/formz.dart';
 import 'package:go_router/go_router.dart';
+import 'package:icons_plus/icons_plus.dart';
 import 'package:mood_repository/mood_repository.dart';
 import 'package:tracking_app/delete_mood/cubit/delete_mood_cubit.dart';
 import 'package:tracking_app/shared/date_time.dart';
@@ -64,15 +65,15 @@ class UpdateMoodScreen extends StatelessWidget {
             if (state.formStatus.isSuccess) {
               showToast(
                 context,
-                Icons.done_rounded,
+                Iconsax.award_bold,
                 translations.moodUpdatedSuccessfully,
               );
 
-              context.go(routeOrigin);
+              context.goNamed(routeOrigin);
             } else if (state.formStatus.isFailure) {
               showToast(
                 context,
-                Icons.error_rounded,
+                Icons.error,
                 translations.somethingWentWrong,
               );
             }
@@ -85,15 +86,15 @@ class UpdateMoodScreen extends StatelessWidget {
             if (deleteMoodState.isSuccess) {
               showToast(
                 context,
-                Icons.delete_outline_rounded,
+                Iconsax.award_bold,
                 translations.moodDeletedSuccessfully,
               );
 
-              context.go(routeOrigin);
+              context.goNamed(routeOrigin);
             } else if (deleteMoodState.isError) {
               showToast(
                 context,
-                Icons.error_rounded,
+                Icons.error,
                 translations.somethingWentWrong,
               );
             }
@@ -106,6 +107,12 @@ class UpdateMoodScreen extends StatelessWidget {
             buildWhen: (previousUpdateMoodState, currentUpdateMoodState) =>
                 previousUpdateMoodState.mood != currentUpdateMoodState.mood,
             builder: (context, state) {
+              if (state.mood == null) {
+                return const Center(
+                  child: LoadingIndicator(),
+                );
+              }
+
               return Column(
                 children: [
                   Text(
@@ -116,16 +123,12 @@ class UpdateMoodScreen extends StatelessWidget {
                     getTimeString(state.mood!.createdOn),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      color: primarySwatch.shade400,
-                      fontSize: 18,
-                    ),
+                    style: Theme.of(context).textTheme.bodySmall,
                   ),
                 ],
               );
             },
           ),
-          centerTitle: true,
           actions: [
             BlocBuilder<DeleteMoodCubit, DeleteMoodState>(
               buildWhen: (previousDeleteMoodState, currentDeleteMoodState) =>
@@ -142,9 +145,8 @@ class UpdateMoodScreen extends StatelessWidget {
                             currentUpdateMoodState.mood,
                     builder: (context, state) {
                       return IconButton(
-                        icon: Icon(
-                          Icons.delete,
-                          color: primarySwatch.shade200,
+                        icon: const Icon(
+                          Iconsax.trash_outline,
                         ),
                         onPressed: () {
                           _showMoodDeletionDialog(

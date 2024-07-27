@@ -14,6 +14,7 @@ import 'package:tracking_app/shared/date_time.dart';
 import 'package:tracking_app/shared/router.dart';
 import 'package:tracking_app/shared/theme/colors.dart';
 import 'package:tracking_app/shared/theme/theme.dart';
+import 'package:tracking_app/shared/widgets/auth_screen_scaffold.dart';
 import 'package:tracking_app/shared/widgets/error_message.dart';
 import 'package:tracking_app/shared/widgets/loading_indicator.dart';
 import 'package:tracking_app/update_mood/bloc/update_mood_bloc.dart';
@@ -60,14 +61,14 @@ class App extends StatelessWidget {
         builder: (context, state) {
           if (state.isInitialOrLoading) {
             return const ColoredBox(
-              color: lightBackgroundColor,
-              child: Center(child: LoadingIndicator()),
+              color: backgroundColor,
+              child: Center(child: LoadingIndicator(color: primarySwatch)),
             );
           } else if (state.isError) {
             final translations = AppLocalizations.of(context)!;
 
             return ColoredBox(
-              color: lightBackgroundColor,
+              color: backgroundColor,
               child: ErrorMessage(
                 message: translations.appInitFailed,
                 onRefresh: context.read<AppCubit>().init,
@@ -79,13 +80,17 @@ class App extends StatelessWidget {
             initialStep: AuthenticatorStep.onboarding,
             authenticatorBuilder:
                 (BuildContext context, AuthenticatorState state) {
+              final translations = AppLocalizations.of(context)!;
+
               if (state.currentStep == AuthenticatorStep.loading) {
                 setDateTimeLocale(context);
 
-                return const Center(child: LoadingIndicator());
-              }
-
-              if (state.currentStep == AuthenticatorStep.onboarding) {
+                return const Center(
+                  child: LoadingIndicator(
+                    color: primarySwatch,
+                  ),
+                );
+              } else if (state.currentStep == AuthenticatorStep.onboarding) {
                 return SafeArea(
                   child: OnboardingSlider(
                     signUpButtonFunction: () => state.changeStep(
@@ -95,6 +100,73 @@ class App extends StatelessWidget {
                       AuthenticatorStep.signIn,
                     ),
                   ),
+                );
+              } else if (state.currentStep == AuthenticatorStep.signUp) {
+                return AuthScreenScaffold(
+                  state: state,
+                  body: SignUpForm(),
+                  footer: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        translations.haveAccount,
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              color: grey,
+                            ),
+                      ),
+                      TextButton(
+                        onPressed: () => state.changeStep(
+                          AuthenticatorStep.signIn,
+                        ),
+                        child: Text(
+                          translations.signIn,
+                          style: const TextStyle(
+                            color: primarySwatch,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              } else if (state.currentStep == AuthenticatorStep.signIn) {
+                return AuthScreenScaffold(
+                  state: state,
+                  body: SignInForm(),
+                  footer: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        translations.noAccount,
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              color: grey,
+                            ),
+                      ),
+                      TextButton(
+                        onPressed: () => state.changeStep(
+                          AuthenticatorStep.signUp,
+                        ),
+                        child: Text(
+                          translations.signUp,
+                          style: const TextStyle(
+                            color: primarySwatch,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              } else if (state.currentStep == AuthenticatorStep.resetPassword) {
+                return AuthScreenScaffold(
+                  state: state,
+                  body: ResetPasswordForm(),
+                );
+              } else if (state.currentStep ==
+                  AuthenticatorStep.confirmResetPassword) {
+                return AuthScreenScaffold(
+                  state: state,
+                  body: const ConfirmResetPasswordForm(),
                 );
               }
 

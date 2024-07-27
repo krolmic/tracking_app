@@ -26,17 +26,21 @@ class Tile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 5,
-      shadowColor: tileShadowColor,
+      shadowColor: contentShadowColor,
       child: ListTile(
+        contentPadding: const EdgeInsets.only(
+          left: 10,
+          right: 15,
+        ),
         iconColor: tileIconColor,
         leading: leading,
         title: Text(
           title,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          style: const TextStyle(
-            color: tileTitleColor,
-          ),
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
         ),
         titleAlignment: ListTileTitleAlignment.threeLine,
         subtitle: subTitle != null
@@ -44,18 +48,19 @@ class Tile extends StatelessWidget {
                 subTitle!,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                  color: tileSubtitleColor,
-                ),
+                style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                      color: darkBlue,
+                    ),
               )
             : null,
         trailing: isLoading
             ? TinyLoadingIndicator(
-                color: primarySwatch.shade200,
+                color: tileIconColor,
               )
             : Icon(
                 icon ?? Icons.chevron_right,
                 size: iconSize ?? 20,
+                color: tileIconColor,
               ),
         onTap: isLoading ? null : onTap,
       ),

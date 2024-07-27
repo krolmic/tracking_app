@@ -47,6 +47,7 @@ dependencies:
   firebase_crashlytics: ^3.4.8
   flutter:
     sdk: flutter
+  flutter_animate: ^4.5.0
   flutter_bloc: ^8.1.3
   flutter_calendar_carousel: ^2.4.3
   flutter_email_sender: ^6.0.2
@@ -60,6 +61,8 @@ dependencies:
   get_it: ^7.6.0
   go_router: ^9.0.3
   google_fonts: 6.1.0
+  google_nav_bar: ^5.0.6
+  icons_plus: ^5.0.0
   intl: ^0.19.0
   jiffy: ^6.2.1
   mood_repository:

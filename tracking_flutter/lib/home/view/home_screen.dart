@@ -1,38 +1,35 @@
-import 'package:animated_emoji/animated_emoji.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:formz/formz.dart';
 import 'package:go_router/go_router.dart';
+import 'package:icons_plus/icons_plus.dart';
 import 'package:mood_repository/mood_repository.dart';
 import 'package:tracking_app/create_mood/bloc/create_mood_bloc.dart';
 import 'package:tracking_app/delete_mood/cubit/delete_mood_cubit.dart';
 import 'package:tracking_app/home/cubit/home_cubit.dart';
 import 'package:tracking_app/main.dart';
 import 'package:tracking_app/shared/date_time.dart';
+import 'package:tracking_app/shared/theme/animation.dart';
 import 'package:tracking_app/shared/theme/colors.dart';
-import 'package:tracking_app/shared/theme/layout.dart';
 import 'package:tracking_app/shared/view/base_view.dart';
-import 'package:tracking_app/shared/widgets/app_elevated_button.dart';
 import 'package:tracking_app/shared/widgets/error_message.dart';
 import 'package:tracking_app/shared/widgets/loading_indicator.dart';
-import 'package:tracking_app/shared/widgets/mood_emoji.dart';
 import 'package:tracking_app/shared/widgets/spacing.dart';
-import 'package:tracking_app/shared/widgets/tile.dart';
+import 'package:tracking_app/shared/widgets/tracked_mood.dart';
 import 'package:tracking_app/update_mood/bloc/update_mood_bloc.dart';
 import 'package:tracking_app/user_profile/cubit/user_profile_cubit.dart';
 import 'package:user_profile_repository/user_profile_repository.dart';
 
-part 'widgets/moods_shader_mask.dart';
-part 'widgets/tracked_mood.dart';
+part 'widgets/average.dart';
+part 'widgets/progress.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final translations = AppLocalizations.of(context)!;
-
     return BlocProvider<HomeCubit>(
       create: (context) {
         final userProfileCubit = context.read<UserProfileCubit>();
@@ -45,45 +42,8 @@ class HomeScreen extends StatelessWidget {
           userProfileRepository: getIt.get<UserProfileRepository>(),
         )..init();
       },
-      child: Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.surface,
-        floatingActionButton: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: viewPaddingHorizontal,
-          ),
-          child: BlocBuilder<HomeCubit, HomeState>(
-            buildWhen: (previousHomeState, currentHomeState) =>
-                previousHomeState != currentHomeState,
-            builder: (context, homeState) {
-              if (homeState.isError) {
-                return const SizedBox.shrink();
-              }
-
-              final todaysMoodIsTracked =
-                  homeState.moodsState.containsTodayMood;
-
-              return AppElevatedButton(
-                icon: todaysMoodIsTracked ? Icons.edit : Icons.add,
-                label: todaysMoodIsTracked
-                    ? translations.updateMood
-                    : translations.trackMood,
-                onPressed: () {
-                  if (todaysMoodIsTracked) {
-                    context.go(
-                      '/home/update',
-                      extra: homeState.moodsState.todaysMood,
-                    );
-                  } else {
-                    context.go('/home/create');
-                  }
-                },
-                isLoading: homeState.isInitialOrLoading,
-              );
-            },
-          ),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        body: const _HomeView(),
+      child: const Scaffold(
+        body: _HomeView(),
       ),
     );
   }
@@ -102,7 +62,7 @@ class _HomeView extends StatelessWidget {
               currentCreateMoodState.formStatus,
           listener: (context, state) {
             if (state.formStatus.isSuccess) {
-              context.read<HomeCubit>().loadMoods(reloadMoods: true);
+              context.read<HomeCubit>().init();
             }
           },
         ),
@@ -112,7 +72,7 @@ class _HomeView extends StatelessWidget {
               currentUpdateMoodState.formStatus,
           listener: (context, state) {
             if (state.formStatus.isSuccess) {
-              context.read<HomeCubit>().loadMoods(reloadMoods: true);
+              context.read<HomeCubit>().init();
             }
           },
         ),
@@ -121,7 +81,7 @@ class _HomeView extends StatelessWidget {
               previousDeleteMoodState != currentDeleteMoodState,
           listener: (context, deleteMoodState) {
             if (deleteMoodState.isSuccess) {
-              context.read<HomeCubit>().loadMoods(reloadMoods: true);
+              context.read<HomeCubit>().init();
             }
           },
         ),
@@ -131,46 +91,46 @@ class _HomeView extends StatelessWidget {
             previousUserProfileState != currentUserProfileState,
         builder: (context, userProfileState) {
           return BlocBuilder<HomeCubit, HomeState>(
-            buildWhen: (previousHomeState, currentHomeState) =>
-                previousHomeState != currentHomeState,
-            builder: (context, homeState) {
+            buildWhen: (previousState, currentState) =>
+                previousState != currentState,
+            builder: (context, state) {
               return BaseView(
-                child: Padding(
-                  padding: const EdgeInsets.only(bottom: 60),
-                  child: Builder(
-                    builder: (context) {
-                      if (userProfileState.isInitialOrLoading ||
-                          homeState.isInitialOrLoading) {
-                        return const Center(child: LoadingIndicator());
-                      } else if (userProfileState.isError ||
-                          homeState.isError) {
-                        return ErrorMessage(
-                          onRefresh: () {
-                            if (userProfileState.isError) {
-                              context
-                                  .read<UserProfileCubit>()
-                                  .loadUserProfile();
-                            }
+                child: Builder(
+                  builder: (context) {
+                    if (userProfileState.isInitialOrLoading ||
+                        state.isInitialOrLoading) {
+                      return const Center(child: LoadingIndicator());
+                    } else if (userProfileState.isError || state.isError) {
+                      return ErrorMessage(
+                        onRefresh: () {
+                          if (userProfileState.isError) {
+                            context.read<UserProfileCubit>().loadUserProfile();
+                          }
 
-                            if (homeState.isError) {
-                              context.read<HomeCubit>().init();
-                            }
-                          },
-                        );
-                      }
-
-                      final moodsSuccessState =
-                          homeState.moodsState as HomeMoodsSuccessState;
-                      final userProfileSuccessState =
-                          userProfileState as UserProfileSuccessState;
-
-                      return _HomeContentView(
-                        firstName: userProfileSuccessState.firstName,
-                        moods: moodsSuccessState.moods,
-                        hasReachedMaxMoods: moodsSuccessState.hasReachedMax,
+                          if (state.isError) {
+                            context.read<HomeCubit>().init();
+                          }
+                        },
                       );
-                    },
-                  ),
+                    }
+
+                    final userProfileSuccessState =
+                        userProfileState as UserProfileSuccessState;
+
+                    return _HomeContentView(
+                      firstName: userProfileSuccessState.firstName,
+                      weeklyProgress: state.moodsListState.weeklyProgress,
+                      averageWorkTimeInHours:
+                          state.moodsListState.averageWorkTimeInHoursThisWeek,
+                      averageRevenue:
+                          state.moodsListState.averageRevenueThisWeek,
+                      averageMood: state.moodsListState.averageMoodThisWeek,
+                      moods: state.moodsListState.recentlyAddedMoods,
+                      trackedEveryDay:
+                          state.moodsListState.trackedEveryDayThisWeek,
+                      trackedToday: state.moodsListState.containsTodayMood,
+                    );
+                  },
                 ),
               );
             },
@@ -181,146 +141,129 @@ class _HomeView extends StatelessWidget {
   }
 }
 
-class _HomeContentView extends StatefulWidget {
+class _HomeContentView extends StatelessWidget {
   const _HomeContentView({
     required this.firstName,
     required this.moods,
-    required this.hasReachedMaxMoods,
+    required this.weeklyProgress,
+    required this.averageWorkTimeInHours,
+    required this.averageMood,
+    required this.averageRevenue,
+    required this.trackedEveryDay,
+    required this.trackedToday,
   });
 
   final String firstName;
+  final double weeklyProgress;
   final List<Mood> moods;
-  final bool hasReachedMaxMoods;
-
-  @override
-  State<_HomeContentView> createState() => _HomeContentViewState();
-}
-
-class _HomeContentViewState extends State<_HomeContentView> {
-  final _scrollController = ScrollController();
-  final _scrollThreshold = 50.0;
-
-  @override
-  void initState() {
-    super.initState();
-    _scrollController.addListener(_onScroll);
-  }
-
-  /// Calls [HomeCubit.loadMoods] if the current scroll position in pixels
-  /// substracted from maximal scroll position
-  /// is less or equal than [_scrollThreshold].
-  Future<void> _onScroll() async {
-    final maxScrollPosition = _scrollController.position.maxScrollExtent;
-    final currentScrollPosition = _scrollController.position.pixels;
-
-    if (maxScrollPosition - currentScrollPosition <= _scrollThreshold) {
-      await context.read<HomeCubit>().loadMoods();
-    }
-  }
+  final double averageMood;
+  final int averageWorkTimeInHours;
+  final int averageRevenue;
+  final bool trackedEveryDay;
+  final bool trackedToday;
 
   @override
   Widget build(BuildContext context) {
     final translations = AppLocalizations.of(context)!;
 
-    if (widget.moods.isEmpty) {
-      return _HomeContentWithNoMoods(
-        firstName: widget.firstName,
-      );
-    }
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const VerticalSpacing.large(),
-        Text(
-          getGreetingString(context, DateTime.now(), widget.firstName),
-          style: Theme.of(context).textTheme.headlineSmall,
-        ),
-        const VerticalSpacing.medium(),
-        Text(
-          translations.moodHistoryTitle,
-          style: Theme.of(context).textTheme.headlineMedium,
-        ),
-        const VerticalSpacing.medium(),
-        Text(
-          translations.moodHistoryDescription,
-          style: Theme.of(context).textTheme.bodyMedium,
-        ),
-        const VerticalSpacing.large(),
-        Expanded(
-          child: MoodsShaderMask(
-            child: _buildMoods(),
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const VerticalSpacing.large(),
+          Text(
+            getGreetingString(context, DateTime.now()),
+            style: Theme.of(context).textTheme.bodyMedium,
           ),
-        ),
-      ],
-    );
-  }
-
-  ListView _buildMoods() {
-    return ListView.builder(
-      controller: _scrollController,
-      itemCount: widget.hasReachedMaxMoods
-          ? widget.moods.length
-          : widget.moods.length + 1,
-      itemBuilder: (context, index) {
-        if (index >= widget.moods.length) {
-          return const Padding(
-            padding: EdgeInsets.only(
-              top: verticalPaddingMedium,
+          Text(
+            firstName,
+            style: Theme.of(context).textTheme.headlineMedium,
+          ),
+          const VerticalSpacing.large(),
+          Text(
+            translations.weekProgress,
+            style: Theme.of(context).textTheme.headlineSmall,
+            maxLines: 3,
+          ),
+          const VerticalSpacing.large(),
+          _HomeProgress(
+            weeklyProgress: weeklyProgress,
+            trackedEveryDayThisWeek: trackedEveryDay,
+            trackedToday: trackedToday,
+          ),
+          const VerticalSpacing.medium(),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 5),
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  child: _Average(
+                    icon: Iconsax.heart_bold,
+                    label: translations.averageMood,
+                    value: averageMood.toStringAsFixed(2),
+                  ).animate().fadeIn(
+                        duration: animationDuration,
+                      ),
+                ),
+                const HorizontalSpacing.medium(),
+                Expanded(
+                  child: _Average(
+                    icon: Iconsax.timer_bold,
+                    label: translations.averageWorkHours,
+                    value: '$averageWorkTimeInHours h',
+                  ).animate().fadeIn(
+                        duration: animationDuration,
+                        delay: animationDuration,
+                      ),
+                ),
+                const HorizontalSpacing.medium(),
+                Expanded(
+                  child: _Average(
+                    icon: Iconsax.money_4_bold,
+                    label: translations.averageRevenue,
+                    value: averageRevenue.toString() + r' $',
+                  ).animate().fadeIn(
+                        duration: animationDuration,
+                        delay: animationDuration * 2,
+                      ),
+                ),
+              ],
             ),
-            child: Center(child: LoadingIndicator()),
-          );
-        }
-
-        final mood = widget.moods[index];
-
-        return Padding(
-          key: ValueKey(mood),
-          padding: const EdgeInsets.only(
-            bottom: verticalPaddingSmall,
           ),
-          child: _TrackedMood(mood: mood),
-        );
-      },
-    );
-  }
-}
-
-class _HomeContentWithNoMoods extends StatelessWidget {
-  const _HomeContentWithNoMoods({
-    required this.firstName,
-  });
-
-  final String firstName;
-
-  @override
-  Widget build(BuildContext context) {
-    final translations = AppLocalizations.of(context)!;
-
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const AnimatedEmoji(
-          AnimatedEmojis.warmSmile,
-          size: 128,
-        ),
-        const VerticalSpacing.small(),
-        Center(
-          child: Text(
-            getGreetingString(context, DateTime.now(), firstName),
-            style: Theme.of(context).textTheme.headlineLarge,
-            textAlign: TextAlign.center,
+          const VerticalSpacing.large(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                translations.recentlyTracked,
+                style: Theme.of(context).textTheme.headlineSmall,
+              ),
+              TextButton(
+                onPressed: () {
+                  context.goNamed('moods');
+                },
+                child: Text(
+                  translations.seeAll,
+                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                        color: blue,
+                      ),
+                ),
+              ),
+            ],
           ),
-        ),
-        const VerticalSpacing.small(),
-        Center(
-          child: Text(
-            translations.noMoodsYet,
-            style: Theme.of(context).textTheme.bodyLarge,
-            textAlign: TextAlign.center,
-          ),
-        ),
-      ],
+          for (final mood in moods)
+            TrackedMood(
+              mood: mood,
+              onTap: () => context.goNamed(
+                'update-mood-from-home',
+                extra: mood,
+              ),
+            ).animate().fadeIn(
+                  duration: animationDuration,
+                ),
+          const VerticalSpacing.extraLarge(),
+        ],
+      ),
     );
   }
 }
