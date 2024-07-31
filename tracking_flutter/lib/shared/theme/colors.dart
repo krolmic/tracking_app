@@ -33,7 +33,7 @@ const Color gradientColor2 = lightBlue;
 const Color gradientColor3 = blue;
 const Color gradientColor4 = darkBlue;
 
-const Color bodySmallTextColor = gradientColor4;
+const Color bodySmallTextColor = darkBlue;
 const Color contentOnDarkBackgroundColor = Colors.white;
 Color contentShadowColor = Colors.black.withOpacity(0.2);
 
@@ -43,4 +43,5 @@ const Color buttonsShadowColor = gradientColor3;
 
 Color inputFillColor = blue.withOpacity(0.2);
 
-Color tileIconColor = blue.withOpacity(0.75);
+Color tileIconColor = darkBlue.withOpacity(.5);
+const Color tileSubtitleColor = darkBlue;
