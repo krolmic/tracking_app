@@ -25,10 +25,12 @@ part 'widgets/update_mood_form.dart';
 class UpdateMoodScreen extends StatelessWidget {
   const UpdateMoodScreen({
     required this.routeOrigin,
+    required this.moodDate,
     super.key,
   });
 
   final String routeOrigin;
+  final DateTime moodDate;
 
   Future<void> _showMoodDeletionDialog(
     BuildContext context,
@@ -104,21 +106,9 @@ class UpdateMoodScreen extends StatelessWidget {
       ],
       child: Scaffold(
         appBar: AppBar(
-          title: BlocBuilder<UpdateMoodBloc, UpdateMoodState>(
-            buildWhen: (previousUpdateMoodState, currentUpdateMoodState) =>
-                previousUpdateMoodState.mood != currentUpdateMoodState.mood,
-            builder: (context, state) {
-              if (state.mood == null) {
-                return const Center(
-                  child: LoadingIndicator(),
-                );
-              }
-
-              return Text(
-                getDateString(context, state.mood!.createdOn),
-                maxLines: 1,
-              );
-            },
+          title: Text(
+            getDateString(context, moodDate),
+            maxLines: 1,
           ),
           actions: [
             BlocBuilder<DeleteMoodCubit, DeleteMoodState>(

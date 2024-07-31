@@ -56,17 +56,16 @@ final goRouter = GoRouter(
                   name: 'update-mood-from-home',
                   path: 'update',
                   pageBuilder: (context, state) {
-                    if (state.extra != null) {
-                      final mood = state.extra! as Mood;
-                      context.read<UpdateMoodBloc>().add(
-                            UpdateMoodEvent.moodSelected(mood),
-                          );
-                    }
+                    final mood = state.extra! as Mood;
+                    context.read<UpdateMoodBloc>().add(
+                          UpdateMoodEvent.moodSelected(mood),
+                        );
 
-                    return const NoTransitionPage(
+                    return NoTransitionPage(
                       child: AuthenticatedView(
                         child: UpdateMoodScreen(
                           routeOrigin: 'home',
+                          moodDate: mood.createdOn,
                         ),
                       ),
                     );
@@ -100,17 +99,16 @@ final goRouter = GoRouter(
                       name: 'update-mood-from-moods',
                       path: 'update',
                       pageBuilder: (context, state) {
-                        if (state.extra != null) {
-                          final mood = state.extra! as Mood;
-                          context.read<UpdateMoodBloc>().add(
-                                UpdateMoodEvent.moodSelected(mood),
-                              );
-                        }
+                        final mood = state.extra! as Mood;
+                        context.read<UpdateMoodBloc>().add(
+                              UpdateMoodEvent.moodSelected(mood),
+                            );
 
-                        return const NoTransitionPage(
+                        return NoTransitionPage(
                           child: AuthenticatedView(
                             child: UpdateMoodScreen(
                               routeOrigin: 'moods',
+                              moodDate: mood.createdOn,
                             ),
                           ),
                         );
@@ -156,17 +154,16 @@ final goRouter = GoRouter(
                   name: 'update-mood-from-calendar',
                   path: 'update',
                   pageBuilder: (context, state) {
-                    if (state.extra != null) {
-                      final mood = state.extra! as Mood;
-                      context.read<UpdateMoodBloc>().add(
-                            UpdateMoodEvent.moodSelected(mood),
-                          );
-                    }
+                    final mood = state.extra! as Mood;
+                    context.read<UpdateMoodBloc>().add(
+                          UpdateMoodEvent.moodSelected(mood),
+                        );
 
-                    return const NoTransitionPage(
+                    return NoTransitionPage(
                       child: AuthenticatedView(
                         child: UpdateMoodScreen(
                           routeOrigin: 'calendar',
+                          moodDate: mood.createdOn,
                         ),
                       ),
                     );
