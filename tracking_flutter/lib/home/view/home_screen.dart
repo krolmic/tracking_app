@@ -16,13 +16,13 @@ import 'package:tracking_app/shared/theme/colors.dart';
 import 'package:tracking_app/shared/view/base_view.dart';
 import 'package:tracking_app/shared/widgets/error_message.dart';
 import 'package:tracking_app/shared/widgets/loading_indicator.dart';
+import 'package:tracking_app/shared/widgets/mood_data.dart';
 import 'package:tracking_app/shared/widgets/spacing.dart';
 import 'package:tracking_app/shared/widgets/tracked_mood.dart';
 import 'package:tracking_app/update_mood/bloc/update_mood_bloc.dart';
 import 'package:tracking_app/user_profile/cubit/user_profile_cubit.dart';
 import 'package:user_profile_repository/user_profile_repository.dart';
 
-part 'widgets/average.dart';
 part 'widgets/progress.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -197,7 +197,7 @@ class _HomeContentView extends StatelessWidget {
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: _Average(
+                  child: MoodData(
                     icon: Iconsax.heart_bold,
                     label: translations.averageMood,
                     value: averageMood.toStringAsFixed(2),
@@ -207,7 +207,7 @@ class _HomeContentView extends StatelessWidget {
                 ),
                 const HorizontalSpacing.medium(),
                 Expanded(
-                  child: _Average(
+                  child: MoodData(
                     icon: Iconsax.timer_bold,
                     label: translations.averageWorkHours,
                     value: '$averageWorkTimeInHours h',
@@ -218,7 +218,7 @@ class _HomeContentView extends StatelessWidget {
                 ),
                 const HorizontalSpacing.medium(),
                 Expanded(
-                  child: _Average(
+                  child: MoodData(
                     icon: Iconsax.money_4_bold,
                     label: translations.averageRevenue,
                     value: averageRevenue.toString() + r' $',

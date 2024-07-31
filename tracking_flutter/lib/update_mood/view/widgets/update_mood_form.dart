@@ -295,8 +295,7 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          '${workTime.inHours}h '
-                          '${workTime.inMinutes.remainder(60)}min',
+                          workTime.toFormattedString(),
                           style: Theme.of(context).textTheme.bodyLarge,
                         ),
                         IconButton(

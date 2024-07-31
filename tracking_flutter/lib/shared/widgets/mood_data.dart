@@ -1,10 +1,13 @@
-part of '../home_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:tracking_app/shared/theme/colors.dart';
+import 'package:tracking_app/shared/widgets/spacing.dart';
 
-class _Average extends StatelessWidget {
-  const _Average({
+class MoodData extends StatelessWidget {
+  const MoodData({
     required this.icon,
     required this.label,
     required this.value,
+    super.key,
   });
 
   final IconData icon;
