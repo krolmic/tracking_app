@@ -115,6 +115,16 @@ class _FloatingBottomNavigationBar extends StatelessWidget {
               GButton(
                 backgroundGradient: navigationButtonGradient,
                 icon: activeIndex == 2
+                    ? Iconsax.activity_bold
+                    : Iconsax.activity_outline,
+                iconActiveColor: contentBackgroundColor,
+                iconColor: darkBlueAccent,
+                textColor: contentOnDarkBackgroundColor,
+                text: "Analysis",
+              ),
+              GButton(
+                backgroundGradient: navigationButtonGradient,
+                icon: activeIndex == 3
                     ? Iconsax.setting_2_bold
                     : Iconsax.setting_2_outline,
                 iconActiveColor: contentBackgroundColor,

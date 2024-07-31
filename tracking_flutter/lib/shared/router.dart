@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mood_repository/mood_repository.dart';
 import 'package:tracking_app/calendar/view/calendar_screen.dart';
 import 'package:tracking_app/create_mood/view/create_mood_screen.dart';
+import 'package:tracking_app/graph/view/graph_screen.dart';
 import 'package:tracking_app/home/view/home_screen.dart';
 import 'package:tracking_app/moods/view/moods_screen.dart';
 import 'package:tracking_app/privacy_policy/view/privacy_policy_screen.dart';
@@ -21,6 +22,8 @@ final _shellNavigatorHomeKey =
     GlobalKey<NavigatorState>(debugLabel: 'shellHome');
 final _shellNavigatorCalendarKey =
     GlobalKey<NavigatorState>(debugLabel: 'shellCalendar');
+final _shellNavigatorGraphKey =
+    GlobalKey<NavigatorState>(debugLabel: 'shellGraph');
 final _shellNavigatorSettingsKey =
     GlobalKey<NavigatorState>(debugLabel: 'shellSettings');
 
@@ -145,6 +148,18 @@ final goRouter = GoRouter(
                   },
                 ),
               ],
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          navigatorKey: _shellNavigatorGraphKey,
+          routes: [
+            GoRoute(
+              name: 'graph',
+              path: '/graph',
+              pageBuilder: (context, state) => const NoTransitionPage(
+                child: GraphScreen(),
+              ),
             ),
           ],
         ),

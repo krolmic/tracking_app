@@ -12,12 +12,17 @@ void setDateTimeLocale(BuildContext context) {
 
 /// Returns a formatted date string based on the date of the passed [dateTime].
 String getDateString(
-  BuildContext context,
+  BuildContext? context,
   DateTime dateTime, {
   bool includeYear = true,
+  bool includeDay = true,
 }) {
-  if (_dateIsToday(dateTime)) {
+  if (context != null && _dateIsToday(dateTime)) {
     return AppLocalizations.of(context)!.today;
+  }
+
+  if (!includeDay) {
+    return Jiffy.parseFromDateTime(dateTime).yMMMM;
   }
 
   if (!includeYear) {
@@ -60,6 +65,8 @@ String getGreetingString(
 extension DateTimeX on DateTime {
   DateTime get startOfMonth => DateTime(year, month);
   DateTime get endOfMonth => DateTime(year, month + 1, 0);
+  DateTime get startOfWeek => subtract(Duration(days: weekday - 1));
+  DateTime get endOfWeek => add(Duration(days: 7 - weekday));
   DateTime get dateOnly => DateTime(year, month, day);
   bool isSameDay(DateTime other) =>
       year == other.year && month == other.month && day == other.day;

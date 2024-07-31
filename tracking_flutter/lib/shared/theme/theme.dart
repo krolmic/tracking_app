@@ -28,6 +28,7 @@ ThemeData get theme => ThemeData.from(
         thickness: 1,
       ),
       inputDecorationTheme: inputDecorationTheme,
+      checkboxTheme: checkBoxTheme,
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: elevatedButtonStyle,
       ),
@@ -99,6 +100,17 @@ final inputDecorationTheme = InputDecorationTheme(
   enabledBorder: const OutlineInputBorder(
     borderSide: BorderSide.none,
     borderRadius: BorderRadius.all(Radius.circular(10)),
+  ),
+);
+
+final checkBoxTheme = CheckboxThemeData(
+  fillColor: WidgetStateProperty.all(inputFillColor),
+  checkColor: WidgetStateProperty.all(primarySwatch),
+  shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(5),
+  ),
+  side: const BorderSide(
+    color: Colors.transparent,
   ),
 );
 
