@@ -4,10 +4,10 @@ import 'package:tracking_app/shared/widgets/spacing.dart';
 
 class MoodData extends StatelessWidget {
   const MoodData({
-    super.key,
     required this.icon,
     required this.label,
     required this.value,
+    super.key,
   });
 
   final IconData icon;

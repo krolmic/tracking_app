@@ -120,7 +120,7 @@ class _FloatingBottomNavigationBar extends StatelessWidget {
                 iconActiveColor: contentBackgroundColor,
                 iconColor: darkBlueAccent,
                 textColor: contentOnDarkBackgroundColor,
-                text: "Analysis",
+                text: translations.analysis,
               ),
               GButton(
                 backgroundGradient: navigationButtonGradient,

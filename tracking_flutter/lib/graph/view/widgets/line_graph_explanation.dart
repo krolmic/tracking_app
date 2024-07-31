@@ -11,7 +11,8 @@ class _LineGraphExplanation extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const _LineGraphBarIndicator(
-            color: _LineGraphStyle.moodsLineChartBarColor),
+          color: _LineGraphStyle.moodsLineChartBarColor,
+        ),
         const HorizontalSpacing.small(),
         Text(
           translations.mood,
