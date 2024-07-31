@@ -12,6 +12,8 @@
     "done": "Fertig",
     "appInitFailed": "Fehler bei Initialisierung der App.",
     "trackMood": "Stimmung tracken",
+    "trackToday": "Heute tracken",
+    "updateToday": "Heute editieren",
     "moodTrackedSuccessfully": "Stimung erfolgreich getrackt!",
     "somethingWentWrong": "Ein Fehler ist aufgetreten...",
     "pleaseTryAgain": "Hier ist etwas schiefgegegangen. Bitte versuche es erneut.",

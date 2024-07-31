@@ -26,6 +26,7 @@ mixin _$CreateMoodEvent {
     required TResult Function(String value) diaryChanged,
     required TResult Function(String value) revenueChanged,
     required TResult Function(Duration value) workTimeChanged,
+    required TResult Function(DateTime value) dateChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,6 +39,7 @@ mixin _$CreateMoodEvent {
     TResult? Function(String value)? diaryChanged,
     TResult? Function(String value)? revenueChanged,
     TResult? Function(Duration value)? workTimeChanged,
+    TResult? Function(DateTime value)? dateChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +52,7 @@ mixin _$CreateMoodEvent {
     TResult Function(String value)? diaryChanged,
     TResult Function(String value)? revenueChanged,
     TResult Function(Duration value)? workTimeChanged,
+    TResult Function(DateTime value)? dateChanged,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -66,6 +69,7 @@ mixin _$CreateMoodEvent {
     required TResult Function(_DiaryChanged value) diaryChanged,
     required TResult Function(_RevenueChanged value) revenueChanged,
     required TResult Function(_WorkTimeChanged value) workTimeChanged,
+    required TResult Function(_DateChanged value) dateChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -81,6 +85,7 @@ mixin _$CreateMoodEvent {
     TResult? Function(_DiaryChanged value)? diaryChanged,
     TResult? Function(_RevenueChanged value)? revenueChanged,
     TResult? Function(_WorkTimeChanged value)? workTimeChanged,
+    TResult? Function(_DateChanged value)? dateChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -96,6 +101,7 @@ mixin _$CreateMoodEvent {
     TResult Function(_DiaryChanged value)? diaryChanged,
     TResult Function(_RevenueChanged value)? revenueChanged,
     TResult Function(_WorkTimeChanged value)? workTimeChanged,
+    TResult Function(_DateChanged value)? dateChanged,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -165,6 +171,7 @@ class _$CreationSubmittedImpl implements _CreationSubmitted {
     required TResult Function(String value) diaryChanged,
     required TResult Function(String value) revenueChanged,
     required TResult Function(Duration value) workTimeChanged,
+    required TResult Function(DateTime value) dateChanged,
   }) {
     return creationSubmitted();
   }
@@ -180,6 +187,7 @@ class _$CreationSubmittedImpl implements _CreationSubmitted {
     TResult? Function(String value)? diaryChanged,
     TResult? Function(String value)? revenueChanged,
     TResult? Function(Duration value)? workTimeChanged,
+    TResult? Function(DateTime value)? dateChanged,
   }) {
     return creationSubmitted?.call();
   }
@@ -195,6 +203,7 @@ class _$CreationSubmittedImpl implements _CreationSubmitted {
     TResult Function(String value)? diaryChanged,
     TResult Function(String value)? revenueChanged,
     TResult Function(Duration value)? workTimeChanged,
+    TResult Function(DateTime value)? dateChanged,
     required TResult orElse(),
   }) {
     if (creationSubmitted != null) {
@@ -217,6 +226,7 @@ class _$CreationSubmittedImpl implements _CreationSubmitted {
     required TResult Function(_DiaryChanged value) diaryChanged,
     required TResult Function(_RevenueChanged value) revenueChanged,
     required TResult Function(_WorkTimeChanged value) workTimeChanged,
+    required TResult Function(_DateChanged value) dateChanged,
   }) {
     return creationSubmitted(this);
   }
@@ -235,6 +245,7 @@ class _$CreationSubmittedImpl implements _CreationSubmitted {
     TResult? Function(_DiaryChanged value)? diaryChanged,
     TResult? Function(_RevenueChanged value)? revenueChanged,
     TResult? Function(_WorkTimeChanged value)? workTimeChanged,
+    TResult? Function(_DateChanged value)? dateChanged,
   }) {
     return creationSubmitted?.call(this);
   }
@@ -253,6 +264,7 @@ class _$CreationSubmittedImpl implements _CreationSubmitted {
     TResult Function(_DiaryChanged value)? diaryChanged,
     TResult Function(_RevenueChanged value)? revenueChanged,
     TResult Function(_WorkTimeChanged value)? workTimeChanged,
+    TResult Function(_DateChanged value)? dateChanged,
     required TResult orElse(),
   }) {
     if (creationSubmitted != null) {
@@ -339,6 +351,7 @@ class _$MoodValueChangedImpl implements _MoodValueChanged {
     required TResult Function(String value) diaryChanged,
     required TResult Function(String value) revenueChanged,
     required TResult Function(Duration value) workTimeChanged,
+    required TResult Function(DateTime value) dateChanged,
   }) {
     return moodValueChanged(value);
   }
@@ -354,6 +367,7 @@ class _$MoodValueChangedImpl implements _MoodValueChanged {
     TResult? Function(String value)? diaryChanged,
     TResult? Function(String value)? revenueChanged,
     TResult? Function(Duration value)? workTimeChanged,
+    TResult? Function(DateTime value)? dateChanged,
   }) {
     return moodValueChanged?.call(value);
   }
@@ -369,6 +383,7 @@ class _$MoodValueChangedImpl implements _MoodValueChanged {
     TResult Function(String value)? diaryChanged,
     TResult Function(String value)? revenueChanged,
     TResult Function(Duration value)? workTimeChanged,
+    TResult Function(DateTime value)? dateChanged,
     required TResult orElse(),
   }) {
     if (moodValueChanged != null) {
@@ -391,6 +406,7 @@ class _$MoodValueChangedImpl implements _MoodValueChanged {
     required TResult Function(_DiaryChanged value) diaryChanged,
     required TResult Function(_RevenueChanged value) revenueChanged,
     required TResult Function(_WorkTimeChanged value) workTimeChanged,
+    required TResult Function(_DateChanged value) dateChanged,
   }) {
     return moodValueChanged(this);
   }
@@ -409,6 +425,7 @@ class _$MoodValueChangedImpl implements _MoodValueChanged {
     TResult? Function(_DiaryChanged value)? diaryChanged,
     TResult? Function(_RevenueChanged value)? revenueChanged,
     TResult? Function(_WorkTimeChanged value)? workTimeChanged,
+    TResult? Function(_DateChanged value)? dateChanged,
   }) {
     return moodValueChanged?.call(this);
   }
@@ -427,6 +444,7 @@ class _$MoodValueChangedImpl implements _MoodValueChanged {
     TResult Function(_DiaryChanged value)? diaryChanged,
     TResult Function(_RevenueChanged value)? revenueChanged,
     TResult Function(_WorkTimeChanged value)? workTimeChanged,
+    TResult Function(_DateChanged value)? dateChanged,
     required TResult orElse(),
   }) {
     if (moodValueChanged != null) {
@@ -523,6 +541,7 @@ class _$ThingsIAmGratefulFor1ChangedImpl
     required TResult Function(String value) diaryChanged,
     required TResult Function(String value) revenueChanged,
     required TResult Function(Duration value) workTimeChanged,
+    required TResult Function(DateTime value) dateChanged,
   }) {
     return thingsIAmGratefulFor1Changed(value);
   }
@@ -538,6 +557,7 @@ class _$ThingsIAmGratefulFor1ChangedImpl
     TResult? Function(String value)? diaryChanged,
     TResult? Function(String value)? revenueChanged,
     TResult? Function(Duration value)? workTimeChanged,
+    TResult? Function(DateTime value)? dateChanged,
   }) {
     return thingsIAmGratefulFor1Changed?.call(value);
   }
@@ -553,6 +573,7 @@ class _$ThingsIAmGratefulFor1ChangedImpl
     TResult Function(String value)? diaryChanged,
     TResult Function(String value)? revenueChanged,
     TResult Function(Duration value)? workTimeChanged,
+    TResult Function(DateTime value)? dateChanged,
     required TResult orElse(),
   }) {
     if (thingsIAmGratefulFor1Changed != null) {
@@ -575,6 +596,7 @@ class _$ThingsIAmGratefulFor1ChangedImpl
     required TResult Function(_DiaryChanged value) diaryChanged,
     required TResult Function(_RevenueChanged value) revenueChanged,
     required TResult Function(_WorkTimeChanged value) workTimeChanged,
+    required TResult Function(_DateChanged value) dateChanged,
   }) {
     return thingsIAmGratefulFor1Changed(this);
   }
@@ -593,6 +615,7 @@ class _$ThingsIAmGratefulFor1ChangedImpl
     TResult? Function(_DiaryChanged value)? diaryChanged,
     TResult? Function(_RevenueChanged value)? revenueChanged,
     TResult? Function(_WorkTimeChanged value)? workTimeChanged,
+    TResult? Function(_DateChanged value)? dateChanged,
   }) {
     return thingsIAmGratefulFor1Changed?.call(this);
   }
@@ -611,6 +634,7 @@ class _$ThingsIAmGratefulFor1ChangedImpl
     TResult Function(_DiaryChanged value)? diaryChanged,
     TResult Function(_RevenueChanged value)? revenueChanged,
     TResult Function(_WorkTimeChanged value)? workTimeChanged,
+    TResult Function(_DateChanged value)? dateChanged,
     required TResult orElse(),
   }) {
     if (thingsIAmGratefulFor1Changed != null) {
@@ -709,6 +733,7 @@ class _$ThingsIAmGratefulFor2ChangedImpl
     required TResult Function(String value) diaryChanged,
     required TResult Function(String value) revenueChanged,
     required TResult Function(Duration value) workTimeChanged,
+    required TResult Function(DateTime value) dateChanged,
   }) {
     return thingsIAmGratefulFor2Changed(value);
   }
@@ -724,6 +749,7 @@ class _$ThingsIAmGratefulFor2ChangedImpl
     TResult? Function(String value)? diaryChanged,
     TResult? Function(String value)? revenueChanged,
     TResult? Function(Duration value)? workTimeChanged,
+    TResult? Function(DateTime value)? dateChanged,
   }) {
     return thingsIAmGratefulFor2Changed?.call(value);
   }
@@ -739,6 +765,7 @@ class _$ThingsIAmGratefulFor2ChangedImpl
     TResult Function(String value)? diaryChanged,
     TResult Function(String value)? revenueChanged,
     TResult Function(Duration value)? workTimeChanged,
+    TResult Function(DateTime value)? dateChanged,
     required TResult orElse(),
   }) {
     if (thingsIAmGratefulFor2Changed != null) {
@@ -761,6 +788,7 @@ class _$ThingsIAmGratefulFor2ChangedImpl
     required TResult Function(_DiaryChanged value) diaryChanged,
     required TResult Function(_RevenueChanged value) revenueChanged,
     required TResult Function(_WorkTimeChanged value) workTimeChanged,
+    required TResult Function(_DateChanged value) dateChanged,
   }) {
     return thingsIAmGratefulFor2Changed(this);
   }
@@ -779,6 +807,7 @@ class _$ThingsIAmGratefulFor2ChangedImpl
     TResult? Function(_DiaryChanged value)? diaryChanged,
     TResult? Function(_RevenueChanged value)? revenueChanged,
     TResult? Function(_WorkTimeChanged value)? workTimeChanged,
+    TResult? Function(_DateChanged value)? dateChanged,
   }) {
     return thingsIAmGratefulFor2Changed?.call(this);
   }
@@ -797,6 +826,7 @@ class _$ThingsIAmGratefulFor2ChangedImpl
     TResult Function(_DiaryChanged value)? diaryChanged,
     TResult Function(_RevenueChanged value)? revenueChanged,
     TResult Function(_WorkTimeChanged value)? workTimeChanged,
+    TResult Function(_DateChanged value)? dateChanged,
     required TResult orElse(),
   }) {
     if (thingsIAmGratefulFor2Changed != null) {
@@ -895,6 +925,7 @@ class _$ThingsIAmGratefulFor3ChangedImpl
     required TResult Function(String value) diaryChanged,
     required TResult Function(String value) revenueChanged,
     required TResult Function(Duration value) workTimeChanged,
+    required TResult Function(DateTime value) dateChanged,
   }) {
     return thingsIAmGratefulFor3Changed(value);
   }
@@ -910,6 +941,7 @@ class _$ThingsIAmGratefulFor3ChangedImpl
     TResult? Function(String value)? diaryChanged,
     TResult? Function(String value)? revenueChanged,
     TResult? Function(Duration value)? workTimeChanged,
+    TResult? Function(DateTime value)? dateChanged,
   }) {
     return thingsIAmGratefulFor3Changed?.call(value);
   }
@@ -925,6 +957,7 @@ class _$ThingsIAmGratefulFor3ChangedImpl
     TResult Function(String value)? diaryChanged,
     TResult Function(String value)? revenueChanged,
     TResult Function(Duration value)? workTimeChanged,
+    TResult Function(DateTime value)? dateChanged,
     required TResult orElse(),
   }) {
     if (thingsIAmGratefulFor3Changed != null) {
@@ -947,6 +980,7 @@ class _$ThingsIAmGratefulFor3ChangedImpl
     required TResult Function(_DiaryChanged value) diaryChanged,
     required TResult Function(_RevenueChanged value) revenueChanged,
     required TResult Function(_WorkTimeChanged value) workTimeChanged,
+    required TResult Function(_DateChanged value) dateChanged,
   }) {
     return thingsIAmGratefulFor3Changed(this);
   }
@@ -965,6 +999,7 @@ class _$ThingsIAmGratefulFor3ChangedImpl
     TResult? Function(_DiaryChanged value)? diaryChanged,
     TResult? Function(_RevenueChanged value)? revenueChanged,
     TResult? Function(_WorkTimeChanged value)? workTimeChanged,
+    TResult? Function(_DateChanged value)? dateChanged,
   }) {
     return thingsIAmGratefulFor3Changed?.call(this);
   }
@@ -983,6 +1018,7 @@ class _$ThingsIAmGratefulFor3ChangedImpl
     TResult Function(_DiaryChanged value)? diaryChanged,
     TResult Function(_RevenueChanged value)? revenueChanged,
     TResult Function(_WorkTimeChanged value)? workTimeChanged,
+    TResult Function(_DateChanged value)? dateChanged,
     required TResult orElse(),
   }) {
     if (thingsIAmGratefulFor3Changed != null) {
@@ -1075,6 +1111,7 @@ class _$DiaryChangedImpl implements _DiaryChanged {
     required TResult Function(String value) diaryChanged,
     required TResult Function(String value) revenueChanged,
     required TResult Function(Duration value) workTimeChanged,
+    required TResult Function(DateTime value) dateChanged,
   }) {
     return diaryChanged(value);
   }
@@ -1090,6 +1127,7 @@ class _$DiaryChangedImpl implements _DiaryChanged {
     TResult? Function(String value)? diaryChanged,
     TResult? Function(String value)? revenueChanged,
     TResult? Function(Duration value)? workTimeChanged,
+    TResult? Function(DateTime value)? dateChanged,
   }) {
     return diaryChanged?.call(value);
   }
@@ -1105,6 +1143,7 @@ class _$DiaryChangedImpl implements _DiaryChanged {
     TResult Function(String value)? diaryChanged,
     TResult Function(String value)? revenueChanged,
     TResult Function(Duration value)? workTimeChanged,
+    TResult Function(DateTime value)? dateChanged,
     required TResult orElse(),
   }) {
     if (diaryChanged != null) {
@@ -1127,6 +1166,7 @@ class _$DiaryChangedImpl implements _DiaryChanged {
     required TResult Function(_DiaryChanged value) diaryChanged,
     required TResult Function(_RevenueChanged value) revenueChanged,
     required TResult Function(_WorkTimeChanged value) workTimeChanged,
+    required TResult Function(_DateChanged value) dateChanged,
   }) {
     return diaryChanged(this);
   }
@@ -1145,6 +1185,7 @@ class _$DiaryChangedImpl implements _DiaryChanged {
     TResult? Function(_DiaryChanged value)? diaryChanged,
     TResult? Function(_RevenueChanged value)? revenueChanged,
     TResult? Function(_WorkTimeChanged value)? workTimeChanged,
+    TResult? Function(_DateChanged value)? dateChanged,
   }) {
     return diaryChanged?.call(this);
   }
@@ -1163,6 +1204,7 @@ class _$DiaryChangedImpl implements _DiaryChanged {
     TResult Function(_DiaryChanged value)? diaryChanged,
     TResult Function(_RevenueChanged value)? revenueChanged,
     TResult Function(_WorkTimeChanged value)? workTimeChanged,
+    TResult Function(_DateChanged value)? dateChanged,
     required TResult orElse(),
   }) {
     if (diaryChanged != null) {
@@ -1254,6 +1296,7 @@ class _$RevenueChangedImpl implements _RevenueChanged {
     required TResult Function(String value) diaryChanged,
     required TResult Function(String value) revenueChanged,
     required TResult Function(Duration value) workTimeChanged,
+    required TResult Function(DateTime value) dateChanged,
   }) {
     return revenueChanged(value);
   }
@@ -1269,6 +1312,7 @@ class _$RevenueChangedImpl implements _RevenueChanged {
     TResult? Function(String value)? diaryChanged,
     TResult? Function(String value)? revenueChanged,
     TResult? Function(Duration value)? workTimeChanged,
+    TResult? Function(DateTime value)? dateChanged,
   }) {
     return revenueChanged?.call(value);
   }
@@ -1284,6 +1328,7 @@ class _$RevenueChangedImpl implements _RevenueChanged {
     TResult Function(String value)? diaryChanged,
     TResult Function(String value)? revenueChanged,
     TResult Function(Duration value)? workTimeChanged,
+    TResult Function(DateTime value)? dateChanged,
     required TResult orElse(),
   }) {
     if (revenueChanged != null) {
@@ -1306,6 +1351,7 @@ class _$RevenueChangedImpl implements _RevenueChanged {
     required TResult Function(_DiaryChanged value) diaryChanged,
     required TResult Function(_RevenueChanged value) revenueChanged,
     required TResult Function(_WorkTimeChanged value) workTimeChanged,
+    required TResult Function(_DateChanged value) dateChanged,
   }) {
     return revenueChanged(this);
   }
@@ -1324,6 +1370,7 @@ class _$RevenueChangedImpl implements _RevenueChanged {
     TResult? Function(_DiaryChanged value)? diaryChanged,
     TResult? Function(_RevenueChanged value)? revenueChanged,
     TResult? Function(_WorkTimeChanged value)? workTimeChanged,
+    TResult? Function(_DateChanged value)? dateChanged,
   }) {
     return revenueChanged?.call(this);
   }
@@ -1342,6 +1389,7 @@ class _$RevenueChangedImpl implements _RevenueChanged {
     TResult Function(_DiaryChanged value)? diaryChanged,
     TResult Function(_RevenueChanged value)? revenueChanged,
     TResult Function(_WorkTimeChanged value)? workTimeChanged,
+    TResult Function(_DateChanged value)? dateChanged,
     required TResult orElse(),
   }) {
     if (revenueChanged != null) {
@@ -1433,6 +1481,7 @@ class _$WorkTimeChangedImpl implements _WorkTimeChanged {
     required TResult Function(String value) diaryChanged,
     required TResult Function(String value) revenueChanged,
     required TResult Function(Duration value) workTimeChanged,
+    required TResult Function(DateTime value) dateChanged,
   }) {
     return workTimeChanged(value);
   }
@@ -1448,6 +1497,7 @@ class _$WorkTimeChangedImpl implements _WorkTimeChanged {
     TResult? Function(String value)? diaryChanged,
     TResult? Function(String value)? revenueChanged,
     TResult? Function(Duration value)? workTimeChanged,
+    TResult? Function(DateTime value)? dateChanged,
   }) {
     return workTimeChanged?.call(value);
   }
@@ -1463,6 +1513,7 @@ class _$WorkTimeChangedImpl implements _WorkTimeChanged {
     TResult Function(String value)? diaryChanged,
     TResult Function(String value)? revenueChanged,
     TResult Function(Duration value)? workTimeChanged,
+    TResult Function(DateTime value)? dateChanged,
     required TResult orElse(),
   }) {
     if (workTimeChanged != null) {
@@ -1485,6 +1536,7 @@ class _$WorkTimeChangedImpl implements _WorkTimeChanged {
     required TResult Function(_DiaryChanged value) diaryChanged,
     required TResult Function(_RevenueChanged value) revenueChanged,
     required TResult Function(_WorkTimeChanged value) workTimeChanged,
+    required TResult Function(_DateChanged value) dateChanged,
   }) {
     return workTimeChanged(this);
   }
@@ -1503,6 +1555,7 @@ class _$WorkTimeChangedImpl implements _WorkTimeChanged {
     TResult? Function(_DiaryChanged value)? diaryChanged,
     TResult? Function(_RevenueChanged value)? revenueChanged,
     TResult? Function(_WorkTimeChanged value)? workTimeChanged,
+    TResult? Function(_DateChanged value)? dateChanged,
   }) {
     return workTimeChanged?.call(this);
   }
@@ -1521,6 +1574,7 @@ class _$WorkTimeChangedImpl implements _WorkTimeChanged {
     TResult Function(_DiaryChanged value)? diaryChanged,
     TResult Function(_RevenueChanged value)? revenueChanged,
     TResult Function(_WorkTimeChanged value)? workTimeChanged,
+    TResult Function(_DateChanged value)? dateChanged,
     required TResult orElse(),
   }) {
     if (workTimeChanged != null) {
@@ -1540,9 +1594,194 @@ abstract class _WorkTimeChanged implements CreateMoodEvent {
 }
 
 /// @nodoc
+abstract class _$$DateChangedImplCopyWith<$Res> {
+  factory _$$DateChangedImplCopyWith(
+          _$DateChangedImpl value, $Res Function(_$DateChangedImpl) then) =
+      __$$DateChangedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({DateTime value});
+}
+
+/// @nodoc
+class __$$DateChangedImplCopyWithImpl<$Res>
+    extends _$CreateMoodEventCopyWithImpl<$Res, _$DateChangedImpl>
+    implements _$$DateChangedImplCopyWith<$Res> {
+  __$$DateChangedImplCopyWithImpl(
+      _$DateChangedImpl _value, $Res Function(_$DateChangedImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? value = null,
+  }) {
+    return _then(_$DateChangedImpl(
+      null == value
+          ? _value.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$DateChangedImpl implements _DateChanged {
+  const _$DateChangedImpl(this.value);
+
+  @override
+  final DateTime value;
+
+  @override
+  String toString() {
+    return 'CreateMoodEvent.dateChanged(value: $value)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$DateChangedImpl &&
+            (identical(other.value, value) || other.value == value));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, value);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$DateChangedImplCopyWith<_$DateChangedImpl> get copyWith =>
+      __$$DateChangedImplCopyWithImpl<_$DateChangedImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() creationSubmitted,
+    required TResult Function(double value) moodValueChanged,
+    required TResult Function(String value) thingsIAmGratefulFor1Changed,
+    required TResult Function(String value) thingsIAmGratefulFor2Changed,
+    required TResult Function(String value) thingsIAmGratefulFor3Changed,
+    required TResult Function(String value) diaryChanged,
+    required TResult Function(String value) revenueChanged,
+    required TResult Function(Duration value) workTimeChanged,
+    required TResult Function(DateTime value) dateChanged,
+  }) {
+    return dateChanged(value);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? creationSubmitted,
+    TResult? Function(double value)? moodValueChanged,
+    TResult? Function(String value)? thingsIAmGratefulFor1Changed,
+    TResult? Function(String value)? thingsIAmGratefulFor2Changed,
+    TResult? Function(String value)? thingsIAmGratefulFor3Changed,
+    TResult? Function(String value)? diaryChanged,
+    TResult? Function(String value)? revenueChanged,
+    TResult? Function(Duration value)? workTimeChanged,
+    TResult? Function(DateTime value)? dateChanged,
+  }) {
+    return dateChanged?.call(value);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? creationSubmitted,
+    TResult Function(double value)? moodValueChanged,
+    TResult Function(String value)? thingsIAmGratefulFor1Changed,
+    TResult Function(String value)? thingsIAmGratefulFor2Changed,
+    TResult Function(String value)? thingsIAmGratefulFor3Changed,
+    TResult Function(String value)? diaryChanged,
+    TResult Function(String value)? revenueChanged,
+    TResult Function(Duration value)? workTimeChanged,
+    TResult Function(DateTime value)? dateChanged,
+    required TResult orElse(),
+  }) {
+    if (dateChanged != null) {
+      return dateChanged(value);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_CreationSubmitted value) creationSubmitted,
+    required TResult Function(_MoodValueChanged value) moodValueChanged,
+    required TResult Function(_ThingsIAmGratefulFor1Changed value)
+        thingsIAmGratefulFor1Changed,
+    required TResult Function(_ThingsIAmGratefulFor2Changed value)
+        thingsIAmGratefulFor2Changed,
+    required TResult Function(_ThingsIAmGratefulFor3Changed value)
+        thingsIAmGratefulFor3Changed,
+    required TResult Function(_DiaryChanged value) diaryChanged,
+    required TResult Function(_RevenueChanged value) revenueChanged,
+    required TResult Function(_WorkTimeChanged value) workTimeChanged,
+    required TResult Function(_DateChanged value) dateChanged,
+  }) {
+    return dateChanged(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_CreationSubmitted value)? creationSubmitted,
+    TResult? Function(_MoodValueChanged value)? moodValueChanged,
+    TResult? Function(_ThingsIAmGratefulFor1Changed value)?
+        thingsIAmGratefulFor1Changed,
+    TResult? Function(_ThingsIAmGratefulFor2Changed value)?
+        thingsIAmGratefulFor2Changed,
+    TResult? Function(_ThingsIAmGratefulFor3Changed value)?
+        thingsIAmGratefulFor3Changed,
+    TResult? Function(_DiaryChanged value)? diaryChanged,
+    TResult? Function(_RevenueChanged value)? revenueChanged,
+    TResult? Function(_WorkTimeChanged value)? workTimeChanged,
+    TResult? Function(_DateChanged value)? dateChanged,
+  }) {
+    return dateChanged?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_CreationSubmitted value)? creationSubmitted,
+    TResult Function(_MoodValueChanged value)? moodValueChanged,
+    TResult Function(_ThingsIAmGratefulFor1Changed value)?
+        thingsIAmGratefulFor1Changed,
+    TResult Function(_ThingsIAmGratefulFor2Changed value)?
+        thingsIAmGratefulFor2Changed,
+    TResult Function(_ThingsIAmGratefulFor3Changed value)?
+        thingsIAmGratefulFor3Changed,
+    TResult Function(_DiaryChanged value)? diaryChanged,
+    TResult Function(_RevenueChanged value)? revenueChanged,
+    TResult Function(_WorkTimeChanged value)? workTimeChanged,
+    TResult Function(_DateChanged value)? dateChanged,
+    required TResult orElse(),
+  }) {
+    if (dateChanged != null) {
+      return dateChanged(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _DateChanged implements CreateMoodEvent {
+  const factory _DateChanged(final DateTime value) = _$DateChangedImpl;
+
+  DateTime get value;
+  @JsonKey(ignore: true)
+  _$$DateChangedImplCopyWith<_$DateChangedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$CreateMoodState {
   FormzSubmissionStatus get formStatus => throw _privateConstructorUsedError;
   MoodFormzState get moodFormState => throw _privateConstructorUsedError;
+  DateTime? get selectedDate => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CreateMoodStateCopyWith<CreateMoodState> get copyWith =>
@@ -1555,7 +1794,10 @@ abstract class $CreateMoodStateCopyWith<$Res> {
           CreateMoodState value, $Res Function(CreateMoodState) then) =
       _$CreateMoodStateCopyWithImpl<$Res, CreateMoodState>;
   @useResult
-  $Res call({FormzSubmissionStatus formStatus, MoodFormzState moodFormState});
+  $Res call(
+      {FormzSubmissionStatus formStatus,
+      MoodFormzState moodFormState,
+      DateTime? selectedDate});
 }
 
 /// @nodoc
@@ -1573,6 +1815,7 @@ class _$CreateMoodStateCopyWithImpl<$Res, $Val extends CreateMoodState>
   $Res call({
     Object? formStatus = null,
     Object? moodFormState = null,
+    Object? selectedDate = freezed,
   }) {
     return _then(_value.copyWith(
       formStatus: null == formStatus
@@ -1583,6 +1826,10 @@ class _$CreateMoodStateCopyWithImpl<$Res, $Val extends CreateMoodState>
           ? _value.moodFormState
           : moodFormState // ignore: cast_nullable_to_non_nullable
               as MoodFormzState,
+      selectedDate: freezed == selectedDate
+          ? _value.selectedDate
+          : selectedDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ) as $Val);
   }
 }
@@ -1595,7 +1842,10 @@ abstract class _$$CreateMoodStateImplCopyWith<$Res>
       __$$CreateMoodStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({FormzSubmissionStatus formStatus, MoodFormzState moodFormState});
+  $Res call(
+      {FormzSubmissionStatus formStatus,
+      MoodFormzState moodFormState,
+      DateTime? selectedDate});
 }
 
 /// @nodoc
@@ -1611,6 +1861,7 @@ class __$$CreateMoodStateImplCopyWithImpl<$Res>
   $Res call({
     Object? formStatus = null,
     Object? moodFormState = null,
+    Object? selectedDate = freezed,
   }) {
     return _then(_$CreateMoodStateImpl(
       formStatus: null == formStatus
@@ -1621,6 +1872,10 @@ class __$$CreateMoodStateImplCopyWithImpl<$Res>
           ? _value.moodFormState
           : moodFormState // ignore: cast_nullable_to_non_nullable
               as MoodFormzState,
+      selectedDate: freezed == selectedDate
+          ? _value.selectedDate
+          : selectedDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -1630,7 +1885,8 @@ class __$$CreateMoodStateImplCopyWithImpl<$Res>
 class _$CreateMoodStateImpl implements _CreateMoodState {
   const _$CreateMoodStateImpl(
       {this.formStatus = FormzSubmissionStatus.initial,
-      this.moodFormState = const MoodFormzState()});
+      this.moodFormState = const MoodFormzState(),
+      this.selectedDate});
 
   @override
   @JsonKey()
@@ -1638,10 +1894,12 @@ class _$CreateMoodStateImpl implements _CreateMoodState {
   @override
   @JsonKey()
   final MoodFormzState moodFormState;
+  @override
+  final DateTime? selectedDate;
 
   @override
   String toString() {
-    return 'CreateMoodState(formStatus: $formStatus, moodFormState: $moodFormState)';
+    return 'CreateMoodState(formStatus: $formStatus, moodFormState: $moodFormState, selectedDate: $selectedDate)';
   }
 
   @override
@@ -1652,11 +1910,14 @@ class _$CreateMoodStateImpl implements _CreateMoodState {
             (identical(other.formStatus, formStatus) ||
                 other.formStatus == formStatus) &&
             (identical(other.moodFormState, moodFormState) ||
-                other.moodFormState == moodFormState));
+                other.moodFormState == moodFormState) &&
+            (identical(other.selectedDate, selectedDate) ||
+                other.selectedDate == selectedDate));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, formStatus, moodFormState);
+  int get hashCode =>
+      Object.hash(runtimeType, formStatus, moodFormState, selectedDate);
 
   @JsonKey(ignore: true)
   @override
@@ -1669,12 +1930,15 @@ class _$CreateMoodStateImpl implements _CreateMoodState {
 abstract class _CreateMoodState implements CreateMoodState {
   const factory _CreateMoodState(
       {final FormzSubmissionStatus formStatus,
-      final MoodFormzState moodFormState}) = _$CreateMoodStateImpl;
+      final MoodFormzState moodFormState,
+      final DateTime? selectedDate}) = _$CreateMoodStateImpl;
 
   @override
   FormzSubmissionStatus get formStatus;
   @override
   MoodFormzState get moodFormState;
+  @override
+  DateTime? get selectedDate;
   @override
   @JsonKey(ignore: true)
   _$$CreateMoodStateImplCopyWith<_$CreateMoodStateImpl> get copyWith =>

@@ -38,6 +38,8 @@ class CreateMoodBloc extends Bloc<CreateMoodEvent, CreateMoodState> {
         _onRevenueChanged(event.revenue, emit);
       } else if (event.isWorkTimeChanged) {
         _onWorkTimeChanged(event.workTime, emit);
+      } else if (event.isDateChanged) {
+        _onDateChanged(event.date, emit);
       }
     });
   }
@@ -57,7 +59,7 @@ class CreateMoodBloc extends Bloc<CreateMoodEvent, CreateMoodState> {
 
       await _moodRepository.createMood(
         userId: userId,
-        createdOn: DateTime.now(),
+        createdOn: state.selectedDate ?? DateTime.now(),
         value: state.moodFormState.moodValue.value,
         diary: state.moodFormState.diary.value,
         thingsIAmGratefulAbout: [
@@ -76,6 +78,7 @@ class CreateMoodBloc extends Bloc<CreateMoodEvent, CreateMoodState> {
         state.copyWith(
           formStatus: FormzSubmissionStatus.success,
           moodFormState: const MoodFormzState(),
+          selectedDate: null,
         ),
       );
     } catch (e, stackTrace) {
@@ -172,6 +175,14 @@ class CreateMoodBloc extends Bloc<CreateMoodEvent, CreateMoodState> {
         moodFormState: state.moodFormState.copyWith(
           workTime: WorkTimeInput.dirty(value: value),
         ),
+      ),
+    );
+  }
+
+  void _onDateChanged(DateTime value, Emitter<CreateMoodState> emit) {
+    emit(
+      state.copyWith(
+        selectedDate: value,
       ),
     );
   }

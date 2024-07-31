@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mood_repository/mood_repository.dart';
 import 'package:tracking_app/calendar/view/calendar_screen.dart';
+import 'package:tracking_app/create_mood/bloc/create_mood_bloc.dart';
 import 'package:tracking_app/create_mood/view/create_mood_screen.dart';
 import 'package:tracking_app/graph/view/graph_screen.dart';
 import 'package:tracking_app/home/view/home_screen.dart';
@@ -81,13 +82,19 @@ final goRouter = GoRouter(
                   ),
                   routes: [
                     GoRoute(
-                      name: 'create',
+                      name: 'create-mood-from-moods',
                       path: 'create',
-                      pageBuilder: (context, state) => const NoTransitionPage(
-                        child: AuthenticatedView(
-                          child: CreateMoodScreen(),
-                        ),
-                      ),
+                      pageBuilder: (context, state) {
+                        context.read<CreateMoodBloc>().add(
+                              CreateMoodEvent.dateChanged(DateTime.now()),
+                            );
+
+                        return const NoTransitionPage(
+                          child: AuthenticatedView(
+                            child: CreateMoodScreen(),
+                          ),
+                        );
+                      },
                     ),
                     GoRoute(
                       name: 'update-mood-from-moods',
@@ -127,6 +134,24 @@ final goRouter = GoRouter(
                 ),
               ),
               routes: [
+                GoRoute(
+                  name: 'create-mood-from-calendar',
+                  path: 'create',
+                  pageBuilder: (context, state) {
+                    if (state.extra != null) {
+                      final date = state.extra! as DateTime;
+                      context.read<CreateMoodBloc>().add(
+                            CreateMoodEvent.dateChanged(date),
+                          );
+                    }
+
+                    return const NoTransitionPage(
+                      child: AuthenticatedView(
+                        child: CreateMoodScreen(),
+                      ),
+                    );
+                  },
+                ),
                 GoRoute(
                   name: 'update-mood-from-calendar',
                   path: 'update',

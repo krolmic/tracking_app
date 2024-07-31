@@ -12,6 +12,8 @@
     "done": "Done",
     "appInitFailed": "App initialization failed.",
     "trackMood": "Track mood",
+    "trackToday": "Track today",
+    "updateToday": "Update today",
     "moodTrackedSuccessfully": "Mood tracked successfully!",
     "somethingWentWrong": "An error has occurred...",
     "pleaseTryAgain": "Something went wrong here. Please try again.",

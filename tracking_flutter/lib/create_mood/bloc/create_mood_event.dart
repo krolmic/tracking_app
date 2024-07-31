@@ -15,6 +15,7 @@ class CreateMoodEvent with _$CreateMoodEvent {
   const factory CreateMoodEvent.revenueChanged(String value) = _RevenueChanged;
   const factory CreateMoodEvent.workTimeChanged(Duration value) =
       _WorkTimeChanged;
+  const factory CreateMoodEvent.dateChanged(DateTime value) = _DateChanged;
 }
 
 extension CreateMoodEventX on CreateMoodEvent {
@@ -29,6 +30,7 @@ extension CreateMoodEventX on CreateMoodEvent {
   bool get isDiaryChanged => this is _DiaryChanged;
   bool get isRevenueChanged => this is _RevenueChanged;
   bool get isWorkTimeChanged => this is _WorkTimeChanged;
+  bool get isDateChanged => this is _DateChanged;
 
   double get moodValue => (this as _MoodValueChanged).value;
   String get thingsIAmGratefulFor1 =>
@@ -40,4 +42,5 @@ extension CreateMoodEventX on CreateMoodEvent {
   String get diary => (this as _DiaryChanged).value;
   String get revenue => (this as _RevenueChanged).value;
   Duration get workTime => (this as _WorkTimeChanged).value;
+  DateTime get date => (this as _DateChanged).value;
 }

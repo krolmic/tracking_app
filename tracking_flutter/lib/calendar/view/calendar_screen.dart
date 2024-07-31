@@ -163,6 +163,11 @@ class _CalendarView extends StatelessWidget {
                         if (mood != null) {
                           context.go('/calendar/update', extra: mood);
                         }
+                      } else {
+                        context.goNamed(
+                          'create-mood-from-calendar',
+                          extra: date,
+                        );
                       }
                     },
                     locale: Localizations.localeOf(context).languageCode,

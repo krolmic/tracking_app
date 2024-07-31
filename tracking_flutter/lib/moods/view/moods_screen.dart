@@ -68,8 +68,8 @@ class MoodsScreen extends StatelessWidget {
               return AppElevatedButton(
                 icon: todaysMoodIsTracked ? Icons.edit : Iconsax.add_outline,
                 label: todaysMoodIsTracked
-                    ? translations.updateMood
-                    : translations.trackMood,
+                    ? translations.updateToday
+                    : translations.trackToday,
                 onPressed: () {
                   if (todaysMoodIsTracked) {
                     context.goNamed(
@@ -77,7 +77,7 @@ class MoodsScreen extends StatelessWidget {
                       extra: state.moodsListState.todaysMood,
                     );
                   } else {
-                    context.goNamed('create');
+                    context.goNamed('create-mood-from-moods');
                   }
                 },
                 isLoading: state.isInitialOrLoading,

@@ -114,19 +114,9 @@ class UpdateMoodScreen extends StatelessWidget {
                 );
               }
 
-              return Column(
-                children: [
-                  Text(
-                    getDateString(context, state.mood!.createdOn),
-                    maxLines: 1,
-                  ),
-                  Text(
-                    getTimeString(state.mood!.createdOn),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
-                ],
+              return Text(
+                getDateString(context, state.mood!.createdOn),
+                maxLines: 1,
               );
             },
           ),
@@ -183,6 +173,12 @@ class _UpdateMoodView extends StatelessWidget {
         buildWhen: (previousState, currentState) =>
             previousState.mood != currentState.mood,
         builder: (context, state) {
+          if (state.mood == null) {
+            return const Center(
+              child: LoadingIndicator(),
+            );
+          }
+
           return _UpdateMoodForm(
             key: const Key('Update mood form'),
             mood: state.mood!,
