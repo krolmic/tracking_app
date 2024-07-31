@@ -33,7 +33,7 @@ class Mood with _$Mood {
   bool get isThisWeek {
     final now = DateTime.now();
     final weekStart = now.subtract(Duration(days: now.weekday - 1));
-    return createdOn.isAfter(weekStart);
+    return createdOn.isAfter(weekStart.subtract(const Duration(days: 1)));
   }
 }
 
