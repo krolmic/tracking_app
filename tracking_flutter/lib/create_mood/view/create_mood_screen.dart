@@ -8,6 +8,7 @@ import 'package:formz/formz.dart';
 import 'package:go_router/go_router.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:tracking_app/create_mood/bloc/create_mood_bloc.dart';
+import 'package:tracking_app/shared/date_time.dart';
 import 'package:tracking_app/shared/formz.dart';
 import 'package:tracking_app/shared/theme/colors.dart';
 import 'package:tracking_app/shared/theme/layout.dart';
@@ -36,7 +37,7 @@ class CreateMoodScreen extends StatelessWidget {
             translations.moodTrackedSuccessfully,
           );
 
-          context.goNamed('moods');
+          context.pop();
         } else if (state.formStatus.isFailure) {
           showToast(
             context,
@@ -47,7 +48,29 @@ class CreateMoodScreen extends StatelessWidget {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text(translations.trackMood),
+          title: Column(
+            children: [
+              Text(translations.trackMood),
+              BlocBuilder<CreateMoodBloc, CreateMoodState>(
+                buildWhen: (previous, current) =>
+                    previous.selectedDate != current.selectedDate,
+                builder: (context, state) {
+                  if (state.selectedDate == null) {
+                    return const TinyLoadingIndicator();
+                  }
+
+                  return Text(
+                    getDateString(
+                      context,
+                      state.selectedDate ?? DateTime.now(),
+                    ),
+                    maxLines: 1,
+                    style: Theme.of(context).textTheme.bodySmall,
+                  );
+                },
+              ),
+            ],
+          ),
         ),
         body: const _CreateMoodView(),
       ),

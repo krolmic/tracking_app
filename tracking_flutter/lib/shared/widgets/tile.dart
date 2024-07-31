@@ -49,7 +49,7 @@ class Tile extends StatelessWidget {
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                      color: darkBlue,
+                      color: tileSubtitleColor,
                     ),
               )
             : null,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:mood_repository/mood_repository.dart';
 import 'package:tracking_app/shared/date_time.dart';
@@ -18,6 +19,8 @@ class TrackedMood extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final translations = AppLocalizations.of(context)!;
+
     return Tile(
       icon: Iconsax.edit_2_outline,
       iconSize: 20,
@@ -34,7 +37,7 @@ class TrackedMood extends StatelessWidget {
         ),
       ),
       title: getDateString(context, mood.createdOn),
-      subTitle: getTimeString(mood.createdOn),
+      subTitle: '${translations.mood}: ${mood.value}',
       onTap: onTap,
     );
   }

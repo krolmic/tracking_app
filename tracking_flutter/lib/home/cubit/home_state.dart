@@ -104,6 +104,10 @@ extension MoodsListStateX on MoodsListState {
   List<Mood> get recentlyAddedMoods {
     return maybeWhen(
       loaded: (moods) {
+        if (moodsThisWeek.length > 2) {
+          return moodsThisWeek;
+        }
+
         return moods.take(3).toList();
       },
       orElse: () => [],
@@ -113,7 +117,7 @@ extension MoodsListStateX on MoodsListState {
   double get weeklyProgress {
     return maybeWhen(
       loaded: (moods) {
-        return moodsThisWeek.length / 7;
+        return moodsThisWeek.length / DateTime.now().weekday;
       },
       orElse: () => 0,
     );
