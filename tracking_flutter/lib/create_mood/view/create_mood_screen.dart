@@ -7,6 +7,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:formz/formz.dart';
 import 'package:go_router/go_router.dart';
 import 'package:icons_plus/icons_plus.dart';
+import 'package:tracking_app/app_settings/bloc/app_settings_bloc.dart';
 import 'package:tracking_app/create_mood/bloc/create_mood_bloc.dart';
 import 'package:tracking_app/shared/date_time.dart';
 import 'package:tracking_app/shared/formz.dart';

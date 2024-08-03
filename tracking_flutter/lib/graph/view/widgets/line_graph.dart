@@ -71,12 +71,14 @@ class _LineGraph extends StatelessWidget {
     required this.moods,
     required this.moodsWithTrackedRevenue,
     required this.moodsWithTrackedWorkTime,
+    required this.currencySymbol,
   });
 
   final DateTime targetDate;
   final List<Mood> moods;
   final List<Mood> moodsWithTrackedRevenue;
   final List<Mood> moodsWithTrackedWorkTime;
+  final String currencySymbol;
 
   @override
   Widget build(BuildContext context) {
@@ -124,7 +126,8 @@ class _LineGraph extends StatelessWidget {
               String text;
               if (isRevenueSpot) {
                 text = '${translations.revenue}:\n'
-                    '${moodsWithTrackedRevenue[flSpot.spotIndex].revenue}\$';
+                    '${moodsWithTrackedRevenue[flSpot.spotIndex].revenue} '
+                    '$currencySymbol';
               } else if (isWorkTimeSpot) {
                 final mood = moodsWithTrackedWorkTime[flSpot.spotIndex];
                 text = '${translations.workTime}:\n'

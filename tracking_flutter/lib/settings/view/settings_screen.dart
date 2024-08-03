@@ -254,6 +254,14 @@ class _SettingsView extends StatelessWidget {
                         ),
                         const VerticalSpacing.large(),
                         Tile(
+                          icon: Iconsax.edit_2_outline,
+                          title: translations.appSettings,
+                          leading: const Icon(Iconsax.setting_4_bold),
+                          onTap: () => context.goNamed(
+                            'app-settings',
+                          ),
+                        ).animate().fadeIn(duration: animationDuration),
+                        Tile(
                           icon: Icons.mail_outline,
                           title: translations.support,
                           leading: const Icon(Iconsax.support_bold),
@@ -264,13 +272,11 @@ class _SettingsView extends StatelessWidget {
                               ),
                           isLoading: settingsState.sendEmailState.isLoading,
                         ).animate().fadeIn(duration: animationDuration),
-                        const VerticalSpacing.medium(),
                         Tile(
                           title: translations.termsOfService,
                           leading: const Icon(Iconsax.document_text_1_bold),
                           onTap: () => context.go('/settings/terms-of-service'),
                         ).animate().fadeIn(duration: animationDuration),
-                        const VerticalSpacing.medium(),
                         Tile(
                           title: translations.privacyPolicy,
                           leading: const Icon(Iconsax.document_text_1_bold),

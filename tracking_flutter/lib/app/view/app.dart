@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mood_repository/mood_repository.dart';
+import 'package:settings_repository/settings_repository.dart';
 import 'package:tracking_app/app/cubit/app_cubit.dart';
+import 'package:tracking_app/app_settings/bloc/app_settings_bloc.dart';
 import 'package:tracking_app/create_mood/bloc/create_mood_bloc.dart';
 import 'package:tracking_app/delete_mood/cubit/delete_mood_cubit.dart';
 import 'package:tracking_app/l10n/amplify_resolvers.dart';
@@ -38,6 +40,11 @@ class App extends StatelessWidget {
             userProfileRepository: getIt<UserProfileRepository>(),
           ),
         ),
+        BlocProvider<AppSettingsBloc>(
+          create: (context) => AppSettingsBloc(
+            settingsRepository: getIt<SettingsRepository>(),
+          )..add(const AppSettingsEvent.settingsInitialized()),
+        ),
         BlocProvider(
           create: (context) => CreateMoodBloc(
             moodRepository: getIt.get<MoodRepository>(),
@@ -55,148 +62,178 @@ class App extends StatelessWidget {
           ),
         ),
       ],
-      child: BlocBuilder<AppCubit, AppState>(
-        buildWhen: (previousState, currentState) =>
-            previousState != currentState,
-        builder: (context, state) {
-          if (state.isInitialOrLoading) {
-            return const ColoredBox(
-              color: backgroundColor,
-              child: Center(child: LoadingIndicator(color: primarySwatch)),
-            );
-          } else if (state.isError) {
-            final translations = AppLocalizations.of(context)!;
+      child: BlocListener<AppSettingsBloc, AppSettingsState>(
+        listenWhen: (previous, current) =>
+            previous.appSettingsData.preSetRevenue !=
+                current.appSettingsData.preSetRevenue ||
+            previous.appSettingsData.preSetWorkTime !=
+                current.appSettingsData.preSetWorkTime,
+        listener: (context, state) {
+          if (state.appSettingsData.isSuccess) {
+            final appSettings = state.appSettingsData;
 
-            return ColoredBox(
-              color: backgroundColor,
-              child: ErrorMessage(
-                message: translations.appInitFailed,
-                onRefresh: context.read<AppCubit>().init,
-              ),
-            );
+            context.read<CreateMoodBloc>().add(
+                  CreateMoodEvent.revenueChanged(
+                    appSettings.preSetRevenue.toString(),
+                  ),
+                );
+
+            context.read<CreateMoodBloc>().add(
+                  CreateMoodEvent.workTimeChanged(
+                    appSettings.preSetWorkTime,
+                  ),
+                );
           }
+        },
+        child: Builder(
+          builder: (context) {
+            final appState = context.select((AppCubit cubit) => cubit.state);
+            final appSettingsState = context
+                .select((AppSettingsBloc cubit) => cubit.state.appSettingsData);
 
-          return Authenticator(
-            initialStep: AuthenticatorStep.onboarding,
-            authenticatorBuilder:
-                (BuildContext context, AuthenticatorState state) {
+            if (appState.isInitialOrLoading ||
+                appSettingsState.isInitialOrLoading) {
+              return const ColoredBox(
+                color: backgroundColor,
+                child: Center(child: LoadingIndicator(color: primarySwatch)),
+              );
+            } else if (appState.isError || appSettingsState.isError) {
               final translations = AppLocalizations.of(context)!;
 
-              if (state.currentStep == AuthenticatorStep.loading) {
-                setDateTimeLocale(context);
+              return ColoredBox(
+                color: backgroundColor,
+                child: ErrorMessage(
+                  message: translations.appInitFailed,
+                  onRefresh: context.read<AppCubit>().init,
+                ),
+              );
+            }
 
-                return const Center(
-                  child: LoadingIndicator(
-                    color: primarySwatch,
-                  ),
-                );
-              } else if (state.currentStep == AuthenticatorStep.onboarding) {
-                return SafeArea(
-                  child: OnboardingSlider(
-                    signUpButtonFunction: () => state.changeStep(
-                      AuthenticatorStep.signUp,
+            return Authenticator(
+              initialStep: AuthenticatorStep.onboarding,
+              authenticatorBuilder:
+                  (BuildContext context, AuthenticatorState state) {
+                final translations = AppLocalizations.of(context)!;
+
+                if (state.currentStep == AuthenticatorStep.loading) {
+                  setDateTimeLocale(context);
+
+                  return const Center(
+                    child: LoadingIndicator(
+                      color: primarySwatch,
                     ),
-                    signInButtonFunction: () => state.changeStep(
-                      AuthenticatorStep.signIn,
-                    ),
-                  ),
-                );
-              } else if (state.currentStep == AuthenticatorStep.signUp) {
-                return AuthScreenScaffold(
-                  state: state,
-                  body: SignUpForm(),
-                  footer: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        translations.haveAccount,
-                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                              color: grey,
-                            ),
+                  );
+                } else if (state.currentStep == AuthenticatorStep.onboarding) {
+                  return SafeArea(
+                    child: OnboardingSlider(
+                      signUpButtonFunction: () => state.changeStep(
+                        AuthenticatorStep.signUp,
                       ),
-                      TextButton(
-                        onPressed: () => state.changeStep(
-                          AuthenticatorStep.signIn,
+                      signInButtonFunction: () => state.changeStep(
+                        AuthenticatorStep.signIn,
+                      ),
+                    ),
+                  );
+                } else if (state.currentStep == AuthenticatorStep.signUp) {
+                  return AuthScreenScaffold(
+                    state: state,
+                    body: SignUpForm(),
+                    footer: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          translations.haveAccount,
+                          style:
+                              Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                    color: grey,
+                                  ),
                         ),
-                        child: Text(
-                          translations.signIn,
-                          style: const TextStyle(
-                            color: primarySwatch,
-                            fontWeight: FontWeight.bold,
+                        TextButton(
+                          onPressed: () => state.changeStep(
+                            AuthenticatorStep.signIn,
+                          ),
+                          child: Text(
+                            translations.signIn,
+                            style: const TextStyle(
+                              color: primarySwatch,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                );
-              } else if (state.currentStep == AuthenticatorStep.signIn) {
-                return AuthScreenScaffold(
-                  state: state,
-                  body: SignInForm(),
-                  footer: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        translations.noAccount,
-                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                              color: grey,
-                            ),
-                      ),
-                      TextButton(
-                        onPressed: () => state.changeStep(
-                          AuthenticatorStep.signUp,
+                      ],
+                    ),
+                  );
+                } else if (state.currentStep == AuthenticatorStep.signIn) {
+                  return AuthScreenScaffold(
+                    state: state,
+                    body: SignInForm(),
+                    footer: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          translations.noAccount,
+                          style:
+                              Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                    color: grey,
+                                  ),
                         ),
-                        child: Text(
-                          translations.signUp,
-                          style: const TextStyle(
-                            color: primarySwatch,
-                            fontWeight: FontWeight.bold,
+                        TextButton(
+                          onPressed: () => state.changeStep(
+                            AuthenticatorStep.signUp,
+                          ),
+                          child: Text(
+                            translations.signUp,
+                            style: const TextStyle(
+                              color: primarySwatch,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                );
-              } else if (state.currentStep == AuthenticatorStep.resetPassword) {
-                return AuthScreenScaffold(
-                  state: state,
-                  body: ResetPasswordForm(),
-                );
-              } else if (state.currentStep ==
-                  AuthenticatorStep.confirmResetPassword) {
-                return AuthScreenScaffold(
-                  state: state,
-                  body: const ConfirmResetPasswordForm(),
-                );
-              }
+                      ],
+                    ),
+                  );
+                } else if (state.currentStep ==
+                    AuthenticatorStep.resetPassword) {
+                  return AuthScreenScaffold(
+                    state: state,
+                    body: ResetPasswordForm(),
+                  );
+                } else if (state.currentStep ==
+                    AuthenticatorStep.confirmResetPassword) {
+                  return AuthScreenScaffold(
+                    state: state,
+                    body: const ConfirmResetPasswordForm(),
+                  );
+                }
 
-              return null;
-            },
-            stringResolver: const AuthStringResolver(
-              buttons: LocalizedButtonResolver(),
-              inputs: LocalizedInputResolver(),
-              messages: LocalizedMessageResolver(),
-              titles: LocalizedTitleResolver(),
-            ),
-            signUpForm: SignUpForm.custom(
-              fields: [
-                SignUpFormField.email(required: true),
-                SignUpFormField.givenName(required: true),
-                SignUpFormField.password(),
-                SignUpFormField.passwordConfirmation(),
-              ],
-            ),
-            child: MaterialApp.router(
-              routerConfig: goRouter,
-              debugShowCheckedModeBanner: false,
-              builder: Authenticator.builder(),
-              localizationsDelegates: AppLocalizations.localizationsDelegates,
-              supportedLocales: AppLocalizations.supportedLocales,
-              theme: theme,
-              themeMode: ThemeMode.light,
-            ),
-          );
-        },
+                return null;
+              },
+              stringResolver: const AuthStringResolver(
+                buttons: LocalizedButtonResolver(),
+                inputs: LocalizedInputResolver(),
+                messages: LocalizedMessageResolver(),
+                titles: LocalizedTitleResolver(),
+              ),
+              signUpForm: SignUpForm.custom(
+                fields: [
+                  SignUpFormField.email(required: true),
+                  SignUpFormField.givenName(required: true),
+                  SignUpFormField.password(),
+                  SignUpFormField.passwordConfirmation(),
+                ],
+              ),
+              child: MaterialApp.router(
+                routerConfig: goRouter,
+                debugShowCheckedModeBanner: false,
+                builder: Authenticator.builder(),
+                localizationsDelegates: AppLocalizations.localizationsDelegates,
+                supportedLocales: AppLocalizations.supportedLocales,
+                theme: theme,
+                themeMode: ThemeMode.light,
+              ),
+            );
+          },
+        ),
       ),
     );
   }

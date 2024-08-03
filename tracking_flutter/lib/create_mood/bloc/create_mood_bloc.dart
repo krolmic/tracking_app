@@ -158,6 +158,8 @@ class CreateMoodBloc extends Bloc<CreateMoodEvent, CreateMoodState> {
   }
 
   void _onRevenueChanged(String value, Emitter<CreateMoodState> emit) {
+    if (double.tryParse(value) == null) return;
+
     emit(
       state.copyWith(
         moodFormState: state.moodFormState.copyWith(
