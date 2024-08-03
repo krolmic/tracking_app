@@ -26,6 +26,15 @@
     "howMuchDidYouEarn": "How much did you earn today?",
     "howMuchDidYouEarnDescription": "Make sure all earnings you track are in one currency so you can evaluate your mood and earnings optimally.",
     "howLongDidYouWork": "How long did you work today?",
+    "revenueHelper": "Revenue in {currency}",
+    "@revenueHelper": {
+        "placeholders": {
+            "currency": {
+                "type": "String",
+                "example": "USD"
+            }
+        }
+    },
     "home": "Home",
     "weekProgress": "Your progress this week",
     "progressDoingGreat": "Be proud of yourself!",
@@ -76,6 +85,14 @@
     "revenue": "Revenue",
     "showRevenue": "Show revenue",
     "showWorkTime": "Show work time",
+    "appSettings": "Preferences",
+    "appSettingsSaved": "Preferences saved successfully!",
+    "currency": "Currency",
+    "currencySettingDescription": "Currency to display symbol of for revenue tracking",
+    "presetRevenue": "Preset revenue",
+    "presetRevenueDescription": "Revenue preset for quick tracking",
+    "presetWorkTime": "Preset work time",
+    "presetWorkTimeDescription": "Work time preset for quick tracking",
     "update": "Update",
     "signIn": "Sign In",
     "signUp": "Sign Up",

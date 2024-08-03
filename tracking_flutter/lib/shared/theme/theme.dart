@@ -78,7 +78,7 @@ final inputDecorationTheme = InputDecorationTheme(
   filled: true,
   fillColor: inputFillColor,
   labelStyle: const TextStyle(
-    color: bodySmallTextColor,
+    color: darkBlue,
     fontSize: 14,
   ),
   hintStyle: TextStyle(
@@ -86,7 +86,8 @@ final inputDecorationTheme = InputDecorationTheme(
     fontSize: 14,
   ),
   helperStyle: const TextStyle(
-    color: blue,
+    color: darkBlue,
+    fontSize: 11,
   ),
   border: const OutlineInputBorder(
     borderSide: BorderSide.none,
@@ -97,7 +98,13 @@ final inputDecorationTheme = InputDecorationTheme(
     vertical: 12,
   ),
   floatingLabelBehavior: FloatingLabelBehavior.never,
+  hoverColor: primarySwatch,
   enabledBorder: const OutlineInputBorder(
+    borderSide: BorderSide.none,
+    borderRadius: BorderRadius.all(Radius.circular(10)),
+  ),
+  focusColor: primarySwatch,
+  focusedBorder: const OutlineInputBorder(
     borderSide: BorderSide.none,
     borderRadius: BorderRadius.all(Radius.circular(10)),
   ),

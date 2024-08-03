@@ -7,10 +7,12 @@ import 'package:formz/formz.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:jiffy/jiffy.dart';
 import 'package:mood_repository/mood_repository.dart';
+import 'package:tracking_app/app_settings/bloc/app_settings_bloc.dart';
 import 'package:tracking_app/create_mood/bloc/create_mood_bloc.dart';
 import 'package:tracking_app/delete_mood/cubit/delete_mood_cubit.dart';
 import 'package:tracking_app/graph/bloc/graph_bloc.dart';
 import 'package:tracking_app/main.dart';
+import 'package:tracking_app/shared/currencies.dart';
 import 'package:tracking_app/shared/date_time.dart';
 import 'package:tracking_app/shared/duration.dart';
 import 'package:tracking_app/shared/theme/animation.dart';
@@ -149,22 +151,32 @@ class _GraphView extends StatelessWidget {
               padding:
                   const EdgeInsets.symmetric(horizontal: viewPaddingHorizontal),
               height: 300,
-              child: BlocBuilder<GraphBloc, GraphState>(
-                buildWhen: (previous, current) =>
-                    previous.moodsState != current.moodsState ||
-                    previous.settings != current.settings,
-                builder: (context, state) {
-                  final moodsState = state.moodsState;
+              child: Builder(
+                builder: (context) {
+                  final moodsState = context.select(
+                    (GraphBloc graphBloc) => graphBloc.state.moodsState,
+                  );
+                  final settings = context.select(
+                    (GraphBloc graphBloc) => graphBloc.state.settings,
+                  );
+                  final currency = context.select(
+                    (AppSettingsBloc appSettingsBloc) =>
+                        appSettingsBloc.state.appSettingsData.currency,
+                  );
+
+                  final targetDate =
+                      context.read<GraphBloc>().state.targetDate.date;
 
                   return _LineGraph(
-                    targetDate: state.targetDate.date,
+                    targetDate: targetDate,
                     moods: moodsState.moods,
-                    moodsWithTrackedRevenue: state.settings.showRevenue
+                    moodsWithTrackedRevenue: settings.showRevenue
                         ? moodsState.moodsWithTrackedRevenue
                         : [],
-                    moodsWithTrackedWorkTime: state.settings.showWorkTime
+                    moodsWithTrackedWorkTime: settings.showWorkTime
                         ? moodsState.moodsWithTrackedWorkTime
                         : [],
+                    currencySymbol: getCurrencySymbol(currency),
                   );
                 },
               ),
@@ -216,12 +228,27 @@ class _GraphView extends StatelessWidget {
                         ),
                         const HorizontalSpacing.medium(),
                         Expanded(
-                          child: MoodData(
-                            icon: Iconsax.money_4_bold,
-                            label: translations.greatestRevenue,
-                            value: moodsState.greatestRevenue != null
-                                ? moodsState.greatestRevenue.toString() + r' $'
-                                : '-',
+                          child: BlocBuilder<AppSettingsBloc, AppSettingsState>(
+                            buildWhen: (previous, current) =>
+                                previous.appSettingsData.currency !=
+                                current.appSettingsData.currency,
+                            builder: (context, state) {
+                              final currencySymbol = getCurrencySymbol(
+                                state.appSettingsData.currency,
+                              );
+                              final greatestRevenue = moodsState
+                                          .greatestRevenue !=
+                                      null
+                                  ? '${moodsState.greatestRevenue!.toInt()} '
+                                      '$currencySymbol'
+                                  : '-';
+
+                              return MoodData(
+                                icon: Iconsax.money_4_bold,
+                                label: translations.greatestRevenue,
+                                value: greatestRevenue,
+                              );
+                            },
                           ),
                         ),
                       ],

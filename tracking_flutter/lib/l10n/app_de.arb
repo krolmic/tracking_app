@@ -26,6 +26,15 @@
     "howMuchDidYouEarn": "Wie viel hast du heute verdient?",
     "howMuchDidYouEarnDescription": "Achte darauf, dass alle Einnahmen in einer Währung sind, damit du deine Stimmung und Einnahnen optimal auswerten kannst.",
     "howLongDidYouWork": "Wie lange hast du heute gearbeitet?",
+    "revenueHelper": "Umsatz in {currency}",
+    "@revenueHelper": {
+        "placeholders": {
+            "currency": {
+                "type": "String",
+                "example": "USD"
+            }
+        }
+    },
     "home": "Home",
     "weekProgress": "Dein Fortschritt diese Woche",
     "progressDoingGreat": "Sei stolz auf dich!",
@@ -76,6 +85,14 @@
     "revenue": "Umsatz",
     "showRevenue": "Umsatz anzeigen",
     "showWorkTime": "Arbeitszeit anzeigen",
+    "appSettings": "Präferenzen",
+    "appSettingsSaved": "Präferenzen erfolgreich gespeichert!",
+    "currency": "Währung",
+    "currencySettingDescription": "Symbol der ausgewählten Währung wird in der App angezeigt",
+    "presetRevenue": "Voreingestellter Umsatz",
+    "presetRevenueDescription": "Voreingestellter Umsatz wird automatisch eingetragen",
+    "presetWorkTime": "Voreingestellte Arbeitszeit",
+    "presetWorkTimeDescription": "Voreingestellte Arbeitszeit wird automatisch eingetragen",
     "update": "Ändern",
     "signIn": "Anmeldung",
     "signUp": "Registrierung",

@@ -1,4 +1,3 @@
-import 'package:duration_picker/duration_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,9 +6,9 @@ import 'package:formz/formz.dart';
 import 'package:go_router/go_router.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:mood_repository/mood_repository.dart';
+import 'package:tracking_app/app_settings/bloc/app_settings_bloc.dart';
 import 'package:tracking_app/delete_mood/cubit/delete_mood_cubit.dart';
 import 'package:tracking_app/shared/date_time.dart';
-import 'package:tracking_app/shared/duration.dart';
 import 'package:tracking_app/shared/formz.dart';
 import 'package:tracking_app/shared/theme/colors.dart';
 import 'package:tracking_app/shared/toast.dart';
@@ -18,6 +17,7 @@ import 'package:tracking_app/shared/widgets/app_dialog.dart';
 import 'package:tracking_app/shared/widgets/app_elevated_button.dart';
 import 'package:tracking_app/shared/widgets/loading_indicator.dart';
 import 'package:tracking_app/shared/widgets/spacing.dart';
+import 'package:tracking_app/shared/widgets/time_input.dart';
 import 'package:tracking_app/update_mood/bloc/update_mood_bloc.dart';
 
 part 'widgets/update_mood_form.dart';

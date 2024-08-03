@@ -266,18 +266,27 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 const VerticalSpacing.large(),
-                TextFormField(
-                  key: const Key('Update mood form revenue input'),
-                  controller: _revenueController,
-                  decoration: const InputDecoration(
-                    hintText: '0.0',
-                    helperText: 'Revenue in your currency',
-                  ),
-                  keyboardType: TextInputType.number,
-                  inputFormatters: [
-                    FilteringTextInputFormatter.allow(RegExp('[0-9.]')),
-                  ],
-                  textInputAction: TextInputAction.next,
+                BlocBuilder<AppSettingsBloc, AppSettingsState>(
+                  buildWhen: (previous, current) =>
+                      previous.appSettingsData.currency !=
+                      current.appSettingsData.currency,
+                  builder: (context, state) {
+                    final currency = state.appSettingsData.currency;
+
+                    return TextFormField(
+                      key: const Key('Update mood form revenue input'),
+                      controller: _revenueController,
+                      decoration: InputDecoration(
+                        hintText: '0.0',
+                        helperText: 'Revenue in $currency',
+                      ),
+                      keyboardType: TextInputType.number,
+                      inputFormatters: [
+                        FilteringTextInputFormatter.allow(RegExp('[0-9.]')),
+                      ],
+                      textInputAction: TextInputAction.next,
+                    );
+                  },
                 ),
                 const VerticalSpacing.extraLarge(),
                 Text(
@@ -291,31 +300,10 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
                       currentState.moodFormState.workTime,
                   builder: (context, state) {
                     final workTime = state.moodFormState.workTime.value;
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          workTime.toFormattedString(),
-                          style: Theme.of(context).textTheme.bodyLarge,
-                        ),
-                        IconButton(
-                          onPressed: () async {
-                            final updatedWorkTime = await showDurationPicker(
-                              context: context,
-                              initialTime: workTime,
-                              upperBound: const Duration(hours: 24),
-                            );
 
-                            if (updatedWorkTime != null) {
-                              _onWorkTimeChanged(updatedWorkTime);
-                            }
-                          },
-                          icon: Icon(
-                            Iconsax.edit_2_outline,
-                            color: Theme.of(context).primaryColor,
-                          ),
-                        ),
-                      ],
+                    return TimeInput(
+                      time: workTime,
+                      onChange: _onWorkTimeChanged,
                     );
                   },
                 ),

@@ -309,23 +309,33 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
               textAlign: TextAlign.center,
             ),
             const VerticalSpacing.large(),
-            TextFormField(
-              key: const Key('Create mood form revenue input'),
-              controller: _revenueController,
-              validator: (value) => createMoodBloc.state.moodFormState.revenue
-                  .validator(
-                    value != null && value != '' ? double.parse(value) : 0,
-                  )
-                  ?.toString(),
-              keyboardType: TextInputType.number,
-              inputFormatters: [
-                FilteringTextInputFormatter.allow(RegExp('[0-9.]')),
-              ],
-              textInputAction: TextInputAction.next,
-              decoration: const InputDecoration(
-                hintText: '0.0',
-                helperText: 'Revenue in your currency',
-              ),
+            BlocBuilder<AppSettingsBloc, AppSettingsState>(
+              buildWhen: (previous, current) =>
+                  previous.appSettingsData.currency !=
+                  current.appSettingsData.currency,
+              builder: (context, state) {
+                final currency = state.appSettingsData.currency;
+
+                return TextFormField(
+                  key: const Key('Create mood form revenue input'),
+                  controller: _revenueController,
+                  validator: (value) => createMoodBloc
+                      .state.moodFormState.revenue
+                      .validator(
+                        value != null && value != '' ? double.parse(value) : 0,
+                      )
+                      ?.toString(),
+                  keyboardType: TextInputType.number,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(RegExp('[0-9.]')),
+                  ],
+                  textInputAction: TextInputAction.next,
+                  decoration: InputDecoration(
+                    hintText: '0.0',
+                    helperText: translations.revenueHelper(currency),
+                  ),
+                );
+              },
             ),
           ],
         ),

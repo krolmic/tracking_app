@@ -6,10 +6,12 @@ import 'package:formz/formz.dart';
 import 'package:go_router/go_router.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:mood_repository/mood_repository.dart';
+import 'package:tracking_app/app_settings/bloc/app_settings_bloc.dart';
 import 'package:tracking_app/create_mood/bloc/create_mood_bloc.dart';
 import 'package:tracking_app/delete_mood/cubit/delete_mood_cubit.dart';
 import 'package:tracking_app/home/cubit/home_cubit.dart';
 import 'package:tracking_app/main.dart';
+import 'package:tracking_app/shared/currencies.dart';
 import 'package:tracking_app/shared/date_time.dart';
 import 'package:tracking_app/shared/theme/animation.dart';
 import 'package:tracking_app/shared/theme/colors.dart';
@@ -218,10 +220,20 @@ class _HomeContentView extends StatelessWidget {
                 ),
                 const HorizontalSpacing.medium(),
                 Expanded(
-                  child: MoodData(
-                    icon: Iconsax.money_4_bold,
-                    label: translations.averageRevenue,
-                    value: averageRevenue.toString() + r' $',
+                  child: BlocBuilder<AppSettingsBloc, AppSettingsState>(
+                    buildWhen: (previous, current) =>
+                        previous.appSettingsData.currency !=
+                        current.appSettingsData.currency,
+                    builder: (context, state) {
+                      final currencySymbol =
+                          getCurrencySymbol(state.appSettingsData.currency);
+
+                      return MoodData(
+                        icon: Iconsax.money_4_bold,
+                        label: translations.averageRevenue,
+                        value: '$averageRevenue $currencySymbol',
+                      );
+                    },
                   ).animate().fadeIn(
                         duration: animationDuration,
                         delay: animationDuration * 2,
