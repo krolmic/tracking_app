@@ -15,7 +15,9 @@ import 'package:tracking_app/shared/currencies.dart';
 import 'package:tracking_app/shared/date_time.dart';
 import 'package:tracking_app/shared/theme/animation.dart';
 import 'package:tracking_app/shared/theme/colors.dart';
+import 'package:tracking_app/shared/theme/layout.dart';
 import 'package:tracking_app/shared/view/base_view.dart';
+import 'package:tracking_app/shared/widgets/app_elevated_button.dart';
 import 'package:tracking_app/shared/widgets/error_message.dart';
 import 'package:tracking_app/shared/widgets/loading_indicator.dart';
 import 'package:tracking_app/shared/widgets/mood_data.dart';
@@ -32,6 +34,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final translations = AppLocalizations.of(context)!;
+
     return BlocProvider<HomeCubit>(
       create: (context) {
         final userProfileCubit = context.read<UserProfileCubit>();
@@ -44,8 +48,41 @@ class HomeScreen extends StatelessWidget {
           userProfileRepository: getIt.get<UserProfileRepository>(),
         )..init();
       },
-      child: const Scaffold(
-        body: _HomeView(),
+      child: Scaffold(
+        floatingActionButton: BlocBuilder<HomeCubit, HomeState>(
+          buildWhen: (previousState, currentState) =>
+              previousState != currentState,
+          builder: (context, state) {
+            final showAddButton =
+                state.isSuccess && !state.moodsListState.containsTodayMood;
+
+            if (showAddButton) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: viewPaddingHorizontal,
+                ),
+                child: AppElevatedButton(
+                  icon: Iconsax.add_outline,
+                  label: translations.trackToday,
+                  onPressed: () {
+                    context.goNamed('create-mood-from-home');
+                  },
+                  isLoading: state.isInitialOrLoading,
+                ),
+              ).animate().moveY(
+                    curve: Curves.easeOut,
+                    begin: 200,
+                    end: 0,
+                    duration: animationDuration,
+                    delay: animationDuration * 3,
+                  );
+            } else {
+              return const SizedBox.shrink();
+            }
+          },
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        body: const _HomeView(),
       ),
     );
   }
@@ -167,6 +204,7 @@ class _HomeContentView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final translations = AppLocalizations.of(context)!;
+    final addExtraBottomSpace = moods.length > 2 && !trackedToday;
 
     return SingleChildScrollView(
       child: Column(
@@ -274,6 +312,7 @@ class _HomeContentView extends StatelessWidget {
                   duration: animationDuration,
                 ),
           const VerticalSpacing.extraLarge(),
+          if (addExtraBottomSpace) const VerticalSpacing.extraLarge(),
         ],
       ),
     );
