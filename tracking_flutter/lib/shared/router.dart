@@ -55,6 +55,21 @@ final goRouter = GoRouter(
               ),
               routes: [
                 GoRoute(
+                  name: 'create-mood-from-home',
+                  path: 'create',
+                  pageBuilder: (context, state) {
+                    context.read<CreateMoodBloc>().add(
+                          CreateMoodEvent.dateChanged(DateTime.now()),
+                        );
+
+                    return const NoTransitionPage(
+                      child: AuthenticatedView(
+                        child: CreateMoodScreen(),
+                      ),
+                    );
+                  },
+                ),
+                GoRoute(
                   name: 'update-mood-from-home',
                   path: 'update',
                   pageBuilder: (context, state) {

@@ -74,6 +74,7 @@ class _HomeProgress extends StatelessWidget {
                       width: 70,
                       child: TweenAnimationBuilder<double>(
                         tween: Tween<double>(begin: 0, end: weeklyProgress),
+                        curve: Curves.easeOut,
                         duration: const Duration(milliseconds: 1000),
                         builder: (context, value, _) =>
                             CircularProgressIndicator(
