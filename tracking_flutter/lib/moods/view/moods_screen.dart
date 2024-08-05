@@ -234,19 +234,14 @@ class _MoodsContentViewState extends State<_MoodsContentView> {
 
         final mood = widget.moods[index];
 
-        return Padding(
+        return TrackedMood(
           key: ValueKey(mood),
-          padding: const EdgeInsets.only(
-            bottom: verticalPaddingSmall,
+          mood: mood,
+          onTap: () => context.goNamed(
+            'update-mood-from-moods',
+            extra: mood,
           ),
-          child: TrackedMood(
-            mood: mood,
-            onTap: () => context.goNamed(
-              'update-mood-from-moods',
-              extra: mood,
-            ),
-          ).animate().fadeIn(duration: animationDuration),
-        );
+        ).animate().fadeIn(duration: animationDuration);
       },
     );
   }
