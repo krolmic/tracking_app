@@ -232,6 +232,8 @@ class _LineGraph extends StatelessWidget {
   LineChartBarData get moodsLineChartBarData => LineChartBarData(
         color: _LineGraphStyle.moodsLineChartBarColor,
         dotData: const FlDotData(show: false),
+        isCurved: true,
+        curveSmoothness: 0.2,
         belowBarData: BarAreaData(
           show: true,
           gradient: _LineGraphStyle.moodsLineChartBelowBarGradient,
