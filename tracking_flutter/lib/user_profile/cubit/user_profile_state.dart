@@ -17,4 +17,6 @@ extension UserProfileStateX on UserProfileState {
       this is UserProfileInitialState || this is UserProfileLoadingState;
   bool get isSuccess => this is UserProfileSuccessState;
   bool get isError => this is UserProfileErrorState;
+
+  String get firstName => (this as UserProfileSuccessState).firstName;
 }
