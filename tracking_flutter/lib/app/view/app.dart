@@ -11,7 +11,7 @@ import 'package:tracking_app/create_mood/bloc/create_mood_bloc.dart';
 import 'package:tracking_app/delete_mood/cubit/delete_mood_cubit.dart';
 import 'package:tracking_app/l10n/amplify_resolvers.dart';
 import 'package:tracking_app/main.dart';
-import 'package:tracking_app/onboarding/onboarding_slider.dart';
+import 'package:tracking_app/onboarding/onboarding_screen.dart';
 import 'package:tracking_app/shared/date_time.dart';
 import 'package:tracking_app/shared/router.dart';
 import 'package:tracking_app/shared/theme/colors.dart';
@@ -124,18 +124,19 @@ class App extends StatelessWidget {
                     ),
                   );
                 } else if (state.currentStep == AuthenticatorStep.onboarding) {
-                  return SafeArea(
-                    child: OnboardingSlider(
-                      signUpButtonFunction: () => state.changeStep(
-                        AuthenticatorStep.signUp,
-                      ),
-                      signInButtonFunction: () => state.changeStep(
-                        AuthenticatorStep.signIn,
-                      ),
+                  return OnboardingScreen(
+                    signUpButtonFunction: () => state.changeStep(
+                      AuthenticatorStep.signUp,
+                    ),
+                    signInButtonFunction: () => state.changeStep(
+                      AuthenticatorStep.signIn,
                     ),
                   );
                 } else if (state.currentStep == AuthenticatorStep.signUp) {
                   return AuthScreenScaffold(
+                    onBackButtonPressed: () => state.changeStep(
+                      AuthenticatorStep.onboarding,
+                    ),
                     state: state,
                     body: SignUpForm(),
                     footer: Row(
@@ -165,6 +166,9 @@ class App extends StatelessWidget {
                   );
                 } else if (state.currentStep == AuthenticatorStep.signIn) {
                   return AuthScreenScaffold(
+                    onBackButtonPressed: () => state.changeStep(
+                      AuthenticatorStep.onboarding,
+                    ),
                     state: state,
                     body: SignInForm(),
                     footer: Row(
@@ -195,12 +199,18 @@ class App extends StatelessWidget {
                 } else if (state.currentStep ==
                     AuthenticatorStep.resetPassword) {
                   return AuthScreenScaffold(
+                    onBackButtonPressed: () => state.changeStep(
+                      AuthenticatorStep.signIn,
+                    ),
                     state: state,
                     body: ResetPasswordForm(),
                   );
                 } else if (state.currentStep ==
                     AuthenticatorStep.confirmResetPassword) {
                   return AuthScreenScaffold(
+                    onBackButtonPressed: () => state.changeStep(
+                      AuthenticatorStep.resetPassword,
+                    ),
                     state: state,
                     body: const ConfirmResetPasswordForm(),
                   );

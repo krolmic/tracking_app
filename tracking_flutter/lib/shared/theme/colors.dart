@@ -1,3 +1,4 @@
+import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 
 const MaterialColor primarySwatch = MaterialColor(
@@ -45,3 +46,12 @@ Color inputFillColor = blue.withOpacity(0.2);
 
 Color tileIconColor = darkBlue.withOpacity(.5);
 const Color tileSubtitleColor = darkBlue;
+
+const Color dotsIndicatorActiveColor = grey;
+const Color dotsIndicatorColor = lightGrey;
+const DotsDecorator dotsDecorator = DotsDecorator(
+  activeColor: dotsIndicatorActiveColor,
+  color: dotsIndicatorColor,
+  activeSize: Size.square(8),
+  size: Size.square(8),
+);

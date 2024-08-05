@@ -54,6 +54,10 @@ final textTheme = GoogleFonts.latoTextTheme().copyWith(
     fontSize: 16,
     fontWeight: FontWeight.bold,
   ),
+  titleMedium: GoogleFonts.lato(
+    fontSize: 14,
+    fontWeight: FontWeight.bold,
+  ),
   titleSmall: GoogleFonts.lato(
     fontSize: 12,
     fontWeight: FontWeight.bold,
