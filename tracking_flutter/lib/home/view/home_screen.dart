@@ -125,54 +125,42 @@ class _HomeView extends StatelessWidget {
           },
         ),
       ],
-      child: BlocBuilder<UserProfileCubit, UserProfileState>(
-        buildWhen: (previousUserProfileState, currentUserProfileState) =>
-            previousUserProfileState != currentUserProfileState,
-        builder: (context, userProfileState) {
-          return BlocBuilder<HomeCubit, HomeState>(
-            buildWhen: (previousState, currentState) =>
-                previousState != currentState,
-            builder: (context, state) {
-              return BaseView(
-                child: Builder(
-                  builder: (context) {
-                    if (userProfileState.isInitialOrLoading ||
-                        state.isInitialOrLoading) {
-                      return const Center(child: LoadingIndicator());
-                    } else if (userProfileState.isError || state.isError) {
-                      return ErrorMessage(
-                        onRefresh: () {
-                          if (userProfileState.isError) {
-                            context.read<UserProfileCubit>().loadUserProfile();
-                          }
+      child: Builder(
+        builder: (context) {
+          final userProfileState = context.watch<UserProfileCubit>().state;
+          final homeState = context.watch<HomeCubit>().state;
 
-                          if (state.isError) {
-                            context.read<HomeCubit>().init();
-                          }
-                        },
-                      );
-                    }
+          if (userProfileState.isInitialOrLoading ||
+              homeState.isInitialOrLoading) {
+            return const Center(child: LoadingIndicator());
+          } else if (userProfileState.isError || homeState.isError) {
+            return BaseView(
+              child: ErrorMessage(
+                onRefresh: () {
+                  if (userProfileState.isError) {
+                    context.read<UserProfileCubit>().loadUserProfile();
+                  }
 
-                    final userProfileSuccessState =
-                        userProfileState as UserProfileSuccessState;
+                  if (homeState.isError) {
+                    context.read<HomeCubit>().init();
+                  }
+                },
+              ),
+            );
+          }
 
-                    return _HomeContentView(
-                      firstName: userProfileSuccessState.firstName,
-                      weeklyProgress: state.moodsListState.weeklyProgress,
-                      averageWorkTimeInHours:
-                          state.moodsListState.averageWorkTimeInHoursThisWeek,
-                      averageRevenue:
-                          state.moodsListState.averageRevenueThisWeek,
-                      averageMood: state.moodsListState.averageMoodThisWeek,
-                      moods: state.moodsListState.recentlyAddedMoods,
-                      trackedEveryDay:
-                          state.moodsListState.trackedEveryDayThisWeek,
-                      trackedToday: state.moodsListState.containsTodayMood,
-                    );
-                  },
-                ),
-              );
-            },
+          return BaseView(
+            child: _HomeContentView(
+              firstName: userProfileState.firstName,
+              weeklyProgress: homeState.moodsListState.weeklyProgress,
+              averageWorkTimeInHours:
+                  homeState.moodsListState.averageWorkTimeInHoursThisWeek,
+              averageRevenue: homeState.moodsListState.averageRevenueThisWeek,
+              averageMood: homeState.moodsListState.averageMoodThisWeek,
+              moods: homeState.moodsListState.recentlyAddedMoods,
+              trackedEveryDay: homeState.moodsListState.trackedEveryDayThisWeek,
+              trackedToday: homeState.moodsListState.containsTodayMood,
+            ),
           );
         },
       ),
