@@ -40,6 +40,12 @@ class CreateMoodBloc extends Bloc<CreateMoodEvent, CreateMoodState> {
         _onWorkTimeChanged(event.workTime, emit);
       } else if (event.isDateChanged) {
         _onDateChanged(event.date, emit);
+      } else if (event.isFormResetRequested) {
+        _onFormResetRequested(
+          event.formResetRevenue,
+          event.formResetWorkTime,
+          emit,
+        );
       }
     });
   }
@@ -185,6 +191,21 @@ class CreateMoodBloc extends Bloc<CreateMoodEvent, CreateMoodState> {
     emit(
       state.copyWith(
         selectedDate: value,
+      ),
+    );
+  }
+
+  void _onFormResetRequested(
+    double revenue,
+    Duration workTime,
+    Emitter<CreateMoodState> emit,
+  ) {
+    emit(
+      state.copyWith(
+        moodFormState: state.moodFormState.copyWith(
+          revenue: RevenueInput.dirty(value: revenue),
+          workTime: WorkTimeInput.dirty(value: workTime),
+        ),
       ),
     );
   }

@@ -67,8 +67,6 @@ class _CreateMoodStepperState extends State<_CreateMoodStepper> {
 
   @override
   Widget build(BuildContext context) {
-    final translations = AppLocalizations.of(context)!;
-
     final content = Expanded(
       child: PageView(
         controller: _controller,
@@ -77,12 +75,10 @@ class _CreateMoodStepperState extends State<_CreateMoodStepper> {
       ),
     );
 
-    final counter = Text(
-      '${translations.step.toUpperCase()} ${currentStep + 1} '
-      '${translations.ofStep.toUpperCase()} ${widget.pages.length}',
-      style: const TextStyle(
-        fontWeight: FontWeight.bold,
-      ),
+    final dotsIndicator = DotsIndicator(
+      dotsCount: widget.pages.length,
+      position: currentStep.toDouble(),
+      decorator: dotsDecorator,
     );
 
     return Column(
@@ -92,39 +88,42 @@ class _CreateMoodStepperState extends State<_CreateMoodStepper> {
           buildWhen: (previousState, currentState) =>
               previousState.formStatus != currentState.formStatus,
           builder: (context, state) {
-            return Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                TextButton(
-                  onPressed:
-                      _isFirst(currentStep) || state.formStatus.isInProgress
-                          ? null
-                          : onStepBack,
-                  child: Text(
-                    translations.previousStep.toUpperCase(),
-                    style: TextStyle(
+            return Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: viewPaddingHorizontal,
+                vertical: horizontalPaddingSmall,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  IconButton(
+                    onPressed:
+                        _isFirst(currentStep) || state.formStatus.isInProgress
+                            ? null
+                            : onStepBack,
+                    icon: Icon(
+                      Iconsax.arrow_left_outline,
                       color:
                           _isFirst(currentStep) || state.formStatus.isInProgress
                               ? lightGrey
-                              : blue,
+                              : primarySwatch,
                     ),
                   ),
-                ),
-                counter,
-                TextButton(
-                  onPressed: onStepNext,
-                  child: state.formStatus.isInProgress
-                      ? const TinyLoadingIndicator()
-                      : Text(
-                          _isLast(currentStep)
-                              ? translations.done.toUpperCase()
-                              : translations.nextStep.toUpperCase(),
-                          style: const TextStyle(
+                  dotsIndicator,
+                  IconButton(
+                    onPressed:
+                        state.formStatus.isInProgress ? null : onStepNext,
+                    icon: state.formStatus.isInProgress
+                        ? const TinyLoadingIndicator()
+                        : Icon(
+                            _isLast(currentStep)
+                                ? Icons.check
+                                : Iconsax.arrow_right_1_outline,
                             color: primarySwatch,
                           ),
-                        ),
-                ),
-              ],
+                  ),
+                ],
+              ),
             );
           },
         ),

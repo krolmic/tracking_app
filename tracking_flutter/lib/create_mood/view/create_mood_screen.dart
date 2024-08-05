@@ -1,4 +1,5 @@
 import 'package:animated_emoji/animated_emoji.dart';
+import 'package:dots_indicator/dots_indicator.dart';
 import 'package:duration_picker/duration_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -27,6 +28,9 @@ class CreateMoodScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final translations = AppLocalizations.of(context)!;
 
+    final appSettingsData =
+        context.select((AppSettingsBloc bloc) => bloc.state.appSettingsData);
+
     return BlocListener<CreateMoodBloc, CreateMoodState>(
       listenWhen: (previousState, currentState) =>
           previousState.formStatus != currentState.formStatus,
@@ -37,6 +41,13 @@ class CreateMoodScreen extends StatelessWidget {
             Iconsax.award_bold,
             translations.moodTrackedSuccessfully,
           );
+
+          context.read<CreateMoodBloc>().add(
+                CreateMoodEvent.formResetRequested(
+                  appSettingsData.preSetRevenue,
+                  appSettingsData.preSetWorkTime,
+                ),
+              );
 
           context.pop();
         } else if (state.formStatus.isFailure) {
