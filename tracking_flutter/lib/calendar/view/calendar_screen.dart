@@ -163,7 +163,7 @@ class _CalendarView extends StatelessWidget {
                         if (mood != null) {
                           context.go('/calendar/update', extra: mood);
                         }
-                      } else {
+                      } else if (!date.isAfterToday) {
                         context.goNamed(
                           'create-mood-from-calendar',
                           extra: date,
