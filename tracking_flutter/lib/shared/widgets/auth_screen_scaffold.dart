@@ -34,13 +34,13 @@ class AuthScreenScaffold extends StatelessWidget {
       backgroundColor: backgroundColor,
       body: SafeArea(
         child: BaseView(
+          addVerticalPadding: true,
           child: CustomScrollView(
             slivers: [
               SliverFillRemaining(
                 hasScrollBody: false,
                 child: Column(
                   children: [
-                    // App logo
                     Expanded(
                       child: Column(
                         children: [
