@@ -38,12 +38,14 @@ class Onboarding extends StatelessWidget {
           titleTopIndent: verticalPaddingExtraLarge,
           titleToBodySpacing: verticalPaddingExtraLarge,
           features: [
-            Text(
-              translations.appDescription,
-              style: Theme.of(context).textTheme.bodyMedium,
-              textAlign: TextAlign.center,
-            ).animate().fadeIn(duration: animationDuration),
-            const VerticalSpacing.large(),
+            Padding(
+              padding: const EdgeInsets.only(bottom: verticalPaddingMedium),
+              child: Text(
+                translations.appDescription,
+                style: Theme.of(context).textTheme.bodyMedium,
+                textAlign: TextAlign.center,
+              ),
+            ),
             WhatsNewFeature(
               icon: const Icon(
                 Iconsax.heart_add_outline,
@@ -59,9 +61,7 @@ class Onboarding extends StatelessWidget {
                       color: grey,
                     ),
               ),
-            )
-                .animate()
-                .fadeIn(duration: animationDuration, delay: animationDuration),
+            ),
             WhatsNewFeature(
               icon: const Icon(
                 Iconsax.money_4_outline,
@@ -77,13 +77,14 @@ class Onboarding extends StatelessWidget {
                       color: grey,
                     ),
               ),
-            )
-                .animate()
-                .fadeIn(duration: animationDuration, delay: animationDuration),
-          ],
+            ),
+          ]
+              .animate()
+              .fadeIn(duration: animationDuration, delay: animationDuration),
         ),
         WhatsNewPage(
           titleTopIndent: verticalPaddingExtraLarge,
+          titleToBodySpacing: verticalPaddingExtraLarge,
           bodyPadding: pagesBodyPadding,
           title: Text(
             translations.sayHelloToCalendar,
@@ -144,6 +145,7 @@ class Onboarding extends StatelessWidget {
         ),
         WhatsNewPage(
           titleTopIndent: verticalPaddingExtraLarge,
+          titleToBodySpacing: verticalPaddingExtraLarge,
           bodyPadding: pagesBodyPadding,
           title: Text(
             translations.giveVisitToAnalysis,
