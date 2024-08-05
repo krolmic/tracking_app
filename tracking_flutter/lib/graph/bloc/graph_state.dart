@@ -8,7 +8,7 @@ class GraphState with _$GraphState {
     @Default(GraphTimeRangeMode.monthly()) GraphTimeRangeMode timeRangeMode,
     @Default(
       GraphSettings(
-        showRevenue: true,
+        showRevenue: false,
         showWorkTime: true,
       ),
     )
