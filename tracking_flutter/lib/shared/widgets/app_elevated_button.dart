@@ -39,7 +39,8 @@ class AppElevatedButton extends StatelessWidget {
       onPressed: isDisabled || isLoading ? null : onPressed,
       icon: isLoading
           ? const TinyLoadingIndicator(
-              color: AppColors.contentOnDarkBackgroundColor)
+              color: AppColors.contentOnDarkBackgroundColor,
+            )
           : iconToBuild,
       label: isLoading ? const SizedBox.shrink() : textToBuild,
     );

@@ -3,7 +3,6 @@ part of '../onboarding_screen.dart';
 class _Onboarding extends StatelessWidget {
   const _Onboarding({
     required this.signUpButtonFunction,
-    super.key,
   });
 
   final VoidCallback signUpButtonFunction;

@@ -17,7 +17,9 @@ class CreateMoodEvent with _$CreateMoodEvent {
       _WorkTimeChanged;
   const factory CreateMoodEvent.dateChanged(DateTime value) = _DateChanged;
   const factory CreateMoodEvent.formResetRequested(
-      double revenue, Duration workTime) = _FormResetRequested;
+    double revenue,
+    Duration workTime,
+  ) = _FormResetRequested;
 }
 
 extension CreateMoodEventX on CreateMoodEvent {

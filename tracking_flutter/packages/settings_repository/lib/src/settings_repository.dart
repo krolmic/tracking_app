@@ -123,8 +123,8 @@ class SettingsRepository {
     } catch (e, stackTrace) {
       Error.throwWithStackTrace(
         SettingsRepositoryException(
-          message:
-              'Failed to read preset work time minutes from shared preferences.',
+          message: 'Failed to read '
+              'preset work time minutes from shared preferences.',
           cause: e,
         ),
         stackTrace,

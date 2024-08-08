@@ -3,7 +3,6 @@ part of '../calendar_screen.dart';
 class _TrackedMood extends StatelessWidget {
   const _TrackedMood({
     required this.mood,
-    super.key,
   });
 
   final Mood mood;
