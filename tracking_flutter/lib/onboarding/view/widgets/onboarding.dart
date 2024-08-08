@@ -1,19 +1,8 @@
-import 'package:cupertino_onboarding/cupertino_onboarding.dart';
-import 'package:dots_indicator/dots_indicator.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:icons_plus/icons_plus.dart';
-import 'package:tracking_app/shared/theme/animation.dart';
-import 'package:tracking_app/shared/theme/colors.dart';
-import 'package:tracking_app/shared/theme/layout.dart';
-import 'package:tracking_app/shared/widgets/app_elevated_button.dart';
-import 'package:tracking_app/shared/widgets/spacing.dart';
+part of '../onboarding_screen.dart';
 
-class Onboarding extends StatelessWidget {
-  const Onboarding({
+class _Onboarding extends StatelessWidget {
+  const _Onboarding({
     required this.signUpButtonFunction,
-    super.key,
   });
 
   final VoidCallback signUpButtonFunction;
@@ -38,16 +27,18 @@ class Onboarding extends StatelessWidget {
           titleTopIndent: verticalPaddingExtraLarge,
           titleToBodySpacing: verticalPaddingExtraLarge,
           features: [
-            Text(
-              translations.appDescription,
-              style: Theme.of(context).textTheme.bodyMedium,
-              textAlign: TextAlign.center,
-            ).animate().fadeIn(duration: animationDuration),
-            const VerticalSpacing.large(),
+            Padding(
+              padding: const EdgeInsets.only(bottom: verticalPaddingMedium),
+              child: Text(
+                translations.appDescription,
+                style: Theme.of(context).textTheme.bodyMedium,
+                textAlign: TextAlign.center,
+              ),
+            ),
             WhatsNewFeature(
               icon: const Icon(
                 Iconsax.heart_add_outline,
-                color: primarySwatch,
+                color: AppColors.primarySwatch,
               ),
               title: Text(
                 translations.trackYourMood,
@@ -56,16 +47,14 @@ class Onboarding extends StatelessWidget {
               description: Text(
                 translations.trackYourMoodDescription,
                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: grey,
+                      color: AppColors.grey,
                     ),
               ),
-            )
-                .animate()
-                .fadeIn(duration: animationDuration, delay: animationDuration),
+            ),
             WhatsNewFeature(
               icon: const Icon(
                 Iconsax.money_4_outline,
-                color: primarySwatch,
+                color: AppColors.primarySwatch,
               ),
               title: Text(
                 translations.trackYourWork,
@@ -74,67 +63,7 @@ class Onboarding extends StatelessWidget {
               description: Text(
                 translations.trackYourWorkDescription,
                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: grey,
-                    ),
-              ),
-            )
-                .animate()
-                .fadeIn(duration: animationDuration, delay: animationDuration),
-          ],
-        ),
-        WhatsNewPage(
-          titleTopIndent: verticalPaddingExtraLarge,
-          bodyPadding: pagesBodyPadding,
-          title: Text(
-            translations.sayHelloToCalendar,
-            style: Theme.of(context).textTheme.headlineLarge,
-          ).animate().fadeIn(duration: animationDuration),
-          features: [
-            WhatsNewFeature(
-              icon: const Icon(
-                Iconsax.calendar_tick_outline,
-                color: primarySwatch,
-              ),
-              title: Text(
-                translations.monthlyOverview,
-                style: Theme.of(context).textTheme.titleMedium,
-              ),
-              description: Text(
-                translations.monthlyOverviewDescription,
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: grey,
-                    ),
-              ),
-            ),
-            WhatsNewFeature(
-              icon: const Icon(
-                Iconsax.calendar_edit_outline,
-                color: primarySwatch,
-              ),
-              title: Text(
-                translations.updateDays,
-                style: Theme.of(context).textTheme.titleMedium,
-              ),
-              description: Text(
-                translations.updateDaysDescription,
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: grey,
-                    ),
-              ),
-            ),
-            WhatsNewFeature(
-              icon: const Icon(
-                Iconsax.calendar_add_outline,
-                color: primarySwatch,
-              ),
-              title: Text(
-                translations.addMissedDays,
-                style: Theme.of(context).textTheme.titleMedium,
-              ),
-              description: Text(
-                translations.addMissedDaysDescription,
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: grey,
+                      color: AppColors.grey,
                     ),
               ),
             ),
@@ -144,6 +73,68 @@ class Onboarding extends StatelessWidget {
         ),
         WhatsNewPage(
           titleTopIndent: verticalPaddingExtraLarge,
+          titleToBodySpacing: verticalPaddingExtraLarge,
+          bodyPadding: pagesBodyPadding,
+          title: Text(
+            translations.sayHelloToCalendar,
+            style: Theme.of(context).textTheme.headlineLarge,
+          ).animate().fadeIn(duration: animationDuration),
+          features: [
+            WhatsNewFeature(
+              icon: const Icon(
+                Iconsax.calendar_tick_outline,
+                color: AppColors.primarySwatch,
+              ),
+              title: Text(
+                translations.monthlyOverview,
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              description: Text(
+                translations.monthlyOverviewDescription,
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      color: AppColors.grey,
+                    ),
+              ),
+            ),
+            WhatsNewFeature(
+              icon: const Icon(
+                Iconsax.calendar_edit_outline,
+                color: AppColors.primarySwatch,
+              ),
+              title: Text(
+                translations.updateDays,
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              description: Text(
+                translations.updateDaysDescription,
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      color: AppColors.grey,
+                    ),
+              ),
+            ),
+            WhatsNewFeature(
+              icon: const Icon(
+                Iconsax.calendar_add_outline,
+                color: AppColors.primarySwatch,
+              ),
+              title: Text(
+                translations.addMissedDays,
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              description: Text(
+                translations.addMissedDaysDescription,
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      color: AppColors.grey,
+                    ),
+              ),
+            ),
+          ]
+              .animate()
+              .fadeIn(duration: animationDuration, delay: animationDuration),
+        ),
+        WhatsNewPage(
+          titleTopIndent: verticalPaddingExtraLarge,
+          titleToBodySpacing: verticalPaddingExtraLarge,
           bodyPadding: pagesBodyPadding,
           title: Text(
             translations.giveVisitToAnalysis,
@@ -153,7 +144,7 @@ class Onboarding extends StatelessWidget {
             WhatsNewFeature(
               icon: const Icon(
                 Iconsax.diagram_outline,
-                color: primarySwatch,
+                color: AppColors.primarySwatch,
               ),
               title: Text(
                 translations.analyzeYourProgress,
@@ -162,14 +153,14 @@ class Onboarding extends StatelessWidget {
               description: Text(
                 translations.analyzeYourProgressDescription,
                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: grey,
+                      color: AppColors.grey,
                     ),
               ),
             ),
             WhatsNewFeature(
               icon: const Icon(
                 Iconsax.data_outline,
-                color: primarySwatch,
+                color: AppColors.primarySwatch,
               ),
               title: Text(
                 translations.showTrackedData,
@@ -178,14 +169,14 @@ class Onboarding extends StatelessWidget {
               description: Text(
                 translations.showTrackedDataDescription,
                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: grey,
+                      color: AppColors.grey,
                     ),
               ),
             ),
             WhatsNewFeature(
               icon: const Icon(
                 Iconsax.trend_up_outline,
-                color: primarySwatch,
+                color: AppColors.primarySwatch,
               ),
               title: Text(
                 translations.getHighestValues,
@@ -194,7 +185,7 @@ class Onboarding extends StatelessWidget {
               description: Text(
                 translations.getHighestValuesDescription,
                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: grey,
+                      color: AppColors.grey,
                     ),
               ),
             ),
@@ -262,10 +253,9 @@ class _OnboadingSliderState extends State<OnboadingSlider> {
             ),
           ),
           if (widget.pages.length > 1)
-            DotsIndicator(
+            AppDotsIndicator(
               dotsCount: widget.pages.length,
               position: _currentPageAsDouble,
-              decorator: dotsDecorator,
             ),
           const VerticalSpacing.large(),
           Center(

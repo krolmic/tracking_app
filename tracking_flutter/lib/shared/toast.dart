@@ -12,7 +12,7 @@ void showToast(
   DelightToastBar(
     animationDuration: animationDuration,
     builder: (context) => ToastCard(
-      color: contentBackgroundColor,
+      color: AppColors.contentBackgroundColor,
       leading: Icon(icon),
       title: Text(message),
     ),

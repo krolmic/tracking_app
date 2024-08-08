@@ -9,11 +9,14 @@ import 'package:go_router/go_router.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:tracking_app/app_settings/bloc/app_settings_bloc.dart';
 import 'package:tracking_app/create_mood/bloc/create_mood_bloc.dart';
-import 'package:tracking_app/shared/date_time.dart';
+import 'package:tracking_app/shared/extensions/date_time.dart';
+import 'package:tracking_app/shared/extensions/double.dart';
 import 'package:tracking_app/shared/formz.dart';
+import 'package:tracking_app/shared/theme/animation.dart';
 import 'package:tracking_app/shared/theme/colors.dart';
 import 'package:tracking_app/shared/theme/layout.dart';
 import 'package:tracking_app/shared/toast.dart';
+import 'package:tracking_app/shared/widgets/app_dots_indicator.dart';
 import 'package:tracking_app/shared/widgets/loading_indicator.dart';
 import 'package:tracking_app/shared/widgets/spacing.dart';
 
@@ -27,6 +30,9 @@ class CreateMoodScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final translations = AppLocalizations.of(context)!;
 
+    final appSettingsData =
+        context.select((AppSettingsBloc bloc) => bloc.state.appSettingsData);
+
     return BlocListener<CreateMoodBloc, CreateMoodState>(
       listenWhen: (previousState, currentState) =>
           previousState.formStatus != currentState.formStatus,
@@ -37,6 +43,13 @@ class CreateMoodScreen extends StatelessWidget {
             Iconsax.award_bold,
             translations.moodTrackedSuccessfully,
           );
+
+          context.read<CreateMoodBloc>().add(
+                CreateMoodEvent.formResetRequested(
+                  appSettingsData.preSetRevenue,
+                  appSettingsData.preSetWorkTime,
+                ),
+              );
 
           context.pop();
         } else if (state.formStatus.isFailure) {
@@ -60,11 +73,10 @@ class CreateMoodScreen extends StatelessWidget {
                     return const TinyLoadingIndicator();
                   }
 
+                  final date = state.selectedDate ?? DateTime.now();
+
                   return Text(
-                    getDateString(
-                      context,
-                      state.selectedDate ?? DateTime.now(),
-                    ),
+                    date.getDateString(context),
                     maxLines: 1,
                     style: Theme.of(context).textTheme.bodySmall,
                   );

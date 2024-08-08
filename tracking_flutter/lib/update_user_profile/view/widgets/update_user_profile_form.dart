@@ -88,7 +88,6 @@ class _UpdateUserProfileFormState extends State<_UpdateUserProfileForm> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const VerticalSpacing.large(),
               Text(
                 translations.email,
                 style: Theme.of(context).textTheme.titleSmall,
@@ -115,15 +114,15 @@ class _UpdateUserProfileFormState extends State<_UpdateUserProfileForm> {
                 decoration: InputDecoration(
                   label: Text(translations.givenName),
                 ),
-                validator: (value) =>
-                    _formState.firstName.validator(value ?? '')?.toString(),
+                validator: (value) => _formState.firstName
+                    .validator(value ?? '')
+                    ?.text(translations),
                 keyboardType: TextInputType.text,
-                textInputAction: TextInputAction.next,
+                textInputAction: TextInputAction.done,
                 enabled: !state.isInProgress,
               ),
               const VerticalSpacing.extraLarge(),
               AppElevatedButton(
-                isDisabled: _firstNameController.text.isEmpty,
                 isLoading: state.isInProgress,
                 icon: Iconsax.edit_2_bold,
                 onPressed: _onSubmit,
@@ -166,6 +165,16 @@ class FirstNameInput extends FormzInput<String, FirstNameInputError> {
   @override
   FirstNameInputError? validator(String value) {
     if (value.isEmpty) return FirstNameInputError.empty;
+
+    return null;
+  }
+}
+
+extension FirstNameInputErrorX on FirstNameInputError {
+  String? text(AppLocalizations translations) {
+    if (this == FirstNameInputError.empty) {
+      return translations.givenNameMustNotBeBlank;
+    }
 
     return null;
   }

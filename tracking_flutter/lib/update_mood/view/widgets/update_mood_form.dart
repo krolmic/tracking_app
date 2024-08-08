@@ -113,7 +113,7 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
 
     _revenueController = TextEditingController(
       text: moodFormState.revenue.value != 0
-          ? moodFormState.revenue.value.toString()
+          ? moodFormState.revenue.value.toFormattedString()
           : '',
     )..addListener(_onRevenueChanged);
   }
@@ -146,14 +146,9 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
                 const VerticalSpacing.large(),
                 Text(
                   translations.howAreYouFeeling,
-                  style: Theme.of(context).textTheme.headlineSmall,
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
                 const VerticalSpacing.medium(),
-                Text(
-                  translations.estimateYourMood,
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
-                const VerticalSpacing.large(),
                 BlocBuilder<UpdateMoodBloc, UpdateMoodState>(
                   buildWhen: (previousState, currentState) =>
                       previousState.moodFormState.moodValue !=
@@ -167,20 +162,13 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
                       divisions: MoodValueInput.maxValue - 1,
                       label: state.moodFormState.moodValue.value.toString(),
                       onChanged: _onMoodValueChanged,
-                      activeColor: blue,
-                      inactiveColor: lightBlue,
                     );
                   },
                 ),
                 const VerticalSpacing.extraLarge(),
                 Text(
                   translations.whatAreYouGreatfulFor,
-                  style: Theme.of(context).textTheme.headlineSmall,
-                ),
-                const VerticalSpacing.medium(),
-                Text(
-                  translations.writeDownThingsYouAreGreatfulFor,
-                  style: Theme.of(context).textTheme.bodyMedium,
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
                 const VerticalSpacing.large(),
                 TextFormField(
@@ -191,6 +179,7 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
                   decoration: InputDecoration(
                     icon: const Icon(Iconsax.heart_edit_outline),
                     iconColor: Theme.of(context).primaryColor,
+                    hintText: translations.affirmation1,
                   ),
                   validator: (value) => updateMoodBloc
                       .state.moodFormState.thingsIAmGreatfulAbout1
@@ -208,6 +197,7 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
                   decoration: InputDecoration(
                     icon: const Icon(Iconsax.heart_edit_outline),
                     iconColor: Theme.of(context).primaryColor,
+                    hintText: translations.affirmation2,
                   ),
                   validator: (value) => updateMoodBloc
                       .state.moodFormState.thingsIAmGreatfulAbout2
@@ -225,6 +215,7 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
                   decoration: InputDecoration(
                     icon: const Icon(Iconsax.heart_edit_outline),
                     iconColor: Theme.of(context).primaryColor,
+                    hintText: translations.affirmation3,
                   ),
                   validator: (value) => updateMoodBloc
                       .state.moodFormState.thingsIAmGreatfulAbout3
@@ -236,12 +227,7 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
                 const VerticalSpacing.extraLarge(),
                 Text(
                   translations.whatIsOnYourMind,
-                  style: Theme.of(context).textTheme.headlineSmall,
-                ),
-                const VerticalSpacing.medium(),
-                Text(
-                  translations.whatIsOnYourMindDescription,
-                  style: Theme.of(context).textTheme.bodyMedium,
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
                 const VerticalSpacing.large(),
                 TextFormField(
@@ -258,12 +244,7 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
                 const VerticalSpacing.extraLarge(),
                 Text(
                   translations.howMuchDidYouEarn,
-                  style: Theme.of(context).textTheme.headlineSmall,
-                ),
-                const VerticalSpacing.medium(),
-                Text(
-                  translations.howMuchDidYouEarnDescription,
-                  style: Theme.of(context).textTheme.bodyMedium,
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
                 const VerticalSpacing.large(),
                 BlocBuilder<AppSettingsBloc, AppSettingsState>(
@@ -291,7 +272,7 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
                 const VerticalSpacing.extraLarge(),
                 Text(
                   translations.howLongDidYouWork,
-                  style: Theme.of(context).textTheme.headlineSmall,
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
                 const VerticalSpacing.large(),
                 BlocBuilder<UpdateMoodBloc, UpdateMoodState>(

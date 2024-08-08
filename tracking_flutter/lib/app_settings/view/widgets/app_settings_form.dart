@@ -19,7 +19,7 @@ class _AppSettingsFormState extends State<_AppSettingsForm> {
 
     _revenueController = TextEditingController(
       text: formState.revenue.value != 0
-          ? formState.revenue.value.toString()
+          ? formState.revenue.value.toFormattedString()
           : '',
     )..addListener(_onRevenueChanged);
   }
@@ -74,7 +74,6 @@ class _AppSettingsFormState extends State<_AppSettingsForm> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const VerticalSpacing.large(),
             Text(
               translations.currency,
               style: Theme.of(context).textTheme.titleSmall,

@@ -5,6 +5,7 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:tracking_app/shared/theme/animation.dart';
 import 'package:tracking_app/shared/theme/colors.dart';
+import 'package:tracking_app/shared/theme/layout.dart';
 
 /// Main navigation widget
 class ScaffoldWithNestedNavigation extends StatelessWidget {
@@ -17,10 +18,6 @@ class ScaffoldWithNestedNavigation extends StatelessWidget {
   void _goBranch(int index) {
     navigationShell.goBranch(
       index,
-      // A common pattern when using bottom navigation bars is to support
-      // navigating to the initial location when tapping the item that is
-      // already active. This example demonstrates how to support this behavior,
-      // using the initialLocation parameter of goBranch.
       initialLocation: true,
     );
   }
@@ -28,7 +25,7 @@ class ScaffoldWithNestedNavigation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: contentOnDarkBackgroundColor,
+      backgroundColor: AppColors.contentOnDarkBackgroundColor,
       body: navigationShell,
       bottomNavigationBar: _FloatingBottomNavigationBar(
         key: const ValueKey('FloatingBottomNavigationBar'),
@@ -49,42 +46,39 @@ class _FloatingBottomNavigationBar extends StatelessWidget {
   final dynamic Function(int) onTap;
   final int activeIndex;
 
+  static const navigationButtonGradient = LinearGradient(
+    colors: [
+      AppColors.gradientColor2,
+      AppColors.gradientColor3,
+      AppColors.gradientColor4,
+    ],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
+  static const iconActiveColor = AppColors.contentBackgroundColor;
+  static final iconColor = AppColors.darkBlueAccent;
+  static const textColor = AppColors.contentOnDarkBackgroundColor;
+
   @override
   Widget build(BuildContext context) {
     final translations = AppLocalizations.of(context)!;
 
-    const navigationButtonGradient = LinearGradient(
-      colors: [
-        gradientColor2,
-        gradientColor3,
-        gradientColor4,
-      ],
-      begin: Alignment.topLeft,
-      end: Alignment.bottomRight,
-    );
-
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10),
+      padding: const EdgeInsets.symmetric(horizontal: viewPaddingHorizontal),
       decoration: BoxDecoration(
-        color: Colors.transparent,
+        color: AppColors.contentBackgroundColor,
         boxShadow: [
           BoxShadow(
             blurRadius: 20,
-            color: Colors.black.withOpacity(.1),
+            color: AppColors.contentShadowColor,
           ),
         ],
       ),
       child: SafeArea(
         child: Container(
-          decoration: const BoxDecoration(
-            color: contentBackgroundColor,
-            borderRadius: BorderRadius.all(
-              Radius.circular(30),
-            ),
-          ),
-          padding: const EdgeInsets.all(10),
+          padding: const EdgeInsets.only(top: 15),
           child: GNav(
-            rippleColor: darkBlueAccent,
+            rippleColor: AppColors.darkBlueAccent,
             hoverColor: Colors.grey[100]!,
             gap: 8,
             iconSize: 20,
@@ -97,9 +91,9 @@ class _FloatingBottomNavigationBar extends StatelessWidget {
                 icon: activeIndex == 0
                     ? Iconsax.home_bold
                     : Iconsax.home_1_outline,
-                iconActiveColor: contentBackgroundColor,
-                iconColor: darkBlueAccent,
-                textColor: contentOnDarkBackgroundColor,
+                iconActiveColor: iconActiveColor,
+                iconColor: iconColor,
+                textColor: textColor,
                 text: translations.home,
               ),
               GButton(
@@ -107,9 +101,9 @@ class _FloatingBottomNavigationBar extends StatelessWidget {
                 icon: activeIndex == 1
                     ? Iconsax.calendar_2_bold
                     : Iconsax.calendar_2_outline,
-                iconActiveColor: contentBackgroundColor,
-                iconColor: darkBlueAccent,
-                textColor: contentOnDarkBackgroundColor,
+                iconActiveColor: iconActiveColor,
+                iconColor: iconColor,
+                textColor: textColor,
                 text: translations.calendar,
               ),
               GButton(
@@ -117,9 +111,9 @@ class _FloatingBottomNavigationBar extends StatelessWidget {
                 icon: activeIndex == 2
                     ? Iconsax.activity_bold
                     : Iconsax.activity_outline,
-                iconActiveColor: contentBackgroundColor,
-                iconColor: darkBlueAccent,
-                textColor: contentOnDarkBackgroundColor,
+                iconActiveColor: iconActiveColor,
+                iconColor: iconColor,
+                textColor: AppColors.contentOnDarkBackgroundColor,
                 text: translations.analysis,
               ),
               GButton(
@@ -127,9 +121,9 @@ class _FloatingBottomNavigationBar extends StatelessWidget {
                 icon: activeIndex == 3
                     ? Iconsax.setting_2_bold
                     : Iconsax.setting_2_outline,
-                iconActiveColor: contentBackgroundColor,
-                iconColor: darkBlueAccent,
-                textColor: contentOnDarkBackgroundColor,
+                iconActiveColor: iconActiveColor,
+                iconColor: iconColor,
+                textColor: textColor,
                 text: translations.settings,
               ),
             ],

@@ -15,9 +15,13 @@ class _MonthsSelection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final selectedMonthIndex = selectedMonth - 1;
+
+    // Scroll to the month before the selected month so that
+    // user is able to select it without scrolling
     final scrollController = ScrollController(
       initialScrollOffset:
-          (selectedMonth - 1) * (monthWidth + horizontalPaddingSmall),
+          (selectedMonthIndex - 1) * (monthWidth + horizontalPaddingSmall),
     );
 
     return SizedBox(
@@ -33,16 +37,16 @@ class _MonthsSelection extends StatelessWidget {
 
           Color textColor;
           if (isCurrentMonth) {
-            textColor = contentOnDarkBackgroundColor;
+            textColor = AppColors.contentOnDarkBackgroundColor;
           } else if (isDisabled) {
-            textColor = lightGrey;
+            textColor = AppColors.lightGrey;
           } else {
             textColor = Colors.black;
           }
 
           Color backgroundColor;
           if (isCurrentMonth) {
-            backgroundColor = primarySwatch;
+            backgroundColor = AppColors.primarySwatch;
           } else {
             backgroundColor = Colors.transparent;
           }

@@ -12,7 +12,11 @@ import 'package:tracking_app/delete_mood/cubit/delete_mood_cubit.dart';
 import 'package:tracking_app/home/cubit/home_cubit.dart';
 import 'package:tracking_app/main.dart';
 import 'package:tracking_app/shared/currencies.dart';
-import 'package:tracking_app/shared/date_time.dart';
+import 'package:tracking_app/shared/extensions/date_time.dart';
+import 'package:tracking_app/shared/extensions/double.dart';
+import 'package:tracking_app/shared/extensions/duration.dart';
+import 'package:tracking_app/shared/router/routes_names.dart';
+import 'package:tracking_app/shared/router/routes_parameters.dart';
 import 'package:tracking_app/shared/theme/animation.dart';
 import 'package:tracking_app/shared/theme/colors.dart';
 import 'package:tracking_app/shared/theme/layout.dart';
@@ -65,7 +69,10 @@ class HomeScreen extends StatelessWidget {
                   icon: Iconsax.add_outline,
                   label: translations.trackToday,
                   onPressed: () {
-                    context.goNamed('create-mood-from-home');
+                    context.pushNamed(
+                      RoutesNames.createMoodFromHome,
+                      extra: CreateMoodRouteParameters(date: DateTime.now()),
+                    );
                   },
                   isLoading: state.isInitialOrLoading,
                 ),
@@ -125,54 +132,44 @@ class _HomeView extends StatelessWidget {
           },
         ),
       ],
-      child: BlocBuilder<UserProfileCubit, UserProfileState>(
-        buildWhen: (previousUserProfileState, currentUserProfileState) =>
-            previousUserProfileState != currentUserProfileState,
-        builder: (context, userProfileState) {
-          return BlocBuilder<HomeCubit, HomeState>(
-            buildWhen: (previousState, currentState) =>
-                previousState != currentState,
-            builder: (context, state) {
-              return BaseView(
-                child: Builder(
-                  builder: (context) {
-                    if (userProfileState.isInitialOrLoading ||
-                        state.isInitialOrLoading) {
-                      return const Center(child: LoadingIndicator());
-                    } else if (userProfileState.isError || state.isError) {
-                      return ErrorMessage(
-                        onRefresh: () {
-                          if (userProfileState.isError) {
-                            context.read<UserProfileCubit>().loadUserProfile();
-                          }
+      child: Builder(
+        builder: (context) {
+          final userProfileState = context.watch<UserProfileCubit>().state;
+          final homeState = context.watch<HomeCubit>().state;
 
-                          if (state.isError) {
-                            context.read<HomeCubit>().init();
-                          }
-                        },
-                      );
-                    }
+          if (userProfileState.isInitialOrLoading ||
+              homeState.isInitialOrLoading) {
+            return const BaseView(child: Center(child: LoadingIndicator()));
+          } else if (userProfileState.isError || homeState.isError) {
+            return BaseView(
+              child: ErrorMessage(
+                onRefresh: () {
+                  if (userProfileState.isError) {
+                    context.read<UserProfileCubit>().loadUserProfile();
+                  }
 
-                    final userProfileSuccessState =
-                        userProfileState as UserProfileSuccessState;
+                  if (homeState.isError) {
+                    context.read<HomeCubit>().init();
+                  }
+                },
+              ),
+            );
+          }
 
-                    return _HomeContentView(
-                      firstName: userProfileSuccessState.firstName,
-                      weeklyProgress: state.moodsListState.weeklyProgress,
-                      averageWorkTimeInHours:
-                          state.moodsListState.averageWorkTimeInHoursThisWeek,
-                      averageRevenue:
-                          state.moodsListState.averageRevenueThisWeek,
-                      averageMood: state.moodsListState.averageMoodThisWeek,
-                      moods: state.moodsListState.recentlyAddedMoods,
-                      trackedEveryDay:
-                          state.moodsListState.trackedEveryDayThisWeek,
-                      trackedToday: state.moodsListState.containsTodayMood,
-                    );
-                  },
-                ),
-              );
-            },
+          final moodsState = homeState.moodsListState;
+
+          return BaseView(
+            addVerticalPadding: true,
+            child: _HomeContentView(
+              firstName: userProfileState.firstName,
+              weeklyProgress: moodsState.weeklyProgress,
+              averageWorkTime: moodsState.averageWorkTimeThisWeek,
+              averageRevenue: moodsState.averageRevenueThisWeek,
+              averageMood: moodsState.averageMoodThisWeek,
+              moods: moodsState.recentlyAddedMoods,
+              trackedEveryDay: moodsState.trackedEveryDayThisWeek,
+              trackedToday: moodsState.containsTodayMood,
+            ),
           );
         },
       ),
@@ -185,7 +182,7 @@ class _HomeContentView extends StatelessWidget {
     required this.firstName,
     required this.moods,
     required this.weeklyProgress,
-    required this.averageWorkTimeInHours,
+    required this.averageWorkTime,
     required this.averageMood,
     required this.averageRevenue,
     required this.trackedEveryDay,
@@ -196,8 +193,8 @@ class _HomeContentView extends StatelessWidget {
   final double weeklyProgress;
   final List<Mood> moods;
   final double averageMood;
-  final int averageWorkTimeInHours;
-  final int averageRevenue;
+  final Duration averageWorkTime;
+  final double averageRevenue;
   final bool trackedEveryDay;
   final bool trackedToday;
 
@@ -206,13 +203,19 @@ class _HomeContentView extends StatelessWidget {
     final translations = AppLocalizations.of(context)!;
     final addExtraBottomSpace = moods.length > 2 && !trackedToday;
 
+    final averageMoodValue =
+        averageMood != 0 ? averageMood.toFormattedString() : '-';
+    final averageWorkTimeValue = averageWorkTime != Duration.zero
+        ? averageWorkTime.toFormattedString()
+        : '-';
+
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const VerticalSpacing.large(),
+          // const VerticalSpacing.large(),
           Text(
-            getGreetingString(context, DateTime.now()),
+            DateTime.now().getGreetingString(translations),
             style: Theme.of(context).textTheme.bodyMedium,
           ),
           Text(
@@ -240,7 +243,7 @@ class _HomeContentView extends StatelessWidget {
                   child: MoodData(
                     icon: Iconsax.heart_bold,
                     label: translations.averageMood,
-                    value: averageMood.toStringAsFixed(2),
+                    value: averageMoodValue,
                   ).animate().fadeIn(
                         duration: animationDuration,
                       ),
@@ -250,7 +253,7 @@ class _HomeContentView extends StatelessWidget {
                   child: MoodData(
                     icon: Iconsax.timer_bold,
                     label: translations.averageWorkHours,
-                    value: '$averageWorkTimeInHours h',
+                    value: averageWorkTimeValue,
                   ).animate().fadeIn(
                         duration: animationDuration,
                         delay: animationDuration,
@@ -263,13 +266,17 @@ class _HomeContentView extends StatelessWidget {
                         previous.appSettingsData.currency !=
                         current.appSettingsData.currency,
                     builder: (context, state) {
-                      final currencySymbol =
+                      final currency =
                           getCurrencySymbol(state.appSettingsData.currency);
+
+                      final averageRevenueValue = averageRevenue != 0
+                          ? '${averageRevenue.toFormattedString()} $currency'
+                          : '-';
 
                       return MoodData(
                         icon: Iconsax.money_4_bold,
                         label: translations.averageRevenue,
-                        value: '$averageRevenue $currencySymbol',
+                        value: averageRevenueValue,
                       );
                     },
                   ).animate().fadeIn(
@@ -281,37 +288,37 @@ class _HomeContentView extends StatelessWidget {
             ),
           ),
           const VerticalSpacing.large(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                translations.recentlyTracked,
-                style: Theme.of(context).textTheme.headlineSmall,
-              ),
-              TextButton(
-                onPressed: () {
-                  context.goNamed('moods');
-                },
-                child: Text(
-                  translations.seeAll,
-                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                        color: blue,
-                      ),
+          if (moods.isNotEmpty)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  translations.recentlyTracked,
+                  style: Theme.of(context).textTheme.headlineSmall,
                 ),
-              ),
-            ],
-          ),
+                TextButton(
+                  onPressed: () {
+                    context.goNamed(RoutesNames.moods);
+                  },
+                  child: Text(
+                    translations.seeAll,
+                    style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                          color: AppColors.blue,
+                        ),
+                  ),
+                ),
+              ],
+            ),
           for (final mood in moods)
             TrackedMood(
               mood: mood,
-              onTap: () => context.goNamed(
-                'update-mood-from-home',
-                extra: mood,
+              onTap: () => context.pushNamed(
+                RoutesNames.updateMoodFromHome,
+                extra: UpdateMoodRouteParameters(mood: mood),
               ),
             ).animate().fadeIn(
                   duration: animationDuration,
                 ),
-          const VerticalSpacing.extraLarge(),
           if (addExtraBottomSpace) const VerticalSpacing.extraLarge(),
         ],
       ),

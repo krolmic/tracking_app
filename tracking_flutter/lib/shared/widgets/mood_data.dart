@@ -19,11 +19,11 @@ class MoodData extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(12.5),
       decoration: BoxDecoration(
-        color: contentBackgroundColor,
+        color: AppColors.contentBackgroundColor,
         borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: AppColors.contentShadowColor,
             blurRadius: 10,
           ),
         ],
@@ -34,19 +34,24 @@ class MoodData extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(5),
             decoration: BoxDecoration(
-              color: lightBlue,
+              color: AppColors.lightBlue,
               borderRadius: BorderRadius.circular(10),
             ),
             child: Icon(
               icon,
-              color: gradientColor3,
+              color: AppColors.gradientColor3,
               size: 20,
             ),
           ),
           const VerticalSpacing.small(),
-          Text(
-            label,
-            style: Theme.of(context).textTheme.bodySmall,
+          SizedBox(
+            height: 30,
+            child: Text(
+              label,
+              style: Theme.of(context).textTheme.bodySmall,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
           const VerticalSpacing.medium(),
           Text(
@@ -54,6 +59,8 @@ class MoodData extends StatelessWidget {
             style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
           ),
         ],
       ),

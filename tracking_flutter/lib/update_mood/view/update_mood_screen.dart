@@ -8,7 +8,8 @@ import 'package:icons_plus/icons_plus.dart';
 import 'package:mood_repository/mood_repository.dart';
 import 'package:tracking_app/app_settings/bloc/app_settings_bloc.dart';
 import 'package:tracking_app/delete_mood/cubit/delete_mood_cubit.dart';
-import 'package:tracking_app/shared/date_time.dart';
+import 'package:tracking_app/shared/extensions/date_time.dart';
+import 'package:tracking_app/shared/extensions/double.dart';
 import 'package:tracking_app/shared/formz.dart';
 import 'package:tracking_app/shared/theme/colors.dart';
 import 'package:tracking_app/shared/toast.dart';
@@ -24,12 +25,10 @@ part 'widgets/update_mood_form.dart';
 
 class UpdateMoodScreen extends StatelessWidget {
   const UpdateMoodScreen({
-    required this.routeOrigin,
     required this.moodDate,
     super.key,
   });
 
-  final String routeOrigin;
   final DateTime moodDate;
 
   Future<void> _showMoodDeletionDialog(
@@ -44,7 +43,7 @@ class UpdateMoodScreen extends StatelessWidget {
         return AppDialog(
           title: translations.deleteMood,
           subTitle: translations.deleteMoodMessage,
-          confirmButtonText: translations.delete.toUpperCase(),
+          confirmButtonText: translations.delete,
           onConfirm: () {
             onConfirm();
             Navigator.of(context).pop();
@@ -72,7 +71,7 @@ class UpdateMoodScreen extends StatelessWidget {
                 translations.moodUpdatedSuccessfully,
               );
 
-              context.goNamed(routeOrigin);
+              context.pop();
             } else if (state.formStatus.isFailure) {
               showToast(
                 context,
@@ -93,7 +92,7 @@ class UpdateMoodScreen extends StatelessWidget {
                 translations.moodDeletedSuccessfully,
               );
 
-              context.goNamed(routeOrigin);
+              context.pop();
             } else if (deleteMoodState.isError) {
               showToast(
                 context,
@@ -107,7 +106,7 @@ class UpdateMoodScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            getDateString(context, moodDate),
+            moodDate.getDateString(context),
             maxLines: 1,
           ),
           actions: [
@@ -117,7 +116,7 @@ class UpdateMoodScreen extends StatelessWidget {
               builder: (context, deleteMoodState) {
                 return deleteMoodState.maybeWhen(
                   loading: () => TinyLoadingIndicator(
-                    color: primarySwatch.shade200,
+                    color: AppColors.primarySwatch.shade200,
                   ),
                   orElse: () => BlocBuilder<UpdateMoodBloc, UpdateMoodState>(
                     buildWhen:

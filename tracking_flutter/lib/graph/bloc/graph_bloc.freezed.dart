@@ -956,7 +956,7 @@ class _$GraphStateImpl implements _GraphState {
       this.targetDate = const GraphTargetDateState.initial(),
       this.timeRangeMode = const GraphTimeRangeMode.monthly(),
       this.settings =
-          const GraphSettings(showRevenue: true, showWorkTime: true)});
+          const GraphSettings(showRevenue: false, showWorkTime: true)});
 
   @override
   @JsonKey()

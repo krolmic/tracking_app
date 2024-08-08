@@ -13,8 +13,9 @@ import 'package:tracking_app/delete_mood/cubit/delete_mood_cubit.dart';
 import 'package:tracking_app/graph/bloc/graph_bloc.dart';
 import 'package:tracking_app/main.dart';
 import 'package:tracking_app/shared/currencies.dart';
-import 'package:tracking_app/shared/date_time.dart';
-import 'package:tracking_app/shared/duration.dart';
+import 'package:tracking_app/shared/extensions/date_time.dart';
+import 'package:tracking_app/shared/extensions/double.dart';
+import 'package:tracking_app/shared/extensions/duration.dart';
 import 'package:tracking_app/shared/theme/animation.dart';
 import 'package:tracking_app/shared/theme/colors.dart';
 import 'package:tracking_app/shared/theme/layout.dart';
@@ -26,6 +27,7 @@ import 'package:tracking_app/shared/widgets/spacing.dart';
 import 'package:tracking_app/update_mood/bloc/update_mood_bloc.dart';
 import 'package:user_profile_repository/user_profile_repository.dart';
 
+part 'widgets/graph_settings.dart';
 part 'widgets/line_graph.dart';
 part 'widgets/line_graph_explanation.dart';
 part 'widgets/months_selection.dart';
@@ -104,12 +106,12 @@ class _GraphView extends StatelessWidget {
     final dateTimeNow = DateTime.now();
 
     return BaseView(
+      addVerticalPadding: true,
       addHorizontalPadding: false,
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const VerticalSpacing.large(),
             Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: viewPaddingHorizontal),
@@ -260,78 +262,6 @@ class _GraphView extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class _GraphSettings extends StatelessWidget {
-  const _GraphSettings();
-
-  @override
-  Widget build(BuildContext context) {
-    final translations = AppLocalizations.of(context)!;
-
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        BlocBuilder<GraphBloc, GraphState>(
-          buildWhen: (previous, current) =>
-              previous.settings.showWorkTime != current.settings.showWorkTime,
-          builder: (context, state) {
-            return Checkbox(
-              value: state.settings.showWorkTime,
-              onChanged: (value) {
-                context
-                    .read<GraphBloc>()
-                    .add(const GraphEvent.showWorkTimeTriggered());
-              },
-            );
-          },
-        ),
-        GestureDetector(
-          onTap: () {
-            context
-                .read<GraphBloc>()
-                .add(const GraphEvent.showWorkTimeTriggered());
-          },
-          child: Text(
-            translations.showWorkTime,
-            style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                  color: blue,
-                  fontWeight: FontWeight.normal,
-                ),
-          ),
-        ),
-        const HorizontalSpacing.medium(),
-        BlocBuilder<GraphBloc, GraphState>(
-          buildWhen: (previous, current) =>
-              previous.settings.showRevenue != current.settings.showRevenue,
-          builder: (context, state) {
-            return Checkbox(
-              value: state.settings.showRevenue,
-              onChanged: (value) {
-                context
-                    .read<GraphBloc>()
-                    .add(const GraphEvent.showRevenueTriggered());
-              },
-            );
-          },
-        ),
-        GestureDetector(
-          onTap: () {
-            context
-                .read<GraphBloc>()
-                .add(const GraphEvent.showRevenueTriggered());
-          },
-          child: Text(
-            translations.showRevenue,
-            style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                  color: blue,
-                  fontWeight: FontWeight.normal,
-                ),
-          ),
-        ),
-      ],
     );
   }
 }
