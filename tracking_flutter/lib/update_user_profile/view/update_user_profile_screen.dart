@@ -91,6 +91,7 @@ class _UpdateUserProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseView(
+      addVerticalPadding: true,
       child: SingleChildScrollView(
         child: _UpdateUserProfileForm(
           email: email,

@@ -2,7 +2,6 @@ import 'package:account_repository/account_repository.dart';
 import 'package:animated_emoji/animated_emoji.dart';
 import 'package:email_repository/email_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
@@ -11,8 +10,8 @@ import 'package:mood_repository/mood_repository.dart';
 import 'package:tracking_app/main.dart';
 import 'package:tracking_app/settings/cubit/settings_cubit.dart';
 import 'package:tracking_app/shared/constants.dart';
-import 'package:tracking_app/shared/router.dart';
-import 'package:tracking_app/shared/theme/animation.dart';
+import 'package:tracking_app/shared/router/routes_names.dart';
+import 'package:tracking_app/shared/router/routes_parameters.dart';
 import 'package:tracking_app/shared/theme/colors.dart';
 import 'package:tracking_app/shared/theme/layout.dart';
 import 'package:tracking_app/shared/toast.dart';
@@ -112,7 +111,7 @@ class _SettingsView extends StatelessWidget {
         return AppDialog(
           title: translations.signOut,
           subTitle: translations.signOutMessage,
-          confirmButtonText: translations.signOut.toUpperCase(),
+          confirmButtonText: translations.signOut,
           onConfirm: onConfirm,
         );
       },
@@ -131,7 +130,7 @@ class _SettingsView extends StatelessWidget {
         return AppDialog(
           title: translations.accountDeletion,
           subTitle: translations.accountDeletionMessage,
-          confirmButtonText: translations.delete.toUpperCase(),
+          confirmButtonText: translations.delete,
           onConfirm: onConfirm,
         );
       },
@@ -176,92 +175,87 @@ class _SettingsView extends StatelessWidget {
       buildWhen: (previousUserProfileState, currentUserProfileState) =>
           previousUserProfileState != currentUserProfileState,
       builder: (context, userProfileState) {
-        return BlocBuilder<SettingsCubit, SettingsState>(
-          buildWhen: (previousState, currentState) =>
-              previousState.signOutState != currentState.signOutState ||
-              previousState.accountDeletionState !=
-                  currentState.accountDeletionState ||
-              previousState.sendEmailState != currentState.sendEmailState,
-          builder: (context, settingsState) {
-            return BaseView(
-              child: userProfileState.maybeWhen(
-                orElse: () => const Center(child: LoadingIndicator()),
-                error: () => ErrorMessage(
-                  onRefresh: context.read<UserProfileCubit>().loadUserProfile,
-                ),
-                loaded: (id, email, firstName) {
-                  return SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const VerticalSpacing.large(),
-                        Center(
-                          child: SizedBox(
-                            height: 200,
-                            child: CircleAvatar(
-                              backgroundColor: lightBlueAccent,
-                              radius: 100,
-                              child: const AnimatedEmoji(
-                                AnimatedEmojis.otter,
-                                size: 128,
-                              ),
+        return BaseView(
+          addVerticalPadding: true,
+          child: userProfileState.maybeWhen(
+            orElse: () => const Center(child: LoadingIndicator()),
+            error: () => ErrorMessage(
+              onRefresh: context.read<UserProfileCubit>().loadUserProfile,
+            ),
+            loaded: (id, email, firstName) {
+              return SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Center(
+                      child: SizedBox(
+                        height: 150,
+                        child: CircleAvatar(
+                          backgroundColor: AppColors.lightBlueAccent,
+                          radius: 75,
+                          child: const AnimatedEmoji(
+                            AnimatedEmojis.otter,
+                            size: 75,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const VerticalSpacing.large(),
+                    Center(
+                      child: Text(
+                        email,
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: verticalPaddingSmall,
+                    ),
+                    Center(
+                      child: Text(
+                        firstName,
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              fontWeight: FontWeight.bold,
                             ),
-                          ),
+                      ),
+                    ),
+                    const VerticalSpacing.extraLarge(),
+                    Text(
+                      translations.account,
+                      style: Theme.of(context).textTheme.headlineSmall,
+                    ),
+                    const VerticalSpacing.large(),
+                    Tile(
+                      icon: Iconsax.edit_2_outline,
+                      title: translations.personalDetails,
+                      leading: const Icon(Iconsax.profile_circle_bold),
+                      onTap: () => context.pushNamed(
+                        RoutesNames.updateUserProfile,
+                        extra: UpdateUserProfileRouteParameters(
+                          email: email,
+                          firstName: firstName,
                         ),
-                        const VerticalSpacing.large(),
-                        Center(
-                          child: Text(
-                            email,
-                            style: Theme.of(context).textTheme.bodyMedium,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: verticalPaddingSmall,
-                        ),
-                        Center(
-                          child: Text(
-                            firstName,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium!
-                                .copyWith(
-                                  fontWeight: FontWeight.bold,
-                                ),
-                          ),
-                        ),
-                        const VerticalSpacing.extraLarge(),
-                        Text(
-                          translations.account,
-                          style: Theme.of(context).textTheme.headlineSmall,
-                        ),
-                        const VerticalSpacing.large(),
-                        Tile(
-                          icon: Iconsax.edit_2_outline,
-                          title: translations.personalDetails,
-                          leading: const Icon(Iconsax.profile_circle_bold),
-                          onTap: () => context.push(
-                            '/settings/update-user-profile',
-                            extra: UpdateUserProfileParams(
-                              email: email,
-                              firstName: firstName,
-                            ),
-                          ),
-                        ).animate().fadeIn(duration: animationDuration),
-                        const VerticalSpacing.extraLarge(),
-                        Text(
-                          translations.general,
-                          style: Theme.of(context).textTheme.headlineSmall,
-                        ),
-                        const VerticalSpacing.large(),
-                        Tile(
-                          icon: Iconsax.edit_2_outline,
-                          title: translations.appSettings,
-                          leading: const Icon(Iconsax.setting_4_bold),
-                          onTap: () => context.goNamed(
-                            'app-settings',
-                          ),
-                        ).animate().fadeIn(duration: animationDuration),
-                        Tile(
+                      ),
+                    ),
+                    const VerticalSpacing.extraLarge(),
+                    Text(
+                      translations.general,
+                      style: Theme.of(context).textTheme.headlineSmall,
+                    ),
+                    const VerticalSpacing.large(),
+                    Tile(
+                      icon: Iconsax.edit_2_outline,
+                      title: translations.appSettings,
+                      leading: const Icon(Iconsax.setting_4_bold),
+                      onTap: () => context.goNamed(
+                        RoutesNames.appSettings,
+                      ),
+                    ),
+                    BlocBuilder<SettingsCubit, SettingsState>(
+                      buildWhen: (previousState, currentState) =>
+                          previousState.sendEmailState !=
+                          currentState.sendEmailState,
+                      builder: (context, state) {
+                        return Tile(
                           icon: Icons.mail_outline,
                           title: translations.support,
                           leading: const Icon(Iconsax.support_bold),
@@ -270,50 +264,67 @@ class _SettingsView extends StatelessWidget {
                                 subject: '',
                                 body: '',
                               ),
-                          isLoading: settingsState.sendEmailState.isLoading,
-                        ).animate().fadeIn(duration: animationDuration),
-                        Tile(
-                          title: translations.termsOfService,
-                          leading: const Icon(Iconsax.document_text_1_bold),
-                          onTap: () => context.go('/settings/terms-of-service'),
-                        ).animate().fadeIn(duration: animationDuration),
-                        Tile(
-                          title: translations.privacyPolicy,
-                          leading: const Icon(Iconsax.document_text_1_bold),
-                          onTap: () => context.go('/settings/privacy-policy'),
-                        ).animate().fadeIn(duration: animationDuration),
-                        const VerticalSpacing.extraLarge(),
-                        Center(
-                          child: TextButton(
+                          isLoading: state.sendEmailState.isLoading,
+                        );
+                      },
+                    ),
+                    Tile(
+                      title: translations.termsOfService,
+                      leading: const Icon(Iconsax.document_text_1_bold),
+                      onTap: () => context.goNamed(
+                        RoutesNames.termsOfService,
+                      ),
+                    ),
+                    Tile(
+                      title: translations.privacyPolicy,
+                      leading: const Icon(Iconsax.document_text_1_bold),
+                      onTap: () => context.goNamed(
+                        RoutesNames.privacyPolicy,
+                      ),
+                    ),
+                    const VerticalSpacing.extraLarge(),
+                    Center(
+                      child: BlocBuilder<SettingsCubit, SettingsState>(
+                        buildWhen: (previousState, currentState) =>
+                            previousState.signOutState !=
+                            currentState.signOutState,
+                        builder: (context, state) {
+                          return TextButton(
                             onPressed: () => _onSignOutPressed(context),
-                            child: settingsState.signOutState.maybeWhen(
+                            child: state.signOutState.maybeWhen(
                               orElse: () => Text(translations.signOut),
                               loading: () => const TinyLoadingIndicator(),
                             ),
-                          ),
-                        ).animate().fadeIn(duration: animationDuration),
-                        Center(
-                          child: TextButton(
+                          );
+                        },
+                      ),
+                    ),
+                    Center(
+                      child: BlocBuilder<SettingsCubit, SettingsState>(
+                        buildWhen: (previousState, currentState) =>
+                            previousState.accountDeletionState !=
+                            currentState.accountDeletionState,
+                        builder: (context, state) {
+                          return TextButton(
                             onPressed: () => _onDeleteAccountPressed(context),
-                            child: settingsState.accountDeletionState.maybeWhen(
+                            child: state.accountDeletionState.maybeWhen(
+                              loading: () => const TinyLoadingIndicator(),
                               orElse: () => Text(
                                 translations.deleteAccount,
                                 style: const TextStyle(
-                                  color: lightGrey,
+                                  color: AppColors.lightGrey,
                                 ),
                               ),
-                              loading: () => const TinyLoadingIndicator(),
                             ),
-                          ),
-                        ).animate().fadeIn(duration: animationDuration),
-                        const VerticalSpacing.large(),
-                      ],
+                          );
+                        },
+                      ),
                     ),
-                  );
-                },
-              ),
-            );
-          },
+                  ],
+                ),
+              );
+            },
+          ),
         );
       },
     );

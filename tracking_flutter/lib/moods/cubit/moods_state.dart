@@ -33,6 +33,20 @@ extension MoodsListStateX on MoodsListState {
   bool get isError => this is MoodsListErrorState;
   bool get isSuccess => this is MoodsListSuccessState;
 
+  List<Mood> get moods {
+    return maybeWhen(
+      loaded: (moods, _, __, ___) => moods,
+      orElse: () => [],
+    );
+  }
+
+  bool get hasReachedMax {
+    return maybeWhen(
+      loaded: (_, __, hasReachedMax, ___) => hasReachedMax,
+      orElse: () => false,
+    );
+  }
+
   bool get containsTodayMood {
     return maybeWhen(
       loaded: (moods, _, __, ___) {

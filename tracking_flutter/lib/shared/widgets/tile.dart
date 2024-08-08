@@ -26,13 +26,13 @@ class Tile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 5,
-      shadowColor: contentShadowColor,
+      shadowColor: AppColors.contentShadowColor,
       child: ListTile(
         contentPadding: const EdgeInsets.only(
           left: 10,
           right: 15,
         ),
-        iconColor: tileIconColor,
+        iconColor: AppColors.tileIconColor,
         leading: leading,
         title: Text(
           title,
@@ -49,18 +49,18 @@ class Tile extends StatelessWidget {
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                      color: tileSubtitleColor,
+                      color: AppColors.tileSubtitleColor,
                     ),
               )
             : null,
         trailing: isLoading
             ? TinyLoadingIndicator(
-                color: tileIconColor,
+                color: AppColors.tileIconColor,
               )
             : Icon(
                 icon ?? Icons.chevron_right,
                 size: iconSize ?? 20,
-                color: tileIconColor,
+                color: AppColors.tileIconColor,
               ),
         onTap: isLoading ? null : onTap,
       ),

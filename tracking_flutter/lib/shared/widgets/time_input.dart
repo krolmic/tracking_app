@@ -1,7 +1,7 @@
 import 'package:duration_picker/duration_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
-import 'package:tracking_app/shared/duration.dart';
+import 'package:tracking_app/shared/extensions/duration.dart';
 
 class TimeInput extends StatelessWidget {
   const TimeInput({required this.onChange, required this.time, super.key});

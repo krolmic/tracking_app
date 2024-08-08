@@ -60,23 +60,23 @@ extension MoodsListStateX on MoodsListState {
     );
   }
 
-  int get averageWorkTimeInHoursThisWeek {
+  Duration get averageWorkTimeThisWeek {
     return maybeWhen(
       loaded: (moods) {
         if (moodsThisWeek.isEmpty) {
-          return 0;
+          return Duration.zero;
         }
         final totalDuration = moodsThisWeek
             .map((mood) => mood.workTime ?? Duration.zero)
             .reduce((a, b) => a + b);
-        final averageDuration = totalDuration.inHours ~/ moodsThisWeek.length;
+        final averageDuration = totalDuration ~/ moodsThisWeek.length;
         return averageDuration;
       },
-      orElse: () => 0,
+      orElse: () => Duration.zero,
     );
   }
 
-  int get averageRevenueThisWeek {
+  double get averageRevenueThisWeek {
     return maybeWhen(
       loaded: (moods) {
         if (moodsThisWeek.isEmpty) {
@@ -85,7 +85,7 @@ extension MoodsListStateX on MoodsListState {
         final totalRevenue = moodsThisWeek
             .map((mood) => mood.revenue ?? 0)
             .reduce((a, b) => a + b);
-        final averageRevenue = totalRevenue ~/ moodsThisWeek.length;
+        final averageRevenue = totalRevenue / moodsThisWeek.length;
         return averageRevenue;
       },
       orElse: () => 0,

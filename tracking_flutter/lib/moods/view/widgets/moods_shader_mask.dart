@@ -18,7 +18,7 @@ class MoodsShaderMask extends StatelessWidget {
           colors: [
             Colors.transparent,
             Colors.transparent,
-            primarySwatch,
+            AppColors.primarySwatch,
           ],
           stops: [0.0, 0.95, 1.0],
         ).createShader(rect);

@@ -26,19 +26,12 @@ class AppDialog extends StatelessWidget {
       content: Text(subTitle),
       actions: <Widget>[
         TextButton(
-          style: TextButton.styleFrom(
-            textStyle: Theme.of(context).textTheme.labelLarge,
-          ),
           onPressed: onCancel ?? Navigator.of(context).pop,
           child: Text(
-            cancelButtonText ??
-                AppLocalizations.of(context)!.cancel.toUpperCase(),
+            cancelButtonText ?? AppLocalizations.of(context)!.cancel,
           ),
         ),
         TextButton(
-          style: TextButton.styleFrom(
-            textStyle: Theme.of(context).textTheme.labelLarge,
-          ),
           onPressed: onConfirm,
           child: Text(confirmButtonText),
         ),

@@ -3,10 +3,16 @@ import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:jiffy/jiffy.dart';
 import 'package:mood_repository/mood_repository.dart';
 import 'package:settings_repository/settings_repository.dart';
 import 'package:tracking_app/app/cubit/app_cubit.dart';
 import 'package:tracking_app/app_settings/bloc/app_settings_bloc.dart';
+import 'package:tracking_app/auth/view/confirm_reset_password_screen.dart';
+import 'package:tracking_app/auth/view/confirm_sign_up_screen.dart';
+import 'package:tracking_app/auth/view/reset_password_screen.dart';
+import 'package:tracking_app/auth/view/sign_in_screen.dart';
+import 'package:tracking_app/auth/view/sign_up_screen.dart';
 import 'package:tracking_app/create_mood/bloc/create_mood_bloc.dart';
 import 'package:tracking_app/delete_mood/cubit/delete_mood_cubit.dart';
 import 'package:tracking_app/l10n/amplify_resolvers.dart';
@@ -14,14 +20,17 @@ import 'package:tracking_app/main.dart';
 import 'package:tracking_app/onboarding/onboarding_screen.dart';
 import 'package:tracking_app/shared/date_time.dart';
 import 'package:tracking_app/shared/router.dart';
+import 'package:tracking_app/shared/router/router.dart';
 import 'package:tracking_app/shared/theme/colors.dart';
 import 'package:tracking_app/shared/theme/theme.dart';
-import 'package:tracking_app/shared/widgets/auth_screen_scaffold.dart';
 import 'package:tracking_app/shared/widgets/error_message.dart';
 import 'package:tracking_app/shared/widgets/loading_indicator.dart';
 import 'package:tracking_app/update_mood/bloc/update_mood_bloc.dart';
 import 'package:tracking_app/user_profile/cubit/user_profile_cubit.dart';
 import 'package:user_profile_repository/user_profile_repository.dart';
+
+part 'widgets/app_error_message.dart';
+part 'widgets/app_loading_indicator.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -91,36 +100,30 @@ class App extends StatelessWidget {
             final appSettingsState = context
                 .select((AppSettingsBloc cubit) => cubit.state.appSettingsData);
 
-            if (appState.isInitialOrLoading ||
-                appSettingsState.isInitialOrLoading) {
-              return const ColoredBox(
-                color: backgroundColor,
-                child: Center(child: LoadingIndicator(color: primarySwatch)),
-              );
-            } else if (appState.isError || appSettingsState.isError) {
+            final showLoadingIndicator = appState.isInitialOrLoading ||
+                appSettingsState.isInitialOrLoading;
+            final showError = appState.isError || appSettingsState.isError;
+
+            if (showLoadingIndicator) {
+              return const _AppLoadingIndicator();
+            } else if (showError) {
               final translations = AppLocalizations.of(context)!;
 
-              return ColoredBox(
-                color: backgroundColor,
-                child: ErrorMessage(
-                  message: translations.appInitFailed,
-                  onRefresh: context.read<AppCubit>().init,
-                ),
-              );
+              return _AppErrorMessage(translations: translations);
             }
 
             return Authenticator(
               initialStep: AuthenticatorStep.onboarding,
               authenticatorBuilder:
                   (BuildContext context, AuthenticatorState state) {
-                final translations = AppLocalizations.of(context)!;
-
                 if (state.currentStep == AuthenticatorStep.loading) {
-                  setDateTimeLocale(context);
+                  Jiffy.setLocale(
+                    Localizations.localeOf(context).languageCode,
+                  );
 
                   return const Center(
                     child: LoadingIndicator(
-                      color: primarySwatch,
+                      color: AppColors.primarySwatch,
                     ),
                   );
                 } else if (state.currentStep == AuthenticatorStep.onboarding) {
@@ -133,86 +136,43 @@ class App extends StatelessWidget {
                     ),
                   );
                 } else if (state.currentStep == AuthenticatorStep.signUp) {
-                  return AuthScreenScaffold(
+                  return SignUpScreen(
                     onBackButtonPressed: () => state.changeStep(
                       AuthenticatorStep.onboarding,
                     ),
-                    state: state,
-                    body: SignUpForm(),
-                    footer: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          translations.haveAccount,
-                          style:
-                              Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                    color: grey,
-                                  ),
-                        ),
-                        TextButton(
-                          onPressed: () => state.changeStep(
-                            AuthenticatorStep.signIn,
-                          ),
-                          child: Text(
-                            translations.signIn,
-                            style: const TextStyle(
-                              color: primarySwatch,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ],
+                    onChangeStepPressed: () => state.changeStep(
+                      AuthenticatorStep.signIn,
+                    ),
+                  );
+                } else if (state.currentStep ==
+                    AuthenticatorStep.confirmSignUp) {
+                  return ConfirmSignUpScreen(
+                    onBackButtonPressed: () => state.changeStep(
+                      AuthenticatorStep.signIn,
                     ),
                   );
                 } else if (state.currentStep == AuthenticatorStep.signIn) {
-                  return AuthScreenScaffold(
+                  return SignInScreen(
                     onBackButtonPressed: () => state.changeStep(
                       AuthenticatorStep.onboarding,
                     ),
-                    state: state,
-                    body: SignInForm(),
-                    footer: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          translations.noAccount,
-                          style:
-                              Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                    color: grey,
-                                  ),
-                        ),
-                        TextButton(
-                          onPressed: () => state.changeStep(
-                            AuthenticatorStep.signUp,
-                          ),
-                          child: Text(
-                            translations.signUp,
-                            style: const TextStyle(
-                              color: primarySwatch,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ],
+                    onChangeStepPressed: () => state.changeStep(
+                      AuthenticatorStep.signUp,
                     ),
                   );
                 } else if (state.currentStep ==
                     AuthenticatorStep.resetPassword) {
-                  return AuthScreenScaffold(
+                  return ResetPasswordScreen(
                     onBackButtonPressed: () => state.changeStep(
                       AuthenticatorStep.signIn,
                     ),
-                    state: state,
-                    body: ResetPasswordForm(),
                   );
                 } else if (state.currentStep ==
                     AuthenticatorStep.confirmResetPassword) {
-                  return AuthScreenScaffold(
+                  return ConfirmResetPasswordScreen(
                     onBackButtonPressed: () => state.changeStep(
                       AuthenticatorStep.resetPassword,
                     ),
-                    state: state,
-                    body: const ConfirmResetPasswordForm(),
                   );
                 }
 
@@ -223,14 +183,6 @@ class App extends StatelessWidget {
                 inputs: LocalizedInputResolver(),
                 messages: LocalizedMessageResolver(),
                 titles: LocalizedTitleResolver(),
-              ),
-              signUpForm: SignUpForm.custom(
-                fields: [
-                  SignUpFormField.email(required: true),
-                  SignUpFormField.givenName(required: true),
-                  SignUpFormField.password(),
-                  SignUpFormField.passwordConfirmation(),
-                ],
               ),
               child: MaterialApp.router(
                 routerConfig: goRouter,

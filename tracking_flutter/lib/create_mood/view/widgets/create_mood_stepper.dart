@@ -75,10 +75,9 @@ class _CreateMoodStepperState extends State<_CreateMoodStepper> {
       ),
     );
 
-    final dotsIndicator = DotsIndicator(
+    final dotsIndicator = AppDotsIndicator(
       dotsCount: widget.pages.length,
       position: currentStep.toDouble(),
-      decorator: dotsDecorator,
     );
 
     return Column(
@@ -105,8 +104,8 @@ class _CreateMoodStepperState extends State<_CreateMoodStepper> {
                       Iconsax.arrow_left_outline,
                       color:
                           _isFirst(currentStep) || state.formStatus.isInProgress
-                              ? lightGrey
-                              : primarySwatch,
+                              ? AppColors.lightGrey
+                              : AppColors.primarySwatch,
                     ),
                   ),
                   dotsIndicator,
@@ -119,7 +118,7 @@ class _CreateMoodStepperState extends State<_CreateMoodStepper> {
                             _isLast(currentStep)
                                 ? Icons.check
                                 : Iconsax.arrow_right_1_outline,
-                            color: primarySwatch,
+                            color: AppColors.primarySwatch,
                           ),
                   ),
                 ],
@@ -144,6 +143,7 @@ class _CreateMoodStepperPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       padding: const EdgeInsets.symmetric(
+        vertical: verticalPaddingExtraLarge,
         horizontal: viewPaddingHorizontal,
       ),
       child: child,

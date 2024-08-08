@@ -110,7 +110,7 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
 
     _revenueController = TextEditingController(
       text: moodFormState.revenue.value != 0
-          ? moodFormState.revenue.value.toString()
+          ? moodFormState.revenue.value.toFormattedString()
           : '',
     )..addListener(_onRevenueChanged);
   }
@@ -154,9 +154,15 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             const VerticalSpacing.medium(),
-            Text(
-              translations.estimateYourMood,
-              style: Theme.of(context).textTheme.bodyMedium,
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: horizontalPaddingLarge,
+              ),
+              child: Text(
+                translations.estimateYourMood,
+                style: Theme.of(context).textTheme.bodyMedium,
+                textAlign: TextAlign.center,
+              ),
             ),
             const VerticalSpacing.large(),
             BlocBuilder<CreateMoodBloc, CreateMoodState>(
@@ -172,8 +178,6 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
                   divisions: MoodValueInput.maxValue - 1,
                   label: state.moodFormState.moodValue.value.toString(),
                   onChanged: _onMoodValueChanged,
-                  activeColor: blue,
-                  inactiveColor: lightBlue,
                 );
               },
             ),
@@ -209,13 +213,14 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
               style: Theme.of(context).textTheme.bodyMedium,
               textAlign: TextAlign.center,
             ),
-            const VerticalSpacing.large(),
+            const VerticalSpacing.extraLarge(),
             TextFormField(
               key: const Key('Create mood form thingIAmGreatfulAbout1 input'),
               controller: _thingIAmGreatfulAbout1Controller,
               decoration: InputDecoration(
                 icon: const Icon(Iconsax.heart_add_outline),
                 iconColor: Theme.of(context).primaryColor,
+                hintText: translations.affirmation1,
               ),
               validator: (value) => createMoodBloc
                   .state.moodFormState.thingsIAmGreatfulAbout1
@@ -231,6 +236,7 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
               decoration: InputDecoration(
                 icon: const Icon(Iconsax.heart_add_outline),
                 iconColor: Theme.of(context).primaryColor,
+                hintText: translations.affirmation2,
               ),
               validator: (value) => createMoodBloc
                   .state.moodFormState.thingsIAmGreatfulAbout2
@@ -246,6 +252,7 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
               decoration: InputDecoration(
                 icon: const Icon(Iconsax.heart_add_outline),
                 iconColor: Theme.of(context).primaryColor,
+                hintText: translations.affirmation3,
               ),
               validator: (value) => createMoodBloc
                   .state.moodFormState.thingsIAmGreatfulAbout3
@@ -267,12 +274,6 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
             Text(
               translations.whatIsOnYourMind,
               style: Theme.of(context).textTheme.headlineSmall,
-              textAlign: TextAlign.center,
-            ),
-            const VerticalSpacing.medium(),
-            Text(
-              translations.whatIsOnYourMindDescription,
-              style: Theme.of(context).textTheme.bodyMedium,
               textAlign: TextAlign.center,
             ),
             const VerticalSpacing.large(),
@@ -303,12 +304,17 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
               textAlign: TextAlign.center,
             ),
             const VerticalSpacing.medium(),
-            Text(
-              translations.howMuchDidYouEarnDescription,
-              style: Theme.of(context).textTheme.bodyMedium,
-              textAlign: TextAlign.center,
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: horizontalPaddingLarge,
+              ),
+              child: Text(
+                translations.howMuchDidYouEarnDescription,
+                style: Theme.of(context).textTheme.bodyMedium,
+                textAlign: TextAlign.center,
+              ),
             ),
-            const VerticalSpacing.large(),
+            const VerticalSpacing.extraLarge(),
             BlocBuilder<AppSettingsBloc, AppSettingsState>(
               buildWhen: (previous, current) =>
                   previous.appSettingsData.currency !=
@@ -352,7 +358,18 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
               style: Theme.of(context).textTheme.headlineSmall,
               textAlign: TextAlign.center,
             ),
-            const VerticalSpacing.large(),
+            const VerticalSpacing.medium(),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: horizontalPaddingLarge,
+              ),
+              child: Text(
+                translations.howLongDidYouWorkDescription,
+                style: Theme.of(context).textTheme.bodyMedium,
+                textAlign: TextAlign.center,
+              ),
+            ),
+            const VerticalSpacing.extraLarge(),
             BlocBuilder<CreateMoodBloc, CreateMoodState>(
               buildWhen: (previousState, currentState) =>
                   previousState.moodFormState.workTime !=
@@ -380,15 +397,14 @@ class _MoodEmoji extends StatelessWidget {
 
   final int moodValue;
 
-  static const double emojiSize = 128;
-  static const int animatedOpacityDurationInMs = 500;
+  static const double emojiSize = 100;
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         AnimatedOpacity(
-          duration: const Duration(milliseconds: animatedOpacityDurationInMs),
+          duration: animationDuration,
           opacity: moodValue < 4 ? 1 : 0,
           child: const AnimatedEmoji(
             AnimatedEmojis.sad,
@@ -396,7 +412,7 @@ class _MoodEmoji extends StatelessWidget {
           ),
         ),
         AnimatedOpacity(
-          duration: const Duration(milliseconds: animatedOpacityDurationInMs),
+          duration: animationDuration,
           opacity: moodValue >= 4 && moodValue < 6 ? 1 : 0,
           child: const AnimatedEmoji(
             AnimatedEmojis.neutralFace,
@@ -404,7 +420,7 @@ class _MoodEmoji extends StatelessWidget {
           ),
         ),
         AnimatedOpacity(
-          duration: const Duration(milliseconds: animatedOpacityDurationInMs),
+          duration: animationDuration,
           opacity: moodValue >= 6 && moodValue < 9 ? 1 : 0,
           child: const AnimatedEmoji(
             AnimatedEmojis.warmSmile,
@@ -412,7 +428,7 @@ class _MoodEmoji extends StatelessWidget {
           ),
         ),
         AnimatedOpacity(
-          duration: const Duration(milliseconds: animatedOpacityDurationInMs),
+          duration: animationDuration,
           opacity: moodValue >= 9 ? 1 : 0,
           child: const AnimatedEmoji(
             AnimatedEmojis.sunglassesFace,

@@ -6,21 +6,28 @@ import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:formz/formz.dart';
 import 'package:go_router/go_router.dart';
+import 'package:icons_plus/icons_plus.dart';
 import 'package:mood_repository/mood_repository.dart';
 import 'package:tracking_app/calendar/bloc/calendar_bloc.dart';
-import 'package:tracking_app/calendar/view/widgets/tracked_mood.dart';
 import 'package:tracking_app/create_mood/bloc/create_mood_bloc.dart';
 import 'package:tracking_app/delete_mood/cubit/delete_mood_cubit.dart';
 import 'package:tracking_app/main.dart';
-import 'package:tracking_app/shared/date_time.dart';
+import 'package:tracking_app/shared/extensions/date_time.dart';
+import 'package:tracking_app/shared/router/routes_names.dart';
+import 'package:tracking_app/shared/router/routes_parameters.dart';
 import 'package:tracking_app/shared/theme/animation.dart';
 import 'package:tracking_app/shared/theme/colors.dart';
 import 'package:tracking_app/shared/theme/layout.dart';
 import 'package:tracking_app/shared/toast.dart';
 import 'package:tracking_app/shared/widgets/loading_indicator.dart';
+import 'package:tracking_app/shared/widgets/mood_emoji.dart';
 import 'package:tracking_app/shared/widgets/spacing.dart';
 import 'package:tracking_app/update_mood/bloc/update_mood_bloc.dart';
 import 'package:user_profile_repository/user_profile_repository.dart';
+
+part 'widgets/calendar.dart';
+part 'widgets/moods_in_month.dart';
+part 'widgets/tracked_mood.dart';
 
 class CalendarScreen extends StatelessWidget {
   const CalendarScreen({super.key});
@@ -100,21 +107,6 @@ class _CalendarView extends StatelessWidget {
   Widget build(BuildContext context) {
     final translations = AppLocalizations.of(context)!;
 
-    const calendarDaysTextStyle = TextStyle(
-      color: Colors.black,
-      fontWeight: FontWeight.bold,
-    );
-
-    const calendarNextAndPrevDaysTextStyle = TextStyle(
-      color: lightGrey,
-    );
-
-    const calendarWeekdaysTextStyle = TextStyle(
-      color: darkBlue,
-    );
-
-    const calendarPrevAndNextButtonsColor = grey;
-
     return SafeArea(
       child: SingleChildScrollView(
         child: BlocBuilder<CalendarBloc, CalendarState>(
@@ -124,56 +116,19 @@ class _CalendarView extends StatelessWidget {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: viewPaddingHorizontal,
-                  ),
-                  child: CalendarCarousel<Event>(
-                    firstDayOfWeek: (0 + 1) % 7,
-                    height: 380,
-                    todayButtonColor: primarySwatch,
-                    todayTextStyle: const TextStyle(
-                      color: contentOnDarkBackgroundColor,
-                      fontWeight: FontWeight.bold,
+                Center(
+                  child: Container(
+                    constraints: const BoxConstraints(maxWidth: 430),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: viewPaddingHorizontal,
                     ),
-                    daysTextStyle: calendarDaysTextStyle,
-                    prevDaysTextStyle: calendarNextAndPrevDaysTextStyle,
-                    weekendTextStyle: calendarDaysTextStyle,
-                    nextDaysTextStyle: calendarNextAndPrevDaysTextStyle,
-                    headerTextStyle: Theme.of(context).textTheme.headlineSmall,
-                    rightButtonIcon: const Icon(
-                      Icons.chevron_right,
-                      color: calendarPrevAndNextButtonsColor,
+                    child: _Calendar(
+                      targetMonthDate: state.targetDate.date,
+                      moods: state.moodsState.moods,
                     ),
-                    leftButtonIcon: const Icon(
-                      Icons.chevron_left,
-                      color: calendarPrevAndNextButtonsColor,
-                    ),
-                    weekdayTextStyle: calendarWeekdaysTextStyle,
-                    markedDatesMap: getMarkedDates(state.moodsState.moods),
-                    targetDateTime:
-                        state.targetDate.isSet ? state.targetDate.date : null,
-                    onCalendarChanged: (date) => context
-                        .read<CalendarBloc>()
-                        .add(CalendarEvent.targetDateChanged(date: date)),
-                    onDayPressed: (date, events) {
-                      if (events.isNotEmpty) {
-                        final mood =
-                            context.read<CalendarBloc>().getMoodForDate(date);
-                        if (mood != null) {
-                          context.go('/calendar/update', extra: mood);
-                        }
-                      } else if (!date.isAfterToday) {
-                        context.goNamed(
-                          'create-mood-from-calendar',
-                          extra: date,
-                        );
-                      }
-                    },
-                    locale: Localizations.localeOf(context).languageCode,
                   ),
                 ),
-                const VerticalSpacing.medium(),
+                const VerticalSpacing.large(),
                 Padding(
                   padding: const EdgeInsets.symmetric(
                     horizontal: viewPaddingHorizontal,
@@ -208,68 +163,6 @@ class _CalendarView extends StatelessWidget {
             );
           },
         ),
-      ),
-    );
-  }
-
-  EventList<Event> getMarkedDates(List<Mood> moods) {
-    return EventList<Event>(
-      events: moods
-          .map(
-        (mood) => <DateTime, List<Event>>{
-          mood.createdOn.dateOnly: [
-            Event(
-              date: mood.createdOn.dateOnly,
-              dot: Container(
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: darkBlue,
-                ),
-                margin: const EdgeInsets.symmetric(horizontal: 1),
-                height: 6,
-                width: 6,
-              ).animate().fadeIn(
-                    duration: animationDuration,
-                  ),
-            ),
-          ],
-        },
-      )
-          .fold(
-        <DateTime, List<Event>>{},
-        (map, event) {
-          map.addAll(event);
-          return map;
-        },
-      ),
-    );
-  }
-}
-
-class _MoodsInMonth extends StatelessWidget {
-  const _MoodsInMonth({
-    required this.moods,
-  });
-
-  final List<Mood> moods;
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: [
-          const SizedBox(width: viewPaddingHorizontal),
-          for (final mood in moods)
-            Padding(
-              key: ValueKey(mood),
-              padding: const EdgeInsets.only(
-                right: verticalPaddingSmall,
-              ),
-              child: TrackedMood(mood: mood),
-            ),
-          const SizedBox(width: viewPaddingHorizontal),
-        ],
       ),
     );
   }

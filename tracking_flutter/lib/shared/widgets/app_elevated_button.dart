@@ -23,14 +23,14 @@ class AppElevatedButton extends StatelessWidget {
     final iconToBuild = icon != null
         ? Icon(
             icon,
-            color: contentOnDarkBackgroundColor,
+            color: AppColors.contentOnDarkBackgroundColor,
           )
         : null;
 
     final textToBuild = Text(
       label,
       style: const TextStyle(
-        color: contentOnDarkBackgroundColor,
+        color: AppColors.contentOnDarkBackgroundColor,
       ),
     );
 
@@ -38,7 +38,8 @@ class AppElevatedButton extends StatelessWidget {
       key: key,
       onPressed: isDisabled || isLoading ? null : onPressed,
       icon: isLoading
-          ? const TinyLoadingIndicator(color: contentOnDarkBackgroundColor)
+          ? const TinyLoadingIndicator(
+              color: AppColors.contentOnDarkBackgroundColor)
           : iconToBuild,
       label: isLoading ? const SizedBox.shrink() : textToBuild,
     );

@@ -10,6 +10,8 @@ import 'package:tracking_app/create_mood/bloc/create_mood_bloc.dart';
 import 'package:tracking_app/delete_mood/cubit/delete_mood_cubit.dart';
 import 'package:tracking_app/main.dart';
 import 'package:tracking_app/moods/cubit/moods_cubit.dart';
+import 'package:tracking_app/shared/router/routes_names.dart';
+import 'package:tracking_app/shared/router/routes_parameters.dart';
 import 'package:tracking_app/shared/theme/animation.dart';
 import 'package:tracking_app/shared/theme/colors.dart';
 import 'package:tracking_app/shared/theme/layout.dart';
@@ -72,12 +74,17 @@ class MoodsScreen extends StatelessWidget {
                     : translations.trackToday,
                 onPressed: () {
                   if (todaysMoodIsTracked) {
-                    context.goNamed(
-                      'update-mood-from-home',
-                      extra: state.moodsListState.todaysMood,
+                    final todaysMood = state.moodsListState.todaysMood!;
+
+                    context.pushNamed(
+                      RoutesNames.updateMoodFromMoods,
+                      extra: UpdateMoodRouteParameters(mood: todaysMood),
                     );
                   } else {
-                    context.goNamed('create-mood-from-moods');
+                    context.pushNamed(
+                      RoutesNames.createMoodFromMoods,
+                      extra: CreateMoodRouteParameters(date: DateTime.now()),
+                    );
                   }
                 },
                 isLoading: state.isInitialOrLoading,
@@ -133,31 +140,24 @@ class _MoodsView extends StatelessWidget {
         buildWhen: (previousState, currentState) =>
             previousState != currentState,
         builder: (context, state) {
+          if (state.isInitialOrLoading) {
+            return const Center(child: LoadingIndicator());
+          } else if (state.isError) {
+            return ErrorMessage(
+              onRefresh: () {
+                if (state.isError) {
+                  context.read<MoodsCubit>().init();
+                }
+              },
+            );
+          }
+
           return BaseView(
             child: Padding(
               padding: const EdgeInsets.only(bottom: 60),
-              child: Builder(
-                builder: (context) {
-                  if (state.isInitialOrLoading) {
-                    return const Center(child: LoadingIndicator());
-                  } else if (state.isError) {
-                    return ErrorMessage(
-                      onRefresh: () {
-                        if (state.isError) {
-                          context.read<MoodsCubit>().init();
-                        }
-                      },
-                    );
-                  }
-
-                  final moodsSuccessState =
-                      state.moodsListState as MoodsListSuccessState;
-
-                  return _MoodsContentView(
-                    moods: moodsSuccessState.moods,
-                    hasReachedMaxMoods: moodsSuccessState.hasReachedMax,
-                  );
-                },
+              child: _MoodsContentView(
+                moods: state.moodsListState.moods,
+                hasReachedMaxMoods: state.moodsListState.hasReachedMax,
               ),
             ),
           );
@@ -234,14 +234,22 @@ class _MoodsContentViewState extends State<_MoodsContentView> {
 
         final mood = widget.moods[index];
 
-        return TrackedMood(
+        final addPaddingBottom =
+            index == widget.moods.length - 1 && widget.hasReachedMaxMoods;
+
+        return Padding(
           key: ValueKey(mood),
-          mood: mood,
-          onTap: () => context.goNamed(
-            'update-mood-from-moods',
-            extra: mood,
-          ),
-        ).animate().fadeIn(duration: animationDuration);
+          padding: addPaddingBottom
+              ? const EdgeInsets.only(bottom: verticalPaddingLarge)
+              : EdgeInsets.zero,
+          child: TrackedMood(
+            mood: mood,
+            onTap: () => context.pushNamed(
+              RoutesNames.updateMoodFromMoods,
+              extra: UpdateMoodRouteParameters(mood: mood),
+            ),
+          ).animate().fadeIn(duration: animationDuration),
+        );
       },
     );
   }

@@ -11,6 +11,11 @@ class _HomeProgress extends StatelessWidget {
   final bool trackedEveryDayThisWeek;
   final bool trackedToday;
 
+  static BoxShadow textShadow = BoxShadow(
+    color: Colors.black.withOpacity(0.3),
+    blurRadius: 2,
+  );
+
   @override
   Widget build(BuildContext context) {
     final translations = AppLocalizations.of(context)!;
@@ -36,10 +41,10 @@ class _HomeProgress extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         gradient: const LinearGradient(
           colors: [
-            gradientColor1,
-            gradientColor2,
-            gradientColor3,
-            gradientColor4,
+            AppColors.gradientColor1,
+            AppColors.gradientColor2,
+            AppColors.gradientColor3,
+            AppColors.gradientColor4,
           ],
           stops: [0, 0.15, 0.5, 1],
           begin: Alignment.topLeft,
@@ -47,7 +52,7 @@ class _HomeProgress extends StatelessWidget {
         ),
         boxShadow: [
           BoxShadow(
-            color: contentShadowColor,
+            color: AppColors.contentShadowColor,
             blurRadius: 10,
           ),
         ],
@@ -64,7 +69,7 @@ class _HomeProgress extends StatelessWidget {
                     child: Text(
                       '${(weeklyProgress * 100).toStringAsFixed(0)}%',
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                            color: gradientColor4,
+                            color: AppColors.gradientColor4,
                           ),
                     ),
                   ),
@@ -76,16 +81,17 @@ class _HomeProgress extends StatelessWidget {
                         tween: Tween<double>(begin: 0, end: weeklyProgress),
                         curve: Curves.easeOut,
                         duration: const Duration(milliseconds: 1000),
-                        builder: (context, value, _) =>
-                            CircularProgressIndicator(
-                          value: value,
-                          backgroundColor: gradientColor3.withOpacity(0.3),
-                          valueColor: AlwaysStoppedAnimation<Color>(
-                            darkBlue.withOpacity(0.6),
-                          ),
-                          strokeCap: StrokeCap.round,
-                          strokeWidth: 7,
-                        ),
+                        builder: (context, value, _) {
+                          return CircularProgressIndicator(
+                            value: value,
+                            backgroundColor: AppColors.blue.withOpacity(0.3),
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              AppColors.darkBlue.withOpacity(0.6),
+                            ),
+                            strokeCap: StrokeCap.round,
+                            strokeWidth: 7,
+                          );
+                        },
                       ),
                     ),
                   ),
@@ -103,13 +109,10 @@ class _HomeProgress extends StatelessWidget {
                     Text(
                       title,
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        color: contentOnDarkBackgroundColor,
+                        color: AppColors.contentOnDarkBackgroundColor,
                         fontWeight: FontWeight.bold,
                         shadows: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.3),
-                            blurRadius: 2,
-                          ),
+                          textShadow,
                         ],
                       ),
                     ),
@@ -117,12 +120,9 @@ class _HomeProgress extends StatelessWidget {
                     Text(
                       subtitle,
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        color: contentOnDarkBackgroundColor,
+                        color: AppColors.contentOnDarkBackgroundColor,
                         shadows: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.3),
-                            blurRadius: 2,
-                          ),
+                          textShadow,
                         ],
                       ),
                     ),

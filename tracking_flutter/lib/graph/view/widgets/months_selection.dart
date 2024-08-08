@@ -37,16 +37,16 @@ class _MonthsSelection extends StatelessWidget {
 
           Color textColor;
           if (isCurrentMonth) {
-            textColor = contentOnDarkBackgroundColor;
+            textColor = AppColors.contentOnDarkBackgroundColor;
           } else if (isDisabled) {
-            textColor = lightGrey;
+            textColor = AppColors.lightGrey;
           } else {
             textColor = Colors.black;
           }
 
           Color backgroundColor;
           if (isCurrentMonth) {
-            backgroundColor = primarySwatch;
+            backgroundColor = AppColors.primarySwatch;
           } else {
             backgroundColor = Colors.transparent;
           }

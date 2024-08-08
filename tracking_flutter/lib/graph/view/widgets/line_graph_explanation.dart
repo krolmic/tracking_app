@@ -11,35 +11,35 @@ class _LineGraphExplanation extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const _LineGraphBarIndicator(
-          color: _LineGraphStyle.moodsLineChartBarColor,
+          color: _LineGraphTheme.moodsLineChartBarColor,
         ),
         const HorizontalSpacing.small(),
         Text(
           translations.mood,
           style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                color: grey,
+                color: AppColors.grey,
               ),
         ),
         const HorizontalSpacing.large(),
         const _LineGraphBarIndicator(
-          color: _LineGraphStyle.workHoursLineCharBarColor,
+          color: _LineGraphTheme.workHoursLineCharBarColor,
         ),
         const HorizontalSpacing.small(),
         Text(
           translations.workTime,
           style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                color: grey,
+                color: AppColors.grey,
               ),
         ),
         const HorizontalSpacing.large(),
         const _LineGraphBarIndicator(
-          color: _LineGraphStyle.revenueLineCharBarColor,
+          color: _LineGraphTheme.revenueLineCharBarColor,
         ),
         const HorizontalSpacing.small(),
         Text(
           translations.revenue,
           style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                color: grey,
+                color: AppColors.grey,
               ),
         ),
       ],

@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:tracking_app/app_settings/bloc/app_settings_bloc.dart';
 import 'package:tracking_app/shared/currencies.dart';
+import 'package:tracking_app/shared/extensions/double.dart';
 import 'package:tracking_app/shared/toast.dart';
 import 'package:tracking_app/shared/view/base_view.dart';
 import 'package:tracking_app/shared/widgets/app_elevated_button.dart';
@@ -56,6 +57,7 @@ class _AppSettingsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseView(
+      addVerticalPadding: true,
       child: BlocBuilder<AppSettingsBloc, AppSettingsState>(
         buildWhen: (previousState, currentState) =>
             previousState.appSettingsForm != currentState.appSettingsForm,

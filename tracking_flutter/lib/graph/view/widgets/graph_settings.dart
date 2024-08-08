@@ -33,7 +33,7 @@ class _GraphSettings extends StatelessWidget {
           child: Text(
             translations.showWorkTime,
             style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                  color: blue,
+                  color: AppColors.blue,
                   fontWeight: FontWeight.normal,
                 ),
           ),
@@ -62,7 +62,7 @@ class _GraphSettings extends StatelessWidget {
           child: Text(
             translations.showRevenue,
             style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                  color: blue,
+                  color: AppColors.blue,
                   fontWeight: FontWeight.normal,
                 ),
           ),

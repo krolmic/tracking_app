@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_fimber/flutter_fimber.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:mood_repository/mood_repository.dart';
-import 'package:tracking_app/shared/date_time.dart';
+import 'package:tracking_app/shared/extensions/date_time.dart';
 import 'package:user_profile_repository/user_profile_repository.dart'
     as user_profile_repository;
 
@@ -80,20 +80,5 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
       Fimber.e('Failed to load moods', ex: e, stacktrace: stackTrace);
       emit(state.copyWith(moodsState: const CalendarMoodsState.error()));
     }
-  }
-
-  Mood? getMoodForDate(DateTime date) {
-    return state.moodsState.maybeWhen(
-      loaded: (moods) {
-        try {
-          return moods.firstWhere(
-            (mood) => mood.createdOn.isSameDay(date),
-          );
-        } catch (e) {
-          return null;
-        }
-      },
-      orElse: () => null,
-    );
   }
 }
