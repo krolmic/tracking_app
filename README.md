@@ -1,8 +1,6 @@
 # Healthy Hustle
 
-<img src="tracking_flutter/screenshots/onboarding.png" width="33%" /> <img src="tracking_flutter/screenshots/sign-in.png" width="33%" />
-<img src="tracking_flutter/screenshots/home.png" width="33%" /> <img src="tracking_flutter/screenshots/track-mood.png" width="33%" />
-<img src="tracking_flutter/screenshots/update-mood.png" width="33%" /> <img src="tracking_flutter/screenshots/settings.png" width="33%" />
+<img src="tracking_flutter/screenshots/mock_ups.png"/> 
 
 ## 📱 App
 
