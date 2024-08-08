@@ -1,8 +1,17 @@
+import 'package:cupertino_onboarding/cupertino_onboarding.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:tracking_app/onboarding/onboarding.dart';
+import 'package:icons_plus/icons_plus.dart';
+import 'package:tracking_app/shared/theme/animation.dart';
+import 'package:tracking_app/shared/theme/colors.dart';
 import 'package:tracking_app/shared/theme/layout.dart';
 import 'package:tracking_app/shared/view/base_view.dart';
+import 'package:tracking_app/shared/widgets/app_dots_indicator.dart';
+import 'package:tracking_app/shared/widgets/app_elevated_button.dart';
+import 'package:tracking_app/shared/widgets/spacing.dart';
+
+part 'widgets/onboarding.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({
@@ -30,7 +39,7 @@ class OnboardingScreen extends StatelessWidget {
         ],
       ),
       body: BaseView(
-        child: Onboarding(
+        child: _Onboarding(
           signUpButtonFunction: signUpButtonFunction,
         ),
       ),
