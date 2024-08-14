@@ -23,32 +23,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/icon.png
   AssetGenImage get icon => const AssetGenImage('assets/images/icon.png');
 
-  /// File path: assets/images/onboarding_breathe.png
-  AssetGenImage get onboardingBreathe =>
-      const AssetGenImage('assets/images/onboarding_breathe.png');
-
-  /// File path: assets/images/onboarding_inhale_exhale.png
-  AssetGenImage get onboardingInhaleExhale =>
-      const AssetGenImage('assets/images/onboarding_inhale_exhale.png');
-
-  /// File path: assets/images/onboarding_namaste.png
-  AssetGenImage get onboardingNamaste =>
-      const AssetGenImage('assets/images/onboarding_namaste.png');
-
-  /// File path: assets/images/onboarding_present_moment.png
-  AssetGenImage get onboardingPresentMoment =>
-      const AssetGenImage('assets/images/onboarding_present_moment.png');
-
   /// List of all assets
-  List<AssetGenImage> get values => [
-        adaptiveIconBackground,
-        adaptiveIconForeground,
-        icon,
-        onboardingBreathe,
-        onboardingInhaleExhale,
-        onboardingNamaste,
-        onboardingPresentMoment
-      ];
+  List<AssetGenImage> get values =>
+      [adaptiveIconBackground, adaptiveIconForeground, icon];
 }
 
 class Assets {

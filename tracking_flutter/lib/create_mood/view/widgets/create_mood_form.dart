@@ -15,7 +15,6 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
   late final TextEditingController _thingIAmGreatfulAbout1Controller;
   late final TextEditingController _thingIAmGreatfulAbout2Controller;
   late final TextEditingController _thingIAmGreatfulAbout3Controller;
-  late final TextEditingController _diaryController;
   late final TextEditingController _revenueController;
 
   void _onMoodValueChanged(double value) {
@@ -42,14 +41,6 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
     context.read<CreateMoodBloc>().add(
           CreateMoodEvent.thingsIAmGratefulFor3Changed(
             _thingIAmGreatfulAbout3Controller.text,
-          ),
-        );
-  }
-
-  void _onDiaryChanged() {
-    context.read<CreateMoodBloc>().add(
-          CreateMoodEvent.diaryChanged(
-            _diaryController.text,
           ),
         );
   }
@@ -104,10 +95,6 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
       text: moodFormState.thingsIAmGreatfulAbout3.value,
     )..addListener(_onThingIAmGreatfulAbout3Changed);
 
-    _diaryController = TextEditingController(
-      text: moodFormState.diary.value,
-    )..addListener(_onDiaryChanged);
-
     _revenueController = TextEditingController(
       text: moodFormState.revenue.value != 0
           ? moodFormState.revenue.value.toFormattedString()
@@ -120,7 +107,6 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
     _thingIAmGreatfulAbout1Controller.dispose();
     _thingIAmGreatfulAbout2Controller.dispose();
     _thingIAmGreatfulAbout3Controller.dispose();
-    _diaryController.dispose();
     _revenueController.dispose();
     super.dispose();
   }
@@ -254,33 +240,6 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
                   ?.toString(),
               keyboardType: TextInputType.text,
               textInputAction: TextInputAction.next,
-            ),
-          ],
-        ),
-      ),
-      _CreateMoodStepperPage(
-        key: const Key(
-          'Create mood stepper page 3',
-        ),
-        child: Column(
-          children: <Widget>[
-            const VerticalSpacing.large(),
-            Text(
-              translations.whatIsOnYourMind,
-              style: Theme.of(context).textTheme.headlineSmall,
-              textAlign: TextAlign.center,
-            ),
-            const VerticalSpacing.large(),
-            TextFormField(
-              key: const Key('Create mood form diary input'),
-              controller: _diaryController,
-              validator: (value) => createMoodBloc.state.moodFormState.diary
-                  .validator(value ?? '')
-                  ?.toString(),
-              keyboardType: TextInputType.text,
-              textInputAction: TextInputAction.next,
-              minLines: 5,
-              maxLines: null,
             ),
           ],
         ),

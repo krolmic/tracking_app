@@ -18,7 +18,6 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
   late final TextEditingController _thingIAmGreatfulAbout1Controller;
   late final TextEditingController _thingIAmGreatfulAbout2Controller;
   late final TextEditingController _thingIAmGreatfulAbout3Controller;
-  late final TextEditingController _diaryController;
   late final TextEditingController _revenueController;
 
   void _onMoodValueChanged(double value) {
@@ -45,14 +44,6 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
     context.read<UpdateMoodBloc>().add(
           UpdateMoodEvent.thingsIAmGratefulFor3Changed(
             _thingIAmGreatfulAbout3Controller.text,
-          ),
-        );
-  }
-
-  void _onDiaryChanged() {
-    context.read<UpdateMoodBloc>().add(
-          UpdateMoodEvent.diaryChanged(
-            _diaryController.text,
           ),
         );
   }
@@ -107,10 +98,6 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
       text: moodFormState.thingsIAmGreatfulAbout3.value,
     )..addListener(_onThingIAmGreatfulAbout3Changed);
 
-    _diaryController = TextEditingController(
-      text: moodFormState.diary.value,
-    )..addListener(_onDiaryChanged);
-
     _revenueController = TextEditingController(
       text: moodFormState.revenue.value != 0
           ? moodFormState.revenue.value.toFormattedString()
@@ -123,7 +110,6 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
     _thingIAmGreatfulAbout1Controller.dispose();
     _thingIAmGreatfulAbout2Controller.dispose();
     _thingIAmGreatfulAbout3Controller.dispose();
-    _diaryController.dispose();
     _revenueController.dispose();
     super.dispose();
   }
@@ -223,23 +209,6 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
                       ?.toString(),
                   keyboardType: TextInputType.text,
                   textInputAction: TextInputAction.next,
-                ),
-                const VerticalSpacing.extraLarge(),
-                Text(
-                  translations.whatIsOnYourMind,
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-                const VerticalSpacing.large(),
-                TextFormField(
-                  key: const Key('Update mood form diary input'),
-                  controller: _diaryController,
-                  validator: (value) => updateMoodBloc.state.moodFormState.diary
-                      .validator(value ?? '')
-                      ?.toString(),
-                  keyboardType: TextInputType.text,
-                  textInputAction: TextInputAction.next,
-                  minLines: 5,
-                  maxLines: null,
                 ),
                 const VerticalSpacing.extraLarge(),
                 Text(

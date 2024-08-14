@@ -46,24 +46,6 @@ class ThingsIAmGreatfulAboutInput
   }
 }
 
-enum DiaryInputError {
-  invalid,
-}
-
-/// [FormzInput] class for mood diary
-/// (awaits string value, input for [Mood.diary])
-class DiaryInput extends FormzInput<String, DiaryInputError> {
-  const DiaryInput.pure() : super.pure('');
-
-  const DiaryInput.dirty({String value = ''}) : super.dirty(value);
-
-  @override
-  DiaryInputError? validator(String value) {
-    // There are no invalid values for now.
-    return null;
-  }
-}
-
 enum RevenueInputError {
   invalid,
 }
@@ -101,7 +83,6 @@ class MoodFormzState with FormzMixin {
     this.thingsIAmGreatfulAbout1 = const ThingsIAmGreatfulAboutInput.pure(),
     this.thingsIAmGreatfulAbout2 = const ThingsIAmGreatfulAboutInput.pure(),
     this.thingsIAmGreatfulAbout3 = const ThingsIAmGreatfulAboutInput.pure(),
-    this.diary = const DiaryInput.pure(),
     this.revenue = const RevenueInput.pure(),
     this.workTime = const WorkTimeInput.pure(),
   });
@@ -110,7 +91,6 @@ class MoodFormzState with FormzMixin {
   final ThingsIAmGreatfulAboutInput thingsIAmGreatfulAbout1;
   final ThingsIAmGreatfulAboutInput thingsIAmGreatfulAbout2;
   final ThingsIAmGreatfulAboutInput thingsIAmGreatfulAbout3;
-  final DiaryInput diary;
   final RevenueInput revenue;
   final WorkTimeInput workTime;
 
@@ -119,7 +99,6 @@ class MoodFormzState with FormzMixin {
     ThingsIAmGreatfulAboutInput? thingsIAmGreatfulAbout1,
     ThingsIAmGreatfulAboutInput? thingsIAmGreatfulAbout2,
     ThingsIAmGreatfulAboutInput? thingsIAmGreatfulAbout3,
-    DiaryInput? diary,
     RevenueInput? revenue,
     WorkTimeInput? workTime,
     FormzSubmissionStatus? status,
@@ -132,7 +111,6 @@ class MoodFormzState with FormzMixin {
           thingsIAmGreatfulAbout2 ?? this.thingsIAmGreatfulAbout2,
       thingsIAmGreatfulAbout3:
           thingsIAmGreatfulAbout3 ?? this.thingsIAmGreatfulAbout3,
-      diary: diary ?? this.diary,
       revenue: revenue ?? this.revenue,
       workTime: workTime ?? this.workTime,
     );
@@ -144,7 +122,6 @@ class MoodFormzState with FormzMixin {
         thingsIAmGreatfulAbout1,
         thingsIAmGreatfulAbout2,
         thingsIAmGreatfulAbout3,
-        diary,
         revenue,
         workTime,
       ];
