@@ -32,8 +32,6 @@ class CreateMoodBloc extends Bloc<CreateMoodEvent, CreateMoodState> {
         _onThingsIAAmGratefulFor2Changed(event.thingsIAmGratefulFor2, emit);
       } else if (event.isThingsIAmGratefulFor3Changed) {
         _onThingsIAmGratefulFor3Changed(event.thingsIAmGratefulFor3, emit);
-      } else if (event.isDiaryChanged) {
-        _onDiaryChanged(event.diary, emit);
       } else if (event.isRevenueChanged) {
         _onRevenueChanged(event.revenue, emit);
       } else if (event.isWorkTimeChanged) {
@@ -67,7 +65,6 @@ class CreateMoodBloc extends Bloc<CreateMoodEvent, CreateMoodState> {
         userId: userId,
         createdOn: state.selectedDate ?? DateTime.now(),
         value: state.moodFormState.moodValue.value,
-        diary: state.moodFormState.diary.value,
         thingsIAmGratefulAbout: [
           if (state.moodFormState.thingsIAmGreatfulAbout1.value.isNotEmpty)
             state.moodFormState.thingsIAmGreatfulAbout1.value,
@@ -148,16 +145,6 @@ class CreateMoodBloc extends Bloc<CreateMoodEvent, CreateMoodState> {
         moodFormState: state.moodFormState.copyWith(
           thingsIAmGreatfulAbout3:
               ThingsIAmGreatfulAboutInput.dirty(value: value),
-        ),
-      ),
-    );
-  }
-
-  void _onDiaryChanged(String value, Emitter<CreateMoodState> emit) {
-    emit(
-      state.copyWith(
-        moodFormState: state.moodFormState.copyWith(
-          diary: DiaryInput.dirty(value: value),
         ),
       ),
     );

@@ -96,7 +96,6 @@ class MoodRepository {
     required String userId,
     required int value,
     required DateTime createdOn,
-    String? diary,
     List<String>? thingsIAmGratefulAbout,
     double? revenue,
     Duration? workTime,
@@ -104,11 +103,11 @@ class MoodRepository {
     try {
       final createdOnDate = createdOn.add(createdOn.timeZoneOffset);
 
+      // TODO(krolmic): Add text encryption for diary field (#44)
       final moodEntryToCreate = MoodEntry(
         userId: userId,
         value: value,
         createdOn: createdOnDate,
-        diary: diary != null && diary.isNotEmpty ? diary : null,
         thingsIAmGratefulFor: thingsIAmGratefulAbout,
         revenue: revenue,
         workTime: workTime,
@@ -129,7 +128,6 @@ class MoodRepository {
   Future<Mood> updateMood(
     Mood mood, {
     int? value,
-    String? diary,
     List<String>? thingsIAmGratefulAbout,
     double? revenue,
     Duration? workTime,
@@ -139,7 +137,6 @@ class MoodRepository {
           await _serverpodClient.moodEntries.updateMoodEntry(
         id: mood.id,
         value: value,
-        diary: diary,
         thingsIAmGratefulFor: thingsIAmGratefulAbout,
         revenue: revenue,
         workTime: workTime,

@@ -27,8 +27,6 @@ class UpdateMoodBloc extends Bloc<UpdateMoodEvent, UpdateMoodState> {
         _onThingsIAmGratefulFor2Changed(event.thingsIAmGratefulFor2, emit);
       } else if (event.isThingsIAmGratefulFor3Changed) {
         _onThingsIAmGratefulFor3Changed(event.thingsIAmGratefulFor3, emit);
-      } else if (event.isDiaryChanged) {
-        _onDiaryChanged(event.diary, emit);
       } else if (event.isRevenueChanged) {
         _onRevenueChanged(event.revenue, emit);
       } else if (event.isWorkTimeChanged) {
@@ -55,7 +53,6 @@ class UpdateMoodBloc extends Bloc<UpdateMoodEvent, UpdateMoodState> {
       await _moodRepository.updateMood(
         mood,
         value: state.moodFormState.moodValue.value,
-        diary: state.moodFormState.diary.value,
         thingsIAmGratefulAbout: [
           if (state.moodFormState.thingsIAmGreatfulAbout1.value.isNotEmpty)
             state.moodFormState.thingsIAmGreatfulAbout1.value,
@@ -135,16 +132,6 @@ class UpdateMoodBloc extends Bloc<UpdateMoodEvent, UpdateMoodState> {
     );
   }
 
-  void _onDiaryChanged(String value, Emitter<UpdateMoodState> emit) {
-    emit(
-      state.copyWith(
-        moodFormState: state.moodFormState.copyWith(
-          diary: DiaryInput.dirty(value: value),
-        ),
-      ),
-    );
-  }
-
   void _onRevenueChanged(String value, Emitter<UpdateMoodState> emit) {
     if (double.tryParse(value) == null) return;
 
@@ -193,7 +180,6 @@ class UpdateMoodBloc extends Bloc<UpdateMoodEvent, UpdateMoodState> {
                 ? mood.thingsIAmGratefulAbout![2]
                 : '',
           ),
-          diary: DiaryInput.dirty(value: mood.diary ?? ''),
           revenue: RevenueInput.dirty(
             value: mood.revenue != null ? mood.revenue! : 0,
           ),

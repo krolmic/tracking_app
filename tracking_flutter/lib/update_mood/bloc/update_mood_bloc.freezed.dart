@@ -23,7 +23,6 @@ mixin _$UpdateMoodEvent {
     required TResult Function(String value) thingsIAmGratefulFor1Changed,
     required TResult Function(String value) thingsIAmGratefulFor2Changed,
     required TResult Function(String value) thingsIAmGratefulFor3Changed,
-    required TResult Function(String value) diaryChanged,
     required TResult Function(String value) revenueChanged,
     required TResult Function(Duration value) workTimeChanged,
     required TResult Function(Mood mood) moodSelected,
@@ -36,7 +35,6 @@ mixin _$UpdateMoodEvent {
     TResult? Function(String value)? thingsIAmGratefulFor1Changed,
     TResult? Function(String value)? thingsIAmGratefulFor2Changed,
     TResult? Function(String value)? thingsIAmGratefulFor3Changed,
-    TResult? Function(String value)? diaryChanged,
     TResult? Function(String value)? revenueChanged,
     TResult? Function(Duration value)? workTimeChanged,
     TResult? Function(Mood mood)? moodSelected,
@@ -49,7 +47,6 @@ mixin _$UpdateMoodEvent {
     TResult Function(String value)? thingsIAmGratefulFor1Changed,
     TResult Function(String value)? thingsIAmGratefulFor2Changed,
     TResult Function(String value)? thingsIAmGratefulFor3Changed,
-    TResult Function(String value)? diaryChanged,
     TResult Function(String value)? revenueChanged,
     TResult Function(Duration value)? workTimeChanged,
     TResult Function(Mood mood)? moodSelected,
@@ -66,7 +63,6 @@ mixin _$UpdateMoodEvent {
         thingsIAmGratefulFor2Changed,
     required TResult Function(_ThingsIAmGratefulFor3Changed value)
         thingsIAmGratefulFor3Changed,
-    required TResult Function(_DiaryChanged value) diaryChanged,
     required TResult Function(_RevenueChanged value) revenueChanged,
     required TResult Function(_WorkTimeChanged value) workTimeChanged,
     required TResult Function(_MoodSelected value) moodSelected,
@@ -82,7 +78,6 @@ mixin _$UpdateMoodEvent {
         thingsIAmGratefulFor2Changed,
     TResult? Function(_ThingsIAmGratefulFor3Changed value)?
         thingsIAmGratefulFor3Changed,
-    TResult? Function(_DiaryChanged value)? diaryChanged,
     TResult? Function(_RevenueChanged value)? revenueChanged,
     TResult? Function(_WorkTimeChanged value)? workTimeChanged,
     TResult? Function(_MoodSelected value)? moodSelected,
@@ -98,7 +93,6 @@ mixin _$UpdateMoodEvent {
         thingsIAmGratefulFor2Changed,
     TResult Function(_ThingsIAmGratefulFor3Changed value)?
         thingsIAmGratefulFor3Changed,
-    TResult Function(_DiaryChanged value)? diaryChanged,
     TResult Function(_RevenueChanged value)? revenueChanged,
     TResult Function(_WorkTimeChanged value)? workTimeChanged,
     TResult Function(_MoodSelected value)? moodSelected,
@@ -205,7 +199,6 @@ class _$UpdateSubmittedImpl implements _UpdateSubmitted {
     required TResult Function(String value) thingsIAmGratefulFor1Changed,
     required TResult Function(String value) thingsIAmGratefulFor2Changed,
     required TResult Function(String value) thingsIAmGratefulFor3Changed,
-    required TResult Function(String value) diaryChanged,
     required TResult Function(String value) revenueChanged,
     required TResult Function(Duration value) workTimeChanged,
     required TResult Function(Mood mood) moodSelected,
@@ -221,7 +214,6 @@ class _$UpdateSubmittedImpl implements _UpdateSubmitted {
     TResult? Function(String value)? thingsIAmGratefulFor1Changed,
     TResult? Function(String value)? thingsIAmGratefulFor2Changed,
     TResult? Function(String value)? thingsIAmGratefulFor3Changed,
-    TResult? Function(String value)? diaryChanged,
     TResult? Function(String value)? revenueChanged,
     TResult? Function(Duration value)? workTimeChanged,
     TResult? Function(Mood mood)? moodSelected,
@@ -237,7 +229,6 @@ class _$UpdateSubmittedImpl implements _UpdateSubmitted {
     TResult Function(String value)? thingsIAmGratefulFor1Changed,
     TResult Function(String value)? thingsIAmGratefulFor2Changed,
     TResult Function(String value)? thingsIAmGratefulFor3Changed,
-    TResult Function(String value)? diaryChanged,
     TResult Function(String value)? revenueChanged,
     TResult Function(Duration value)? workTimeChanged,
     TResult Function(Mood mood)? moodSelected,
@@ -260,7 +251,6 @@ class _$UpdateSubmittedImpl implements _UpdateSubmitted {
         thingsIAmGratefulFor2Changed,
     required TResult Function(_ThingsIAmGratefulFor3Changed value)
         thingsIAmGratefulFor3Changed,
-    required TResult Function(_DiaryChanged value) diaryChanged,
     required TResult Function(_RevenueChanged value) revenueChanged,
     required TResult Function(_WorkTimeChanged value) workTimeChanged,
     required TResult Function(_MoodSelected value) moodSelected,
@@ -279,7 +269,6 @@ class _$UpdateSubmittedImpl implements _UpdateSubmitted {
         thingsIAmGratefulFor2Changed,
     TResult? Function(_ThingsIAmGratefulFor3Changed value)?
         thingsIAmGratefulFor3Changed,
-    TResult? Function(_DiaryChanged value)? diaryChanged,
     TResult? Function(_RevenueChanged value)? revenueChanged,
     TResult? Function(_WorkTimeChanged value)? workTimeChanged,
     TResult? Function(_MoodSelected value)? moodSelected,
@@ -298,7 +287,6 @@ class _$UpdateSubmittedImpl implements _UpdateSubmitted {
         thingsIAmGratefulFor2Changed,
     TResult Function(_ThingsIAmGratefulFor3Changed value)?
         thingsIAmGratefulFor3Changed,
-    TResult Function(_DiaryChanged value)? diaryChanged,
     TResult Function(_RevenueChanged value)? revenueChanged,
     TResult Function(_WorkTimeChanged value)? workTimeChanged,
     TResult Function(_MoodSelected value)? moodSelected,
@@ -390,7 +378,6 @@ class _$MoodValueChangedImpl implements _MoodValueChanged {
     required TResult Function(String value) thingsIAmGratefulFor1Changed,
     required TResult Function(String value) thingsIAmGratefulFor2Changed,
     required TResult Function(String value) thingsIAmGratefulFor3Changed,
-    required TResult Function(String value) diaryChanged,
     required TResult Function(String value) revenueChanged,
     required TResult Function(Duration value) workTimeChanged,
     required TResult Function(Mood mood) moodSelected,
@@ -406,7 +393,6 @@ class _$MoodValueChangedImpl implements _MoodValueChanged {
     TResult? Function(String value)? thingsIAmGratefulFor1Changed,
     TResult? Function(String value)? thingsIAmGratefulFor2Changed,
     TResult? Function(String value)? thingsIAmGratefulFor3Changed,
-    TResult? Function(String value)? diaryChanged,
     TResult? Function(String value)? revenueChanged,
     TResult? Function(Duration value)? workTimeChanged,
     TResult? Function(Mood mood)? moodSelected,
@@ -422,7 +408,6 @@ class _$MoodValueChangedImpl implements _MoodValueChanged {
     TResult Function(String value)? thingsIAmGratefulFor1Changed,
     TResult Function(String value)? thingsIAmGratefulFor2Changed,
     TResult Function(String value)? thingsIAmGratefulFor3Changed,
-    TResult Function(String value)? diaryChanged,
     TResult Function(String value)? revenueChanged,
     TResult Function(Duration value)? workTimeChanged,
     TResult Function(Mood mood)? moodSelected,
@@ -445,7 +430,6 @@ class _$MoodValueChangedImpl implements _MoodValueChanged {
         thingsIAmGratefulFor2Changed,
     required TResult Function(_ThingsIAmGratefulFor3Changed value)
         thingsIAmGratefulFor3Changed,
-    required TResult Function(_DiaryChanged value) diaryChanged,
     required TResult Function(_RevenueChanged value) revenueChanged,
     required TResult Function(_WorkTimeChanged value) workTimeChanged,
     required TResult Function(_MoodSelected value) moodSelected,
@@ -464,7 +448,6 @@ class _$MoodValueChangedImpl implements _MoodValueChanged {
         thingsIAmGratefulFor2Changed,
     TResult? Function(_ThingsIAmGratefulFor3Changed value)?
         thingsIAmGratefulFor3Changed,
-    TResult? Function(_DiaryChanged value)? diaryChanged,
     TResult? Function(_RevenueChanged value)? revenueChanged,
     TResult? Function(_WorkTimeChanged value)? workTimeChanged,
     TResult? Function(_MoodSelected value)? moodSelected,
@@ -483,7 +466,6 @@ class _$MoodValueChangedImpl implements _MoodValueChanged {
         thingsIAmGratefulFor2Changed,
     TResult Function(_ThingsIAmGratefulFor3Changed value)?
         thingsIAmGratefulFor3Changed,
-    TResult Function(_DiaryChanged value)? diaryChanged,
     TResult Function(_RevenueChanged value)? revenueChanged,
     TResult Function(_WorkTimeChanged value)? workTimeChanged,
     TResult Function(_MoodSelected value)? moodSelected,
@@ -580,7 +562,6 @@ class _$ThingsIAmGratefulFor1ChangedImpl
     required TResult Function(String value) thingsIAmGratefulFor1Changed,
     required TResult Function(String value) thingsIAmGratefulFor2Changed,
     required TResult Function(String value) thingsIAmGratefulFor3Changed,
-    required TResult Function(String value) diaryChanged,
     required TResult Function(String value) revenueChanged,
     required TResult Function(Duration value) workTimeChanged,
     required TResult Function(Mood mood) moodSelected,
@@ -596,7 +577,6 @@ class _$ThingsIAmGratefulFor1ChangedImpl
     TResult? Function(String value)? thingsIAmGratefulFor1Changed,
     TResult? Function(String value)? thingsIAmGratefulFor2Changed,
     TResult? Function(String value)? thingsIAmGratefulFor3Changed,
-    TResult? Function(String value)? diaryChanged,
     TResult? Function(String value)? revenueChanged,
     TResult? Function(Duration value)? workTimeChanged,
     TResult? Function(Mood mood)? moodSelected,
@@ -612,7 +592,6 @@ class _$ThingsIAmGratefulFor1ChangedImpl
     TResult Function(String value)? thingsIAmGratefulFor1Changed,
     TResult Function(String value)? thingsIAmGratefulFor2Changed,
     TResult Function(String value)? thingsIAmGratefulFor3Changed,
-    TResult Function(String value)? diaryChanged,
     TResult Function(String value)? revenueChanged,
     TResult Function(Duration value)? workTimeChanged,
     TResult Function(Mood mood)? moodSelected,
@@ -635,7 +614,6 @@ class _$ThingsIAmGratefulFor1ChangedImpl
         thingsIAmGratefulFor2Changed,
     required TResult Function(_ThingsIAmGratefulFor3Changed value)
         thingsIAmGratefulFor3Changed,
-    required TResult Function(_DiaryChanged value) diaryChanged,
     required TResult Function(_RevenueChanged value) revenueChanged,
     required TResult Function(_WorkTimeChanged value) workTimeChanged,
     required TResult Function(_MoodSelected value) moodSelected,
@@ -654,7 +632,6 @@ class _$ThingsIAmGratefulFor1ChangedImpl
         thingsIAmGratefulFor2Changed,
     TResult? Function(_ThingsIAmGratefulFor3Changed value)?
         thingsIAmGratefulFor3Changed,
-    TResult? Function(_DiaryChanged value)? diaryChanged,
     TResult? Function(_RevenueChanged value)? revenueChanged,
     TResult? Function(_WorkTimeChanged value)? workTimeChanged,
     TResult? Function(_MoodSelected value)? moodSelected,
@@ -673,7 +650,6 @@ class _$ThingsIAmGratefulFor1ChangedImpl
         thingsIAmGratefulFor2Changed,
     TResult Function(_ThingsIAmGratefulFor3Changed value)?
         thingsIAmGratefulFor3Changed,
-    TResult Function(_DiaryChanged value)? diaryChanged,
     TResult Function(_RevenueChanged value)? revenueChanged,
     TResult Function(_WorkTimeChanged value)? workTimeChanged,
     TResult Function(_MoodSelected value)? moodSelected,
@@ -772,7 +748,6 @@ class _$ThingsIAmGratefulFor2ChangedImpl
     required TResult Function(String value) thingsIAmGratefulFor1Changed,
     required TResult Function(String value) thingsIAmGratefulFor2Changed,
     required TResult Function(String value) thingsIAmGratefulFor3Changed,
-    required TResult Function(String value) diaryChanged,
     required TResult Function(String value) revenueChanged,
     required TResult Function(Duration value) workTimeChanged,
     required TResult Function(Mood mood) moodSelected,
@@ -788,7 +763,6 @@ class _$ThingsIAmGratefulFor2ChangedImpl
     TResult? Function(String value)? thingsIAmGratefulFor1Changed,
     TResult? Function(String value)? thingsIAmGratefulFor2Changed,
     TResult? Function(String value)? thingsIAmGratefulFor3Changed,
-    TResult? Function(String value)? diaryChanged,
     TResult? Function(String value)? revenueChanged,
     TResult? Function(Duration value)? workTimeChanged,
     TResult? Function(Mood mood)? moodSelected,
@@ -804,7 +778,6 @@ class _$ThingsIAmGratefulFor2ChangedImpl
     TResult Function(String value)? thingsIAmGratefulFor1Changed,
     TResult Function(String value)? thingsIAmGratefulFor2Changed,
     TResult Function(String value)? thingsIAmGratefulFor3Changed,
-    TResult Function(String value)? diaryChanged,
     TResult Function(String value)? revenueChanged,
     TResult Function(Duration value)? workTimeChanged,
     TResult Function(Mood mood)? moodSelected,
@@ -827,7 +800,6 @@ class _$ThingsIAmGratefulFor2ChangedImpl
         thingsIAmGratefulFor2Changed,
     required TResult Function(_ThingsIAmGratefulFor3Changed value)
         thingsIAmGratefulFor3Changed,
-    required TResult Function(_DiaryChanged value) diaryChanged,
     required TResult Function(_RevenueChanged value) revenueChanged,
     required TResult Function(_WorkTimeChanged value) workTimeChanged,
     required TResult Function(_MoodSelected value) moodSelected,
@@ -846,7 +818,6 @@ class _$ThingsIAmGratefulFor2ChangedImpl
         thingsIAmGratefulFor2Changed,
     TResult? Function(_ThingsIAmGratefulFor3Changed value)?
         thingsIAmGratefulFor3Changed,
-    TResult? Function(_DiaryChanged value)? diaryChanged,
     TResult? Function(_RevenueChanged value)? revenueChanged,
     TResult? Function(_WorkTimeChanged value)? workTimeChanged,
     TResult? Function(_MoodSelected value)? moodSelected,
@@ -865,7 +836,6 @@ class _$ThingsIAmGratefulFor2ChangedImpl
         thingsIAmGratefulFor2Changed,
     TResult Function(_ThingsIAmGratefulFor3Changed value)?
         thingsIAmGratefulFor3Changed,
-    TResult Function(_DiaryChanged value)? diaryChanged,
     TResult Function(_RevenueChanged value)? revenueChanged,
     TResult Function(_WorkTimeChanged value)? workTimeChanged,
     TResult Function(_MoodSelected value)? moodSelected,
@@ -964,7 +934,6 @@ class _$ThingsIAmGratefulFor3ChangedImpl
     required TResult Function(String value) thingsIAmGratefulFor1Changed,
     required TResult Function(String value) thingsIAmGratefulFor2Changed,
     required TResult Function(String value) thingsIAmGratefulFor3Changed,
-    required TResult Function(String value) diaryChanged,
     required TResult Function(String value) revenueChanged,
     required TResult Function(Duration value) workTimeChanged,
     required TResult Function(Mood mood) moodSelected,
@@ -980,7 +949,6 @@ class _$ThingsIAmGratefulFor3ChangedImpl
     TResult? Function(String value)? thingsIAmGratefulFor1Changed,
     TResult? Function(String value)? thingsIAmGratefulFor2Changed,
     TResult? Function(String value)? thingsIAmGratefulFor3Changed,
-    TResult? Function(String value)? diaryChanged,
     TResult? Function(String value)? revenueChanged,
     TResult? Function(Duration value)? workTimeChanged,
     TResult? Function(Mood mood)? moodSelected,
@@ -996,7 +964,6 @@ class _$ThingsIAmGratefulFor3ChangedImpl
     TResult Function(String value)? thingsIAmGratefulFor1Changed,
     TResult Function(String value)? thingsIAmGratefulFor2Changed,
     TResult Function(String value)? thingsIAmGratefulFor3Changed,
-    TResult Function(String value)? diaryChanged,
     TResult Function(String value)? revenueChanged,
     TResult Function(Duration value)? workTimeChanged,
     TResult Function(Mood mood)? moodSelected,
@@ -1019,7 +986,6 @@ class _$ThingsIAmGratefulFor3ChangedImpl
         thingsIAmGratefulFor2Changed,
     required TResult Function(_ThingsIAmGratefulFor3Changed value)
         thingsIAmGratefulFor3Changed,
-    required TResult Function(_DiaryChanged value) diaryChanged,
     required TResult Function(_RevenueChanged value) revenueChanged,
     required TResult Function(_WorkTimeChanged value) workTimeChanged,
     required TResult Function(_MoodSelected value) moodSelected,
@@ -1038,7 +1004,6 @@ class _$ThingsIAmGratefulFor3ChangedImpl
         thingsIAmGratefulFor2Changed,
     TResult? Function(_ThingsIAmGratefulFor3Changed value)?
         thingsIAmGratefulFor3Changed,
-    TResult? Function(_DiaryChanged value)? diaryChanged,
     TResult? Function(_RevenueChanged value)? revenueChanged,
     TResult? Function(_WorkTimeChanged value)? workTimeChanged,
     TResult? Function(_MoodSelected value)? moodSelected,
@@ -1057,7 +1022,6 @@ class _$ThingsIAmGratefulFor3ChangedImpl
         thingsIAmGratefulFor2Changed,
     TResult Function(_ThingsIAmGratefulFor3Changed value)?
         thingsIAmGratefulFor3Changed,
-    TResult Function(_DiaryChanged value)? diaryChanged,
     TResult Function(_RevenueChanged value)? revenueChanged,
     TResult Function(_WorkTimeChanged value)? workTimeChanged,
     TResult Function(_MoodSelected value)? moodSelected,
@@ -1079,190 +1043,6 @@ abstract class _ThingsIAmGratefulFor3Changed implements UpdateMoodEvent {
   _$$ThingsIAmGratefulFor3ChangedImplCopyWith<
           _$ThingsIAmGratefulFor3ChangedImpl>
       get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$DiaryChangedImplCopyWith<$Res> {
-  factory _$$DiaryChangedImplCopyWith(
-          _$DiaryChangedImpl value, $Res Function(_$DiaryChangedImpl) then) =
-      __$$DiaryChangedImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String value});
-}
-
-/// @nodoc
-class __$$DiaryChangedImplCopyWithImpl<$Res>
-    extends _$UpdateMoodEventCopyWithImpl<$Res, _$DiaryChangedImpl>
-    implements _$$DiaryChangedImplCopyWith<$Res> {
-  __$$DiaryChangedImplCopyWithImpl(
-      _$DiaryChangedImpl _value, $Res Function(_$DiaryChangedImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? value = null,
-  }) {
-    return _then(_$DiaryChangedImpl(
-      null == value
-          ? _value.value
-          : value // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$DiaryChangedImpl implements _DiaryChanged {
-  const _$DiaryChangedImpl(this.value);
-
-  @override
-  final String value;
-
-  @override
-  String toString() {
-    return 'UpdateMoodEvent.diaryChanged(value: $value)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$DiaryChangedImpl &&
-            (identical(other.value, value) || other.value == value));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, value);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$DiaryChangedImplCopyWith<_$DiaryChangedImpl> get copyWith =>
-      __$$DiaryChangedImplCopyWithImpl<_$DiaryChangedImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(Mood mood) updateSubmitted,
-    required TResult Function(double value) moodValueChanged,
-    required TResult Function(String value) thingsIAmGratefulFor1Changed,
-    required TResult Function(String value) thingsIAmGratefulFor2Changed,
-    required TResult Function(String value) thingsIAmGratefulFor3Changed,
-    required TResult Function(String value) diaryChanged,
-    required TResult Function(String value) revenueChanged,
-    required TResult Function(Duration value) workTimeChanged,
-    required TResult Function(Mood mood) moodSelected,
-  }) {
-    return diaryChanged(value);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Mood mood)? updateSubmitted,
-    TResult? Function(double value)? moodValueChanged,
-    TResult? Function(String value)? thingsIAmGratefulFor1Changed,
-    TResult? Function(String value)? thingsIAmGratefulFor2Changed,
-    TResult? Function(String value)? thingsIAmGratefulFor3Changed,
-    TResult? Function(String value)? diaryChanged,
-    TResult? Function(String value)? revenueChanged,
-    TResult? Function(Duration value)? workTimeChanged,
-    TResult? Function(Mood mood)? moodSelected,
-  }) {
-    return diaryChanged?.call(value);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Mood mood)? updateSubmitted,
-    TResult Function(double value)? moodValueChanged,
-    TResult Function(String value)? thingsIAmGratefulFor1Changed,
-    TResult Function(String value)? thingsIAmGratefulFor2Changed,
-    TResult Function(String value)? thingsIAmGratefulFor3Changed,
-    TResult Function(String value)? diaryChanged,
-    TResult Function(String value)? revenueChanged,
-    TResult Function(Duration value)? workTimeChanged,
-    TResult Function(Mood mood)? moodSelected,
-    required TResult orElse(),
-  }) {
-    if (diaryChanged != null) {
-      return diaryChanged(value);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_UpdateSubmitted value) updateSubmitted,
-    required TResult Function(_MoodValueChanged value) moodValueChanged,
-    required TResult Function(_ThingsIAmGratefulFor1Changed value)
-        thingsIAmGratefulFor1Changed,
-    required TResult Function(_ThingsIAmGratefulFor2Changed value)
-        thingsIAmGratefulFor2Changed,
-    required TResult Function(_ThingsIAmGratefulFor3Changed value)
-        thingsIAmGratefulFor3Changed,
-    required TResult Function(_DiaryChanged value) diaryChanged,
-    required TResult Function(_RevenueChanged value) revenueChanged,
-    required TResult Function(_WorkTimeChanged value) workTimeChanged,
-    required TResult Function(_MoodSelected value) moodSelected,
-  }) {
-    return diaryChanged(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_UpdateSubmitted value)? updateSubmitted,
-    TResult? Function(_MoodValueChanged value)? moodValueChanged,
-    TResult? Function(_ThingsIAmGratefulFor1Changed value)?
-        thingsIAmGratefulFor1Changed,
-    TResult? Function(_ThingsIAmGratefulFor2Changed value)?
-        thingsIAmGratefulFor2Changed,
-    TResult? Function(_ThingsIAmGratefulFor3Changed value)?
-        thingsIAmGratefulFor3Changed,
-    TResult? Function(_DiaryChanged value)? diaryChanged,
-    TResult? Function(_RevenueChanged value)? revenueChanged,
-    TResult? Function(_WorkTimeChanged value)? workTimeChanged,
-    TResult? Function(_MoodSelected value)? moodSelected,
-  }) {
-    return diaryChanged?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_UpdateSubmitted value)? updateSubmitted,
-    TResult Function(_MoodValueChanged value)? moodValueChanged,
-    TResult Function(_ThingsIAmGratefulFor1Changed value)?
-        thingsIAmGratefulFor1Changed,
-    TResult Function(_ThingsIAmGratefulFor2Changed value)?
-        thingsIAmGratefulFor2Changed,
-    TResult Function(_ThingsIAmGratefulFor3Changed value)?
-        thingsIAmGratefulFor3Changed,
-    TResult Function(_DiaryChanged value)? diaryChanged,
-    TResult Function(_RevenueChanged value)? revenueChanged,
-    TResult Function(_WorkTimeChanged value)? workTimeChanged,
-    TResult Function(_MoodSelected value)? moodSelected,
-    required TResult orElse(),
-  }) {
-    if (diaryChanged != null) {
-      return diaryChanged(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _DiaryChanged implements UpdateMoodEvent {
-  const factory _DiaryChanged(final String value) = _$DiaryChangedImpl;
-
-  String get value;
-  @JsonKey(ignore: true)
-  _$$DiaryChangedImplCopyWith<_$DiaryChangedImpl> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -1335,7 +1115,6 @@ class _$RevenueChangedImpl implements _RevenueChanged {
     required TResult Function(String value) thingsIAmGratefulFor1Changed,
     required TResult Function(String value) thingsIAmGratefulFor2Changed,
     required TResult Function(String value) thingsIAmGratefulFor3Changed,
-    required TResult Function(String value) diaryChanged,
     required TResult Function(String value) revenueChanged,
     required TResult Function(Duration value) workTimeChanged,
     required TResult Function(Mood mood) moodSelected,
@@ -1351,7 +1130,6 @@ class _$RevenueChangedImpl implements _RevenueChanged {
     TResult? Function(String value)? thingsIAmGratefulFor1Changed,
     TResult? Function(String value)? thingsIAmGratefulFor2Changed,
     TResult? Function(String value)? thingsIAmGratefulFor3Changed,
-    TResult? Function(String value)? diaryChanged,
     TResult? Function(String value)? revenueChanged,
     TResult? Function(Duration value)? workTimeChanged,
     TResult? Function(Mood mood)? moodSelected,
@@ -1367,7 +1145,6 @@ class _$RevenueChangedImpl implements _RevenueChanged {
     TResult Function(String value)? thingsIAmGratefulFor1Changed,
     TResult Function(String value)? thingsIAmGratefulFor2Changed,
     TResult Function(String value)? thingsIAmGratefulFor3Changed,
-    TResult Function(String value)? diaryChanged,
     TResult Function(String value)? revenueChanged,
     TResult Function(Duration value)? workTimeChanged,
     TResult Function(Mood mood)? moodSelected,
@@ -1390,7 +1167,6 @@ class _$RevenueChangedImpl implements _RevenueChanged {
         thingsIAmGratefulFor2Changed,
     required TResult Function(_ThingsIAmGratefulFor3Changed value)
         thingsIAmGratefulFor3Changed,
-    required TResult Function(_DiaryChanged value) diaryChanged,
     required TResult Function(_RevenueChanged value) revenueChanged,
     required TResult Function(_WorkTimeChanged value) workTimeChanged,
     required TResult Function(_MoodSelected value) moodSelected,
@@ -1409,7 +1185,6 @@ class _$RevenueChangedImpl implements _RevenueChanged {
         thingsIAmGratefulFor2Changed,
     TResult? Function(_ThingsIAmGratefulFor3Changed value)?
         thingsIAmGratefulFor3Changed,
-    TResult? Function(_DiaryChanged value)? diaryChanged,
     TResult? Function(_RevenueChanged value)? revenueChanged,
     TResult? Function(_WorkTimeChanged value)? workTimeChanged,
     TResult? Function(_MoodSelected value)? moodSelected,
@@ -1428,7 +1203,6 @@ class _$RevenueChangedImpl implements _RevenueChanged {
         thingsIAmGratefulFor2Changed,
     TResult Function(_ThingsIAmGratefulFor3Changed value)?
         thingsIAmGratefulFor3Changed,
-    TResult Function(_DiaryChanged value)? diaryChanged,
     TResult Function(_RevenueChanged value)? revenueChanged,
     TResult Function(_WorkTimeChanged value)? workTimeChanged,
     TResult Function(_MoodSelected value)? moodSelected,
@@ -1520,7 +1294,6 @@ class _$WorkTimeChangedImpl implements _WorkTimeChanged {
     required TResult Function(String value) thingsIAmGratefulFor1Changed,
     required TResult Function(String value) thingsIAmGratefulFor2Changed,
     required TResult Function(String value) thingsIAmGratefulFor3Changed,
-    required TResult Function(String value) diaryChanged,
     required TResult Function(String value) revenueChanged,
     required TResult Function(Duration value) workTimeChanged,
     required TResult Function(Mood mood) moodSelected,
@@ -1536,7 +1309,6 @@ class _$WorkTimeChangedImpl implements _WorkTimeChanged {
     TResult? Function(String value)? thingsIAmGratefulFor1Changed,
     TResult? Function(String value)? thingsIAmGratefulFor2Changed,
     TResult? Function(String value)? thingsIAmGratefulFor3Changed,
-    TResult? Function(String value)? diaryChanged,
     TResult? Function(String value)? revenueChanged,
     TResult? Function(Duration value)? workTimeChanged,
     TResult? Function(Mood mood)? moodSelected,
@@ -1552,7 +1324,6 @@ class _$WorkTimeChangedImpl implements _WorkTimeChanged {
     TResult Function(String value)? thingsIAmGratefulFor1Changed,
     TResult Function(String value)? thingsIAmGratefulFor2Changed,
     TResult Function(String value)? thingsIAmGratefulFor3Changed,
-    TResult Function(String value)? diaryChanged,
     TResult Function(String value)? revenueChanged,
     TResult Function(Duration value)? workTimeChanged,
     TResult Function(Mood mood)? moodSelected,
@@ -1575,7 +1346,6 @@ class _$WorkTimeChangedImpl implements _WorkTimeChanged {
         thingsIAmGratefulFor2Changed,
     required TResult Function(_ThingsIAmGratefulFor3Changed value)
         thingsIAmGratefulFor3Changed,
-    required TResult Function(_DiaryChanged value) diaryChanged,
     required TResult Function(_RevenueChanged value) revenueChanged,
     required TResult Function(_WorkTimeChanged value) workTimeChanged,
     required TResult Function(_MoodSelected value) moodSelected,
@@ -1594,7 +1364,6 @@ class _$WorkTimeChangedImpl implements _WorkTimeChanged {
         thingsIAmGratefulFor2Changed,
     TResult? Function(_ThingsIAmGratefulFor3Changed value)?
         thingsIAmGratefulFor3Changed,
-    TResult? Function(_DiaryChanged value)? diaryChanged,
     TResult? Function(_RevenueChanged value)? revenueChanged,
     TResult? Function(_WorkTimeChanged value)? workTimeChanged,
     TResult? Function(_MoodSelected value)? moodSelected,
@@ -1613,7 +1382,6 @@ class _$WorkTimeChangedImpl implements _WorkTimeChanged {
         thingsIAmGratefulFor2Changed,
     TResult Function(_ThingsIAmGratefulFor3Changed value)?
         thingsIAmGratefulFor3Changed,
-    TResult Function(_DiaryChanged value)? diaryChanged,
     TResult Function(_RevenueChanged value)? revenueChanged,
     TResult Function(_WorkTimeChanged value)? workTimeChanged,
     TResult Function(_MoodSelected value)? moodSelected,
@@ -1714,7 +1482,6 @@ class _$MoodSelectedImpl implements _MoodSelected {
     required TResult Function(String value) thingsIAmGratefulFor1Changed,
     required TResult Function(String value) thingsIAmGratefulFor2Changed,
     required TResult Function(String value) thingsIAmGratefulFor3Changed,
-    required TResult Function(String value) diaryChanged,
     required TResult Function(String value) revenueChanged,
     required TResult Function(Duration value) workTimeChanged,
     required TResult Function(Mood mood) moodSelected,
@@ -1730,7 +1497,6 @@ class _$MoodSelectedImpl implements _MoodSelected {
     TResult? Function(String value)? thingsIAmGratefulFor1Changed,
     TResult? Function(String value)? thingsIAmGratefulFor2Changed,
     TResult? Function(String value)? thingsIAmGratefulFor3Changed,
-    TResult? Function(String value)? diaryChanged,
     TResult? Function(String value)? revenueChanged,
     TResult? Function(Duration value)? workTimeChanged,
     TResult? Function(Mood mood)? moodSelected,
@@ -1746,7 +1512,6 @@ class _$MoodSelectedImpl implements _MoodSelected {
     TResult Function(String value)? thingsIAmGratefulFor1Changed,
     TResult Function(String value)? thingsIAmGratefulFor2Changed,
     TResult Function(String value)? thingsIAmGratefulFor3Changed,
-    TResult Function(String value)? diaryChanged,
     TResult Function(String value)? revenueChanged,
     TResult Function(Duration value)? workTimeChanged,
     TResult Function(Mood mood)? moodSelected,
@@ -1769,7 +1534,6 @@ class _$MoodSelectedImpl implements _MoodSelected {
         thingsIAmGratefulFor2Changed,
     required TResult Function(_ThingsIAmGratefulFor3Changed value)
         thingsIAmGratefulFor3Changed,
-    required TResult Function(_DiaryChanged value) diaryChanged,
     required TResult Function(_RevenueChanged value) revenueChanged,
     required TResult Function(_WorkTimeChanged value) workTimeChanged,
     required TResult Function(_MoodSelected value) moodSelected,
@@ -1788,7 +1552,6 @@ class _$MoodSelectedImpl implements _MoodSelected {
         thingsIAmGratefulFor2Changed,
     TResult? Function(_ThingsIAmGratefulFor3Changed value)?
         thingsIAmGratefulFor3Changed,
-    TResult? Function(_DiaryChanged value)? diaryChanged,
     TResult? Function(_RevenueChanged value)? revenueChanged,
     TResult? Function(_WorkTimeChanged value)? workTimeChanged,
     TResult? Function(_MoodSelected value)? moodSelected,
@@ -1807,7 +1570,6 @@ class _$MoodSelectedImpl implements _MoodSelected {
         thingsIAmGratefulFor2Changed,
     TResult Function(_ThingsIAmGratefulFor3Changed value)?
         thingsIAmGratefulFor3Changed,
-    TResult Function(_DiaryChanged value)? diaryChanged,
     TResult Function(_RevenueChanged value)? revenueChanged,
     TResult Function(_WorkTimeChanged value)? workTimeChanged,
     TResult Function(_MoodSelected value)? moodSelected,
