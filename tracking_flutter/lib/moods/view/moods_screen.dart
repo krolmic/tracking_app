@@ -68,7 +68,9 @@ class MoodsScreen extends StatelessWidget {
                   state.moodsListState.containsTodayMood;
 
               return AppElevatedButton(
-                icon: todaysMoodIsTracked ? Icons.edit : Iconsax.add_outline,
+                icon: todaysMoodIsTracked
+                    ? Iconsax.edit_2_bold
+                    : Iconsax.add_outline,
                 label: todaysMoodIsTracked
                     ? translations.updateToday
                     : translations.trackToday,
