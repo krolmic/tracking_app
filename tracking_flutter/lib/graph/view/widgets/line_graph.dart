@@ -132,8 +132,11 @@ class _LineGraph extends StatelessWidget {
                     '$currencySymbol';
               } else if (isWorkTimeSpot) {
                 final mood = moodsWithTrackedWorkTime[flSpot.spotIndex];
+                final workTime = mood.workTime! > Duration.zero
+                    ? mood.workTime!.toFormattedString()
+                    : '-';
                 text = '${translations.workTime}:\n'
-                    '${mood.workTime!.toFormattedString()}';
+                    '$workTime';
               } else if (isMoodSpot) {
                 text = '${translations.mood}: '
                     '${moods[flSpot.spotIndex].value}';
