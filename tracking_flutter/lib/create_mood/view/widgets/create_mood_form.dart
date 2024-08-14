@@ -207,12 +207,6 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
               style: Theme.of(context).textTheme.headlineSmall,
               textAlign: TextAlign.center,
             ),
-            const VerticalSpacing.medium(),
-            Text(
-              translations.writeDownThingsYouAreGreatfulFor,
-              style: Theme.of(context).textTheme.bodyMedium,
-              textAlign: TextAlign.center,
-            ),
             const VerticalSpacing.extraLarge(),
             TextFormField(
               key: const Key('Create mood form thingIAmGreatfulAbout1 input'),
