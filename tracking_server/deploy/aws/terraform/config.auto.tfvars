@@ -15,7 +15,7 @@ project_name = "tracking"
 # need to update the instance_ami variable (see below) and update the region in
 # the .github/workflows/deployment-aws.yml file. In some cases you will also
 # need to update your instance_type.
-aws_region = "us-west-2"
+aws_region = "us-east-1"
 
 # Enabling Redis may incur additional costs. You will also need to enable Redis
 # in your staging.yaml and production.yaml configuration files.
