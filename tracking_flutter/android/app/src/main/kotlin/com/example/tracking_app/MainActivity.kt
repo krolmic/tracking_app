@@ -1,4 +1,4 @@
-package app.mindfulme
+package app.healthyhustle
 
 import io.flutter.embedding.android.FlutterActivity
 
