@@ -15,7 +15,8 @@ void run(List<String> args) async {
     Protocol(),
     Endpoints(),
     authenticationHandler: (Session session, String token) async {
-      if (token != 'valid') return null;
+      final apiKey = session.serverpod.getPassword('apiKey');
+      if (token != apiKey) return null;
 
       return AuthenticationInfo(1, <Scope>{});
     },

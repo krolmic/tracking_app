@@ -65,11 +65,12 @@ Future<void> registerSingletons() async {
 
 Future<Client> initServerpodClient() async {
   final serverpodClient = Client(
-    'http://$localhost:8080/',
+    const String.fromEnvironment('API_URL'),
     authenticationKeyManager: FlutterAuthenticationKeyManager(),
   )..connectivityMonitor = FlutterConnectivityMonitor();
 
-  await serverpodClient.authenticationKeyManager!.put('valid');
+  await serverpodClient.authenticationKeyManager!
+      .put(const String.fromEnvironment('API_KEY'));
 
   return serverpodClient;
 }
