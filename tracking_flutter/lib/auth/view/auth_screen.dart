@@ -34,8 +34,16 @@ class AuthScreen extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                const Center(child: FlutterLogo(size: 100)),
-                const VerticalSpacing.large(),
+                const Center(
+                  child: Image(
+                    image: AssetImage(
+                      'assets/images/adaptive_icon_foreground.png',
+                    ),
+                    width: 100,
+                    height: 100,
+                  ),
+                ),
+                const VerticalSpacing.extraLarge(),
                 Container(
                   constraints: const BoxConstraints(maxWidth: 600),
                   child: body,
