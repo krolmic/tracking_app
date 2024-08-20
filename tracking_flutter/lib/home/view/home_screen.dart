@@ -192,9 +192,9 @@ class _HomeContentView extends StatelessWidget {
   final String firstName;
   final double weeklyProgress;
   final List<Mood> moods;
-  final double averageMood;
-  final Duration averageWorkTime;
-  final double averageRevenue;
+  final double? averageMood;
+  final Duration? averageWorkTime;
+  final double? averageRevenue;
   final bool trackedEveryDay;
   final bool trackedToday;
 
@@ -204,16 +204,14 @@ class _HomeContentView extends StatelessWidget {
     final addExtraBottomSpace = moods.length > 2 && !trackedToday;
 
     final averageMoodValue =
-        averageMood != 0 ? averageMood.toFormattedString() : '-';
-    final averageWorkTimeValue = averageWorkTime != Duration.zero
-        ? averageWorkTime.toFormattedString()
-        : '-';
+        averageMood != null ? averageMood!.toFormattedString() : '-';
+    final averageWorkTimeValue =
+        averageWorkTime != null ? averageWorkTime!.toFormattedString() : '-';
 
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // const VerticalSpacing.large(),
           Text(
             DateTime.now().getGreetingString(translations),
             style: Theme.of(context).textTheme.bodyMedium,
@@ -269,8 +267,8 @@ class _HomeContentView extends StatelessWidget {
                       final currency =
                           getCurrencySymbol(state.appSettingsData.currency);
 
-                      final averageRevenueValue = averageRevenue != 0
-                          ? '${averageRevenue.toFormattedString()} $currency'
+                      final averageRevenueValue = averageRevenue != null
+                          ? '${averageRevenue!.toFormattedString()} $currency'
                           : '-';
 
                       return MoodData(
