@@ -48,23 +48,23 @@ extension MoodsListStateX on MoodsListState {
     );
   }
 
-  double get averageMoodThisWeek {
+  double? get averageMoodThisWeek {
     return maybeWhen(
       loaded: (moods) {
         return moodsThisWeek.isEmpty
-            ? 0
+            ? null
             : moodsThisWeek.map((mood) => mood.value).reduce((a, b) => a + b) /
                 moodsThisWeek.length;
       },
-      orElse: () => 0,
+      orElse: () => null,
     );
   }
 
-  Duration get averageWorkTimeThisWeek {
+  Duration? get averageWorkTimeThisWeek {
     return maybeWhen(
       loaded: (moods) {
         if (moodsThisWeek.isEmpty) {
-          return Duration.zero;
+          return null;
         }
         final totalDuration = moodsThisWeek
             .map((mood) => mood.workTime ?? Duration.zero)
@@ -72,15 +72,15 @@ extension MoodsListStateX on MoodsListState {
         final averageDuration = totalDuration ~/ moodsThisWeek.length;
         return averageDuration;
       },
-      orElse: () => Duration.zero,
+      orElse: () => null,
     );
   }
 
-  double get averageRevenueThisWeek {
+  double? get averageRevenueThisWeek {
     return maybeWhen(
       loaded: (moods) {
         if (moodsThisWeek.isEmpty) {
-          return 0;
+          return null;
         }
         final totalRevenue = moodsThisWeek
             .map((mood) => mood.revenue ?? 0)
@@ -88,7 +88,7 @@ extension MoodsListStateX on MoodsListState {
         final averageRevenue = totalRevenue / moodsThisWeek.length;
         return averageRevenue;
       },
-      orElse: () => 0,
+      orElse: () => null,
     );
   }
 
