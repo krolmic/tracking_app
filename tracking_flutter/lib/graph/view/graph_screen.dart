@@ -21,6 +21,7 @@ import 'package:tracking_app/shared/theme/colors.dart';
 import 'package:tracking_app/shared/theme/layout.dart';
 import 'package:tracking_app/shared/toast.dart';
 import 'package:tracking_app/shared/view/base_view.dart';
+import 'package:tracking_app/shared/widgets/app_dialog.dart';
 import 'package:tracking_app/shared/widgets/loading_indicator.dart';
 import 'package:tracking_app/shared/widgets/mood_data.dart';
 import 'package:tracking_app/shared/widgets/spacing.dart';
@@ -31,6 +32,7 @@ part 'widgets/graph_settings.dart';
 part 'widgets/line_graph.dart';
 part 'widgets/line_graph_explanation.dart';
 part 'widgets/months_selection.dart';
+part 'widgets/weeks_selection.dart';
 
 class GraphScreen extends StatelessWidget {
   const GraphScreen({super.key});
@@ -100,55 +102,117 @@ class GraphScreen extends StatelessWidget {
 class _GraphView extends StatelessWidget {
   const _GraphView();
 
+  Future<void> _showSettingsDialog(
+    BuildContext context,
+  ) {
+    return showDialog<void>(
+      context: context,
+      builder: (dialogContext) {
+        final translations = AppLocalizations.of(context)!;
+
+        return AppDialog(
+          title: translations.display,
+          body: BlocProvider.value(
+            value: BlocProvider.of<GraphBloc>(context),
+            child: const _GraphSettings(),
+          ),
+          confirmButtonText: translations.ok,
+          onConfirm: () {
+            Navigator.of(dialogContext).pop();
+          },
+          buildCancelButton: false,
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final translations = AppLocalizations.of(context)!;
     final dateTimeNow = DateTime.now();
 
     return BaseView(
-      addVerticalPadding: true,
+      addVerticalPadding: false,
       addHorizontalPadding: false,
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: viewPaddingHorizontal),
-              child: Center(
-                child: Text(
-                  dateTimeNow.year.toString(),
-                  style: Theme.of(context).textTheme.headlineSmall,
+            const VerticalSpacing.large(),
+            Container(
+              height: 30,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: viewPaddingHorizontal,
+                ),
+                child: Stack(
+                  children: [
+                    Positioned.fill(
+                      child: Center(
+                        child: Text(
+                          dateTimeNow.year.toString(),
+                          style: Theme.of(context).textTheme.headlineSmall,
+                        ),
+                      ),
+                    ),
+                    Positioned.fill(
+                      child: Align(
+                        alignment: Alignment.topRight,
+                        child: IconButton(
+                          color: AppColors.primarySwatch,
+                          icon: const Icon(
+                            Iconsax.setting_4_outline,
+                            size: 15,
+                          ),
+                          onPressed: () async {
+                            await _showSettingsDialog(context);
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
-            const VerticalSpacing.large(),
+            const VerticalSpacing.medium(),
             BlocBuilder<GraphBloc, GraphState>(
               buildWhen: (previous, current) =>
                   previous.targetDate != current.targetDate ||
-                  previous.timeRangeMode != current.timeRangeMode,
+                  previous.settings.timeRangeMode !=
+                      current.settings.timeRangeMode,
               builder: (context, state) {
                 final setTargetDate = state.targetDate.date;
 
-                return _MonthsSelection(
-                  currentMonth: dateTimeNow.month,
-                  selectedMonth: setTargetDate.month,
-                  onMonthSelected: (month) {
-                    context.read<GraphBloc>().add(
-                          GraphEvent.targetDateChanged(
-                            date: DateTime(setTargetDate.year, month),
-                          ),
-                        );
-                  },
-                );
+                if (state.settings.timeRangeMode.isMonthly) {
+                  return _MonthsSelection(
+                    currentMonth: dateTimeNow.month,
+                    selectedMonth: setTargetDate.month,
+                    onMonthSelected: (month) {
+                      context.read<GraphBloc>().add(
+                            GraphEvent.targetDateChanged(
+                              date: DateTime(setTargetDate.year, month),
+                            ),
+                          );
+                    },
+                  );
+                } else {
+                  return _WeeksSelection(
+                    numberOfWeeks: setTargetDate.numberOfWeeksInYear,
+                    currentWeek: dateTimeNow.weekNumber,
+                    selectedWeek: setTargetDate.weekNumber,
+                    onWeekSelected: (week) {
+                      context.read<GraphBloc>().add(
+                            GraphEvent.targetDateChanged(
+                              date: DateTime(setTargetDate.year)
+                                  .fromWeekNumber(week),
+                            ),
+                          );
+                    },
+                  );
+                }
               },
             ),
-            const VerticalSpacing.large(),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: viewPaddingHorizontal),
-              child: _GraphSettings(),
-            ),
-            const VerticalSpacing.large(),
+            const VerticalSpacing.extraLarge(),
             Container(
               padding:
                   const EdgeInsets.symmetric(horizontal: viewPaddingHorizontal),
@@ -179,6 +243,7 @@ class _GraphView extends StatelessWidget {
                         ? moodsState.moodsWithTrackedWorkTime
                         : [],
                     currencySymbol: getCurrencySymbol(currency),
+                    timeRangeMode: settings.timeRangeMode,
                   );
                 },
               ),

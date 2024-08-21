@@ -98,6 +98,20 @@
     "revenue": "Umsatz",
     "showRevenue": "Umsatz anzeigen",
     "showWorkTime": "Arbeitszeit anzeigen",
+    "mode": "Modus",
+    "monthly": "Monatlich",
+    "weekly": "Wöchentlich",
+    "calendarWeek": "KW {weekNumber}",
+    "@calendarWeek": {
+        "placeholders": {
+            "weekNumber": {
+                "type": "int"
+            }
+        }
+    },
+    "display": "Anzeige",
+    "lines": "Linien",
+    "ok": "OK",
     "appSettings": "Präferenzen",
     "appSettingsSaved": "Präferenzen erfolgreich gespeichert!",
     "currency": "Währung",

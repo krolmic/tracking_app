@@ -23,6 +23,7 @@ mixin _$GraphEvent {
     required TResult Function() moodsUpdated,
     required TResult Function() showWorkTimeTriggered,
     required TResult Function() showRevenueTriggered,
+    required TResult Function(GraphTimeRangeMode mode) timeRangeModeChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -32,6 +33,7 @@ mixin _$GraphEvent {
     TResult? Function()? moodsUpdated,
     TResult? Function()? showWorkTimeTriggered,
     TResult? Function()? showRevenueTriggered,
+    TResult? Function(GraphTimeRangeMode mode)? timeRangeModeChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -41,6 +43,7 @@ mixin _$GraphEvent {
     TResult Function()? moodsUpdated,
     TResult Function()? showWorkTimeTriggered,
     TResult Function()? showRevenueTriggered,
+    TResult Function(GraphTimeRangeMode mode)? timeRangeModeChanged,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -54,6 +57,8 @@ mixin _$GraphEvent {
         showWorkTimeTriggered,
     required TResult Function(_GraphEventShowRevenueTriggered value)
         showRevenueTriggered,
+    required TResult Function(_GraphEventTimeRangeModeChanged value)
+        timeRangeModeChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -65,6 +70,8 @@ mixin _$GraphEvent {
         showWorkTimeTriggered,
     TResult? Function(_GraphEventShowRevenueTriggered value)?
         showRevenueTriggered,
+    TResult? Function(_GraphEventTimeRangeModeChanged value)?
+        timeRangeModeChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -76,6 +83,8 @@ mixin _$GraphEvent {
         showWorkTimeTriggered,
     TResult Function(_GraphEventShowRevenueTriggered value)?
         showRevenueTriggered,
+    TResult Function(_GraphEventTimeRangeModeChanged value)?
+        timeRangeModeChanged,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -144,6 +153,7 @@ class _$GraphEventInitializedImpl implements _GraphEventInitialized {
     required TResult Function() moodsUpdated,
     required TResult Function() showWorkTimeTriggered,
     required TResult Function() showRevenueTriggered,
+    required TResult Function(GraphTimeRangeMode mode) timeRangeModeChanged,
   }) {
     return graphInitialized();
   }
@@ -156,6 +166,7 @@ class _$GraphEventInitializedImpl implements _GraphEventInitialized {
     TResult? Function()? moodsUpdated,
     TResult? Function()? showWorkTimeTriggered,
     TResult? Function()? showRevenueTriggered,
+    TResult? Function(GraphTimeRangeMode mode)? timeRangeModeChanged,
   }) {
     return graphInitialized?.call();
   }
@@ -168,6 +179,7 @@ class _$GraphEventInitializedImpl implements _GraphEventInitialized {
     TResult Function()? moodsUpdated,
     TResult Function()? showWorkTimeTriggered,
     TResult Function()? showRevenueTriggered,
+    TResult Function(GraphTimeRangeMode mode)? timeRangeModeChanged,
     required TResult orElse(),
   }) {
     if (graphInitialized != null) {
@@ -187,6 +199,8 @@ class _$GraphEventInitializedImpl implements _GraphEventInitialized {
         showWorkTimeTriggered,
     required TResult Function(_GraphEventShowRevenueTriggered value)
         showRevenueTriggered,
+    required TResult Function(_GraphEventTimeRangeModeChanged value)
+        timeRangeModeChanged,
   }) {
     return graphInitialized(this);
   }
@@ -201,6 +215,8 @@ class _$GraphEventInitializedImpl implements _GraphEventInitialized {
         showWorkTimeTriggered,
     TResult? Function(_GraphEventShowRevenueTriggered value)?
         showRevenueTriggered,
+    TResult? Function(_GraphEventTimeRangeModeChanged value)?
+        timeRangeModeChanged,
   }) {
     return graphInitialized?.call(this);
   }
@@ -215,6 +231,8 @@ class _$GraphEventInitializedImpl implements _GraphEventInitialized {
         showWorkTimeTriggered,
     TResult Function(_GraphEventShowRevenueTriggered value)?
         showRevenueTriggered,
+    TResult Function(_GraphEventTimeRangeModeChanged value)?
+        timeRangeModeChanged,
     required TResult orElse(),
   }) {
     if (graphInitialized != null) {
@@ -301,6 +319,7 @@ class _$GraphEventTargetDateChangedImpl
     required TResult Function() moodsUpdated,
     required TResult Function() showWorkTimeTriggered,
     required TResult Function() showRevenueTriggered,
+    required TResult Function(GraphTimeRangeMode mode) timeRangeModeChanged,
   }) {
     return targetDateChanged(date);
   }
@@ -313,6 +332,7 @@ class _$GraphEventTargetDateChangedImpl
     TResult? Function()? moodsUpdated,
     TResult? Function()? showWorkTimeTriggered,
     TResult? Function()? showRevenueTriggered,
+    TResult? Function(GraphTimeRangeMode mode)? timeRangeModeChanged,
   }) {
     return targetDateChanged?.call(date);
   }
@@ -325,6 +345,7 @@ class _$GraphEventTargetDateChangedImpl
     TResult Function()? moodsUpdated,
     TResult Function()? showWorkTimeTriggered,
     TResult Function()? showRevenueTriggered,
+    TResult Function(GraphTimeRangeMode mode)? timeRangeModeChanged,
     required TResult orElse(),
   }) {
     if (targetDateChanged != null) {
@@ -344,6 +365,8 @@ class _$GraphEventTargetDateChangedImpl
         showWorkTimeTriggered,
     required TResult Function(_GraphEventShowRevenueTriggered value)
         showRevenueTriggered,
+    required TResult Function(_GraphEventTimeRangeModeChanged value)
+        timeRangeModeChanged,
   }) {
     return targetDateChanged(this);
   }
@@ -358,6 +381,8 @@ class _$GraphEventTargetDateChangedImpl
         showWorkTimeTriggered,
     TResult? Function(_GraphEventShowRevenueTriggered value)?
         showRevenueTriggered,
+    TResult? Function(_GraphEventTimeRangeModeChanged value)?
+        timeRangeModeChanged,
   }) {
     return targetDateChanged?.call(this);
   }
@@ -372,6 +397,8 @@ class _$GraphEventTargetDateChangedImpl
         showWorkTimeTriggered,
     TResult Function(_GraphEventShowRevenueTriggered value)?
         showRevenueTriggered,
+    TResult Function(_GraphEventTimeRangeModeChanged value)?
+        timeRangeModeChanged,
     required TResult orElse(),
   }) {
     if (targetDateChanged != null) {
@@ -437,6 +464,7 @@ class _$GraphEventMoodsUpdatedImpl implements _GraphEventMoodsUpdated {
     required TResult Function() moodsUpdated,
     required TResult Function() showWorkTimeTriggered,
     required TResult Function() showRevenueTriggered,
+    required TResult Function(GraphTimeRangeMode mode) timeRangeModeChanged,
   }) {
     return moodsUpdated();
   }
@@ -449,6 +477,7 @@ class _$GraphEventMoodsUpdatedImpl implements _GraphEventMoodsUpdated {
     TResult? Function()? moodsUpdated,
     TResult? Function()? showWorkTimeTriggered,
     TResult? Function()? showRevenueTriggered,
+    TResult? Function(GraphTimeRangeMode mode)? timeRangeModeChanged,
   }) {
     return moodsUpdated?.call();
   }
@@ -461,6 +490,7 @@ class _$GraphEventMoodsUpdatedImpl implements _GraphEventMoodsUpdated {
     TResult Function()? moodsUpdated,
     TResult Function()? showWorkTimeTriggered,
     TResult Function()? showRevenueTriggered,
+    TResult Function(GraphTimeRangeMode mode)? timeRangeModeChanged,
     required TResult orElse(),
   }) {
     if (moodsUpdated != null) {
@@ -480,6 +510,8 @@ class _$GraphEventMoodsUpdatedImpl implements _GraphEventMoodsUpdated {
         showWorkTimeTriggered,
     required TResult Function(_GraphEventShowRevenueTriggered value)
         showRevenueTriggered,
+    required TResult Function(_GraphEventTimeRangeModeChanged value)
+        timeRangeModeChanged,
   }) {
     return moodsUpdated(this);
   }
@@ -494,6 +526,8 @@ class _$GraphEventMoodsUpdatedImpl implements _GraphEventMoodsUpdated {
         showWorkTimeTriggered,
     TResult? Function(_GraphEventShowRevenueTriggered value)?
         showRevenueTriggered,
+    TResult? Function(_GraphEventTimeRangeModeChanged value)?
+        timeRangeModeChanged,
   }) {
     return moodsUpdated?.call(this);
   }
@@ -508,6 +542,8 @@ class _$GraphEventMoodsUpdatedImpl implements _GraphEventMoodsUpdated {
         showWorkTimeTriggered,
     TResult Function(_GraphEventShowRevenueTriggered value)?
         showRevenueTriggered,
+    TResult Function(_GraphEventTimeRangeModeChanged value)?
+        timeRangeModeChanged,
     required TResult orElse(),
   }) {
     if (moodsUpdated != null) {
@@ -569,6 +605,7 @@ class _$GraphEventShowWorkTimeTriggeredImpl
     required TResult Function() moodsUpdated,
     required TResult Function() showWorkTimeTriggered,
     required TResult Function() showRevenueTriggered,
+    required TResult Function(GraphTimeRangeMode mode) timeRangeModeChanged,
   }) {
     return showWorkTimeTriggered();
   }
@@ -581,6 +618,7 @@ class _$GraphEventShowWorkTimeTriggeredImpl
     TResult? Function()? moodsUpdated,
     TResult? Function()? showWorkTimeTriggered,
     TResult? Function()? showRevenueTriggered,
+    TResult? Function(GraphTimeRangeMode mode)? timeRangeModeChanged,
   }) {
     return showWorkTimeTriggered?.call();
   }
@@ -593,6 +631,7 @@ class _$GraphEventShowWorkTimeTriggeredImpl
     TResult Function()? moodsUpdated,
     TResult Function()? showWorkTimeTriggered,
     TResult Function()? showRevenueTriggered,
+    TResult Function(GraphTimeRangeMode mode)? timeRangeModeChanged,
     required TResult orElse(),
   }) {
     if (showWorkTimeTriggered != null) {
@@ -612,6 +651,8 @@ class _$GraphEventShowWorkTimeTriggeredImpl
         showWorkTimeTriggered,
     required TResult Function(_GraphEventShowRevenueTriggered value)
         showRevenueTriggered,
+    required TResult Function(_GraphEventTimeRangeModeChanged value)
+        timeRangeModeChanged,
   }) {
     return showWorkTimeTriggered(this);
   }
@@ -626,6 +667,8 @@ class _$GraphEventShowWorkTimeTriggeredImpl
         showWorkTimeTriggered,
     TResult? Function(_GraphEventShowRevenueTriggered value)?
         showRevenueTriggered,
+    TResult? Function(_GraphEventTimeRangeModeChanged value)?
+        timeRangeModeChanged,
   }) {
     return showWorkTimeTriggered?.call(this);
   }
@@ -640,6 +683,8 @@ class _$GraphEventShowWorkTimeTriggeredImpl
         showWorkTimeTriggered,
     TResult Function(_GraphEventShowRevenueTriggered value)?
         showRevenueTriggered,
+    TResult Function(_GraphEventTimeRangeModeChanged value)?
+        timeRangeModeChanged,
     required TResult orElse(),
   }) {
     if (showWorkTimeTriggered != null) {
@@ -701,6 +746,7 @@ class _$GraphEventShowRevenueTriggeredImpl
     required TResult Function() moodsUpdated,
     required TResult Function() showWorkTimeTriggered,
     required TResult Function() showRevenueTriggered,
+    required TResult Function(GraphTimeRangeMode mode) timeRangeModeChanged,
   }) {
     return showRevenueTriggered();
   }
@@ -713,6 +759,7 @@ class _$GraphEventShowRevenueTriggeredImpl
     TResult? Function()? moodsUpdated,
     TResult? Function()? showWorkTimeTriggered,
     TResult? Function()? showRevenueTriggered,
+    TResult? Function(GraphTimeRangeMode mode)? timeRangeModeChanged,
   }) {
     return showRevenueTriggered?.call();
   }
@@ -725,6 +772,7 @@ class _$GraphEventShowRevenueTriggeredImpl
     TResult Function()? moodsUpdated,
     TResult Function()? showWorkTimeTriggered,
     TResult Function()? showRevenueTriggered,
+    TResult Function(GraphTimeRangeMode mode)? timeRangeModeChanged,
     required TResult orElse(),
   }) {
     if (showRevenueTriggered != null) {
@@ -744,6 +792,8 @@ class _$GraphEventShowRevenueTriggeredImpl
         showWorkTimeTriggered,
     required TResult Function(_GraphEventShowRevenueTriggered value)
         showRevenueTriggered,
+    required TResult Function(_GraphEventTimeRangeModeChanged value)
+        timeRangeModeChanged,
   }) {
     return showRevenueTriggered(this);
   }
@@ -758,6 +808,8 @@ class _$GraphEventShowRevenueTriggeredImpl
         showWorkTimeTriggered,
     TResult? Function(_GraphEventShowRevenueTriggered value)?
         showRevenueTriggered,
+    TResult? Function(_GraphEventTimeRangeModeChanged value)?
+        timeRangeModeChanged,
   }) {
     return showRevenueTriggered?.call(this);
   }
@@ -772,6 +824,8 @@ class _$GraphEventShowRevenueTriggeredImpl
         showWorkTimeTriggered,
     TResult Function(_GraphEventShowRevenueTriggered value)?
         showRevenueTriggered,
+    TResult Function(_GraphEventTimeRangeModeChanged value)?
+        timeRangeModeChanged,
     required TResult orElse(),
   }) {
     if (showRevenueTriggered != null) {
@@ -787,10 +841,184 @@ abstract class _GraphEventShowRevenueTriggered implements GraphEvent {
 }
 
 /// @nodoc
+abstract class _$$GraphEventTimeRangeModeChangedImplCopyWith<$Res> {
+  factory _$$GraphEventTimeRangeModeChangedImplCopyWith(
+          _$GraphEventTimeRangeModeChangedImpl value,
+          $Res Function(_$GraphEventTimeRangeModeChangedImpl) then) =
+      __$$GraphEventTimeRangeModeChangedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({GraphTimeRangeMode mode});
+}
+
+/// @nodoc
+class __$$GraphEventTimeRangeModeChangedImplCopyWithImpl<$Res>
+    extends _$GraphEventCopyWithImpl<$Res, _$GraphEventTimeRangeModeChangedImpl>
+    implements _$$GraphEventTimeRangeModeChangedImplCopyWith<$Res> {
+  __$$GraphEventTimeRangeModeChangedImplCopyWithImpl(
+      _$GraphEventTimeRangeModeChangedImpl _value,
+      $Res Function(_$GraphEventTimeRangeModeChangedImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? mode = null,
+  }) {
+    return _then(_$GraphEventTimeRangeModeChangedImpl(
+      mode: null == mode
+          ? _value.mode
+          : mode // ignore: cast_nullable_to_non_nullable
+              as GraphTimeRangeMode,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$GraphEventTimeRangeModeChangedImpl
+    implements _GraphEventTimeRangeModeChanged {
+  const _$GraphEventTimeRangeModeChangedImpl({required this.mode});
+
+  @override
+  final GraphTimeRangeMode mode;
+
+  @override
+  String toString() {
+    return 'GraphEvent.timeRangeModeChanged(mode: $mode)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GraphEventTimeRangeModeChangedImpl &&
+            (identical(other.mode, mode) || other.mode == mode));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, mode);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GraphEventTimeRangeModeChangedImplCopyWith<
+          _$GraphEventTimeRangeModeChangedImpl>
+      get copyWith => __$$GraphEventTimeRangeModeChangedImplCopyWithImpl<
+          _$GraphEventTimeRangeModeChangedImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() graphInitialized,
+    required TResult Function(DateTime date) targetDateChanged,
+    required TResult Function() moodsUpdated,
+    required TResult Function() showWorkTimeTriggered,
+    required TResult Function() showRevenueTriggered,
+    required TResult Function(GraphTimeRangeMode mode) timeRangeModeChanged,
+  }) {
+    return timeRangeModeChanged(mode);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? graphInitialized,
+    TResult? Function(DateTime date)? targetDateChanged,
+    TResult? Function()? moodsUpdated,
+    TResult? Function()? showWorkTimeTriggered,
+    TResult? Function()? showRevenueTriggered,
+    TResult? Function(GraphTimeRangeMode mode)? timeRangeModeChanged,
+  }) {
+    return timeRangeModeChanged?.call(mode);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? graphInitialized,
+    TResult Function(DateTime date)? targetDateChanged,
+    TResult Function()? moodsUpdated,
+    TResult Function()? showWorkTimeTriggered,
+    TResult Function()? showRevenueTriggered,
+    TResult Function(GraphTimeRangeMode mode)? timeRangeModeChanged,
+    required TResult orElse(),
+  }) {
+    if (timeRangeModeChanged != null) {
+      return timeRangeModeChanged(mode);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GraphEventInitialized value) graphInitialized,
+    required TResult Function(_GraphEventTargetDateChanged value)
+        targetDateChanged,
+    required TResult Function(_GraphEventMoodsUpdated value) moodsUpdated,
+    required TResult Function(_GraphEventShowWorkTimeTriggered value)
+        showWorkTimeTriggered,
+    required TResult Function(_GraphEventShowRevenueTriggered value)
+        showRevenueTriggered,
+    required TResult Function(_GraphEventTimeRangeModeChanged value)
+        timeRangeModeChanged,
+  }) {
+    return timeRangeModeChanged(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GraphEventInitialized value)? graphInitialized,
+    TResult? Function(_GraphEventTargetDateChanged value)? targetDateChanged,
+    TResult? Function(_GraphEventMoodsUpdated value)? moodsUpdated,
+    TResult? Function(_GraphEventShowWorkTimeTriggered value)?
+        showWorkTimeTriggered,
+    TResult? Function(_GraphEventShowRevenueTriggered value)?
+        showRevenueTriggered,
+    TResult? Function(_GraphEventTimeRangeModeChanged value)?
+        timeRangeModeChanged,
+  }) {
+    return timeRangeModeChanged?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GraphEventInitialized value)? graphInitialized,
+    TResult Function(_GraphEventTargetDateChanged value)? targetDateChanged,
+    TResult Function(_GraphEventMoodsUpdated value)? moodsUpdated,
+    TResult Function(_GraphEventShowWorkTimeTriggered value)?
+        showWorkTimeTriggered,
+    TResult Function(_GraphEventShowRevenueTriggered value)?
+        showRevenueTriggered,
+    TResult Function(_GraphEventTimeRangeModeChanged value)?
+        timeRangeModeChanged,
+    required TResult orElse(),
+  }) {
+    if (timeRangeModeChanged != null) {
+      return timeRangeModeChanged(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GraphEventTimeRangeModeChanged implements GraphEvent {
+  const factory _GraphEventTimeRangeModeChanged(
+          {required final GraphTimeRangeMode mode}) =
+      _$GraphEventTimeRangeModeChangedImpl;
+
+  GraphTimeRangeMode get mode;
+  @JsonKey(ignore: true)
+  _$$GraphEventTimeRangeModeChangedImplCopyWith<
+          _$GraphEventTimeRangeModeChangedImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$GraphState {
   GraphMoodsState get moodsState => throw _privateConstructorUsedError;
   GraphTargetDateState get targetDate => throw _privateConstructorUsedError;
-  GraphTimeRangeMode get timeRangeMode => throw _privateConstructorUsedError;
   GraphSettings get settings => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -807,12 +1035,10 @@ abstract class $GraphStateCopyWith<$Res> {
   $Res call(
       {GraphMoodsState moodsState,
       GraphTargetDateState targetDate,
-      GraphTimeRangeMode timeRangeMode,
       GraphSettings settings});
 
   $GraphMoodsStateCopyWith<$Res> get moodsState;
   $GraphTargetDateStateCopyWith<$Res> get targetDate;
-  $GraphTimeRangeModeCopyWith<$Res> get timeRangeMode;
   $GraphSettingsCopyWith<$Res> get settings;
 }
 
@@ -831,7 +1057,6 @@ class _$GraphStateCopyWithImpl<$Res, $Val extends GraphState>
   $Res call({
     Object? moodsState = null,
     Object? targetDate = null,
-    Object? timeRangeMode = null,
     Object? settings = null,
   }) {
     return _then(_value.copyWith(
@@ -843,10 +1068,6 @@ class _$GraphStateCopyWithImpl<$Res, $Val extends GraphState>
           ? _value.targetDate
           : targetDate // ignore: cast_nullable_to_non_nullable
               as GraphTargetDateState,
-      timeRangeMode: null == timeRangeMode
-          ? _value.timeRangeMode
-          : timeRangeMode // ignore: cast_nullable_to_non_nullable
-              as GraphTimeRangeMode,
       settings: null == settings
           ? _value.settings
           : settings // ignore: cast_nullable_to_non_nullable
@@ -872,14 +1093,6 @@ class _$GraphStateCopyWithImpl<$Res, $Val extends GraphState>
 
   @override
   @pragma('vm:prefer-inline')
-  $GraphTimeRangeModeCopyWith<$Res> get timeRangeMode {
-    return $GraphTimeRangeModeCopyWith<$Res>(_value.timeRangeMode, (value) {
-      return _then(_value.copyWith(timeRangeMode: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
   $GraphSettingsCopyWith<$Res> get settings {
     return $GraphSettingsCopyWith<$Res>(_value.settings, (value) {
       return _then(_value.copyWith(settings: value) as $Val);
@@ -898,15 +1111,12 @@ abstract class _$$GraphStateImplCopyWith<$Res>
   $Res call(
       {GraphMoodsState moodsState,
       GraphTargetDateState targetDate,
-      GraphTimeRangeMode timeRangeMode,
       GraphSettings settings});
 
   @override
   $GraphMoodsStateCopyWith<$Res> get moodsState;
   @override
   $GraphTargetDateStateCopyWith<$Res> get targetDate;
-  @override
-  $GraphTimeRangeModeCopyWith<$Res> get timeRangeMode;
   @override
   $GraphSettingsCopyWith<$Res> get settings;
 }
@@ -924,7 +1134,6 @@ class __$$GraphStateImplCopyWithImpl<$Res>
   $Res call({
     Object? moodsState = null,
     Object? targetDate = null,
-    Object? timeRangeMode = null,
     Object? settings = null,
   }) {
     return _then(_$GraphStateImpl(
@@ -936,10 +1145,6 @@ class __$$GraphStateImplCopyWithImpl<$Res>
           ? _value.targetDate
           : targetDate // ignore: cast_nullable_to_non_nullable
               as GraphTargetDateState,
-      timeRangeMode: null == timeRangeMode
-          ? _value.timeRangeMode
-          : timeRangeMode // ignore: cast_nullable_to_non_nullable
-              as GraphTimeRangeMode,
       settings: null == settings
           ? _value.settings
           : settings // ignore: cast_nullable_to_non_nullable
@@ -954,9 +1159,10 @@ class _$GraphStateImpl implements _GraphState {
   const _$GraphStateImpl(
       {this.moodsState = const GraphMoodsState.initial(),
       this.targetDate = const GraphTargetDateState.initial(),
-      this.timeRangeMode = const GraphTimeRangeMode.monthly(),
-      this.settings =
-          const GraphSettings(showRevenue: false, showWorkTime: true)});
+      this.settings = const GraphSettings(
+          showRevenue: false,
+          showWorkTime: true,
+          timeRangeMode: GraphTimeRangeMode.weekly)});
 
   @override
   @JsonKey()
@@ -966,14 +1172,11 @@ class _$GraphStateImpl implements _GraphState {
   final GraphTargetDateState targetDate;
   @override
   @JsonKey()
-  final GraphTimeRangeMode timeRangeMode;
-  @override
-  @JsonKey()
   final GraphSettings settings;
 
   @override
   String toString() {
-    return 'GraphState(moodsState: $moodsState, targetDate: $targetDate, timeRangeMode: $timeRangeMode, settings: $settings)';
+    return 'GraphState(moodsState: $moodsState, targetDate: $targetDate, settings: $settings)';
   }
 
   @override
@@ -985,15 +1188,13 @@ class _$GraphStateImpl implements _GraphState {
                 other.moodsState == moodsState) &&
             (identical(other.targetDate, targetDate) ||
                 other.targetDate == targetDate) &&
-            (identical(other.timeRangeMode, timeRangeMode) ||
-                other.timeRangeMode == timeRangeMode) &&
             (identical(other.settings, settings) ||
                 other.settings == settings));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, moodsState, targetDate, timeRangeMode, settings);
+      Object.hash(runtimeType, moodsState, targetDate, settings);
 
   @JsonKey(ignore: true)
   @override
@@ -1006,15 +1207,12 @@ abstract class _GraphState implements GraphState {
   const factory _GraphState(
       {final GraphMoodsState moodsState,
       final GraphTargetDateState targetDate,
-      final GraphTimeRangeMode timeRangeMode,
       final GraphSettings settings}) = _$GraphStateImpl;
 
   @override
   GraphMoodsState get moodsState;
   @override
   GraphTargetDateState get targetDate;
-  @override
-  GraphTimeRangeMode get timeRangeMode;
   @override
   GraphSettings get settings;
   @override
@@ -1024,281 +1222,10 @@ abstract class _GraphState implements GraphState {
 }
 
 /// @nodoc
-mixin _$GraphTimeRangeMode {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() monthly,
-    required TResult Function() weekly,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? monthly,
-    TResult? Function()? weekly,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? monthly,
-    TResult Function()? weekly,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(GraphTimeRangeMonthlyMode value) monthly,
-    required TResult Function(GraphTimeRangeWeeklyMode value) weekly,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(GraphTimeRangeMonthlyMode value)? monthly,
-    TResult? Function(GraphTimeRangeWeeklyMode value)? weekly,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(GraphTimeRangeMonthlyMode value)? monthly,
-    TResult Function(GraphTimeRangeWeeklyMode value)? weekly,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $GraphTimeRangeModeCopyWith<$Res> {
-  factory $GraphTimeRangeModeCopyWith(
-          GraphTimeRangeMode value, $Res Function(GraphTimeRangeMode) then) =
-      _$GraphTimeRangeModeCopyWithImpl<$Res, GraphTimeRangeMode>;
-}
-
-/// @nodoc
-class _$GraphTimeRangeModeCopyWithImpl<$Res, $Val extends GraphTimeRangeMode>
-    implements $GraphTimeRangeModeCopyWith<$Res> {
-  _$GraphTimeRangeModeCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-}
-
-/// @nodoc
-abstract class _$$GraphTimeRangeMonthlyModeImplCopyWith<$Res> {
-  factory _$$GraphTimeRangeMonthlyModeImplCopyWith(
-          _$GraphTimeRangeMonthlyModeImpl value,
-          $Res Function(_$GraphTimeRangeMonthlyModeImpl) then) =
-      __$$GraphTimeRangeMonthlyModeImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$GraphTimeRangeMonthlyModeImplCopyWithImpl<$Res>
-    extends _$GraphTimeRangeModeCopyWithImpl<$Res,
-        _$GraphTimeRangeMonthlyModeImpl>
-    implements _$$GraphTimeRangeMonthlyModeImplCopyWith<$Res> {
-  __$$GraphTimeRangeMonthlyModeImplCopyWithImpl(
-      _$GraphTimeRangeMonthlyModeImpl _value,
-      $Res Function(_$GraphTimeRangeMonthlyModeImpl) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$GraphTimeRangeMonthlyModeImpl implements GraphTimeRangeMonthlyMode {
-  const _$GraphTimeRangeMonthlyModeImpl();
-
-  @override
-  String toString() {
-    return 'GraphTimeRangeMode.monthly()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$GraphTimeRangeMonthlyModeImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() monthly,
-    required TResult Function() weekly,
-  }) {
-    return monthly();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? monthly,
-    TResult? Function()? weekly,
-  }) {
-    return monthly?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? monthly,
-    TResult Function()? weekly,
-    required TResult orElse(),
-  }) {
-    if (monthly != null) {
-      return monthly();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(GraphTimeRangeMonthlyMode value) monthly,
-    required TResult Function(GraphTimeRangeWeeklyMode value) weekly,
-  }) {
-    return monthly(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(GraphTimeRangeMonthlyMode value)? monthly,
-    TResult? Function(GraphTimeRangeWeeklyMode value)? weekly,
-  }) {
-    return monthly?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(GraphTimeRangeMonthlyMode value)? monthly,
-    TResult Function(GraphTimeRangeWeeklyMode value)? weekly,
-    required TResult orElse(),
-  }) {
-    if (monthly != null) {
-      return monthly(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class GraphTimeRangeMonthlyMode implements GraphTimeRangeMode {
-  const factory GraphTimeRangeMonthlyMode() = _$GraphTimeRangeMonthlyModeImpl;
-}
-
-/// @nodoc
-abstract class _$$GraphTimeRangeWeeklyModeImplCopyWith<$Res> {
-  factory _$$GraphTimeRangeWeeklyModeImplCopyWith(
-          _$GraphTimeRangeWeeklyModeImpl value,
-          $Res Function(_$GraphTimeRangeWeeklyModeImpl) then) =
-      __$$GraphTimeRangeWeeklyModeImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$GraphTimeRangeWeeklyModeImplCopyWithImpl<$Res>
-    extends _$GraphTimeRangeModeCopyWithImpl<$Res,
-        _$GraphTimeRangeWeeklyModeImpl>
-    implements _$$GraphTimeRangeWeeklyModeImplCopyWith<$Res> {
-  __$$GraphTimeRangeWeeklyModeImplCopyWithImpl(
-      _$GraphTimeRangeWeeklyModeImpl _value,
-      $Res Function(_$GraphTimeRangeWeeklyModeImpl) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$GraphTimeRangeWeeklyModeImpl implements GraphTimeRangeWeeklyMode {
-  const _$GraphTimeRangeWeeklyModeImpl();
-
-  @override
-  String toString() {
-    return 'GraphTimeRangeMode.weekly()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$GraphTimeRangeWeeklyModeImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() monthly,
-    required TResult Function() weekly,
-  }) {
-    return weekly();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? monthly,
-    TResult? Function()? weekly,
-  }) {
-    return weekly?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? monthly,
-    TResult Function()? weekly,
-    required TResult orElse(),
-  }) {
-    if (weekly != null) {
-      return weekly();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(GraphTimeRangeMonthlyMode value) monthly,
-    required TResult Function(GraphTimeRangeWeeklyMode value) weekly,
-  }) {
-    return weekly(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(GraphTimeRangeMonthlyMode value)? monthly,
-    TResult? Function(GraphTimeRangeWeeklyMode value)? weekly,
-  }) {
-    return weekly?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(GraphTimeRangeMonthlyMode value)? monthly,
-    TResult Function(GraphTimeRangeWeeklyMode value)? weekly,
-    required TResult orElse(),
-  }) {
-    if (weekly != null) {
-      return weekly(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class GraphTimeRangeWeeklyMode implements GraphTimeRangeMode {
-  const factory GraphTimeRangeWeeklyMode() = _$GraphTimeRangeWeeklyModeImpl;
-}
-
-/// @nodoc
 mixin _$GraphSettings {
   bool get showRevenue => throw _privateConstructorUsedError;
   bool get showWorkTime => throw _privateConstructorUsedError;
+  GraphTimeRangeMode get timeRangeMode => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $GraphSettingsCopyWith<GraphSettings> get copyWith =>
@@ -1311,7 +1238,8 @@ abstract class $GraphSettingsCopyWith<$Res> {
           GraphSettings value, $Res Function(GraphSettings) then) =
       _$GraphSettingsCopyWithImpl<$Res, GraphSettings>;
   @useResult
-  $Res call({bool showRevenue, bool showWorkTime});
+  $Res call(
+      {bool showRevenue, bool showWorkTime, GraphTimeRangeMode timeRangeMode});
 }
 
 /// @nodoc
@@ -1329,6 +1257,7 @@ class _$GraphSettingsCopyWithImpl<$Res, $Val extends GraphSettings>
   $Res call({
     Object? showRevenue = null,
     Object? showWorkTime = null,
+    Object? timeRangeMode = null,
   }) {
     return _then(_value.copyWith(
       showRevenue: null == showRevenue
@@ -1339,6 +1268,10 @@ class _$GraphSettingsCopyWithImpl<$Res, $Val extends GraphSettings>
           ? _value.showWorkTime
           : showWorkTime // ignore: cast_nullable_to_non_nullable
               as bool,
+      timeRangeMode: null == timeRangeMode
+          ? _value.timeRangeMode
+          : timeRangeMode // ignore: cast_nullable_to_non_nullable
+              as GraphTimeRangeMode,
     ) as $Val);
   }
 }
@@ -1351,7 +1284,8 @@ abstract class _$$GraphSettingsImplCopyWith<$Res>
       __$$GraphSettingsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool showRevenue, bool showWorkTime});
+  $Res call(
+      {bool showRevenue, bool showWorkTime, GraphTimeRangeMode timeRangeMode});
 }
 
 /// @nodoc
@@ -1367,6 +1301,7 @@ class __$$GraphSettingsImplCopyWithImpl<$Res>
   $Res call({
     Object? showRevenue = null,
     Object? showWorkTime = null,
+    Object? timeRangeMode = null,
   }) {
     return _then(_$GraphSettingsImpl(
       showRevenue: null == showRevenue
@@ -1377,6 +1312,10 @@ class __$$GraphSettingsImplCopyWithImpl<$Res>
           ? _value.showWorkTime
           : showWorkTime // ignore: cast_nullable_to_non_nullable
               as bool,
+      timeRangeMode: null == timeRangeMode
+          ? _value.timeRangeMode
+          : timeRangeMode // ignore: cast_nullable_to_non_nullable
+              as GraphTimeRangeMode,
     ));
   }
 }
@@ -1385,16 +1324,20 @@ class __$$GraphSettingsImplCopyWithImpl<$Res>
 
 class _$GraphSettingsImpl implements _GraphSettings {
   const _$GraphSettingsImpl(
-      {required this.showRevenue, required this.showWorkTime});
+      {required this.showRevenue,
+      required this.showWorkTime,
+      required this.timeRangeMode});
 
   @override
   final bool showRevenue;
   @override
   final bool showWorkTime;
+  @override
+  final GraphTimeRangeMode timeRangeMode;
 
   @override
   String toString() {
-    return 'GraphSettings(showRevenue: $showRevenue, showWorkTime: $showWorkTime)';
+    return 'GraphSettings(showRevenue: $showRevenue, showWorkTime: $showWorkTime, timeRangeMode: $timeRangeMode)';
   }
 
   @override
@@ -1405,11 +1348,14 @@ class _$GraphSettingsImpl implements _GraphSettings {
             (identical(other.showRevenue, showRevenue) ||
                 other.showRevenue == showRevenue) &&
             (identical(other.showWorkTime, showWorkTime) ||
-                other.showWorkTime == showWorkTime));
+                other.showWorkTime == showWorkTime) &&
+            (identical(other.timeRangeMode, timeRangeMode) ||
+                other.timeRangeMode == timeRangeMode));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, showRevenue, showWorkTime);
+  int get hashCode =>
+      Object.hash(runtimeType, showRevenue, showWorkTime, timeRangeMode);
 
   @JsonKey(ignore: true)
   @override
@@ -1421,12 +1367,15 @@ class _$GraphSettingsImpl implements _GraphSettings {
 abstract class _GraphSettings implements GraphSettings {
   const factory _GraphSettings(
       {required final bool showRevenue,
-      required final bool showWorkTime}) = _$GraphSettingsImpl;
+      required final bool showWorkTime,
+      required final GraphTimeRangeMode timeRangeMode}) = _$GraphSettingsImpl;
 
   @override
   bool get showRevenue;
   @override
   bool get showWorkTime;
+  @override
+  GraphTimeRangeMode get timeRangeMode;
   @override
   @JsonKey(ignore: true)
   _$$GraphSettingsImplCopyWith<_$GraphSettingsImpl> get copyWith =>

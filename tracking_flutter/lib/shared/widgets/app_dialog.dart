@@ -4,18 +4,20 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class AppDialog extends StatelessWidget {
   const AppDialog({
     required this.title,
-    required this.subTitle,
+    required this.body,
     required this.confirmButtonText,
     required this.onConfirm,
+    this.buildCancelButton = true,
     this.cancelButtonText,
     this.onCancel,
     super.key,
   });
 
   final String title;
-  final String subTitle;
+  final Widget body;
   final String confirmButtonText;
   final VoidCallback onConfirm;
+  final bool buildCancelButton;
   final String? cancelButtonText;
   final VoidCallback? onCancel;
 
@@ -23,14 +25,15 @@ class AppDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Text(title),
-      content: Text(subTitle),
+      content: body,
       actions: <Widget>[
-        TextButton(
-          onPressed: onCancel ?? Navigator.of(context).pop,
-          child: Text(
-            cancelButtonText ?? AppLocalizations.of(context)!.cancel,
+        if (buildCancelButton)
+          TextButton(
+            onPressed: onCancel ?? Navigator.of(context).pop,
+            child: Text(
+              cancelButtonText ?? AppLocalizations.of(context)!.cancel,
+            ),
           ),
-        ),
         TextButton(
           onPressed: onConfirm,
           child: Text(confirmButtonText),

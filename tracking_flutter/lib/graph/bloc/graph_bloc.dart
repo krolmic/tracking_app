@@ -31,6 +31,8 @@ class GraphBloc extends Bloc<GraphEvent, GraphState> {
         _onShowWorkTimeTriggered(emit);
       } else if (event.isShowRevenueTriggered) {
         _onShowRevenueTriggered(emit);
+      } else if (event.isTimeRangeModeChanged) {
+        await _onTimeRangeModeChanged(event.mode, emit);
       }
     });
   }
@@ -74,6 +76,21 @@ class GraphBloc extends Bloc<GraphEvent, GraphState> {
     );
   }
 
+  Future<void> _onTimeRangeModeChanged(
+    GraphTimeRangeMode mode,
+    Emitter<GraphState> emit,
+  ) async {
+    emit(
+      state.copyWith(
+        settings: state.settings.copyWith(
+          timeRangeMode: mode,
+        ),
+        targetDate: GraphTargetDateState.initial(),
+      ),
+    );
+    await _loadMoods(emit);
+  }
+
   Future<void> _loadMoods(
     Emitter<GraphState> emit, {
     DateTime? newTargetDate,
@@ -91,14 +108,12 @@ class GraphBloc extends Bloc<GraphEvent, GraphState> {
       final userId = await _userProfileRepository.getCurrentUserId();
       final moods = await _moodRepository.getMoodsInTimeRange(
         userId: userId,
-        from: state.timeRangeMode.when(
-          monthly: () => state.targetDate.date.startOfMonth,
-          weekly: () => state.targetDate.date.startOfWeek,
-        ),
-        to: state.timeRangeMode.when(
-          monthly: () => state.targetDate.date.endOfMonth,
-          weekly: () => state.targetDate.date.endOfWeek,
-        ),
+        from: state.settings.timeRangeMode.isMonthly
+            ? state.targetDate.date.startOfMonth
+            : state.targetDate.date.startOfWeek,
+        to: state.settings.timeRangeMode.isMonthly
+            ? state.targetDate.date.endOfMonth
+            : state.targetDate.date.endOfWeek,
       );
 
       emit(

@@ -10,6 +10,9 @@ class GraphEvent with _$GraphEvent {
       _GraphEventShowWorkTimeTriggered;
   const factory GraphEvent.showRevenueTriggered() =
       _GraphEventShowRevenueTriggered;
+  const factory GraphEvent.timeRangeModeChanged({
+    required GraphTimeRangeMode mode,
+  }) = _GraphEventTimeRangeModeChanged;
 }
 
 extension GraphEventX on GraphEvent {
@@ -18,6 +21,8 @@ extension GraphEventX on GraphEvent {
   bool get isMoodsUpdated => this is _GraphEventMoodsUpdated;
   bool get isShowWorkTimeTriggered => this is _GraphEventShowWorkTimeTriggered;
   bool get isShowRevenueTriggered => this is _GraphEventShowRevenueTriggered;
+  bool get isTimeRangeModeChanged => this is _GraphEventTimeRangeModeChanged;
 
   DateTime get date => (this as _GraphEventTargetDateChanged).date;
+  GraphTimeRangeMode get mode => (this as _GraphEventTimeRangeModeChanged).mode;
 }
