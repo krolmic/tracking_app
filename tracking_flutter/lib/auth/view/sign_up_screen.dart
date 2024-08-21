@@ -23,7 +23,7 @@ class SignUpScreen extends StatelessWidget {
       onBackButtonPressed: onBackButtonPressed,
       body: SignUpForm.custom(
         fields: [
-          SignUpFormField.email(required: true),
+          SignUpFormField.username(),
           SignUpFormField.custom(
             required: true,
             title: translations.givenName,

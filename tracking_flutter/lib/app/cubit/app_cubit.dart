@@ -5,7 +5,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_fimber/flutter_fimber.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:tracking_app/amplify_outputs.dart';
+import 'package:tracking_app/amplify_outputs.dart'
+    as amplify_config_development;
+import 'package:tracking_app/amplify_outputs_production.dart'
+    as amplify_config_production;
 import 'package:tracking_app/shared/logging.dart';
 
 part 'app_cubit.freezed.dart';
@@ -45,7 +48,9 @@ class AppCubit extends Cubit<AppState> {
       auth,
     ]);
 
-    await _amplify.configure(amplifyConfig);
+    await _amplify.configure(kReleaseMode
+        ? amplify_config_production.amplifyConfig
+        : amplify_config_development.amplifyConfig);
   }
 
   Future<void> _configureLogging() async {

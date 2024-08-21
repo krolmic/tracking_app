@@ -70,5 +70,3 @@ devtools_options.yaml
 
 # amplify
 .amplify
-amplify_outputs*
-amplifyconfiguration*
