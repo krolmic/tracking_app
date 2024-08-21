@@ -3,69 +3,136 @@ part of '../graph_screen.dart';
 class _GraphSettings extends StatelessWidget {
   const _GraphSettings();
 
+  void _onTimeRangeModeChanged(
+    BuildContext context,
+    GraphTimeRangeMode? value,
+  ) {
+    if (value != null) {
+      context
+          .read<GraphBloc>()
+          .add(GraphEvent.timeRangeModeChanged(mode: value));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final translations = AppLocalizations.of(context)!;
 
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        const VerticalSpacing.small(),
+        Text(
+          translations.mode,
+          style: Theme.of(context).textTheme.titleSmall,
+        ),
+        const VerticalSpacing.small(),
         BlocBuilder<GraphBloc, GraphState>(
           buildWhen: (previous, current) =>
-              previous.settings.showWorkTime != current.settings.showWorkTime,
+              previous.settings.timeRangeMode != current.settings.timeRangeMode,
           builder: (context, state) {
-            return Checkbox(
-              value: state.settings.showWorkTime,
-              onChanged: (value) {
-                context
-                    .read<GraphBloc>()
-                    .add(const GraphEvent.showWorkTimeTriggered());
-              },
+            return DropdownButtonFormField<GraphTimeRangeMode>(
+              icon: const Icon(Iconsax.arrow_down_1_outline, size: 18),
+              iconEnabledColor: Theme.of(context).primaryColor,
+              focusColor: Colors.transparent,
+              style: Theme.of(context).textTheme.bodyMedium,
+              dropdownColor: Colors.white,
+              elevation: 4,
+              value: state.settings.timeRangeMode,
+              items: [
+                DropdownMenuItem(
+                  value: GraphTimeRangeMode.monthly,
+                  alignment: Alignment.center,
+                  child: Text(translations.monthly),
+                ),
+                DropdownMenuItem(
+                  value: GraphTimeRangeMode.weekly,
+                  alignment: Alignment.center,
+                  child: Text(translations.weekly),
+                ),
+              ],
+              onChanged: (value) => _onTimeRangeModeChanged(context, value),
             );
           },
         ),
-        GestureDetector(
-          onTap: () {
-            context
-                .read<GraphBloc>()
-                .add(const GraphEvent.showWorkTimeTriggered());
-          },
-          child: Text(
-            translations.showWorkTime,
-            style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                  color: AppColors.blue,
-                  fontWeight: FontWeight.normal,
-                ),
-          ),
+        const VerticalSpacing.large(),
+        Text(
+          translations.lines,
+          style: Theme.of(context).textTheme.titleSmall,
         ),
-        const HorizontalSpacing.medium(),
-        BlocBuilder<GraphBloc, GraphState>(
-          buildWhen: (previous, current) =>
-              previous.settings.showRevenue != current.settings.showRevenue,
-          builder: (context, state) {
-            return Checkbox(
-              value: state.settings.showRevenue,
-              onChanged: (value) {
+        const VerticalSpacing.small(),
+        Row(
+          children: [
+            BlocBuilder<GraphBloc, GraphState>(
+              buildWhen: (previous, current) =>
+                  previous.settings.showRevenue != current.settings.showRevenue,
+              builder: (context, state) {
+                return SizedBox(
+                  height: 24,
+                  child: Checkbox(
+                    value: state.settings.showRevenue,
+                    onChanged: (value) {
+                      context
+                          .read<GraphBloc>()
+                          .add(const GraphEvent.showRevenueTriggered());
+                    },
+                  ),
+                );
+              },
+            ),
+            GestureDetector(
+              onTap: () {
                 context
                     .read<GraphBloc>()
                     .add(const GraphEvent.showRevenueTriggered());
               },
-            );
-          },
+              child: Text(
+                translations.showRevenue,
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      color: AppColors.blue,
+                      fontWeight: FontWeight.normal,
+                    ),
+              ),
+            ),
+          ],
         ),
-        GestureDetector(
-          onTap: () {
-            context
-                .read<GraphBloc>()
-                .add(const GraphEvent.showRevenueTriggered());
-          },
-          child: Text(
-            translations.showRevenue,
-            style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                  color: AppColors.blue,
-                  fontWeight: FontWeight.normal,
-                ),
-          ),
+        const VerticalSpacing.small(),
+        Row(
+          children: [
+            BlocBuilder<GraphBloc, GraphState>(
+              buildWhen: (previous, current) =>
+                  previous.settings.showWorkTime !=
+                  current.settings.showWorkTime,
+              builder: (context, state) {
+                return SizedBox(
+                  height: 24,
+                  child: Checkbox(
+                    value: state.settings.showWorkTime,
+                    onChanged: (value) {
+                      context
+                          .read<GraphBloc>()
+                          .add(const GraphEvent.showWorkTimeTriggered());
+                    },
+                  ),
+                );
+              },
+            ),
+            GestureDetector(
+              onTap: () {
+                context
+                    .read<GraphBloc>()
+                    .add(const GraphEvent.showWorkTimeTriggered());
+              },
+              child: Text(
+                translations.showWorkTime,
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      color: AppColors.blue,
+                      fontWeight: FontWeight.normal,
+                    ),
+              ),
+            ),
+          ],
         ),
       ],
     );

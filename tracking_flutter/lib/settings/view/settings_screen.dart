@@ -110,7 +110,7 @@ class _SettingsView extends StatelessWidget {
 
         return AppDialog(
           title: translations.signOut,
-          subTitle: translations.signOutMessage,
+          body: Text(translations.signOutMessage),
           confirmButtonText: translations.signOut,
           onConfirm: onConfirm,
         );
@@ -129,7 +129,7 @@ class _SettingsView extends StatelessWidget {
 
         return AppDialog(
           title: translations.accountDeletion,
-          subTitle: translations.accountDeletionMessage,
+          body: Text(translations.accountDeletionMessage),
           confirmButtonText: translations.delete,
           onConfirm: onConfirm,
         );

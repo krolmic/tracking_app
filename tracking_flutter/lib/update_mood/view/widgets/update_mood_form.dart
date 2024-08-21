@@ -99,9 +99,7 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
     )..addListener(_onThingIAmGreatfulAbout3Changed);
 
     _revenueController = TextEditingController(
-      text: moodFormState.revenue.value != 0
-          ? moodFormState.revenue.value.toFormattedString()
-          : '',
+      text: moodFormState.revenue.value.toFormattedString(),
     )..addListener(_onRevenueChanged);
   }
 

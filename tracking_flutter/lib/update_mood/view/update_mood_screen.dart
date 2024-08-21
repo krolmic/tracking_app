@@ -42,7 +42,7 @@ class UpdateMoodScreen extends StatelessWidget {
 
         return AppDialog(
           title: translations.deleteMood,
-          subTitle: translations.deleteMoodMessage,
+          body: Text(translations.deleteMoodMessage),
           confirmButtonText: translations.delete,
           onConfirm: () {
             onConfirm();

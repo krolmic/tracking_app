@@ -3,6 +3,19 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:jiffy/jiffy.dart';
 
 extension DateTimeX on DateTime {
+  DateTime fromWeekNumber(int weekNumber) {
+    final firstDayOfYear = DateTime(year);
+
+    final daysSinceFirstDayOfYear = difference(firstDayOfYear).inDays;
+
+    final firstDayOfGivenWeek =
+        firstDayOfYear.add(Duration(days: (weekNumber - 1) * 7));
+
+    return firstDayOfGivenWeek.subtract(
+      Duration(days: daysSinceFirstDayOfYear),
+    );
+  }
+
   DateTime get startOfMonth => DateTime(year, month);
 
   DateTime get endOfMonth => DateTime(year, month + 1, 0);
@@ -10,6 +23,26 @@ extension DateTimeX on DateTime {
   DateTime get startOfWeek => subtract(Duration(days: weekday - 1));
 
   DateTime get endOfWeek => add(Duration(days: 7 - weekday));
+
+  int get numberOfWeeksInYear {
+    final firstDayOfYear = DateTime(year, 1);
+    final lastDayOfYear = DateTime(year, 12, 31);
+
+    final firstWeekNumber = firstDayOfYear.weekNumber;
+    final lastWeekNumber = lastDayOfYear.weekNumber;
+
+    return lastWeekNumber - firstWeekNumber + 1;
+  }
+
+  int get weekNumber {
+    final firstDayOfYear = DateTime(year, 1);
+    final firstWeekday = firstDayOfYear.weekday;
+
+    final daysSinceFirstWeekday = (weekday - firstWeekday + 7) % 7;
+    final daysSinceFirstDayOfYear = difference(firstDayOfYear).inDays;
+
+    return 1 + (daysSinceFirstDayOfYear - daysSinceFirstWeekday) ~/ 7;
+  }
 
   DateTime get dateOnly => DateTime(year, month, day);
 

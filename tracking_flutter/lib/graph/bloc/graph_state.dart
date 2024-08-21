@@ -5,11 +5,11 @@ class GraphState with _$GraphState {
   const factory GraphState({
     @Default(GraphMoodsState.initial()) GraphMoodsState moodsState,
     @Default(GraphTargetDateState.initial()) GraphTargetDateState targetDate,
-    @Default(GraphTimeRangeMode.monthly()) GraphTimeRangeMode timeRangeMode,
     @Default(
       GraphSettings(
         showRevenue: false,
         showWorkTime: true,
+        timeRangeMode: GraphTimeRangeMode.weekly,
       ),
     )
     GraphSettings settings,
@@ -22,10 +22,10 @@ extension GraphStateX on GraphState {
   bool get isSuccess => moodsState.isSuccess;
 }
 
-@freezed
-class GraphTimeRangeMode with _$GraphTimeRangeMode {
-  const factory GraphTimeRangeMode.monthly() = GraphTimeRangeMonthlyMode;
-  const factory GraphTimeRangeMode.weekly() = GraphTimeRangeWeeklyMode;
+enum GraphTimeRangeMode { monthly, weekly }
+
+extension GraphTimeRangeModeX on GraphTimeRangeMode {
+  bool get isMonthly => this == GraphTimeRangeMode.monthly;
 }
 
 @freezed
@@ -33,6 +33,7 @@ class GraphSettings with _$GraphSettings {
   const factory GraphSettings({
     required bool showRevenue,
     required bool showWorkTime,
+    required GraphTimeRangeMode timeRangeMode,
   }) = _GraphSettings;
 }
 

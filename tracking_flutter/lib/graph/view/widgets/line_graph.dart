@@ -72,6 +72,7 @@ class _LineGraph extends StatelessWidget {
     required this.moodsWithTrackedRevenue,
     required this.moodsWithTrackedWorkTime,
     required this.currencySymbol,
+    required this.timeRangeMode,
   });
 
   final DateTime targetDate;
@@ -79,6 +80,7 @@ class _LineGraph extends StatelessWidget {
   final List<Mood> moodsWithTrackedRevenue;
   final List<Mood> moodsWithTrackedWorkTime;
   final String currencySymbol;
+  final GraphTimeRangeMode timeRangeMode;
 
   @override
   Widget build(BuildContext context) {
@@ -90,17 +92,24 @@ class _LineGraph extends StatelessWidget {
     );
   }
 
-  LineChartData lineChartData(AppLocalizations translations) => LineChartData(
-        lineTouchData: lineTouchData(translations),
-        gridData: gridData,
-        titlesData: titlesData,
-        borderData: borderData,
-        lineBarsData: lineBarsData,
-        minX: 1,
-        maxX: targetDate.endOfMonth.day.toDouble(),
-        maxY: 10,
-        minY: 0,
-      );
+  LineChartData lineChartData(AppLocalizations translations) {
+    final firstDay = timeRangeMode.isMonthly ? 1 : targetDate.startOfWeek.day;
+    final lastDay = timeRangeMode.isMonthly
+        ? targetDate.endOfMonth.day
+        : targetDate.endOfWeek.day;
+
+    return LineChartData(
+      lineTouchData: lineTouchData(translations),
+      gridData: gridData,
+      titlesData: titlesData,
+      borderData: borderData,
+      lineBarsData: lineBarsData,
+      minX: firstDay.toDouble(),
+      maxX: lastDay.toDouble(),
+      maxY: 10,
+      minY: 0,
+    );
+  }
 
   LineTouchData lineTouchData(AppLocalizations translations) => LineTouchData(
         getTouchedSpotIndicator: (barData, spotIndexes) {
@@ -132,9 +141,7 @@ class _LineGraph extends StatelessWidget {
                     '$currencySymbol';
               } else if (isWorkTimeSpot) {
                 final mood = moodsWithTrackedWorkTime[flSpot.spotIndex];
-                final workTime = mood.workTime! > Duration.zero
-                    ? mood.workTime!.toFormattedString()
-                    : '-';
+                final workTime = mood.workTime!.toFormattedString();
                 text = '${translations.workTime}:\n'
                     '$workTime';
               } else if (isMoodSpot) {
@@ -193,7 +200,7 @@ class _LineGraph extends StatelessWidget {
         reservedSize: 40,
       );
 
-  Widget getBottomTitle(double value, TitleMeta meta) {
+  Widget getBottomTitleForMonthlyMode(double value, TitleMeta meta) {
     if (value == 5 || value == 15 || value == 25) {
       final day = DateTime(targetDate.year, targetDate.month, value.toInt());
 
@@ -218,11 +225,38 @@ class _LineGraph extends StatelessWidget {
     }
   }
 
+  Widget getBottomTitleForWeeklyMode(double value, TitleMeta meta) {
+    final firstDayIsOdd = targetDate.startOfWeek.day.isOdd;
+    final day = DateTime(targetDate.year, targetDate.month, value.toInt());
+
+    if ((firstDayIsOdd && value.toInt().isEven) ||
+        (!firstDayIsOdd && value.toInt().isOdd)) {
+      return SideTitleWidget(
+        axisSide: meta.axisSide,
+        space: 10,
+        child: Text(
+          day.getDateString(
+            null,
+            includeYear: false,
+          ),
+          style: _LineGraphTheme.bottomTitlesTextStyle,
+        ),
+      );
+    } else {
+      return Text(
+        value.toInt().toString(),
+        style: _LineGraphTheme.bottomSmallTitlesTextStyle,
+      );
+    }
+  }
+
   SideTitles get bottomTitles => SideTitles(
         showTitles: true,
         reservedSize: 32,
         interval: 1,
-        getTitlesWidget: getBottomTitle,
+        getTitlesWidget: timeRangeMode.isMonthly
+            ? getBottomTitleForMonthlyMode
+            : getBottomTitleForWeeklyMode,
       );
 
   FlGridData get gridData => const FlGridData(
@@ -258,6 +292,7 @@ class _LineGraph extends StatelessWidget {
 
   LineChartBarData get revenueLineChartBarData => LineChartBarData(
         color: _LineGraphTheme.revenueLineCharBarColor,
+        barWidth: 3,
         dotData: const FlDotData(show: false),
         spots: revenueSpots,
       );

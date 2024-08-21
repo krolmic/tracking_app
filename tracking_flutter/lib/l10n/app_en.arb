@@ -97,6 +97,20 @@
     "revenue": "Revenue",
     "showRevenue": "Show revenue",
     "showWorkTime": "Show work time",
+    "mode": "Mode",
+    "monthly": "Monthly",
+    "weekly": "Weekly",
+    "calendarWeek": "CW {weekNumber}",
+    "@calendarWeek": {
+        "placeholders": {
+            "weekNumber": {
+                "type": "int"
+            }
+        }
+    },
+    "display": "Display",
+    "lines": "Lines",
+    "ok": "OK",
     "appSettings": "Preferences",
     "appSettingsSaved": "Preferences saved successfully!",
     "currency": "Currency",
