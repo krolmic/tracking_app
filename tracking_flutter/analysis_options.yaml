@@ -10,3 +10,4 @@ analyzer:
     - "lib/models/*"
     - "lib/amplifyconfiguration.dart"
     - "lib/firebase_options.dart"
+    - "lib/amplify_outputs*"

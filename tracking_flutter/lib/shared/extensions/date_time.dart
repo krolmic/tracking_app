@@ -25,7 +25,7 @@ extension DateTimeX on DateTime {
   DateTime get endOfWeek => add(Duration(days: 7 - weekday));
 
   int get numberOfWeeksInYear {
-    final firstDayOfYear = DateTime(year, 1);
+    final firstDayOfYear = DateTime(year);
     final lastDayOfYear = DateTime(year, 12, 31);
 
     final firstWeekNumber = firstDayOfYear.weekNumber;
@@ -35,7 +35,7 @@ extension DateTimeX on DateTime {
   }
 
   int get weekNumber {
-    final firstDayOfYear = DateTime(year, 1);
+    final firstDayOfYear = DateTime(year);
     final firstWeekday = firstDayOfYear.weekday;
 
     final daysSinceFirstWeekday = (weekday - firstWeekday + 7) % 7;

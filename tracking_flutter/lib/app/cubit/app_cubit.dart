@@ -48,9 +48,11 @@ class AppCubit extends Cubit<AppState> {
       auth,
     ]);
 
-    await _amplify.configure(kReleaseMode
-        ? amplify_config_production.amplifyConfig
-        : amplify_config_development.amplifyConfig);
+    await _amplify.configure(
+      kReleaseMode
+          ? amplify_config_production.amplifyConfig
+          : amplify_config_development.amplifyConfig,
+    );
   }
 
   Future<void> _configureLogging() async {
