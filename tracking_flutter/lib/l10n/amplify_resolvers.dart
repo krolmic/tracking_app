@@ -252,7 +252,7 @@ class LocalizedInputResolver extends InputResolver {
       final characterType = AppLocalizations.of(context)!
           .passwordRequirementsCharacterType(characterReq.name);
       final atLeast = AppLocalizations.of(context)!
-          .passwordRequirementsAtLeast(1, characterType);
+          .passwordRequirementsAtLeast(1, ' $characterType');
       sb.writeln('* $atLeast');
     }
     return sb.toString();

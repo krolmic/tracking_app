@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_fimber/flutter_fimber.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:tracking_app/amplifyconfiguration.dart';
+import 'package:tracking_app/amplify_outputs.dart';
 import 'package:tracking_app/shared/logging.dart';
 
 part 'app_cubit.freezed.dart';
@@ -45,7 +45,7 @@ class AppCubit extends Cubit<AppState> {
       auth,
     ]);
 
-    await _amplify.configure(amplifyconfig);
+    await _amplify.configure(amplifyConfig);
   }
 
   Future<void> _configureLogging() async {
