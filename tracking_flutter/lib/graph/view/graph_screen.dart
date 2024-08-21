@@ -132,14 +132,13 @@ class _GraphView extends StatelessWidget {
     final dateTimeNow = DateTime.now();
 
     return BaseView(
-      addVerticalPadding: false,
       addHorizontalPadding: false,
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const VerticalSpacing.large(),
-            Container(
+            SizedBox(
               height: 30,
               child: Padding(
                 padding: const EdgeInsets.symmetric(
