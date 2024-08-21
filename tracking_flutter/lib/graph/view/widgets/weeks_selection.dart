@@ -21,7 +21,7 @@ class _WeeksSelection extends StatelessWidget {
 
     final selectedWeekIndex = selectedWeek - 1;
 
-    // Scroll to the month before the selected month so that
+    // Scroll to the month before the selected week so that
     // user is able to select it without scrolling
     final scrollController = ScrollController(
       initialScrollOffset:
