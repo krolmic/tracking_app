@@ -67,3 +67,8 @@ amplifytools.xcconfig
 #amplify-do-not-edit-end
 
 devtools_options.yaml
+
+# amplify
+.amplify
+amplify_outputs*
+amplifyconfiguration*

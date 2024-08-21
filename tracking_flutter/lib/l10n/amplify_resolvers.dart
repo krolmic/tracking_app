@@ -1,4 +1,6 @@
 import 'package:amplify_authenticator/amplify_authenticator.dart';
+// ignore: implementation_imports
+import 'package:amplify_authenticator/src/utils/unmet_password_requirements.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -230,10 +232,10 @@ class LocalizedInputResolver extends InputResolver {
   @override
   String passwordRequires(
     BuildContext context,
-    PasswordProtectionSettings requirements,
+    UnmetPasswordRequirements requirements,
   ) {
-    final minLength = requirements.passwordPolicyMinLength;
-    final characterReqs = requirements.passwordPolicyCharacters;
+    final minLength = requirements.minLength;
+    final characterReqs = requirements.characterRequirements;
     if (minLength == null && (characterReqs.isEmpty)) {
       return '';
     }
@@ -250,7 +252,7 @@ class LocalizedInputResolver extends InputResolver {
       final characterType = AppLocalizations.of(context)!
           .passwordRequirementsCharacterType(characterReq.name);
       final atLeast = AppLocalizations.of(context)!
-          .passwordRequirementsAtLeast(1, characterType);
+          .passwordRequirementsAtLeast(1, ' $characterType');
       sb.writeln('* $atLeast');
     }
     return sb.toString();
