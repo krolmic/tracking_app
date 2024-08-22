@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:679937544462:android:3ffe7d9811a491c40fc75f",
+        "mobilesdk_app_id": "1:679937544462:android:55296f112815c22b0fc75f",
         "android_client_info": {
-          "package_name": "app.mindfulme"
+          "package_name": "app.healthyhustle"
         }
       },
       "oauth_client": [],
