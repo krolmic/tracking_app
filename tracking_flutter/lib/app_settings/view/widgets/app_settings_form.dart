@@ -84,16 +84,8 @@ class _AppSettingsFormState extends State<_AppSettingsForm> {
                   previousState.appSettingsForm.formState.currency !=
                   currentState.appSettingsForm.formState.currency,
               builder: (context, state) {
-                return DropdownButtonFormField<String>(
-                  icon: const Icon(Iconsax.arrow_down_1_outline, size: 18),
-                  iconEnabledColor: Theme.of(context).primaryColor,
-                  menuMaxHeight: 300,
-                  focusColor: Colors.transparent,
-                  focusNode: FocusNode(canRequestFocus: false),
-                  style: Theme.of(context).textTheme.bodyMedium,
+                return DropDown<String>(
                   value: state.appSettingsForm.formState.currency.value,
-                  dropdownColor: Colors.white,
-                  elevation: 4,
                   items:
                       currenciesCodesAndSymbols.keys.toList().map((currency) {
                     return DropdownMenuItem(

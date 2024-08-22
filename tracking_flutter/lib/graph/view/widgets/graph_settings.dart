@@ -32,13 +32,7 @@ class _GraphSettings extends StatelessWidget {
           buildWhen: (previous, current) =>
               previous.settings.timeRangeMode != current.settings.timeRangeMode,
           builder: (context, state) {
-            return DropdownButtonFormField<GraphTimeRangeMode>(
-              icon: const Icon(Iconsax.arrow_down_1_outline, size: 18),
-              iconEnabledColor: Theme.of(context).primaryColor,
-              focusColor: Colors.transparent,
-              style: Theme.of(context).textTheme.bodyMedium,
-              dropdownColor: Colors.white,
-              elevation: 4,
+            return DropDown<GraphTimeRangeMode>(
               value: state.settings.timeRangeMode,
               items: [
                 DropdownMenuItem(
