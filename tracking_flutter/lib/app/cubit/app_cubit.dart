@@ -17,10 +17,12 @@ part 'app_state.dart';
 class AppCubit extends Cubit<AppState> {
   AppCubit({
     required AmplifyClass amplify,
+    required this.releaseMode,
   })  : _amplify = amplify,
         super(const AppState.initial());
 
   final AmplifyClass _amplify;
+  final bool releaseMode;
 
   Future<void> init() async {
     emit(const AppState.loading());
@@ -49,14 +51,14 @@ class AppCubit extends Cubit<AppState> {
     ]);
 
     await _amplify.configure(
-      kReleaseMode
+      releaseMode
           ? amplify_config_production.amplifyConfig
           : amplify_config_development.amplifyConfig,
     );
   }
 
   Future<void> _configureLogging() async {
-    if (kReleaseMode) {
+    if (releaseMode) {
       await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
       FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
       PlatformDispatcher.instance.onError = (error, stack) {

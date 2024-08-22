@@ -40,6 +40,7 @@ class App extends StatelessWidget {
         BlocProvider<AppCubit>(
           create: (context) => AppCubit(
             amplify: getIt<AmplifyClass>(),
+            releaseMode: const bool.fromEnvironment('RELEASE_MODE'),
           )..init(),
         ),
         BlocProvider<UserProfileCubit>(
