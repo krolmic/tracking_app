@@ -45,7 +45,7 @@ class MoodData extends StatelessWidget {
           ),
           const VerticalSpacing.small(),
           SizedBox(
-            height: 30,
+            height: 35,
             child: Text(
               label,
               style: Theme.of(context).textTheme.bodySmall,

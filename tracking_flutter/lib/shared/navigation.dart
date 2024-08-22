@@ -63,8 +63,14 @@ class _FloatingBottomNavigationBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final translations = AppLocalizations.of(context)!;
 
+    final isSmallScreen = MediaQuery.of(context).size.width <= 375;
+    final navigationGap = isSmallScreen ? 6.0 : 8.0;
+
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: viewPaddingHorizontal),
+      padding: const EdgeInsets.symmetric(
+        horizontal: viewPaddingHorizontal,
+        vertical: verticalPaddingMedium,
+      ),
       decoration: BoxDecoration(
         color: AppColors.contentBackgroundColor,
         boxShadow: [
@@ -75,61 +81,60 @@ class _FloatingBottomNavigationBar extends StatelessWidget {
         ],
       ),
       child: SafeArea(
-        child: Container(
-          padding: const EdgeInsets.only(top: 15),
-          child: GNav(
-            rippleColor: AppColors.darkBlueAccent,
-            hoverColor: Colors.grey[100]!,
-            gap: 8,
-            iconSize: 20,
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-            duration: animationDuration,
-            color: Colors.black,
-            tabs: [
-              GButton(
-                backgroundGradient: navigationButtonGradient,
-                icon: activeIndex == 0
-                    ? Iconsax.home_bold
-                    : Iconsax.home_1_outline,
-                iconActiveColor: iconActiveColor,
-                iconColor: iconColor,
-                textColor: textColor,
-                text: translations.home,
-              ),
-              GButton(
-                backgroundGradient: navigationButtonGradient,
-                icon: activeIndex == 1
-                    ? Iconsax.calendar_2_bold
-                    : Iconsax.calendar_2_outline,
-                iconActiveColor: iconActiveColor,
-                iconColor: iconColor,
-                textColor: textColor,
-                text: translations.calendar,
-              ),
-              GButton(
-                backgroundGradient: navigationButtonGradient,
-                icon: activeIndex == 2
-                    ? Iconsax.activity_bold
-                    : Iconsax.activity_outline,
-                iconActiveColor: iconActiveColor,
-                iconColor: iconColor,
-                textColor: AppColors.contentOnDarkBackgroundColor,
-                text: translations.analysis,
-              ),
-              GButton(
-                backgroundGradient: navigationButtonGradient,
-                icon: activeIndex == 3
-                    ? Iconsax.setting_2_bold
-                    : Iconsax.setting_2_outline,
-                iconActiveColor: iconActiveColor,
-                iconColor: iconColor,
-                textColor: textColor,
-                text: translations.settings,
-              ),
-            ],
-            selectedIndex: activeIndex,
-            onTabChange: onTap,
+        child: GNav(
+          rippleColor: AppColors.darkBlueAccent,
+          hoverColor: Colors.grey[100]!,
+          gap: navigationGap,
+          iconSize: 20,
+          padding: const EdgeInsets.symmetric(
+            horizontal: horizontalPaddingLarge,
+            vertical: verticalPaddingMedium,
           ),
+          duration: animationDuration,
+          color: Colors.black,
+          tabs: [
+            GButton(
+              backgroundGradient: navigationButtonGradient,
+              icon:
+                  activeIndex == 0 ? Iconsax.home_bold : Iconsax.home_1_outline,
+              iconActiveColor: iconActiveColor,
+              iconColor: iconColor,
+              textColor: textColor,
+              text: translations.home,
+            ),
+            GButton(
+              backgroundGradient: navigationButtonGradient,
+              icon: activeIndex == 1
+                  ? Iconsax.calendar_2_bold
+                  : Iconsax.calendar_2_outline,
+              iconActiveColor: iconActiveColor,
+              iconColor: iconColor,
+              textColor: textColor,
+              text: translations.calendar,
+            ),
+            GButton(
+              backgroundGradient: navigationButtonGradient,
+              icon: activeIndex == 2
+                  ? Iconsax.activity_bold
+                  : Iconsax.activity_outline,
+              iconActiveColor: iconActiveColor,
+              iconColor: iconColor,
+              textColor: AppColors.contentOnDarkBackgroundColor,
+              text: translations.analysis,
+            ),
+            GButton(
+              backgroundGradient: navigationButtonGradient,
+              icon: activeIndex == 3
+                  ? Iconsax.setting_2_bold
+                  : Iconsax.setting_2_outline,
+              iconActiveColor: iconActiveColor,
+              iconColor: iconColor,
+              textColor: textColor,
+              text: translations.settings,
+            ),
+          ],
+          selectedIndex: activeIndex,
+          onTabChange: onTap,
         ),
       ),
     );
