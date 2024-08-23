@@ -12,6 +12,7 @@ import 'package:tracking_app/shared/extensions/date_time.dart';
 import 'package:tracking_app/shared/extensions/double.dart';
 import 'package:tracking_app/shared/formz.dart';
 import 'package:tracking_app/shared/theme/colors.dart';
+import 'package:tracking_app/shared/theme/layout.dart';
 import 'package:tracking_app/shared/toast.dart';
 import 'package:tracking_app/shared/view/base_view.dart';
 import 'package:tracking_app/shared/widgets/app_dialog.dart';
@@ -115,8 +116,13 @@ class UpdateMoodScreen extends StatelessWidget {
                   previousDeleteMoodState != currentDeleteMoodState,
               builder: (context, deleteMoodState) {
                 return deleteMoodState.maybeWhen(
-                  loading: () => TinyLoadingIndicator(
-                    color: AppColors.primarySwatch.shade200,
+                  loading: () => Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: viewPaddingHorizontal,
+                    ),
+                    child: TinyLoadingIndicator(
+                      color: AppColors.primarySwatch.shade200,
+                    ),
                   ),
                   orElse: () => BlocBuilder<UpdateMoodBloc, UpdateMoodState>(
                     buildWhen:
@@ -125,6 +131,9 @@ class UpdateMoodScreen extends StatelessWidget {
                             currentUpdateMoodState.mood,
                     builder: (context, state) {
                       return IconButton(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: viewPaddingHorizontal,
+                        ),
                         icon: const Icon(
                           Iconsax.trash_outline,
                         ),
