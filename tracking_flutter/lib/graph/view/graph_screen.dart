@@ -139,37 +139,42 @@ class _GraphView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const VerticalSpacing.large(),
-            SizedBox(
-              height: 30,
-              child: Stack(
-                children: [
-                  Positioned.fill(
-                    child: Center(
-                      child: Text(
-                        dateTimeNow.year.toString(),
-                        style: Theme.of(context).textTheme.headlineSmall,
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: horizontalPaddingSmall,
+              ),
+              child: SizedBox(
+                height: 30,
+                child: Stack(
+                  children: [
+                    Positioned.fill(
+                      child: Center(
+                        child: Text(
+                          dateTimeNow.year.toString(),
+                          style: Theme.of(context).textTheme.headlineSmall,
+                        ),
                       ),
                     ),
-                  ),
-                  Positioned.fill(
-                    child: Align(
-                      alignment: Alignment.centerRight,
-                      child: IconButton(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: viewPaddingHorizontal,
+                    Positioned.fill(
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: IconButton(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: horizontalPaddingSmall,
+                          ),
+                          color: AppColors.primarySwatch,
+                          icon: Icon(
+                            Iconsax.setting_4_outline,
+                            size: Theme.of(context).appBarTheme.iconTheme!.size,
+                          ),
+                          onPressed: () async {
+                            await _showSettingsDialog(context);
+                          },
                         ),
-                        color: AppColors.primarySwatch,
-                        icon: const Icon(
-                          Iconsax.setting_4_outline,
-                          size: 15,
-                        ),
-                        onPressed: () async {
-                          await _showSettingsDialog(context);
-                        },
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
             const VerticalSpacing.medium(),

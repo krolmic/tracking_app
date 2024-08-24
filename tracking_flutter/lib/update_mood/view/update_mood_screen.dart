@@ -111,47 +111,50 @@ class UpdateMoodScreen extends StatelessWidget {
             maxLines: 1,
           ),
           actions: [
-            BlocBuilder<DeleteMoodCubit, DeleteMoodState>(
-              buildWhen: (previousDeleteMoodState, currentDeleteMoodState) =>
-                  previousDeleteMoodState != currentDeleteMoodState,
-              builder: (context, deleteMoodState) {
-                return deleteMoodState.maybeWhen(
-                  loading: () => Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: viewPaddingHorizontal,
+            Padding(
+              padding: const EdgeInsets.only(right: horizontalPaddingSmall),
+              child: BlocBuilder<DeleteMoodCubit, DeleteMoodState>(
+                buildWhen: (previousDeleteMoodState, currentDeleteMoodState) =>
+                    previousDeleteMoodState != currentDeleteMoodState,
+                builder: (context, deleteMoodState) {
+                  return deleteMoodState.maybeWhen(
+                    loading: () => Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: horizontalPaddingSmall,
+                      ),
+                      child: TinyLoadingIndicator(
+                        color: AppColors.primarySwatch.shade200,
+                      ),
                     ),
-                    child: TinyLoadingIndicator(
-                      color: AppColors.primarySwatch.shade200,
+                    orElse: () => BlocBuilder<UpdateMoodBloc, UpdateMoodState>(
+                      buildWhen:
+                          (previousUpdateMoodState, currentUpdateMoodState) =>
+                              previousUpdateMoodState.mood !=
+                              currentUpdateMoodState.mood,
+                      builder: (context, state) {
+                        return IconButton(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: horizontalPaddingSmall,
+                          ),
+                          icon: const Icon(
+                            Iconsax.trash_outline,
+                          ),
+                          onPressed: () {
+                            _showMoodDeletionDialog(
+                              context,
+                              () {
+                                context
+                                    .read<DeleteMoodCubit>()
+                                    .deleteMood(state.mood!);
+                              },
+                            );
+                          },
+                        );
+                      },
                     ),
-                  ),
-                  orElse: () => BlocBuilder<UpdateMoodBloc, UpdateMoodState>(
-                    buildWhen:
-                        (previousUpdateMoodState, currentUpdateMoodState) =>
-                            previousUpdateMoodState.mood !=
-                            currentUpdateMoodState.mood,
-                    builder: (context, state) {
-                      return IconButton(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: viewPaddingHorizontal,
-                        ),
-                        icon: const Icon(
-                          Iconsax.trash_outline,
-                        ),
-                        onPressed: () {
-                          _showMoodDeletionDialog(
-                            context,
-                            () {
-                              context
-                                  .read<DeleteMoodCubit>()
-                                  .deleteMood(state.mood!);
-                            },
-                          );
-                        },
-                      );
-                    },
-                  ),
-                );
-              },
+                  );
+                },
+              ),
             ),
           ],
         ),
