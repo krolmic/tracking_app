@@ -1,4 +1,8 @@
+
+
 # Healthy Hustle
+
+[![Codemagic build status](https://api.codemagic.io/apps/66c76bd87889bec3cf7eb996/66ca5b5e34c4b0021e9ddfcb/status_badge.svg)](https://codemagic.io/app/66c76bd87889bec3cf7eb996/66ca5b5e34c4b0021e9ddfcb/latest_build)
 
 <img src="tracking_flutter/screenshots/mock_ups.png"/> 
 
