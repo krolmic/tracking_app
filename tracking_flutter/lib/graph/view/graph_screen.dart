@@ -141,37 +141,35 @@ class _GraphView extends StatelessWidget {
             const VerticalSpacing.large(),
             SizedBox(
               height: 30,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: viewPaddingHorizontal,
-                ),
-                child: Stack(
-                  children: [
-                    Positioned.fill(
-                      child: Center(
-                        child: Text(
-                          dateTimeNow.year.toString(),
-                          style: Theme.of(context).textTheme.headlineSmall,
-                        ),
+              child: Stack(
+                children: [
+                  Positioned.fill(
+                    child: Center(
+                      child: Text(
+                        dateTimeNow.year.toString(),
+                        style: Theme.of(context).textTheme.headlineSmall,
                       ),
                     ),
-                    Positioned.fill(
-                      child: Align(
-                        alignment: Alignment.topRight,
-                        child: IconButton(
-                          color: AppColors.primarySwatch,
-                          icon: const Icon(
-                            Iconsax.setting_4_outline,
-                            size: 15,
-                          ),
-                          onPressed: () async {
-                            await _showSettingsDialog(context);
-                          },
+                  ),
+                  Positioned.fill(
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: IconButton(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: viewPaddingHorizontal,
                         ),
+                        color: AppColors.primarySwatch,
+                        icon: const Icon(
+                          Iconsax.setting_4_outline,
+                          size: 15,
+                        ),
+                        onPressed: () async {
+                          await _showSettingsDialog(context);
+                        },
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
             const VerticalSpacing.medium(),
