@@ -52,13 +52,15 @@ class _Calendar extends StatelessWidget {
       weekendTextStyle: _CalendarTheme.calendarDaysTextStyle,
       nextDaysTextStyle: _CalendarTheme.calendarNextAndPrevDaysTextStyle,
       headerTextStyle: Theme.of(context).textTheme.headlineSmall,
-      rightButtonIcon: const Icon(
-        Icons.chevron_right,
+      rightButtonIcon: Icon(
+        Iconsax.arrow_right_3_outline,
         color: _CalendarTheme.calendarPrevAndNextButtonsColor,
+        size: Theme.of(context).appBarTheme.iconTheme!.size,
       ),
-      leftButtonIcon: const Icon(
-        Icons.chevron_left,
+      leftButtonIcon: Icon(
+        Iconsax.arrow_left_2_outline,
         color: _CalendarTheme.calendarPrevAndNextButtonsColor,
+        size: Theme.of(context).appBarTheme.iconTheme!.size,
       ),
       weekdayTextStyle: _CalendarTheme.calendarWeekdaysTextStyle,
       markedDatesMap: _getMarkedDates(),
