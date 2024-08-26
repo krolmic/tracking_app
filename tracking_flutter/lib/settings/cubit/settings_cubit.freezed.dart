@@ -21,7 +21,9 @@ mixin _$SettingsState {
   AccountDeletionState get accountDeletionState =>
       throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SettingsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SettingsStateCopyWith<SettingsState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -52,6 +54,8 @@ class _$SettingsStateCopyWithImpl<$Res, $Val extends SettingsState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of SettingsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -75,6 +79,8 @@ class _$SettingsStateCopyWithImpl<$Res, $Val extends SettingsState>
     ) as $Val);
   }
 
+  /// Create a copy of SettingsState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $SendEmailStateCopyWith<$Res> get sendEmailState {
@@ -83,6 +89,8 @@ class _$SettingsStateCopyWithImpl<$Res, $Val extends SettingsState>
     });
   }
 
+  /// Create a copy of SettingsState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $SignOutStateCopyWith<$Res> get signOutState {
@@ -91,6 +99,8 @@ class _$SettingsStateCopyWithImpl<$Res, $Val extends SettingsState>
     });
   }
 
+  /// Create a copy of SettingsState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $AccountDeletionStateCopyWith<$Res> get accountDeletionState {
@@ -130,6 +140,8 @@ class __$$SettingsStateImplCopyWithImpl<$Res>
       _$SettingsStateImpl _value, $Res Function(_$SettingsStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SettingsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -194,7 +206,9 @@ class _$SettingsStateImpl implements _SettingsState {
   int get hashCode => Object.hash(
       runtimeType, sendEmailState, signOutState, accountDeletionState);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SettingsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SettingsStateImplCopyWith<_$SettingsStateImpl> get copyWith =>
@@ -213,8 +227,11 @@ abstract class _SettingsState implements SettingsState {
   SignOutState get signOutState;
   @override
   AccountDeletionState get accountDeletionState;
+
+  /// Create a copy of SettingsState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SettingsStateImplCopyWith<_$SettingsStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -283,6 +300,9 @@ class _$SignOutStateCopyWithImpl<$Res, $Val extends SignOutState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of SignOutState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -299,6 +319,9 @@ class __$$SignOutInitialStateImplCopyWithImpl<$Res>
   __$$SignOutInitialStateImplCopyWithImpl(_$SignOutInitialStateImpl _value,
       $Res Function(_$SignOutInitialStateImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of SignOutState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -408,6 +431,9 @@ class __$$SignOutLoadingStateImplCopyWithImpl<$Res>
   __$$SignOutLoadingStateImplCopyWithImpl(_$SignOutLoadingStateImpl _value,
       $Res Function(_$SignOutLoadingStateImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of SignOutState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -517,6 +543,9 @@ class __$$SignOutErrorStateImplCopyWithImpl<$Res>
   __$$SignOutErrorStateImplCopyWithImpl(_$SignOutErrorStateImpl _value,
       $Res Function(_$SignOutErrorStateImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of SignOutState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -682,6 +711,9 @@ class _$AccountDeletionStateCopyWithImpl<$Res,
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of AccountDeletionState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -701,6 +733,9 @@ class __$$AccountDeletionInitialStateImplCopyWithImpl<$Res>
       _$AccountDeletionInitialStateImpl _value,
       $Res Function(_$AccountDeletionInitialStateImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of AccountDeletionState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -820,6 +855,9 @@ class __$$AccountDeletionLoadingStateImplCopyWithImpl<$Res>
       _$AccountDeletionLoadingStateImpl _value,
       $Res Function(_$AccountDeletionLoadingStateImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of AccountDeletionState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -939,6 +977,9 @@ class __$$AccountDeletionSuccessStateImplCopyWithImpl<$Res>
       _$AccountDeletionSuccessStateImpl _value,
       $Res Function(_$AccountDeletionSuccessStateImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of AccountDeletionState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -1058,6 +1099,9 @@ class __$$AccountDeletionErrorStateImplCopyWithImpl<$Res>
       _$AccountDeletionErrorStateImpl _value,
       $Res Function(_$AccountDeletionErrorStateImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of AccountDeletionState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -1229,6 +1273,9 @@ class _$SendEmailStateCopyWithImpl<$Res, $Val extends SendEmailState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of SendEmailState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -1247,6 +1294,9 @@ class __$$SendEmailStateInitialStateImplCopyWithImpl<$Res>
       _$SendEmailStateInitialStateImpl _value,
       $Res Function(_$SendEmailStateInitialStateImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of SendEmailState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -1364,6 +1414,9 @@ class __$$SendEmailStateLoadingStateImplCopyWithImpl<$Res>
       _$SendEmailStateLoadingStateImpl _value,
       $Res Function(_$SendEmailStateLoadingStateImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of SendEmailState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -1481,6 +1534,9 @@ class __$$SendEmailStateSuccessStateImplCopyWithImpl<$Res>
       _$SendEmailStateSuccessStateImpl _value,
       $Res Function(_$SendEmailStateSuccessStateImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of SendEmailState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -1598,6 +1654,9 @@ class __$$SendEmailStateErrorStateImplCopyWithImpl<$Res>
       _$SendEmailStateErrorStateImpl _value,
       $Res Function(_$SendEmailStateErrorStateImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of SendEmailState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc

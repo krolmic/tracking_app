@@ -106,6 +106,9 @@ class _$GraphEventCopyWithImpl<$Res, $Val extends GraphEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of GraphEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -123,6 +126,9 @@ class __$$GraphEventInitializedImplCopyWithImpl<$Res>
   __$$GraphEventInitializedImplCopyWithImpl(_$GraphEventInitializedImpl _value,
       $Res Function(_$GraphEventInitializedImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of GraphEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -265,6 +271,8 @@ class __$$GraphEventTargetDateChangedImplCopyWithImpl<$Res>
       $Res Function(_$GraphEventTargetDateChangedImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of GraphEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -304,7 +312,9 @@ class _$GraphEventTargetDateChangedImpl
   @override
   int get hashCode => Object.hash(runtimeType, date);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GraphEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$GraphEventTargetDateChangedImplCopyWith<_$GraphEventTargetDateChangedImpl>
@@ -413,7 +423,10 @@ abstract class _GraphEventTargetDateChanged implements GraphEvent {
       _$GraphEventTargetDateChangedImpl;
 
   DateTime get date;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of GraphEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GraphEventTargetDateChangedImplCopyWith<_$GraphEventTargetDateChangedImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -434,6 +447,9 @@ class __$$GraphEventMoodsUpdatedImplCopyWithImpl<$Res>
       _$GraphEventMoodsUpdatedImpl _value,
       $Res Function(_$GraphEventMoodsUpdatedImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of GraphEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -574,6 +590,9 @@ class __$$GraphEventShowWorkTimeTriggeredImplCopyWithImpl<$Res>
       _$GraphEventShowWorkTimeTriggeredImpl _value,
       $Res Function(_$GraphEventShowWorkTimeTriggeredImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of GraphEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -715,6 +734,9 @@ class __$$GraphEventShowRevenueTriggeredImplCopyWithImpl<$Res>
       _$GraphEventShowRevenueTriggeredImpl _value,
       $Res Function(_$GraphEventShowRevenueTriggeredImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of GraphEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -859,6 +881,8 @@ class __$$GraphEventTimeRangeModeChangedImplCopyWithImpl<$Res>
       $Res Function(_$GraphEventTimeRangeModeChangedImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of GraphEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -898,7 +922,9 @@ class _$GraphEventTimeRangeModeChangedImpl
   @override
   int get hashCode => Object.hash(runtimeType, mode);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GraphEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$GraphEventTimeRangeModeChangedImplCopyWith<
@@ -1009,7 +1035,10 @@ abstract class _GraphEventTimeRangeModeChanged implements GraphEvent {
       _$GraphEventTimeRangeModeChangedImpl;
 
   GraphTimeRangeMode get mode;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of GraphEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GraphEventTimeRangeModeChangedImplCopyWith<
           _$GraphEventTimeRangeModeChangedImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -1021,7 +1050,9 @@ mixin _$GraphState {
   GraphTargetDateState get targetDate => throw _privateConstructorUsedError;
   GraphSettings get settings => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GraphState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $GraphStateCopyWith<GraphState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1052,6 +1083,8 @@ class _$GraphStateCopyWithImpl<$Res, $Val extends GraphState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of GraphState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1075,6 +1108,8 @@ class _$GraphStateCopyWithImpl<$Res, $Val extends GraphState>
     ) as $Val);
   }
 
+  /// Create a copy of GraphState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $GraphMoodsStateCopyWith<$Res> get moodsState {
@@ -1083,6 +1118,8 @@ class _$GraphStateCopyWithImpl<$Res, $Val extends GraphState>
     });
   }
 
+  /// Create a copy of GraphState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $GraphTargetDateStateCopyWith<$Res> get targetDate {
@@ -1091,6 +1128,8 @@ class _$GraphStateCopyWithImpl<$Res, $Val extends GraphState>
     });
   }
 
+  /// Create a copy of GraphState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $GraphSettingsCopyWith<$Res> get settings {
@@ -1129,6 +1168,8 @@ class __$$GraphStateImplCopyWithImpl<$Res>
       _$GraphStateImpl _value, $Res Function(_$GraphStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of GraphState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1196,7 +1237,9 @@ class _$GraphStateImpl implements _GraphState {
   int get hashCode =>
       Object.hash(runtimeType, moodsState, targetDate, settings);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GraphState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$GraphStateImplCopyWith<_$GraphStateImpl> get copyWith =>
@@ -1215,8 +1258,11 @@ abstract class _GraphState implements GraphState {
   GraphTargetDateState get targetDate;
   @override
   GraphSettings get settings;
+
+  /// Create a copy of GraphState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GraphStateImplCopyWith<_$GraphStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1227,7 +1273,9 @@ mixin _$GraphSettings {
   bool get showWorkTime => throw _privateConstructorUsedError;
   GraphTimeRangeMode get timeRangeMode => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GraphSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $GraphSettingsCopyWith<GraphSettings> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1252,6 +1300,8 @@ class _$GraphSettingsCopyWithImpl<$Res, $Val extends GraphSettings>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of GraphSettings
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1296,6 +1346,8 @@ class __$$GraphSettingsImplCopyWithImpl<$Res>
       _$GraphSettingsImpl _value, $Res Function(_$GraphSettingsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of GraphSettings
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1357,7 +1409,9 @@ class _$GraphSettingsImpl implements _GraphSettings {
   int get hashCode =>
       Object.hash(runtimeType, showRevenue, showWorkTime, timeRangeMode);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GraphSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$GraphSettingsImplCopyWith<_$GraphSettingsImpl> get copyWith =>
@@ -1376,8 +1430,11 @@ abstract class _GraphSettings implements GraphSettings {
   bool get showWorkTime;
   @override
   GraphTimeRangeMode get timeRangeMode;
+
+  /// Create a copy of GraphSettings
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GraphSettingsImplCopyWith<_$GraphSettingsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1441,6 +1498,9 @@ class _$GraphTargetDateStateCopyWithImpl<$Res,
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of GraphTargetDateState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -1460,6 +1520,9 @@ class __$$GraphTargetDateInitialStateImplCopyWithImpl<$Res>
       _$GraphTargetDateInitialStateImpl _value,
       $Res Function(_$GraphTargetDateInitialStateImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of GraphTargetDateState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -1570,6 +1633,8 @@ class __$$GraphTargetDateSetStateImplCopyWithImpl<$Res>
       $Res Function(_$GraphTargetDateSetStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of GraphTargetDateState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1608,7 +1673,9 @@ class _$GraphTargetDateSetStateImpl implements GraphTargetDateSetState {
   @override
   int get hashCode => Object.hash(runtimeType, date);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GraphTargetDateState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$GraphTargetDateSetStateImplCopyWith<_$GraphTargetDateSetStateImpl>
@@ -1683,7 +1750,10 @@ abstract class GraphTargetDateSetState implements GraphTargetDateState {
       _$GraphTargetDateSetStateImpl;
 
   DateTime get date;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of GraphTargetDateState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GraphTargetDateSetStateImplCopyWith<_$GraphTargetDateSetStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -1758,6 +1828,9 @@ class _$GraphMoodsStateCopyWithImpl<$Res, $Val extends GraphMoodsState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of GraphMoodsState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -1776,6 +1849,9 @@ class __$$GraphMoodsInitialStateImplCopyWithImpl<$Res>
       _$GraphMoodsInitialStateImpl _value,
       $Res Function(_$GraphMoodsInitialStateImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of GraphMoodsState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -1893,6 +1969,9 @@ class __$$GraphMoodsLoadingStateImplCopyWithImpl<$Res>
       _$GraphMoodsLoadingStateImpl _value,
       $Res Function(_$GraphMoodsLoadingStateImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of GraphMoodsState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -2013,6 +2092,8 @@ class __$$GraphMoodsSuccessStateImplCopyWithImpl<$Res>
       $Res Function(_$GraphMoodsSuccessStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of GraphMoodsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -2058,7 +2139,9 @@ class _$GraphMoodsSuccessStateImpl implements GraphMoodsSuccessState {
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_moods));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GraphMoodsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$GraphMoodsSuccessStateImplCopyWith<_$GraphMoodsSuccessStateImpl>
@@ -2145,7 +2228,10 @@ abstract class GraphMoodsSuccessState implements GraphMoodsState {
       _$GraphMoodsSuccessStateImpl;
 
   List<Mood> get moods;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of GraphMoodsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GraphMoodsSuccessStateImplCopyWith<_$GraphMoodsSuccessStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -2164,6 +2250,9 @@ class __$$GraphMoodsErrorStateImplCopyWithImpl<$Res>
   __$$GraphMoodsErrorStateImplCopyWithImpl(_$GraphMoodsErrorStateImpl _value,
       $Res Function(_$GraphMoodsErrorStateImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of GraphMoodsState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc

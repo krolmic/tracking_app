@@ -84,6 +84,9 @@ class _$UserProfileStateCopyWithImpl<$Res, $Val extends UserProfileState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of UserProfileState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -102,6 +105,9 @@ class __$$UserProfileInitialStateImplCopyWithImpl<$Res>
       _$UserProfileInitialStateImpl _value,
       $Res Function(_$UserProfileInitialStateImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of UserProfileState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -219,6 +225,9 @@ class __$$UserProfileLoadingStateImplCopyWithImpl<$Res>
       _$UserProfileLoadingStateImpl _value,
       $Res Function(_$UserProfileLoadingStateImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of UserProfileState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -339,6 +348,8 @@ class __$$UserProfileSuccessStateImplCopyWithImpl<$Res>
       $Res Function(_$UserProfileSuccessStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of UserProfileState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -395,7 +406,9 @@ class _$UserProfileSuccessStateImpl implements UserProfileSuccessState {
   @override
   int get hashCode => Object.hash(runtimeType, id, email, firstName);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UserProfileState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$UserProfileSuccessStateImplCopyWith<_$UserProfileSuccessStateImpl>
@@ -486,7 +499,10 @@ abstract class UserProfileSuccessState implements UserProfileState {
   String get id;
   String get email;
   String get firstName;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of UserProfileState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UserProfileSuccessStateImplCopyWith<_$UserProfileSuccessStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -506,6 +522,9 @@ class __$$UserProfileErrorStateImplCopyWithImpl<$Res>
   __$$UserProfileErrorStateImplCopyWithImpl(_$UserProfileErrorStateImpl _value,
       $Res Function(_$UserProfileErrorStateImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of UserProfileState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc

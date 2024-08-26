@@ -18,7 +18,9 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$MoodsState {
   MoodsListState get moodsListState => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of MoodsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $MoodsStateCopyWith<MoodsState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -44,6 +46,8 @@ class _$MoodsStateCopyWithImpl<$Res, $Val extends MoodsState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of MoodsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -57,6 +61,8 @@ class _$MoodsStateCopyWithImpl<$Res, $Val extends MoodsState>
     ) as $Val);
   }
 
+  /// Create a copy of MoodsState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $MoodsListStateCopyWith<$Res> get moodsListState {
@@ -88,6 +94,8 @@ class __$$MoodsStateImplCopyWithImpl<$Res>
       _$MoodsStateImpl _value, $Res Function(_$MoodsStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of MoodsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -129,7 +137,9 @@ class _$MoodsStateImpl implements _MoodsState {
   @override
   int get hashCode => Object.hash(runtimeType, moodsListState);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of MoodsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$MoodsStateImplCopyWith<_$MoodsStateImpl> get copyWith =>
@@ -142,8 +152,11 @@ abstract class _MoodsState implements MoodsState {
 
   @override
   MoodsListState get moodsListState;
+
+  /// Create a copy of MoodsState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$MoodsStateImplCopyWith<_$MoodsStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -224,6 +237,9 @@ class _$MoodsListStateCopyWithImpl<$Res, $Val extends MoodsListState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of MoodsListState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -241,6 +257,9 @@ class __$$MoodsListInitialStateImplCopyWithImpl<$Res>
   __$$MoodsListInitialStateImplCopyWithImpl(_$MoodsListInitialStateImpl _value,
       $Res Function(_$MoodsListInitialStateImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of MoodsListState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -363,6 +382,9 @@ class __$$MoodsListLoadingStateImplCopyWithImpl<$Res>
   __$$MoodsListLoadingStateImplCopyWithImpl(_$MoodsListLoadingStateImpl _value,
       $Res Function(_$MoodsListLoadingStateImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of MoodsListState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -492,6 +514,8 @@ class __$$MoodsListSuccessStateImplCopyWithImpl<$Res>
       $Res Function(_$MoodsListSuccessStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of MoodsListState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -573,7 +597,9 @@ class _$MoodsListSuccessStateImpl implements MoodsListSuccessState {
       hasReachedMax,
       nextPageToLoad);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of MoodsListState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$MoodsListSuccessStateImplCopyWith<_$MoodsListSuccessStateImpl>
@@ -672,7 +698,10 @@ abstract class MoodsListSuccessState implements MoodsListState {
   bool get loadingMore;
   bool get hasReachedMax;
   int get nextPageToLoad;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of MoodsListState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$MoodsListSuccessStateImplCopyWith<_$MoodsListSuccessStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -691,6 +720,9 @@ class __$$MoodsListErrorStateImplCopyWithImpl<$Res>
   __$$MoodsListErrorStateImplCopyWithImpl(_$MoodsListErrorStateImpl _value,
       $Res Function(_$MoodsListErrorStateImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of MoodsListState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
