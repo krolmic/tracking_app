@@ -84,6 +84,9 @@ class _$DeleteMoodStateCopyWithImpl<$Res, $Val extends DeleteMoodState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of DeleteMoodState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -102,6 +105,9 @@ class __$$InitialDeleteMoodStateImplCopyWithImpl<$Res>
       _$InitialDeleteMoodStateImpl _value,
       $Res Function(_$InitialDeleteMoodStateImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of DeleteMoodState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -219,6 +225,9 @@ class __$$LoadingDeleteMoodStateImplCopyWithImpl<$Res>
       _$LoadingDeleteMoodStateImpl _value,
       $Res Function(_$LoadingDeleteMoodStateImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of DeleteMoodState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -336,6 +345,9 @@ class __$$SuccessDeleteMoodStateImplCopyWithImpl<$Res>
       _$SuccessDeleteMoodStateImpl _value,
       $Res Function(_$SuccessDeleteMoodStateImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of DeleteMoodState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -451,6 +463,9 @@ class __$$ErrorDeleteMoodStateImplCopyWithImpl<$Res>
   __$$ErrorDeleteMoodStateImplCopyWithImpl(_$ErrorDeleteMoodStateImpl _value,
       $Res Function(_$ErrorDeleteMoodStateImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of DeleteMoodState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc

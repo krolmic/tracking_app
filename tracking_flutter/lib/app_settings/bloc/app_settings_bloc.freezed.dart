@@ -98,6 +98,9 @@ class _$AppSettingsEventCopyWithImpl<$Res, $Val extends AppSettingsEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of AppSettingsEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -114,6 +117,9 @@ class __$$SettingsInitializedImplCopyWithImpl<$Res>
   __$$SettingsInitializedImplCopyWithImpl(_$SettingsInitializedImpl _value,
       $Res Function(_$SettingsInitializedImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of AppSettingsEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -245,6 +251,9 @@ class __$$SettingsFormInitializedImplCopyWithImpl<$Res>
       _$SettingsFormInitializedImpl _value,
       $Res Function(_$SettingsFormInitializedImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of AppSettingsEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -377,6 +386,8 @@ class __$$CurrencyChangedImplCopyWithImpl<$Res>
       _$CurrencyChangedImpl _value, $Res Function(_$CurrencyChangedImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AppSettingsEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -416,7 +427,9 @@ class _$CurrencyChangedImpl implements _CurrencyChanged {
   @override
   int get hashCode => Object.hash(runtimeType, currency);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AppSettingsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$CurrencyChangedImplCopyWith<_$CurrencyChangedImpl> get copyWith =>
@@ -516,7 +529,10 @@ abstract class _CurrencyChanged implements AppSettingsEvent {
   const factory _CurrencyChanged(final String currency) = _$CurrencyChangedImpl;
 
   String get currency;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AppSettingsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CurrencyChangedImplCopyWith<_$CurrencyChangedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -538,6 +554,8 @@ class __$$RevenueChangedImplCopyWithImpl<$Res>
       _$RevenueChangedImpl _value, $Res Function(_$RevenueChangedImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AppSettingsEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -576,7 +594,9 @@ class _$RevenueChangedImpl implements _RevenueChanged {
   @override
   int get hashCode => Object.hash(runtimeType, revenue);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AppSettingsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$RevenueChangedImplCopyWith<_$RevenueChangedImpl> get copyWith =>
@@ -676,7 +696,10 @@ abstract class _RevenueChanged implements AppSettingsEvent {
   const factory _RevenueChanged(final String revenue) = _$RevenueChangedImpl;
 
   String get revenue;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AppSettingsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$RevenueChangedImplCopyWith<_$RevenueChangedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -698,6 +721,8 @@ class __$$WorkTimeChangedImplCopyWithImpl<$Res>
       _$WorkTimeChangedImpl _value, $Res Function(_$WorkTimeChangedImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AppSettingsEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -737,7 +762,9 @@ class _$WorkTimeChangedImpl implements _WorkTimeChanged {
   @override
   int get hashCode => Object.hash(runtimeType, workTime);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AppSettingsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$WorkTimeChangedImplCopyWith<_$WorkTimeChangedImpl> get copyWith =>
@@ -838,7 +865,10 @@ abstract class _WorkTimeChanged implements AppSettingsEvent {
       _$WorkTimeChangedImpl;
 
   Duration get workTime;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AppSettingsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$WorkTimeChangedImplCopyWith<_$WorkTimeChangedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -858,6 +888,9 @@ class __$$SettingsFormSubmittedImplCopyWithImpl<$Res>
   __$$SettingsFormSubmittedImplCopyWithImpl(_$SettingsFormSubmittedImpl _value,
       $Res Function(_$SettingsFormSubmittedImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of AppSettingsEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -982,7 +1015,9 @@ mixin _$AppSettingsState {
   AppSettingsDataState get appSettingsData =>
       throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AppSettingsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AppSettingsStateCopyWith<AppSettingsState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1012,6 +1047,8 @@ class _$AppSettingsStateCopyWithImpl<$Res, $Val extends AppSettingsState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of AppSettingsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1035,6 +1072,8 @@ class _$AppSettingsStateCopyWithImpl<$Res, $Val extends AppSettingsState>
     ) as $Val);
   }
 
+  /// Create a copy of AppSettingsState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $AppSettingsFormStateCopyWith<$Res> get appSettingsForm {
@@ -1043,6 +1082,8 @@ class _$AppSettingsStateCopyWithImpl<$Res, $Val extends AppSettingsState>
     });
   }
 
+  /// Create a copy of AppSettingsState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $AppSettingsDataStateCopyWith<$Res> get appSettingsData {
@@ -1079,6 +1120,8 @@ class __$$AppSettingsStateImplCopyWithImpl<$Res>
       $Res Function(_$AppSettingsStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AppSettingsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1143,7 +1186,9 @@ class _$AppSettingsStateImpl implements _AppSettingsState {
   int get hashCode => Object.hash(
       runtimeType, appSettingsForm, formSubmissionStatus, appSettingsData);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AppSettingsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AppSettingsStateImplCopyWith<_$AppSettingsStateImpl> get copyWith =>
@@ -1163,8 +1208,11 @@ abstract class _AppSettingsState implements AppSettingsState {
   FormzSubmissionStatus get formSubmissionStatus;
   @override
   AppSettingsDataState get appSettingsData;
+
+  /// Create a copy of AppSettingsState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AppSettingsStateImplCopyWith<_$AppSettingsStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1229,6 +1277,9 @@ class _$AppSettingsFormStateCopyWithImpl<$Res,
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of AppSettingsFormState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -1248,6 +1299,9 @@ class __$$AppSettingsFormNoneStateImplCopyWithImpl<$Res>
       _$AppSettingsFormNoneStateImpl _value,
       $Res Function(_$AppSettingsFormNoneStateImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of AppSettingsFormState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -1358,6 +1412,8 @@ class __$$AppSettingsFormInitializedStateImplCopyWithImpl<$Res>
       $Res Function(_$AppSettingsFormInitializedStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AppSettingsFormState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1398,7 +1454,9 @@ class _$AppSettingsFormInitializedStateImpl
   @override
   int get hashCode => Object.hash(runtimeType, formState);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AppSettingsFormState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AppSettingsFormInitializedStateImplCopyWith<
@@ -1477,7 +1535,10 @@ abstract class _AppSettingsFormInitializedState
       _$AppSettingsFormInitializedStateImpl;
 
   AppSettingsFormzState get formState;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AppSettingsFormState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AppSettingsFormInitializedStateImplCopyWith<
           _$AppSettingsFormInitializedStateImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -1560,6 +1621,9 @@ class _$AppSettingsDataStateCopyWithImpl<$Res,
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of AppSettingsDataState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -1579,6 +1643,9 @@ class __$$AppSettingsDataInitialStateImplCopyWithImpl<$Res>
       _$AppSettingsDataInitialStateImpl _value,
       $Res Function(_$AppSettingsDataInitialStateImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of AppSettingsDataState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -1705,6 +1772,9 @@ class __$$AppSettingsDataLoadingStateImplCopyWithImpl<$Res>
       _$AppSettingsDataLoadingStateImpl _value,
       $Res Function(_$AppSettingsDataLoadingStateImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of AppSettingsDataState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -1834,6 +1904,8 @@ class __$$AppSettingsDataSuccessStateImplCopyWithImpl<$Res>
       $Res Function(_$AppSettingsDataSuccessStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AppSettingsDataState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1896,7 +1968,9 @@ class _$AppSettingsDataSuccessStateImpl
   int get hashCode =>
       Object.hash(runtimeType, currency, preSetWorkTime, preSetRevenue);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AppSettingsDataState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AppSettingsDataSuccessStateImplCopyWith<_$AppSettingsDataSuccessStateImpl>
@@ -1993,7 +2067,10 @@ abstract class _AppSettingsDataSuccessState implements AppSettingsDataState {
   String get currency;
   Duration get preSetWorkTime;
   double get preSetRevenue;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AppSettingsDataState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AppSettingsDataSuccessStateImplCopyWith<_$AppSettingsDataSuccessStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -2015,6 +2092,9 @@ class __$$AppSettingsDataErrorStateImplCopyWithImpl<$Res>
       _$AppSettingsDataErrorStateImpl _value,
       $Res Function(_$AppSettingsDataErrorStateImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of AppSettingsDataState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc

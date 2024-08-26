@@ -82,6 +82,9 @@ class _$CalendarEventCopyWithImpl<$Res, $Val extends CalendarEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of CalendarEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -101,6 +104,9 @@ class __$$CalendarEventCalendarInitializedImplCopyWithImpl<$Res>
       _$CalendarEventCalendarInitializedImpl _value,
       $Res Function(_$CalendarEventCalendarInitializedImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of CalendarEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -222,6 +228,8 @@ class __$$CalendarEventTargetDateChangedImplCopyWithImpl<$Res>
       $Res Function(_$CalendarEventTargetDateChangedImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of CalendarEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -261,7 +269,9 @@ class _$CalendarEventTargetDateChangedImpl
   @override
   int get hashCode => Object.hash(runtimeType, date);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CalendarEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$CalendarEventTargetDateChangedImplCopyWith<
@@ -347,7 +357,10 @@ abstract class _CalendarEventTargetDateChanged implements CalendarEvent {
       {required final DateTime date}) = _$CalendarEventTargetDateChangedImpl;
 
   DateTime get date;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of CalendarEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CalendarEventTargetDateChangedImplCopyWith<
           _$CalendarEventTargetDateChangedImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -369,6 +382,9 @@ class __$$CalendarEventMoodsUpdatedImplCopyWithImpl<$Res>
       _$CalendarEventMoodsUpdatedImpl _value,
       $Res Function(_$CalendarEventMoodsUpdatedImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of CalendarEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -473,7 +489,9 @@ mixin _$CalendarState {
   CalendarMoodsState get moodsState => throw _privateConstructorUsedError;
   CalendarTargetDateState get targetDate => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CalendarState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $CalendarStateCopyWith<CalendarState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -501,6 +519,8 @@ class _$CalendarStateCopyWithImpl<$Res, $Val extends CalendarState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of CalendarState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -519,6 +539,8 @@ class _$CalendarStateCopyWithImpl<$Res, $Val extends CalendarState>
     ) as $Val);
   }
 
+  /// Create a copy of CalendarState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $CalendarMoodsStateCopyWith<$Res> get moodsState {
@@ -527,6 +549,8 @@ class _$CalendarStateCopyWithImpl<$Res, $Val extends CalendarState>
     });
   }
 
+  /// Create a copy of CalendarState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $CalendarTargetDateStateCopyWith<$Res> get targetDate {
@@ -561,6 +585,8 @@ class __$$CalendarStateImplCopyWithImpl<$Res>
       _$CalendarStateImpl _value, $Res Function(_$CalendarStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of CalendarState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -613,7 +639,9 @@ class _$CalendarStateImpl implements _CalendarState {
   @override
   int get hashCode => Object.hash(runtimeType, moodsState, targetDate);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CalendarState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$CalendarStateImplCopyWith<_$CalendarStateImpl> get copyWith =>
@@ -629,8 +657,11 @@ abstract class _CalendarState implements CalendarState {
   CalendarMoodsState get moodsState;
   @override
   CalendarTargetDateState get targetDate;
+
+  /// Create a copy of CalendarState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CalendarStateImplCopyWith<_$CalendarStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -694,6 +725,9 @@ class _$CalendarTargetDateStateCopyWithImpl<$Res,
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of CalendarTargetDateState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -713,6 +747,9 @@ class __$$CalendarTargetDateInitialStateImplCopyWithImpl<$Res>
       _$CalendarTargetDateInitialStateImpl _value,
       $Res Function(_$CalendarTargetDateInitialStateImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of CalendarTargetDateState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -825,6 +862,8 @@ class __$$CalendarTargetDateSetStateImplCopyWithImpl<$Res>
       $Res Function(_$CalendarTargetDateSetStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of CalendarTargetDateState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -863,7 +902,9 @@ class _$CalendarTargetDateSetStateImpl implements CalendarTargetDateSetState {
   @override
   int get hashCode => Object.hash(runtimeType, date);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CalendarTargetDateState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$CalendarTargetDateSetStateImplCopyWith<_$CalendarTargetDateSetStateImpl>
@@ -938,7 +979,10 @@ abstract class CalendarTargetDateSetState implements CalendarTargetDateState {
       _$CalendarTargetDateSetStateImpl;
 
   DateTime get date;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of CalendarTargetDateState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CalendarTargetDateSetStateImplCopyWith<_$CalendarTargetDateSetStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -1013,6 +1057,9 @@ class _$CalendarMoodsStateCopyWithImpl<$Res, $Val extends CalendarMoodsState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of CalendarMoodsState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -1032,6 +1079,9 @@ class __$$CalendarMoodsInitialStateImplCopyWithImpl<$Res>
       _$CalendarMoodsInitialStateImpl _value,
       $Res Function(_$CalendarMoodsInitialStateImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of CalendarMoodsState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -1150,6 +1200,9 @@ class __$$CalendarMoodsLoadingStateImplCopyWithImpl<$Res>
       _$CalendarMoodsLoadingStateImpl _value,
       $Res Function(_$CalendarMoodsLoadingStateImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of CalendarMoodsState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -1271,6 +1324,8 @@ class __$$CalendarMoodsSuccessStateImplCopyWithImpl<$Res>
       $Res Function(_$CalendarMoodsSuccessStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of CalendarMoodsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1316,7 +1371,9 @@ class _$CalendarMoodsSuccessStateImpl implements CalendarMoodsSuccessState {
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_moods));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CalendarMoodsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$CalendarMoodsSuccessStateImplCopyWith<_$CalendarMoodsSuccessStateImpl>
@@ -1403,7 +1460,10 @@ abstract class CalendarMoodsSuccessState implements CalendarMoodsState {
       _$CalendarMoodsSuccessStateImpl;
 
   List<Mood> get moods;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of CalendarMoodsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CalendarMoodsSuccessStateImplCopyWith<_$CalendarMoodsSuccessStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -1425,6 +1485,9 @@ class __$$CalendarMoodsErrorStateImplCopyWithImpl<$Res>
       _$CalendarMoodsErrorStateImpl _value,
       $Res Function(_$CalendarMoodsErrorStateImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of CalendarMoodsState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc

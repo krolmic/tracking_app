@@ -117,6 +117,9 @@ class _$UpdateMoodEventCopyWithImpl<$Res, $Val extends UpdateMoodEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of UpdateMoodEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -138,6 +141,8 @@ class __$$UpdateSubmittedImplCopyWithImpl<$Res>
       _$UpdateSubmittedImpl _value, $Res Function(_$UpdateSubmittedImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of UpdateMoodEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -151,6 +156,8 @@ class __$$UpdateSubmittedImplCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of UpdateMoodEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $MoodCopyWith<$Res> get mood {
@@ -184,7 +191,9 @@ class _$UpdateSubmittedImpl implements _UpdateSubmitted {
   @override
   int get hashCode => Object.hash(runtimeType, mood);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UpdateMoodEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$UpdateSubmittedImplCopyWith<_$UpdateSubmittedImpl> get copyWith =>
@@ -303,7 +312,10 @@ abstract class _UpdateSubmitted implements UpdateMoodEvent {
   const factory _UpdateSubmitted(final Mood mood) = _$UpdateSubmittedImpl;
 
   Mood get mood;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of UpdateMoodEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UpdateSubmittedImplCopyWith<_$UpdateSubmittedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -325,6 +337,8 @@ class __$$MoodValueChangedImplCopyWithImpl<$Res>
       $Res Function(_$MoodValueChangedImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of UpdateMoodEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -363,7 +377,9 @@ class _$MoodValueChangedImpl implements _MoodValueChanged {
   @override
   int get hashCode => Object.hash(runtimeType, value);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UpdateMoodEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$MoodValueChangedImplCopyWith<_$MoodValueChangedImpl> get copyWith =>
@@ -482,7 +498,10 @@ abstract class _MoodValueChanged implements UpdateMoodEvent {
   const factory _MoodValueChanged(final double value) = _$MoodValueChangedImpl;
 
   double get value;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of UpdateMoodEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$MoodValueChangedImplCopyWith<_$MoodValueChangedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -507,6 +526,8 @@ class __$$ThingsIAmGratefulFor1ChangedImplCopyWithImpl<$Res>
       $Res Function(_$ThingsIAmGratefulFor1ChangedImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of UpdateMoodEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -546,7 +567,9 @@ class _$ThingsIAmGratefulFor1ChangedImpl
   @override
   int get hashCode => Object.hash(runtimeType, value);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UpdateMoodEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ThingsIAmGratefulFor1ChangedImplCopyWith<
@@ -667,7 +690,10 @@ abstract class _ThingsIAmGratefulFor1Changed implements UpdateMoodEvent {
       _$ThingsIAmGratefulFor1ChangedImpl;
 
   String get value;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of UpdateMoodEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ThingsIAmGratefulFor1ChangedImplCopyWith<
           _$ThingsIAmGratefulFor1ChangedImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -693,6 +719,8 @@ class __$$ThingsIAmGratefulFor2ChangedImplCopyWithImpl<$Res>
       $Res Function(_$ThingsIAmGratefulFor2ChangedImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of UpdateMoodEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -732,7 +760,9 @@ class _$ThingsIAmGratefulFor2ChangedImpl
   @override
   int get hashCode => Object.hash(runtimeType, value);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UpdateMoodEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ThingsIAmGratefulFor2ChangedImplCopyWith<
@@ -853,7 +883,10 @@ abstract class _ThingsIAmGratefulFor2Changed implements UpdateMoodEvent {
       _$ThingsIAmGratefulFor2ChangedImpl;
 
   String get value;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of UpdateMoodEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ThingsIAmGratefulFor2ChangedImplCopyWith<
           _$ThingsIAmGratefulFor2ChangedImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -879,6 +912,8 @@ class __$$ThingsIAmGratefulFor3ChangedImplCopyWithImpl<$Res>
       $Res Function(_$ThingsIAmGratefulFor3ChangedImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of UpdateMoodEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -918,7 +953,9 @@ class _$ThingsIAmGratefulFor3ChangedImpl
   @override
   int get hashCode => Object.hash(runtimeType, value);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UpdateMoodEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ThingsIAmGratefulFor3ChangedImplCopyWith<
@@ -1039,7 +1076,10 @@ abstract class _ThingsIAmGratefulFor3Changed implements UpdateMoodEvent {
       _$ThingsIAmGratefulFor3ChangedImpl;
 
   String get value;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of UpdateMoodEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ThingsIAmGratefulFor3ChangedImplCopyWith<
           _$ThingsIAmGratefulFor3ChangedImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -1062,6 +1102,8 @@ class __$$RevenueChangedImplCopyWithImpl<$Res>
       _$RevenueChangedImpl _value, $Res Function(_$RevenueChangedImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of UpdateMoodEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1100,7 +1142,9 @@ class _$RevenueChangedImpl implements _RevenueChanged {
   @override
   int get hashCode => Object.hash(runtimeType, value);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UpdateMoodEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$RevenueChangedImplCopyWith<_$RevenueChangedImpl> get copyWith =>
@@ -1219,7 +1263,10 @@ abstract class _RevenueChanged implements UpdateMoodEvent {
   const factory _RevenueChanged(final String value) = _$RevenueChangedImpl;
 
   String get value;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of UpdateMoodEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$RevenueChangedImplCopyWith<_$RevenueChangedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1241,6 +1288,8 @@ class __$$WorkTimeChangedImplCopyWithImpl<$Res>
       _$WorkTimeChangedImpl _value, $Res Function(_$WorkTimeChangedImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of UpdateMoodEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1279,7 +1328,9 @@ class _$WorkTimeChangedImpl implements _WorkTimeChanged {
   @override
   int get hashCode => Object.hash(runtimeType, value);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UpdateMoodEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$WorkTimeChangedImplCopyWith<_$WorkTimeChangedImpl> get copyWith =>
@@ -1398,7 +1449,10 @@ abstract class _WorkTimeChanged implements UpdateMoodEvent {
   const factory _WorkTimeChanged(final Duration value) = _$WorkTimeChangedImpl;
 
   Duration get value;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of UpdateMoodEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$WorkTimeChangedImplCopyWith<_$WorkTimeChangedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1422,6 +1476,8 @@ class __$$MoodSelectedImplCopyWithImpl<$Res>
       _$MoodSelectedImpl _value, $Res Function(_$MoodSelectedImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of UpdateMoodEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1435,6 +1491,8 @@ class __$$MoodSelectedImplCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of UpdateMoodEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $MoodCopyWith<$Res> get mood {
@@ -1468,7 +1526,9 @@ class _$MoodSelectedImpl implements _MoodSelected {
   @override
   int get hashCode => Object.hash(runtimeType, mood);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UpdateMoodEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$MoodSelectedImplCopyWith<_$MoodSelectedImpl> get copyWith =>
@@ -1586,7 +1646,10 @@ abstract class _MoodSelected implements UpdateMoodEvent {
   const factory _MoodSelected(final Mood mood) = _$MoodSelectedImpl;
 
   Mood get mood;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of UpdateMoodEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$MoodSelectedImplCopyWith<_$MoodSelectedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1597,7 +1660,9 @@ mixin _$UpdateMoodState {
   MoodFormzState get moodFormState => throw _privateConstructorUsedError;
   Mood? get mood => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UpdateMoodState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $UpdateMoodStateCopyWith<UpdateMoodState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1626,6 +1691,8 @@ class _$UpdateMoodStateCopyWithImpl<$Res, $Val extends UpdateMoodState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of UpdateMoodState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1649,6 +1716,8 @@ class _$UpdateMoodStateCopyWithImpl<$Res, $Val extends UpdateMoodState>
     ) as $Val);
   }
 
+  /// Create a copy of UpdateMoodState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $MoodCopyWith<$Res>? get mood {
@@ -1687,6 +1756,8 @@ class __$$UpdateMoodStateImplCopyWithImpl<$Res>
       _$UpdateMoodStateImpl _value, $Res Function(_$UpdateMoodStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of UpdateMoodState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1748,7 +1819,9 @@ class _$UpdateMoodStateImpl implements _UpdateMoodState {
   @override
   int get hashCode => Object.hash(runtimeType, formStatus, moodFormState, mood);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UpdateMoodState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$UpdateMoodStateImplCopyWith<_$UpdateMoodStateImpl> get copyWith =>
@@ -1768,8 +1841,11 @@ abstract class _UpdateMoodState implements UpdateMoodState {
   MoodFormzState get moodFormState;
   @override
   Mood? get mood;
+
+  /// Create a copy of UpdateMoodState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UpdateMoodStateImplCopyWith<_$UpdateMoodStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
