@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tracking_app/gen/assets.gen.dart';
 import 'package:tracking_app/shared/theme/colors.dart';
 import 'package:tracking_app/shared/theme/layout.dart';
 import 'package:tracking_app/shared/view/base_view.dart';
@@ -34,11 +35,8 @@ class AuthScreen extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                const Center(
-                  child: Image(
-                    image: AssetImage(
-                      'assets/images/adaptive_icon_foreground.png',
-                    ),
+                Center(
+                  child: Assets.images.adaptiveIconForeground.image(
                     width: 100,
                     height: 100,
                   ),
