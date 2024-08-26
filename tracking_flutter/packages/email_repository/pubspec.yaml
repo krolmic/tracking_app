@@ -6,7 +6,7 @@ environment:
   sdk: ^3.0.6
 
 dependencies:
-  flutter_email_sender: ^6.0.2
+  flutter_email_sender: ^6.0.3
 
 dev_dependencies:
   test: ^1.16.4
