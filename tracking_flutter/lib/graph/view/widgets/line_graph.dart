@@ -82,6 +82,8 @@ class _LineGraph extends StatelessWidget {
   final String currencySymbol;
   final GraphTimeRangeMode timeRangeMode;
 
+  static const minX = 1;
+
   @override
   Widget build(BuildContext context) {
     final translations = AppLocalizations.of(context)!;
@@ -92,24 +94,32 @@ class _LineGraph extends StatelessWidget {
     );
   }
 
-  LineChartData lineChartData(AppLocalizations translations) {
-    final firstDay = timeRangeMode.isMonthly ? 1 : targetDate.startOfWeek.day;
-    final lastDay = timeRangeMode.isMonthly
-        ? targetDate.endOfMonth.day
-        : targetDate.endOfWeek.day;
-
-    return LineChartData(
-      lineTouchData: lineTouchData(translations),
-      gridData: gridData,
-      titlesData: titlesData,
-      borderData: borderData,
-      lineBarsData: lineBarsData,
-      minX: firstDay.toDouble(),
-      maxX: lastDay.toDouble(),
-      maxY: 10,
-      minY: 0,
-    );
+  /// Returns the maximum value for the x-axis.
+  ///
+  /// If [timeRangeMode] is [GraphTimeRangeMode.monthly],
+  /// the maximum value is the last day of the month.
+  ///
+  /// Otherwise (if [timeRangeMode] is [GraphTimeRangeMode.weekly]),
+  /// the maximum value is 7.
+  double get maxX {
+    if (timeRangeMode.isMonthly) {
+      return targetDate.endOfMonth.day.toDouble();
+    } else {
+      return 7;
+    }
   }
+
+  LineChartData lineChartData(AppLocalizations translations) => LineChartData(
+        lineTouchData: lineTouchData(translations),
+        gridData: gridData,
+        titlesData: titlesData,
+        borderData: borderData,
+        lineBarsData: lineBarsData,
+        minX: minX.toDouble(),
+        maxX: maxX,
+        maxY: 10,
+        minY: 0,
+      );
 
   LineTouchData lineTouchData(AppLocalizations translations) => LineTouchData(
         getTouchedSpotIndicator: (barData, spotIndexes) {
@@ -200,6 +210,10 @@ class _LineGraph extends StatelessWidget {
         reservedSize: 40,
       );
 
+  /// Returns the bottom title for the given [value]
+  /// (between [minX] and [maxX]).
+  ///
+  /// The title represents day of the selected month based on [value].
   Widget getBottomTitleForMonthlyMode(double value, TitleMeta meta) {
     if (value == 5 || value == 15 || value == 25) {
       final day = DateTime(targetDate.year, targetDate.month, value.toInt());
@@ -225,17 +239,23 @@ class _LineGraph extends StatelessWidget {
     }
   }
 
+  /// Returns the bottom title for the given [value]
+  /// (between [minX] and [maxX]).
+  ///
+  /// The title represents day of the selected week based on [value].
   Widget getBottomTitleForWeeklyMode(double value, TitleMeta meta) {
-    final firstDayIsOdd = targetDate.startOfWeek.day.isOdd;
-    final day = DateTime(targetDate.year, targetDate.month, value.toInt());
+    final valueWeekDates = targetDate.weekDates;
+    final valueDateIndex = value.toInt() - 1;
+    final valueDate = valueWeekDates[valueDateIndex];
 
-    if ((firstDayIsOdd && value.toInt().isEven) ||
-        (!firstDayIsOdd && value.toInt().isOdd)) {
+    final isEverySecondDate = value.toInt().isEven;
+
+    if (isEverySecondDate) {
       return SideTitleWidget(
         axisSide: meta.axisSide,
         space: 10,
         child: Text(
-          day.getDateString(
+          valueDate.getDateString(
             null,
             includeYear: false,
           ),
@@ -244,7 +264,7 @@ class _LineGraph extends StatelessWidget {
       );
     } else {
       return Text(
-        value.toInt().toString(),
+        valueDate.day.toString(),
         style: _LineGraphTheme.bottomSmallTitlesTextStyle,
       );
     }
@@ -284,7 +304,7 @@ class _LineGraph extends StatelessWidget {
   List<FlSpot> get moodsSpots => moods
       .map(
         (mood) => FlSpot(
-          mood.createdOn.day.toDouble(),
+          getSpotXValue(mood.createdOn),
           mood.value.toDouble(),
         ),
       )
@@ -308,7 +328,7 @@ class _LineGraph extends StatelessWidget {
   List<FlSpot> get revenueSpots => moodsWithTrackedRevenue
       .map(
         (mood) => FlSpot(
-          mood.createdOn.day.toDouble(),
+          getSpotXValue(mood.createdOn),
           greatestRevenue != 0 ? (mood.revenue! / greatestRevenue) * 10 : 0,
         ),
       )
@@ -332,11 +352,17 @@ class _LineGraph extends StatelessWidget {
   List<FlSpot> get workTimeSpots => moodsWithTrackedWorkTime
       .map(
         (mood) => FlSpot(
-          mood.createdOn.day.toDouble(),
+          getSpotXValue(mood.createdOn),
           greatestWorkTime != Duration.zero
               ? (mood.workTime!.inMinutes / greatestWorkTime.inMinutes) * 10
               : 0,
         ),
       )
       .toList();
+
+  double getSpotXValue(DateTime date) {
+    return timeRangeMode.isMonthly
+        ? date.day.toDouble()
+        : date.weekday.toDouble();
+  }
 }
