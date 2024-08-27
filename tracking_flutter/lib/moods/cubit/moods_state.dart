@@ -50,7 +50,7 @@ extension MoodsListStateX on MoodsListState {
   bool get containsTodayMood {
     return maybeWhen(
       loaded: (moods, _, __, ___) {
-        return moods.any((mood) => mood.isToday);
+        return moods.any((mood) => mood.createdOn.isToday);
       },
       orElse: () => false,
     );
@@ -60,7 +60,7 @@ extension MoodsListStateX on MoodsListState {
     if (isSuccess) {
       try {
         return (this as MoodsListSuccessState).moods.firstWhere(
-              (mood) => mood.isToday,
+              (mood) => mood.createdOn.isToday,
             );
       } catch (e) {
         return null;

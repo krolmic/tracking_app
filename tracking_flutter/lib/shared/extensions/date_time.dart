@@ -20,9 +20,24 @@ extension DateTimeX on DateTime {
 
   DateTime get endOfMonth => DateTime(year, month + 1, 0);
 
-  DateTime get startOfWeek => subtract(Duration(days: weekday - 1));
+  DateTime get startOfWeek {
+    final startOfWeekDateTime = subtract(Duration(days: weekday - 1));
+
+    return DateTime(
+      startOfWeekDateTime.year,
+      startOfWeekDateTime.month,
+      startOfWeekDateTime.day,
+    );
+  }
 
   DateTime get endOfWeek => add(Duration(days: 7 - weekday));
+
+  List<DateTime> get weekDates {
+    return List.generate(
+      endOfWeek.difference(startOfWeek).inDays + 1,
+      (index) => startOfWeek.add(Duration(days: index)),
+    );
+  }
 
   int get numberOfWeeksInYear {
     final firstDayOfYear = DateTime(year);
@@ -55,6 +70,12 @@ extension DateTimeX on DateTime {
 
   bool isSameMonth(DateTime other) =>
       year == other.year && month == other.month;
+
+  bool get isThisWeek {
+    final now = DateTime.now();
+    final startOfWeek = now.startOfWeek;
+    return isAfter(startOfWeek);
+  }
 
   bool get isToday {
     final now = DateTime.now();

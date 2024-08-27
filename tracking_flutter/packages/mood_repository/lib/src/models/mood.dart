@@ -22,19 +22,6 @@ class Mood with _$Mood {
   /// [Mood] constructor awaiting Serverpod's client model [MoodEntry] object
   factory Mood.fromMoodEntry(MoodEntry moodEntry) =>
       MoodCoverter().convert(moodEntry);
-
-  bool get isToday {
-    final now = DateTime.now();
-    return createdOn.year == now.year &&
-        createdOn.month == now.month &&
-        createdOn.day == now.day;
-  }
-
-  bool get isThisWeek {
-    final now = DateTime.now();
-    final weekStart = now.subtract(Duration(days: now.weekday - 1));
-    return createdOn.isAfter(weekStart.subtract(const Duration(days: 1)));
-  }
 }
 
 /// Converts [MoodEntry] to [Mood]
