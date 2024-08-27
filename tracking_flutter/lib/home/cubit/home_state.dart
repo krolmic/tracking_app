@@ -33,7 +33,7 @@ extension MoodsListStateX on MoodsListState {
   bool get containsTodayMood {
     return maybeWhen(
       loaded: (moods) {
-        return moods.any((mood) => mood.isToday);
+        return moods.any((mood) => mood.createdOn.isToday);
       },
       orElse: () => false,
     );
@@ -42,7 +42,7 @@ extension MoodsListStateX on MoodsListState {
   List<Mood> get moodsThisWeek {
     return maybeWhen(
       loaded: (moods) {
-        return moods.where((mood) => mood.isThisWeek).toList();
+        return moods.where((mood) => mood.createdOn.isThisWeek).toList();
       },
       orElse: () => [],
     );
