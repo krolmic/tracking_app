@@ -151,6 +151,17 @@ void main() {
       expect(date1.isSameMonth(date3), false);
     });
 
+    test('weekNumber returns correct number', () {
+      expect(DateTime(2023).weekNumber, 52); // Last week of 2022
+      expect(DateTime(2023, 1, 2).weekNumber, 1); // First week of 2023
+      expect(DateTime(2023, 12, 31).weekNumber, 52); // Last week of 2023
+      expect(DateTime(2024).weekNumber, 1); // First week of 2024
+      expect(DateTime(2024, 8, 29).weekNumber, 35); // 35th week of 2024
+      expect(DateTime(2024, 12, 30).weekNumber, 1); // First week of 2025
+      expect(DateTime(2025).weekNumber, 1); // First week of 2025
+      expect(DateTime(2025, 4, 2).weekNumber, 14); // 14th week of 2025
+    });
+
     testWidgets('getDateString returns correct string',
         (WidgetTester tester) async {
       await tester.pumpWidget(

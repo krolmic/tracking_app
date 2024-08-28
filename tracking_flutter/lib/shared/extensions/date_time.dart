@@ -53,23 +53,31 @@ extension DateTimeX on DateTime {
   }
 
   int get numberOfWeeksInYear {
-    final firstDayOfYear = DateTime(year);
-    final lastDayOfYear = DateTime(year, 12, 31);
+    final lastDayOfYear = DateTime(year, 12, 28);
 
-    final firstWeekNumber = firstDayOfYear.weekNumber;
-    final lastWeekNumber = lastDayOfYear.weekNumber;
-
-    return lastWeekNumber - firstWeekNumber + 1;
+    return lastDayOfYear.weekNumber;
   }
 
   int get weekNumber {
-    final firstDayOfYear = DateTime(year);
-    final firstWeekday = firstDayOfYear.weekday;
+    final weekNumber = (daysSinceLastYear - weekday + 10) ~/ 7;
 
-    final daysSinceFirstWeekday = (weekday - firstWeekday + 7) % 7;
-    final daysSinceFirstDayOfYear = difference(firstDayOfYear).inDays;
+    if (weekNumber == 0) {
+      return DateTime(year - 1, 12, 28).weekNumber;
+    }
 
-    return 1 + (daysSinceFirstDayOfYear - daysSinceFirstWeekday) ~/ 7;
+    final yearHas53Weeks = DateTime(year).weekday != DateTime.thursday &&
+        DateTime(year, 12, 31).weekday != DateTime.thursday;
+
+    if (weekNumber == 53 && yearHas53Weeks) {
+      return 1;
+    }
+
+    return weekNumber;
+  }
+
+  int get daysSinceLastYear {
+    final lastDayOfPreviousYear = DateTime(year - 1, 12, 31);
+    return difference(lastDayOfPreviousYear).inDays;
   }
 
   DateTime get dateOnly => DateTime(year, month, day);
