@@ -30,7 +30,20 @@ extension DateTimeX on DateTime {
     );
   }
 
-  DateTime get endOfWeek => add(Duration(days: 7 - weekday));
+  DateTime get endOfWeek {
+    final endOfWeekDateTime = add(Duration(days: 7 - weekday));
+
+    return DateTime(
+      endOfWeekDateTime.year,
+      endOfWeekDateTime.month,
+      endOfWeekDateTime.day,
+      23,
+      59,
+      59,
+      999,
+      999,
+    );
+  }
 
   List<DateTime> get weekDates {
     return List.generate(
@@ -71,10 +84,11 @@ extension DateTimeX on DateTime {
   bool isSameMonth(DateTime other) =>
       year == other.year && month == other.month;
 
-  bool get isThisWeek {
-    final now = DateTime.now();
+  bool isThisWeek(DateTime now) {
     final startOfWeek = now.startOfWeek;
-    return isAfter(startOfWeek);
+    final endOfWeek = now.endOfWeek;
+    return isAfter(startOfWeek.subtract(const Duration(microseconds: 1))) &&
+        isBefore(endOfWeek.add(const Duration(microseconds: 1)));
   }
 
   bool get isToday {
