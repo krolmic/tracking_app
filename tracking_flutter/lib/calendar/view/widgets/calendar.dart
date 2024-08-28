@@ -8,6 +8,11 @@ class _CalendarTheme {
     fontWeight: FontWeight.bold,
   );
 
+  static const calendarDaysAfterTodayTextStyle = TextStyle(
+    color: Colors.grey,
+    fontWeight: FontWeight.bold,
+  );
+
   static const todayTextStyle = TextStyle(
     color: AppColors.contentOnDarkBackgroundColor,
     fontWeight: FontWeight.bold,
@@ -52,6 +57,35 @@ class _Calendar extends StatelessWidget {
       weekendTextStyle: _CalendarTheme.calendarDaysTextStyle,
       nextDaysTextStyle: _CalendarTheme.calendarNextAndPrevDaysTextStyle,
       headerTextStyle: Theme.of(context).textTheme.headlineSmall,
+      customDayBuilder: (
+        bool isSelectable,
+        int index,
+        bool isSelectedDay,
+        bool isToday,
+        bool isPrevMonthDay,
+        TextStyle textStyle,
+        bool isNextMonthDay,
+        bool isThisMonthDay,
+        DateTime date,
+      ) {
+        if (isNextMonthDay || isPrevMonthDay) {
+          return Center(
+            child: Text(
+              '${date.day}',
+              style: _CalendarTheme.calendarNextAndPrevDaysTextStyle,
+            ),
+          );
+        } else if (date.isAfterToday) {
+          return Center(
+            child: Text(
+              '${date.day}',
+              style: _CalendarTheme.calendarDaysAfterTodayTextStyle,
+            ),
+          );
+        }
+
+        return null;
+      },
       rightButtonIcon: Icon(
         Iconsax.arrow_right_3_outline,
         color: _CalendarTheme.calendarPrevAndNextButtonsColor,
