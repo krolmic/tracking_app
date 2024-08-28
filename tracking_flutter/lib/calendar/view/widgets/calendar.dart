@@ -44,7 +44,7 @@ class _Calendar extends StatelessWidget {
   Widget build(BuildContext context) {
     return CalendarCarousel<Event>(
       firstDayOfWeek: (0 + 1) % 7,
-      height: 380,
+      height: 395,
       todayButtonColor: _CalendarTheme.todayButtonColor,
       todayTextStyle: _CalendarTheme.todayTextStyle,
       daysTextStyle: _CalendarTheme.calendarDaysTextStyle,
