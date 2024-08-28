@@ -11,7 +11,7 @@ class _LineGraphExplanation extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const _LineGraphBarIndicator(
-          color: _LineGraphTheme.moodsLineChartBarColor,
+          color: LineGraphTheme.moodsLineChartBarColor,
         ),
         const HorizontalSpacing.small(),
         Text(
@@ -22,7 +22,7 @@ class _LineGraphExplanation extends StatelessWidget {
         ),
         const HorizontalSpacing.large(),
         const _LineGraphBarIndicator(
-          color: _LineGraphTheme.workHoursLineCharBarColor,
+          color: LineGraphTheme.workHoursLineCharBarColor,
         ),
         const HorizontalSpacing.small(),
         Text(
@@ -33,7 +33,7 @@ class _LineGraphExplanation extends StatelessWidget {
         ),
         const HorizontalSpacing.large(),
         const _LineGraphBarIndicator(
-          color: _LineGraphTheme.revenueLineCharBarColor,
+          color: LineGraphTheme.revenueLineCharBarColor,
         ),
         const HorizontalSpacing.small(),
         Text(

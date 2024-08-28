@@ -1,4 +1,3 @@
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,10 +10,10 @@ import 'package:tracking_app/app_settings/bloc/app_settings_bloc.dart';
 import 'package:tracking_app/create_mood/bloc/create_mood_bloc.dart';
 import 'package:tracking_app/delete_mood/cubit/delete_mood_cubit.dart';
 import 'package:tracking_app/graph/bloc/graph_bloc.dart';
+import 'package:tracking_app/graph/view/widgets/line_graph.dart';
 import 'package:tracking_app/main.dart';
 import 'package:tracking_app/shared/currencies.dart';
 import 'package:tracking_app/shared/extensions/date_time.dart';
-import 'package:tracking_app/shared/extensions/double.dart';
 import 'package:tracking_app/shared/extensions/duration.dart';
 import 'package:tracking_app/shared/theme/animation.dart';
 import 'package:tracking_app/shared/theme/colors.dart';
@@ -30,7 +29,6 @@ import 'package:tracking_app/update_mood/bloc/update_mood_bloc.dart';
 import 'package:user_profile_repository/user_profile_repository.dart';
 
 part 'widgets/graph_settings.dart';
-part 'widgets/line_graph.dart';
 part 'widgets/line_graph_explanation.dart';
 part 'widgets/months_selection.dart';
 part 'widgets/weeks_selection.dart';
@@ -236,7 +234,7 @@ class _GraphView extends StatelessWidget {
                   final targetDate =
                       context.read<GraphBloc>().state.targetDate.date;
 
-                  return _LineGraph(
+                  return LineGraph(
                     targetDate: targetDate,
                     moods: moodsState.moods,
                     moodsWithTrackedRevenue: settings.showRevenue

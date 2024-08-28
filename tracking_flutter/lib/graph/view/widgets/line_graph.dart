@@ -1,7 +1,16 @@
-part of '../graph_screen.dart';
+import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mood_repository/mood_repository.dart';
+import 'package:tracking_app/graph/bloc/graph_bloc.dart';
+import 'package:tracking_app/shared/extensions/date_time.dart';
+import 'package:tracking_app/shared/extensions/double.dart';
+import 'package:tracking_app/shared/extensions/duration.dart';
+import 'package:tracking_app/shared/theme/animation.dart';
+import 'package:tracking_app/shared/theme/colors.dart';
 
-class _LineGraphTheme {
-  _LineGraphTheme._();
+class LineGraphTheme {
+  LineGraphTheme._();
 
   static const leftTitlesTextStyle = TextStyle(
     fontSize: 14,
@@ -21,7 +30,7 @@ class _LineGraphTheme {
   static Color toolTipBackgroundColor = AppColors.darkBlue;
   static const Color toolTipFontColor = AppColors.contentOnDarkBackgroundColor;
   static const TextStyle toolTipTextStyle = TextStyle(
-    color: _LineGraphTheme.toolTipFontColor,
+    color: LineGraphTheme.toolTipFontColor,
   );
 
   static const FlLine touchedSpotLine = FlLine(
@@ -65,14 +74,15 @@ class _LineGraphTheme {
   static const Color workHoursLineCharBarColor = AppColors.blue;
 }
 
-class _LineGraph extends StatelessWidget {
-  const _LineGraph({
+class LineGraph extends StatelessWidget {
+  const LineGraph({
     required this.targetDate,
     required this.moods,
     required this.moodsWithTrackedRevenue,
     required this.moodsWithTrackedWorkTime,
     required this.currencySymbol,
     required this.timeRangeMode,
+    super.key,
   });
 
   final DateTime targetDate;
@@ -125,15 +135,15 @@ class _LineGraph extends StatelessWidget {
         getTouchedSpotIndicator: (barData, spotIndexes) {
           return spotIndexes.map((spotIndex) {
             return TouchedSpotIndicatorData(
-              _LineGraphTheme.touchedSpotLine,
-              _LineGraphTheme.touchedSpotDotData,
+              LineGraphTheme.touchedSpotLine,
+              LineGraphTheme.touchedSpotDotData,
             );
           }).toList();
         },
         touchTooltipData: LineTouchTooltipData(
           tooltipRoundedRadius: 10,
           getTooltipColor: (touchedSpot) =>
-              _LineGraphTheme.toolTipBackgroundColor,
+              LineGraphTheme.toolTipBackgroundColor,
           getTooltipItems: (touchedSpots) {
             return touchedSpots.map((LineBarSpot touchedSpot) {
               final flSpot = touchedSpot;
@@ -163,7 +173,7 @@ class _LineGraph extends StatelessWidget {
 
               return LineTooltipItem(
                 text,
-                _LineGraphTheme.toolTipTextStyle,
+                LineGraphTheme.toolTipTextStyle,
               );
             }).toList();
           },
@@ -191,13 +201,13 @@ class _LineGraph extends StatelessWidget {
     if (value == 0 || value == 3 || value == 6 || value == 10) {
       return Text(
         value.toInt().toString(),
-        style: _LineGraphTheme.leftTitlesTextStyle,
+        style: LineGraphTheme.leftTitlesTextStyle,
         textAlign: TextAlign.center,
       );
     } else {
       return Text(
         value.toInt().toString(),
-        style: _LineGraphTheme.leftSmallTitlesTextStyle,
+        style: LineGraphTheme.leftSmallTitlesTextStyle,
         textAlign: TextAlign.center,
       );
     }
@@ -226,13 +236,13 @@ class _LineGraph extends StatelessWidget {
             null,
             includeYear: false,
           ),
-          style: _LineGraphTheme.bottomTitlesTextStyle,
+          style: LineGraphTheme.bottomTitlesTextStyle,
         ),
       );
     } else if (value.toInt().isOdd) {
       return Text(
         value.toInt().toString(),
-        style: _LineGraphTheme.bottomSmallTitlesTextStyle,
+        style: LineGraphTheme.bottomSmallTitlesTextStyle,
       );
     } else {
       return const SizedBox();
@@ -259,13 +269,13 @@ class _LineGraph extends StatelessWidget {
             null,
             includeYear: false,
           ),
-          style: _LineGraphTheme.bottomTitlesTextStyle,
+          style: LineGraphTheme.bottomTitlesTextStyle,
         ),
       );
     } else {
       return Text(
         valueDate.day.toString(),
-        style: _LineGraphTheme.bottomSmallTitlesTextStyle,
+        style: LineGraphTheme.bottomSmallTitlesTextStyle,
       );
     }
   }
@@ -286,17 +296,17 @@ class _LineGraph extends StatelessWidget {
 
   FlBorderData get borderData => FlBorderData(
         show: true,
-        border: _LineGraphTheme.border,
+        border: LineGraphTheme.border,
       );
 
   LineChartBarData get moodsLineChartBarData => LineChartBarData(
-        color: _LineGraphTheme.moodsLineChartBarColor,
+        color: LineGraphTheme.moodsLineChartBarColor,
         dotData: const FlDotData(show: false),
         isCurved: true,
         curveSmoothness: 0.2,
         belowBarData: BarAreaData(
           show: true,
-          gradient: _LineGraphTheme.moodsLineChartBelowBarGradient,
+          gradient: LineGraphTheme.moodsLineChartBelowBarGradient,
         ),
         spots: moodsSpots,
       );
@@ -311,7 +321,7 @@ class _LineGraph extends StatelessWidget {
       .toList();
 
   LineChartBarData get revenueLineChartBarData => LineChartBarData(
-        color: _LineGraphTheme.revenueLineCharBarColor,
+        color: LineGraphTheme.revenueLineCharBarColor,
         barWidth: 3,
         dotData: const FlDotData(show: false),
         spots: revenueSpots,
@@ -335,7 +345,7 @@ class _LineGraph extends StatelessWidget {
       .toList();
 
   LineChartBarData get workTimeLineChartBarData => LineChartBarData(
-        color: _LineGraphTheme.workHoursLineCharBarColor,
+        color: LineGraphTheme.workHoursLineCharBarColor,
         dotData: const FlDotData(show: false),
         spots: workTimeSpots,
       );
