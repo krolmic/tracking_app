@@ -152,6 +152,7 @@ void main() {
     });
 
     test('weekNumber returns correct number', () {
+      expect(DateTime(2020, 12, 28).weekNumber, 53); // Last week of 2020
       expect(DateTime(2023).weekNumber, 52); // Last week of 2022
       expect(DateTime(2023, 1, 2).weekNumber, 1); // First week of 2023
       expect(DateTime(2023, 12, 31).weekNumber, 52); // Last week of 2023
