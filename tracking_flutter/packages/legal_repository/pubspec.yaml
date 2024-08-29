@@ -1,0 +1,14 @@
+name: legal_repository
+description: A Dart Repository which reads legal documents.
+version: 1.0.0
+
+environment:
+  sdk: ^3.0.6
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  test: ^1.16.4
+  very_good_analysis: ^6.0.0

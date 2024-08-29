@@ -28,10 +28,31 @@ class $AssetsImagesGen {
       [adaptiveIconBackground, adaptiveIconForeground, icon];
 }
 
+class $AssetsLegalGen {
+  const $AssetsLegalGen();
+
+  /// File path: assets/legal/privacy_policy_de.html
+  String get privacyPolicyDe => 'assets/legal/privacy_policy_de.html';
+
+  /// File path: assets/legal/privacy_policy_en.html
+  String get privacyPolicyEn => 'assets/legal/privacy_policy_en.html';
+
+  /// File path: assets/legal/terms_of_service_de.html
+  String get termsOfServiceDe => 'assets/legal/terms_of_service_de.html';
+
+  /// File path: assets/legal/terms_of_service_en.html
+  String get termsOfServiceEn => 'assets/legal/terms_of_service_en.html';
+
+  /// List of all assets
+  List<String> get values =>
+      [privacyPolicyDe, privacyPolicyEn, termsOfServiceDe, termsOfServiceEn];
+}
+
 class Assets {
   Assets._();
 
   static const $AssetsImagesGen images = $AssetsImagesGen();
+  static const $AssetsLegalGen legal = $AssetsLegalGen();
 }
 
 class AssetGenImage {
