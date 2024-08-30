@@ -24,6 +24,7 @@ class TimeInput extends StatelessWidget {
         }
       },
       child: Container(
+        height: 50,
         padding: Theme.of(context).inputDecorationTheme.contentPadding,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),

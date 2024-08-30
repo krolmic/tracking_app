@@ -208,7 +208,6 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
                   ?.toString(),
               keyboardType: TextInputType.text,
               textInputAction: TextInputAction.next,
-              autofocus: true,
               textCapitalization: TextCapitalization.sentences,
             ),
             const VerticalSpacing.medium(),
@@ -292,7 +291,6 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
                   inputFormatters: [
                     FilteringTextInputFormatter.allow(RegExp('[0-9.]')),
                   ],
-                  autofocus: true,
                   textInputAction: TextInputAction.done,
                   decoration: InputDecoration(
                     hintText: '0.0',

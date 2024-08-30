@@ -42,4 +42,7 @@ class AppColors {
 
   static Color tileIconColor = darkBlue.withOpacity(.5);
   static const Color tileSubtitleColor = darkBlue;
+
+  static const Color toastSuccessColor = blue;
+  static const Color toastErrorColor = lightGrey;
 }
