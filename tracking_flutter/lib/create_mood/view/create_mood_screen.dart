@@ -39,9 +39,9 @@ class CreateMoodScreen extends StatelessWidget {
       listener: (context, state) {
         if (state.formStatus.isSuccess) {
           showToast(
-            context,
-            Iconsax.award_bold,
-            translations.moodTrackedSuccessfully,
+            context: context,
+            icon: Iconsax.award_bold,
+            message: translations.moodTrackedSuccessfully,
           );
 
           context.read<CreateMoodBloc>().add(
@@ -54,9 +54,10 @@ class CreateMoodScreen extends StatelessWidget {
           context.pop();
         } else if (state.formStatus.isFailure) {
           showToast(
-            context,
-            Icons.error_rounded,
-            translations.somethingWentWrong,
+            context: context,
+            icon: Icons.error_rounded,
+            message: translations.somethingWentWrong,
+            isError: true,
           );
         }
       },

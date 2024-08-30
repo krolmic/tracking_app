@@ -67,17 +67,18 @@ class UpdateMoodScreen extends StatelessWidget {
           listener: (context, state) {
             if (state.formStatus.isSuccess) {
               showToast(
-                context,
-                Iconsax.award_bold,
-                translations.moodUpdatedSuccessfully,
+                context: context,
+                icon: Iconsax.award_bold,
+                message: translations.moodUpdatedSuccessfully,
               );
 
               context.pop();
             } else if (state.formStatus.isFailure) {
               showToast(
-                context,
-                Icons.error,
-                translations.somethingWentWrong,
+                context: context,
+                icon: Icons.error,
+                message: translations.somethingWentWrong,
+                isError: true,
               );
             }
           },
@@ -88,17 +89,18 @@ class UpdateMoodScreen extends StatelessWidget {
           listener: (context, deleteMoodState) {
             if (deleteMoodState.isSuccess) {
               showToast(
-                context,
-                Iconsax.award_bold,
-                translations.moodDeletedSuccessfully,
+                context: context,
+                icon: Iconsax.award_bold,
+                message: translations.moodDeletedSuccessfully,
               );
 
               context.pop();
             } else if (deleteMoodState.isError) {
               showToast(
-                context,
-                Icons.error,
-                translations.somethingWentWrong,
+                context: context,
+                icon: Icons.error,
+                message: translations.somethingWentWrong,
+                isError: true,
               );
             }
           },

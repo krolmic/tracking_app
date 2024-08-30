@@ -53,9 +53,10 @@ class SettingsScreen extends StatelessWidget {
             listener: (context, settingsState) {
               if (settingsState.signOutState.isError) {
                 showToast(
-                  context,
-                  Icons.error,
-                  translations.somethingWentWrong,
+                  context: context,
+                  icon: Icons.error,
+                  message: translations.somethingWentWrong,
+                  isError: true,
                 );
               }
             },
@@ -67,9 +68,10 @@ class SettingsScreen extends StatelessWidget {
             listener: (context, settingsState) {
               if (settingsState.accountDeletionState.isError) {
                 showToast(
-                  context,
-                  Icons.error,
-                  translations.somethingWentWrong,
+                  context: context,
+                  icon: Icons.error,
+                  message: translations.somethingWentWrong,
+                  isError: true,
                 );
               }
             },
@@ -80,9 +82,10 @@ class SettingsScreen extends StatelessWidget {
             listener: (context, settingsState) {
               if (settingsState.sendEmailState.isError) {
                 showToast(
-                  context,
-                  Icons.error,
-                  translations.somethingWentWrong,
+                  context: context,
+                  icon: Icons.error,
+                  message: translations.somethingWentWrong,
+                  isError: true,
                 );
               }
             },

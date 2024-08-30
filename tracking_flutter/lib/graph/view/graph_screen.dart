@@ -53,9 +53,10 @@ class GraphScreen extends StatelessWidget {
             listener: (context, state) {
               if (state.isError) {
                 showToast(
-                  context,
-                  Icons.error_rounded,
-                  translations.somethingWentWrong,
+                  context: context,
+                  icon: Icons.error_rounded,
+                  message: translations.somethingWentWrong,
+                  isError: true,
                 );
               }
             },

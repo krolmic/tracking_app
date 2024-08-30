@@ -461,14 +461,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.10"
-  delightful_toast:
-    dependency: "direct main"
-    description:
-      name: delightful_toast
-      sha256: "93d0b9e89a65947e42daa8aafe552596487dbedc15f68d0480654e789e94bc5b"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.1.0"
   device_info_plus:
     dependency: transitive
     description:
@@ -976,6 +968,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.0.0"
+  iconsax_flutter:
+    dependency: transitive
+    description:
+      name: iconsax_flutter
+      sha256: "95b65699da8ea98f87c5d232f06b0debaaf1ec1332b697e4d90969ec9a93037d"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   image:
     dependency: transitive
     description:
@@ -1374,6 +1374,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.0"
+  pausable_timer:
+    dependency: transitive
+    description:
+      name: pausable_timer
+      sha256: "6ef1a95441ec3439de6fb63f39a011b67e693198e7dae14e20675c3c00e86074"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.0+3"
   petitparser:
     dependency: transitive
     description:
@@ -1722,6 +1730,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.1"
+  toastification:
+    dependency: "direct main"
+    description:
+      name: toastification
+      sha256: "441adf261f03b82db7067cba349756f70e9e2c0b7276bcba856210742f85f394"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.0"
   tracking_client:
     dependency: "direct main"
     description:

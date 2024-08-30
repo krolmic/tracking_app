@@ -32,17 +32,18 @@ class AppSettingsScreen extends StatelessWidget {
       listener: (context, state) {
         if (state.formSubmissionStatus.isSuccess) {
           showToast(
-            context,
-            Iconsax.award_bold,
-            translations.appSettingsSaved,
+            context: context,
+            icon: Iconsax.award_bold,
+            message: translations.appSettingsSaved,
           );
 
           context.pop();
         } else if (state.formSubmissionStatus.isFailure) {
           showToast(
-            context,
-            Icons.error,
-            translations.somethingWentWrong,
+            context: context,
+            icon: Icons.error,
+            message: translations.somethingWentWrong,
+            isError: true,
           );
         }
       },

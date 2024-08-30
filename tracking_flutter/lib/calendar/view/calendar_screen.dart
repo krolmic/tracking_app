@@ -49,9 +49,10 @@ class CalendarScreen extends StatelessWidget {
             listener: (context, calendarState) {
               if (calendarState.moodsState.isError) {
                 showToast(
-                  context,
-                  Icons.error_rounded,
-                  translations.somethingWentWrong,
+                  context: context,
+                  icon: Icons.error_rounded,
+                  message: translations.somethingWentWrong,
+                  isError: true,
                 );
               }
             },
