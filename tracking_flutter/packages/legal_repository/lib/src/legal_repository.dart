@@ -20,7 +20,8 @@ class LegalRepository {
   Future<String> getTermsOfService(String languageCode) async {
     try {
       return await rootBundle.loadString(
-          'assets/legal/terms_of_service_${languageCode.substring(0, 2)}.html');
+        'assets/legal/terms_of_service_${languageCode.substring(0, 2)}.html',
+      );
     } catch (_) {
       // Fallback to English if the specific language is not found
       try {
@@ -41,7 +42,8 @@ class LegalRepository {
   Future<String> getPrivacyPolicy(String languageCode) async {
     try {
       return await rootBundle.loadString(
-          'assets/legal/privacy_policy_${languageCode.substring(0, 2)}.html');
+        'assets/legal/privacy_policy_${languageCode.substring(0, 2)}.html',
+      );
     } catch (_) {
       // Fallback to English if the specific language is not found
       try {
