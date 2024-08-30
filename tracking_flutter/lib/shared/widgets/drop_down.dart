@@ -18,6 +18,7 @@ class DropDown<T> extends StatelessWidget {
     return ButtonTheme(
       alignedDropdown: true,
       child: DropdownButtonFormField<T>(
+        menuMaxHeight: MediaQuery.of(context).size.height * 0.4,
         isExpanded: true,
         icon: const Icon(Iconsax.arrow_down_1_outline, size: 18),
         iconEnabledColor: Theme.of(context).primaryColor,
