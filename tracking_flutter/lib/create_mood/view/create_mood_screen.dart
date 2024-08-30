@@ -1,5 +1,4 @@
 import 'package:animated_emoji/animated_emoji.dart';
-import 'package:duration_picker/duration_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,6 +18,7 @@ import 'package:tracking_app/shared/toast.dart';
 import 'package:tracking_app/shared/widgets/app_dots_indicator.dart';
 import 'package:tracking_app/shared/widgets/loading_indicator.dart';
 import 'package:tracking_app/shared/widgets/spacing.dart';
+import 'package:tracking_app/shared/widgets/time_input.dart';
 
 part 'widgets/create_mood_form.dart';
 part 'widgets/create_mood_stepper.dart';

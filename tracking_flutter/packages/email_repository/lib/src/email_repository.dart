@@ -1,4 +1,4 @@
-import 'package:flutter_email_sender/flutter_email_sender.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class EmailRepositoryException implements Exception {
   EmailRepositoryException({
@@ -23,13 +23,11 @@ class EmailRepository {
     required String body,
   }) async {
     try {
-      final email = Email(
-        body: body,
-        subject: subject,
-        recipients: [recipient],
-      );
+      final url = Uri.parse('mailto:$recipient?subject=$subject&body=$body');
 
-      await FlutterEmailSender.send(email);
+      if (!await launchUrl(url)) {
+        throw Exception('Could not launch $url');
+      }
     } catch (e, stackTrace) {
       Error.throwWithStackTrace(
         EmailRepositoryException(
