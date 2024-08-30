@@ -70,7 +70,11 @@ class _CreateMoodStepperState extends State<_CreateMoodStepper> {
     final content = Expanded(
       child: PageView(
         controller: _controller,
-        physics: const NeverScrollableScrollPhysics(),
+        onPageChanged: (index) {
+          setState(() {
+            currentStep = index;
+          });
+        },
         children: widget.pages,
       ),
     );

@@ -208,6 +208,8 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
                   ?.toString(),
               keyboardType: TextInputType.text,
               textInputAction: TextInputAction.next,
+              autofocus: true,
+              textCapitalization: TextCapitalization.sentences,
             ),
             const VerticalSpacing.medium(),
             TextFormField(
@@ -224,6 +226,7 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
                   ?.toString(),
               keyboardType: TextInputType.text,
               textInputAction: TextInputAction.next,
+              textCapitalization: TextCapitalization.sentences,
             ),
             const VerticalSpacing.medium(),
             TextFormField(
@@ -239,7 +242,8 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
                   .validator(value ?? '')
                   ?.toString(),
               keyboardType: TextInputType.text,
-              textInputAction: TextInputAction.next,
+              textInputAction: TextInputAction.done,
+              textCapitalization: TextCapitalization.sentences,
             ),
           ],
         ),
@@ -288,7 +292,8 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
                   inputFormatters: [
                     FilteringTextInputFormatter.allow(RegExp('[0-9.]')),
                   ],
-                  textInputAction: TextInputAction.next,
+                  autofocus: true,
+                  textInputAction: TextInputAction.done,
                   decoration: InputDecoration(
                     hintText: '0.0',
                     helperText: translations.revenueHelper(currency),
@@ -328,10 +333,9 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
                   previousState.moodFormState.workTime !=
                   currentState.moodFormState.workTime,
               builder: (context, state) {
-                return DurationPicker(
+                return TimeInput(
                   key: const Key('Create mood form workTime input'),
-                  duration: state.moodFormState.workTime.value,
-                  upperBound: const Duration(hours: 24),
+                  time: state.moodFormState.workTime.value,
                   onChange: _onWorkTimeChanged,
                 );
               },
