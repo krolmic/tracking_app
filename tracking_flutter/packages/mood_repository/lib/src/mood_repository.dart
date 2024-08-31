@@ -61,8 +61,8 @@ class MoodRepository {
     required String userId,
   }) async {
     try {
-      final fromDate = DateTime(from.year, from.month, from.day);
-      final toDate = DateTime(to.year, to.month, to.day, 23, 59, 59);
+      final fromDate = from.add(from.timeZoneOffset);
+      final toDate = to.add(to.timeZoneOffset);
 
       final moodEntries =
           await _serverpodClient.moodEntries.getMoodEntriesInTimeRange(
