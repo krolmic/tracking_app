@@ -194,45 +194,6 @@ class _SettingsView extends StatelessWidget {
     );
   }
 
-  Future<void> _showEmojiPicker(
-    BuildContext context,
-  ) async {
-    final selectedEmoji = await showDialog<String>(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text("Select an emoji"),
-          content: SizedBox(
-            width: double.maxFinite,
-            child: GridView.count(
-              crossAxisCount: 4,
-              children: AnimatedEmojis.values.map((emoji) {
-                return GestureDetector(
-                  onTap: () => Navigator.of(context).pop(emoji.name),
-                  child: AnimatedEmoji(
-                    emoji,
-                    size: 50,
-                  ),
-                );
-              }).toList(),
-            ),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: Text(AppLocalizations.of(context)!.cancel),
-            ),
-          ],
-        );
-      },
-    );
-
-    if (selectedEmoji != null) {
-      final settingsCubit = context.read<SettingsCubit>();
-      await settingsCubit.updateUserPicture(selectedEmoji);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final translations = AppLocalizations.of(context)!;
