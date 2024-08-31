@@ -17,6 +17,9 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
   late final TextEditingController _thingIAmGreatfulAbout3Controller;
   late final TextEditingController _revenueController;
 
+  final FocusNode _thingIAmGreatfulAbout1FocusNode = FocusNode();
+  final FocusNode _revenueFocusNode = FocusNode();
+
   void _onMoodValueChanged(double value) {
     context.read<CreateMoodBloc>().add(CreateMoodEvent.moodValueChanged(value));
   }
@@ -108,6 +111,10 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
     _thingIAmGreatfulAbout2Controller.dispose();
     _thingIAmGreatfulAbout3Controller.dispose();
     _revenueController.dispose();
+
+    _thingIAmGreatfulAbout1FocusNode.dispose();
+    _revenueFocusNode.dispose();
+
     super.dispose();
   }
 
@@ -118,6 +125,10 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
       child: _CreateMoodStepper(
         onCompleted: _onSubmit,
         pages: _getStepperPages(),
+        thingIAmGreatfulForFocusNode: _thingIAmGreatfulAbout1FocusNode,
+        revenueFocusNode: _revenueFocusNode,
+        thingsIAmGreatfulForPageIndex: 1,
+        revenuePageIndex: 2,
       ),
     );
   }
@@ -133,13 +144,13 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
           'Create mood stepper page 1',
         ),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const VerticalSpacing.large(),
             Text(
               translations.howAreYouFeeling,
               style: Theme.of(context).textTheme.headlineSmall,
             ),
-            const VerticalSpacing.medium(),
+            const VerticalSpacing.large(),
             Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: horizontalPaddingLarge,
@@ -150,24 +161,7 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
                 textAlign: TextAlign.center,
               ),
             ),
-            const VerticalSpacing.large(),
-            BlocBuilder<CreateMoodBloc, CreateMoodState>(
-              buildWhen: (previousState, currentState) =>
-                  previousState.moodFormState.moodValue !=
-                  currentState.moodFormState.moodValue,
-              builder: (context, state) {
-                return Slider(
-                  autofocus: true,
-                  value: state.moodFormState.moodValue.value.toDouble(),
-                  min: MoodValueInput.minValue.toDouble(),
-                  max: MoodValueInput.maxValue.toDouble(),
-                  divisions: MoodValueInput.maxValue - 1,
-                  label: state.moodFormState.moodValue.value.toString(),
-                  onChanged: _onMoodValueChanged,
-                );
-              },
-            ),
-            const VerticalSpacing.large(),
+            const VerticalSpacing.extraExtraLarge(),
             BlocBuilder<CreateMoodBloc, CreateMoodState>(
               buildWhen: (previousState, currentState) =>
                   previousState.moodFormState.moodValue !=
@@ -175,6 +169,23 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
               builder: (context, state) {
                 return _MoodEmoji(
                   moodValue: state.moodFormState.moodValue.value,
+                );
+              },
+            ),
+            const VerticalSpacing.extraLarge(),
+            const VerticalSpacing.large(),
+            BlocBuilder<CreateMoodBloc, CreateMoodState>(
+              buildWhen: (previousState, currentState) =>
+                  previousState.moodFormState.moodValue !=
+                  currentState.moodFormState.moodValue,
+              builder: (context, state) {
+                return Slider(
+                  value: state.moodFormState.moodValue.value.toDouble(),
+                  min: MoodValueInput.minValue.toDouble(),
+                  max: MoodValueInput.maxValue.toDouble(),
+                  divisions: MoodValueInput.maxValue - 1,
+                  label: state.moodFormState.moodValue.value.toString(),
+                  onChanged: _onMoodValueChanged,
                 );
               },
             ),
@@ -187,16 +198,16 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
         ),
         child: Column(
           children: <Widget>[
-            const VerticalSpacing.large(),
             Text(
               translations.whatAreYouGreatfulFor,
               style: Theme.of(context).textTheme.headlineSmall,
               textAlign: TextAlign.center,
             ),
-            const VerticalSpacing.extraLarge(),
+            const VerticalSpacing.extraExtraLarge(),
             TextFormField(
               key: const Key('Create mood form thingIAmGreatfulAbout1 input'),
               controller: _thingIAmGreatfulAbout1Controller,
+              focusNode: _thingIAmGreatfulAbout1FocusNode,
               decoration: InputDecoration(
                 icon: const Icon(Iconsax.heart_add_outline),
                 iconColor: Theme.of(context).primaryColor,
@@ -210,7 +221,7 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
               textInputAction: TextInputAction.next,
               textCapitalization: TextCapitalization.sentences,
             ),
-            const VerticalSpacing.medium(),
+            const VerticalSpacing.large(),
             TextFormField(
               key: const Key('Create mood form thingIAmGreatfulAbout2 input'),
               controller: _thingIAmGreatfulAbout2Controller,
@@ -227,7 +238,7 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
               textInputAction: TextInputAction.next,
               textCapitalization: TextCapitalization.sentences,
             ),
-            const VerticalSpacing.medium(),
+            const VerticalSpacing.large(),
             TextFormField(
               key: const Key('Create mood form thingIAmGreatfulAbout3 input'),
               controller: _thingIAmGreatfulAbout3Controller,
@@ -253,13 +264,12 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
         ),
         child: Column(
           children: <Widget>[
-            const VerticalSpacing.large(),
             Text(
               translations.howMuchDidYouEarn,
               style: Theme.of(context).textTheme.headlineSmall,
               textAlign: TextAlign.center,
             ),
-            const VerticalSpacing.medium(),
+            const VerticalSpacing.large(),
             Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: horizontalPaddingLarge,
@@ -270,7 +280,7 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
                 textAlign: TextAlign.center,
               ),
             ),
-            const VerticalSpacing.extraLarge(),
+            const VerticalSpacing.extraExtraLarge(),
             BlocBuilder<AppSettingsBloc, AppSettingsState>(
               buildWhen: (previous, current) =>
                   previous.appSettingsData.currency !=
@@ -281,6 +291,7 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
                 return TextFormField(
                   key: const Key('Create mood form revenue input'),
                   controller: _revenueController,
+                  focusNode: _revenueFocusNode,
                   validator: (value) => createMoodBloc
                       .state.moodFormState.revenue
                       .validator(
@@ -308,13 +319,12 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
         ),
         child: Column(
           children: <Widget>[
-            const VerticalSpacing.large(),
             Text(
               translations.howLongDidYouWork,
               style: Theme.of(context).textTheme.headlineSmall,
               textAlign: TextAlign.center,
             ),
-            const VerticalSpacing.medium(),
+            const VerticalSpacing.large(),
             Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: horizontalPaddingLarge,
@@ -325,7 +335,7 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
                 textAlign: TextAlign.center,
               ),
             ),
-            const VerticalSpacing.extraLarge(),
+            const VerticalSpacing.extraExtraLarge(),
             BlocBuilder<CreateMoodBloc, CreateMoodState>(
               buildWhen: (previousState, currentState) =>
                   previousState.moodFormState.workTime !=
