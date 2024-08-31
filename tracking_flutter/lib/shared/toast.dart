@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:icons_plus/icons_plus.dart';
 import 'package:toastification/toastification.dart';
 import 'package:tracking_app/shared/theme/colors.dart';
 import 'package:tracking_app/shared/theme/layout.dart';
 
 void showToast({
   required BuildContext context,
-  required IconData icon,
   required String message,
   bool isError = false,
 }) {
@@ -18,7 +18,7 @@ void showToast({
     autoCloseDuration: const Duration(seconds: 4),
     alignment: const Alignment(0.5, 0.7),
     icon: Icon(
-      icon,
+      isError ? Iconsax.info_circle_bold : Iconsax.tick_circle_bold,
     ),
     margin: const EdgeInsets.only(
       left: viewPaddingHorizontal,

@@ -48,7 +48,6 @@ class UpdateUserProfileScreen extends StatelessWidget {
           if (state.isSuccess) {
             showToast(
               context: context,
-              icon: Iconsax.award_bold,
               message: translations.profileUpdatedSuccessfully,
             );
 
@@ -58,7 +57,6 @@ class UpdateUserProfileScreen extends StatelessWidget {
           } else if (state.isFailure) {
             showToast(
               context: context,
-              icon: Icons.error,
               message: translations.somethingWentWrong,
               isError: true,
             );
