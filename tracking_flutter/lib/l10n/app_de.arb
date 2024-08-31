@@ -72,6 +72,8 @@
     "accountDeletion": "Account Löschen",
     "accountDeletionMessage": "Alle deine Daten werden gelöscht.\n\n Bist du dir sicher, dass dein Account gelöscht werden soll?",
     "delete": "Löschen",
+    "selectEmoji": "Wähle dein Hustle-Tier",
+    "emojiUpdatedSuccessfully": "Hustle-Tier erfolgreich geändert!",
     "account": "Account",
     "personalDetails": "Persönliche Details",
     "general": "Allgemein",

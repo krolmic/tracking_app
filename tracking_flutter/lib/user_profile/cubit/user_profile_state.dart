@@ -8,6 +8,7 @@ class UserProfileState with _$UserProfileState {
     required String id,
     required String email,
     required String firstName,
+    String? picture,
   }) = UserProfileSuccessState;
   const factory UserProfileState.error() = UserProfileErrorState;
 }
@@ -19,4 +20,5 @@ extension UserProfileStateX on UserProfileState {
   bool get isError => this is UserProfileErrorState;
 
   String get firstName => (this as UserProfileSuccessState).firstName;
+  String? get picture => (this as UserProfileSuccessState).picture;
 }

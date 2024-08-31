@@ -82,4 +82,27 @@ class UserProfileRepository {
       );
     }
   }
+
+  Future<void> updateUserPicture(String picture) async {
+    try {
+      final attributes = [
+        AuthUserAttribute(
+          userAttributeKey: AuthUserAttributeKey.picture,
+          value: picture,
+        ),
+      ];
+
+      await _amplifyAuth.updateUserAttributes(
+        attributes: attributes,
+      );
+    } catch (e, stackTrace) {
+      Error.throwWithStackTrace(
+        UserProfileRepositoryException(
+          message: 'Failed to update user picture.',
+          cause: e,
+        ),
+        stackTrace,
+      );
+    }
+  }
 }

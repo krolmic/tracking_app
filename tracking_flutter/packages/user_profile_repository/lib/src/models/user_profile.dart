@@ -11,6 +11,7 @@ class UserProfile with _$UserProfile {
     required String id,
     required String email,
     required String firstName,
+    String? picture,
   }) = _UserProfile;
 
   factory UserProfile.fromUserAttributes(
@@ -26,6 +27,7 @@ class UserProfileConverter
     var id = '';
     var email = '';
     var firstName = '';
+    var picture = '';
 
     for (final userAttribute in input) {
       final userAttributeKey = userAttribute.userAttributeKey.key;
@@ -37,6 +39,8 @@ class UserProfileConverter
         id = userAttributeValue;
       } else if (userAttributeKey == 'given_name') {
         firstName = userAttributeValue;
+      } else if (userAttributeKey == 'picture') {
+        picture = userAttributeValue;
       }
     }
 
@@ -44,6 +48,7 @@ class UserProfileConverter
       id: id,
       email: email,
       firstName: firstName,
+      picture: picture.isNotEmpty ? picture : null,
     );
   }
 }

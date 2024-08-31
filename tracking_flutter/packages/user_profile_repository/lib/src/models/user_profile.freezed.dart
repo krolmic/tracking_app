@@ -12,15 +12,18 @@ part of 'user_profile.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$UserProfile {
   String get id => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   String get firstName => throw _privateConstructorUsedError;
+  String? get picture => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UserProfile
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $UserProfileCopyWith<UserProfile> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -31,7 +34,7 @@ abstract class $UserProfileCopyWith<$Res> {
           UserProfile value, $Res Function(UserProfile) then) =
       _$UserProfileCopyWithImpl<$Res, UserProfile>;
   @useResult
-  $Res call({String id, String email, String firstName});
+  $Res call({String id, String email, String firstName, String? picture});
 }
 
 /// @nodoc
@@ -44,12 +47,15 @@ class _$UserProfileCopyWithImpl<$Res, $Val extends UserProfile>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of UserProfile
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? id = null,
     Object? email = null,
     Object? firstName = null,
+    Object? picture = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -64,6 +70,10 @@ class _$UserProfileCopyWithImpl<$Res, $Val extends UserProfile>
           ? _value.firstName
           : firstName // ignore: cast_nullable_to_non_nullable
               as String,
+      picture: freezed == picture
+          ? _value.picture
+          : picture // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -76,7 +86,7 @@ abstract class _$$UserProfileImplCopyWith<$Res>
       __$$UserProfileImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String email, String firstName});
+  $Res call({String id, String email, String firstName, String? picture});
 }
 
 /// @nodoc
@@ -87,12 +97,15 @@ class __$$UserProfileImplCopyWithImpl<$Res>
       _$UserProfileImpl _value, $Res Function(_$UserProfileImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of UserProfile
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? id = null,
     Object? email = null,
     Object? firstName = null,
+    Object? picture = freezed,
   }) {
     return _then(_$UserProfileImpl(
       id: null == id
@@ -107,6 +120,10 @@ class __$$UserProfileImplCopyWithImpl<$Res>
           ? _value.firstName
           : firstName // ignore: cast_nullable_to_non_nullable
               as String,
+      picture: freezed == picture
+          ? _value.picture
+          : picture // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -115,7 +132,10 @@ class __$$UserProfileImplCopyWithImpl<$Res>
 
 class _$UserProfileImpl implements _UserProfile {
   _$UserProfileImpl(
-      {required this.id, required this.email, required this.firstName});
+      {required this.id,
+      required this.email,
+      required this.firstName,
+      this.picture});
 
   @override
   final String id;
@@ -123,27 +143,32 @@ class _$UserProfileImpl implements _UserProfile {
   final String email;
   @override
   final String firstName;
+  @override
+  final String? picture;
 
   @override
   String toString() {
-    return 'UserProfile(id: $id, email: $email, firstName: $firstName)';
+    return 'UserProfile(id: $id, email: $email, firstName: $firstName, picture: $picture)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UserProfileImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.firstName, firstName) ||
-                other.firstName == firstName));
+                other.firstName == firstName) &&
+            (identical(other.picture, picture) || other.picture == picture));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, email, firstName);
+  int get hashCode => Object.hash(runtimeType, id, email, firstName, picture);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UserProfile
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$UserProfileImplCopyWith<_$UserProfileImpl> get copyWith =>
@@ -154,7 +179,8 @@ abstract class _UserProfile implements UserProfile {
   factory _UserProfile(
       {required final String id,
       required final String email,
-      required final String firstName}) = _$UserProfileImpl;
+      required final String firstName,
+      final String? picture}) = _$UserProfileImpl;
 
   @override
   String get id;
@@ -163,7 +189,12 @@ abstract class _UserProfile implements UserProfile {
   @override
   String get firstName;
   @override
-  @JsonKey(ignore: true)
+  String? get picture;
+
+  /// Create a copy of UserProfile
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UserProfileImplCopyWith<_$UserProfileImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

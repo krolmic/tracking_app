@@ -24,6 +24,8 @@ import 'package:tracking_app/shared/widgets/tile.dart';
 import 'package:tracking_app/user_profile/cubit/user_profile_cubit.dart';
 import 'package:user_profile_repository/user_profile_repository.dart';
 
+part 'widgets/user_profile_avatar.dart';
+
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
 
@@ -47,6 +49,28 @@ class SettingsScreen extends StatelessWidget {
       },
       child: MultiBlocListener(
         listeners: [
+          BlocListener<SettingsCubit, SettingsState>(
+            listenWhen: (previousState, currentState) =>
+                previousState.updatePictureState !=
+                currentState.updatePictureState,
+            listener: (context, settingsState) {
+              if (settingsState.updatePictureState.isError) {
+                showToast(
+                  context: context,
+                  icon: Icons.error,
+                  message: translations.somethingWentWrong,
+                  isError: true,
+                );
+              } else if (settingsState.updatePictureState.isSuccess) {
+                showToast(
+                  context: context,
+                  icon: Icons.check,
+                  message: translations.emojiUpdatedSuccessfully,
+                );
+                context.read<UserProfileCubit>().loadUserProfile();
+              }
+            },
+          ),
           BlocListener<SettingsCubit, SettingsState>(
             listenWhen: (previousState, currentState) =>
                 previousState.signOutState != currentState.signOutState,
@@ -170,6 +194,45 @@ class _SettingsView extends StatelessWidget {
     );
   }
 
+  Future<void> _showEmojiPicker(
+    BuildContext context,
+  ) async {
+    final selectedEmoji = await showDialog<String>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Select an emoji"),
+          content: SizedBox(
+            width: double.maxFinite,
+            child: GridView.count(
+              crossAxisCount: 4,
+              children: AnimatedEmojis.values.map((emoji) {
+                return GestureDetector(
+                  onTap: () => Navigator.of(context).pop(emoji.name),
+                  child: AnimatedEmoji(
+                    emoji,
+                    size: 50,
+                  ),
+                );
+              }).toList(),
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text(AppLocalizations.of(context)!.cancel),
+            ),
+          ],
+        );
+      },
+    );
+
+    if (selectedEmoji != null) {
+      final settingsCubit = context.read<SettingsCubit>();
+      await settingsCubit.updateUserPicture(selectedEmoji);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final translations = AppLocalizations.of(context)!;
@@ -185,23 +248,13 @@ class _SettingsView extends StatelessWidget {
             error: () => ErrorMessage(
               onRefresh: context.read<UserProfileCubit>().loadUserProfile,
             ),
-            loaded: (id, email, firstName) {
+            loaded: (id, email, firstName, picture) {
               return SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Center(
-                      child: SizedBox(
-                        height: 150,
-                        child: CircleAvatar(
-                          backgroundColor: AppColors.lightBlueAccent,
-                          radius: 75,
-                          child: const AnimatedEmoji(
-                            AnimatedEmojis.otter,
-                            size: 75,
-                          ),
-                        ),
-                      ),
+                      child: _UserProfileAvatar(setEmoji: picture),
                     ),
                     const VerticalSpacing.large(),
                     Center(

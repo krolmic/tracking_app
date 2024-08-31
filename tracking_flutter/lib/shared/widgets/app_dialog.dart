@@ -5,8 +5,9 @@ class AppDialog extends StatelessWidget {
   const AppDialog({
     required this.title,
     required this.body,
-    required this.confirmButtonText,
-    required this.onConfirm,
+    this.buildConfirmButton = true,
+    this.confirmButtonText,
+    this.onConfirm,
     this.buildCancelButton = true,
     this.cancelButtonText,
     this.onCancel,
@@ -15,8 +16,9 @@ class AppDialog extends StatelessWidget {
 
   final String title;
   final Widget body;
-  final String confirmButtonText;
-  final VoidCallback onConfirm;
+  final bool buildConfirmButton;
+  final String? confirmButtonText;
+  final VoidCallback? onConfirm;
   final bool buildCancelButton;
   final String? cancelButtonText;
   final VoidCallback? onCancel;
@@ -34,10 +36,13 @@ class AppDialog extends StatelessWidget {
               cancelButtonText ?? AppLocalizations.of(context)!.cancel,
             ),
           ),
-        TextButton(
-          onPressed: onConfirm,
-          child: Text(confirmButtonText),
-        ),
+        if (buildConfirmButton)
+          TextButton(
+            onPressed: onConfirm ?? Navigator.of(context).pop,
+            child: Text(
+              confirmButtonText ?? AppLocalizations.of(context)!.confirm,
+            ),
+          ),
       ],
     );
   }

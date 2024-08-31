@@ -29,6 +29,7 @@ class UserProfileCubit extends Cubit<UserProfileState> {
           id: userProfile.id,
           email: userProfile.email,
           firstName: userProfile.firstName,
+          picture: userProfile.picture,
         ),
       );
     } catch (e, stackTrace) {

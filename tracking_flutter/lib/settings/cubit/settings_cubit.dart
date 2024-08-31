@@ -128,4 +128,29 @@ class SettingsCubit extends Cubit<SettingsState> {
       );
     }
   }
+
+  Future<void> updateUserPicture(String picture) async {
+    try {
+      emit(
+        state.copyWith(
+          updatePictureState: const UpdatePictureState.loading(),
+        ),
+      );
+
+      await _userProfileRepository.updateUserPicture(picture);
+
+      emit(
+        state.copyWith(
+          updatePictureState: const UpdatePictureState.success(),
+        ),
+      );
+    } catch (e, stackTrace) {
+      Fimber.e('Updating user picture failed', ex: e, stacktrace: stackTrace);
+      emit(
+        state.copyWith(
+          updatePictureState: const UpdatePictureState.error(),
+        ),
+      );
+    }
+  }
 }

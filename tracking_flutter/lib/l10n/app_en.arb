@@ -72,6 +72,8 @@
     "accountDeletion": "Account deletion",
     "accountDeletionMessage": "All your data will be deleted.\n\nAre you sure you want to delete your account?",
     "delete": "Delete",
+    "selectEmoji": "Select your Hustle animal",
+    "emojiUpdatedSuccessfully": "Hustle animal updated successfully!",
     "account": "Account",
     "personalDetails": "Personal details",
     "general": "General",
