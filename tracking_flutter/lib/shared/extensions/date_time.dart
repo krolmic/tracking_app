@@ -18,7 +18,7 @@ extension DateTimeX on DateTime {
 
   DateTime get startOfMonth => DateTime(year, month);
 
-  DateTime get endOfMonth => DateTime(year, month + 1, 0);
+  DateTime get endOfMonth => DateTime(year, month + 1, 0, 23, 59, 59, 999, 999);
 
   DateTime get startOfWeek {
     final startOfWeekDateTime = subtract(Duration(days: weekday - 1));
