@@ -1,28 +1,121 @@
 import 'package:duration_picker/duration_picker.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:tracking_app/shared/extensions/duration.dart';
+import 'package:tracking_app/shared/theme/colors.dart';
+import 'package:tracking_app/shared/theme/layout.dart';
+import 'package:tracking_app/shared/widgets/platform_widget.dart';
 
-class TimeInput extends StatelessWidget {
-  const TimeInput({required this.onChange, required this.time, super.key});
+class PlatformTimeInput extends StatelessWidget {
+  const PlatformTimeInput({
+    required this.onChange,
+    required this.time,
+    super.key,
+  });
 
   final Duration time;
   final void Function(Duration) onChange;
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return PlatformWidget(
+      iOSWidget: _IOSTimeInput(
+        time: time,
+        onChange: onChange,
+      ),
+      androidWidget: _AndroidTimeInput(
+        time: time,
+        onChange: onChange,
+      ),
+    );
+  }
+}
+
+class _IOSTimeInput extends StatelessWidget {
+  const _IOSTimeInput({
+    required this.onChange,
+    required this.time,
+  });
+
+  final Duration time;
+  final void Function(Duration) onChange;
+
+  void _showDialog(BuildContext context) {
+    showCupertinoModalPopup<void>(
+      context: context,
+      builder: (BuildContext context) => Container(
+        height: 220,
+        padding: const EdgeInsets.only(top: viewPaddingVertical),
+        margin: EdgeInsets.only(
+          bottom: MediaQuery.of(context).viewInsets.bottom,
+        ),
+        color: AppColors.backgroundColor,
+        child: SafeArea(
+          top: false,
+          child: CupertinoTheme(
+            data: CupertinoThemeData(
+              textTheme: CupertinoTextThemeData(
+                pickerTextStyle: Theme.of(context).textTheme.bodyMedium,
+              ),
+            ),
+            child: CupertinoTimerPicker(
+              mode: CupertinoTimerPickerMode.hm,
+              initialTimerDuration: time,
+              onTimerDurationChanged: onChange,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return _TimeInputField(
+      time: time,
+      onTap: () => _showDialog(context),
+    );
+  }
+}
+
+class _AndroidTimeInput extends StatelessWidget {
+  const _AndroidTimeInput({
+    required this.onChange,
+    required this.time,
+  });
+
+  final Duration time;
+  final void Function(Duration) onChange;
+
+  @override
+  Widget build(BuildContext context) {
+    return _TimeInputField(
+      time: time,
       onTap: () async {
         final updatedWorkTime = await showDurationPicker(
           context: context,
           initialTime: time,
           upperBound: const Duration(hours: 24),
         );
-
         if (updatedWorkTime != null) {
           onChange(updatedWorkTime);
         }
       },
+    );
+  }
+}
+
+class _TimeInputField extends StatelessWidget {
+  const _TimeInputField({required this.onTap, required this.time, super.key});
+
+  final Duration time;
+  final void Function() onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
       child: Container(
         height: 50,
         padding: Theme.of(context).inputDecorationTheme.contentPadding,

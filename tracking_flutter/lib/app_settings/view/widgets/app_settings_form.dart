@@ -137,7 +137,7 @@ class _AppSettingsFormState extends State<_AppSettingsForm> {
               builder: (context, state) {
                 final workTime = state.appSettingsForm.formState.workTime.value;
 
-                return TimeInput(
+                return PlatformTimeInput(
                   time: workTime,
                   onChange: _onWorkTimeChanged,
                 );
