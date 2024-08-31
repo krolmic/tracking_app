@@ -107,7 +107,7 @@ class _AndroidTimeInput extends StatelessWidget {
 }
 
 class _TimeInputField extends StatelessWidget {
-  const _TimeInputField({required this.onTap, required this.time, super.key});
+  const _TimeInputField({required this.onTap, required this.time});
 
   final Duration time;
   final void Function() onTap;

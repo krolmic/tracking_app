@@ -7,6 +7,8 @@ class SettingsState with _$SettingsState {
     @Default(SignOutState.initial()) SignOutState signOutState,
     @Default(AccountDeletionState.initial())
     AccountDeletionState accountDeletionState,
+    @Default(UpdatePictureState.initial())
+    UpdatePictureState updatePictureState,
   }) = _SettingsState;
 }
 
@@ -51,4 +53,19 @@ extension SendEmailStateX on SendEmailState {
   bool get isLoading => this is SendEmailStateLoadingState;
   bool get isSuccess => this is SendEmailStateSuccessState;
   bool get isError => this is SendEmailStateErrorState;
+}
+
+@freezed
+class UpdatePictureState with _$UpdatePictureState {
+  const factory UpdatePictureState.initial() = UpdatePictureStateInitialState;
+  const factory UpdatePictureState.loading() = UpdatePictureStateLoadingState;
+  const factory UpdatePictureState.success() = UpdatePictureStateSuccessState;
+  const factory UpdatePictureState.error() = UpdatePictureStateErrorState;
+}
+
+extension UpdatePictureStateX on UpdatePictureState {
+  bool get isInitial => this is UpdatePictureStateInitialState;
+  bool get isLoading => this is UpdatePictureStateLoadingState;
+  bool get isSuccess => this is UpdatePictureStateSuccessState;
+  bool get isError => this is UpdatePictureStateErrorState;
 }

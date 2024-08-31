@@ -20,7 +20,9 @@ mixin _$UserProfileState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(String id, String email, String firstName) loaded,
+    required TResult Function(
+            String id, String email, String firstName, String? picture)
+        loaded,
     required TResult Function() error,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,7 +30,9 @@ mixin _$UserProfileState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(String id, String email, String firstName)? loaded,
+    TResult? Function(
+            String id, String email, String firstName, String? picture)?
+        loaded,
     TResult? Function()? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,7 +40,9 @@ mixin _$UserProfileState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String id, String email, String firstName)? loaded,
+    TResult Function(
+            String id, String email, String firstName, String? picture)?
+        loaded,
     TResult Function()? error,
     required TResult orElse(),
   }) =>
@@ -135,7 +141,9 @@ class _$UserProfileInitialStateImpl implements UserProfileInitialState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(String id, String email, String firstName) loaded,
+    required TResult Function(
+            String id, String email, String firstName, String? picture)
+        loaded,
     required TResult Function() error,
   }) {
     return initial();
@@ -146,7 +154,9 @@ class _$UserProfileInitialStateImpl implements UserProfileInitialState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(String id, String email, String firstName)? loaded,
+    TResult? Function(
+            String id, String email, String firstName, String? picture)?
+        loaded,
     TResult? Function()? error,
   }) {
     return initial?.call();
@@ -157,7 +167,9 @@ class _$UserProfileInitialStateImpl implements UserProfileInitialState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String id, String email, String firstName)? loaded,
+    TResult Function(
+            String id, String email, String firstName, String? picture)?
+        loaded,
     TResult Function()? error,
     required TResult orElse(),
   }) {
@@ -255,7 +267,9 @@ class _$UserProfileLoadingStateImpl implements UserProfileLoadingState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(String id, String email, String firstName) loaded,
+    required TResult Function(
+            String id, String email, String firstName, String? picture)
+        loaded,
     required TResult Function() error,
   }) {
     return loading();
@@ -266,7 +280,9 @@ class _$UserProfileLoadingStateImpl implements UserProfileLoadingState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(String id, String email, String firstName)? loaded,
+    TResult? Function(
+            String id, String email, String firstName, String? picture)?
+        loaded,
     TResult? Function()? error,
   }) {
     return loading?.call();
@@ -277,7 +293,9 @@ class _$UserProfileLoadingStateImpl implements UserProfileLoadingState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String id, String email, String firstName)? loaded,
+    TResult Function(
+            String id, String email, String firstName, String? picture)?
+        loaded,
     TResult Function()? error,
     required TResult orElse(),
   }) {
@@ -336,7 +354,7 @@ abstract class _$$UserProfileSuccessStateImplCopyWith<$Res> {
           $Res Function(_$UserProfileSuccessStateImpl) then) =
       __$$UserProfileSuccessStateImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String id, String email, String firstName});
+  $Res call({String id, String email, String firstName, String? picture});
 }
 
 /// @nodoc
@@ -356,6 +374,7 @@ class __$$UserProfileSuccessStateImplCopyWithImpl<$Res>
     Object? id = null,
     Object? email = null,
     Object? firstName = null,
+    Object? picture = freezed,
   }) {
     return _then(_$UserProfileSuccessStateImpl(
       id: null == id
@@ -370,6 +389,10 @@ class __$$UserProfileSuccessStateImplCopyWithImpl<$Res>
           ? _value.firstName
           : firstName // ignore: cast_nullable_to_non_nullable
               as String,
+      picture: freezed == picture
+          ? _value.picture
+          : picture // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -378,7 +401,10 @@ class __$$UserProfileSuccessStateImplCopyWithImpl<$Res>
 
 class _$UserProfileSuccessStateImpl implements UserProfileSuccessState {
   const _$UserProfileSuccessStateImpl(
-      {required this.id, required this.email, required this.firstName});
+      {required this.id,
+      required this.email,
+      required this.firstName,
+      this.picture});
 
   @override
   final String id;
@@ -386,10 +412,12 @@ class _$UserProfileSuccessStateImpl implements UserProfileSuccessState {
   final String email;
   @override
   final String firstName;
+  @override
+  final String? picture;
 
   @override
   String toString() {
-    return 'UserProfileState.loaded(id: $id, email: $email, firstName: $firstName)';
+    return 'UserProfileState.loaded(id: $id, email: $email, firstName: $firstName, picture: $picture)';
   }
 
   @override
@@ -400,11 +428,12 @@ class _$UserProfileSuccessStateImpl implements UserProfileSuccessState {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.firstName, firstName) ||
-                other.firstName == firstName));
+                other.firstName == firstName) &&
+            (identical(other.picture, picture) || other.picture == picture));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, email, firstName);
+  int get hashCode => Object.hash(runtimeType, id, email, firstName, picture);
 
   /// Create a copy of UserProfileState
   /// with the given fields replaced by the non-null parameter values.
@@ -420,10 +449,12 @@ class _$UserProfileSuccessStateImpl implements UserProfileSuccessState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(String id, String email, String firstName) loaded,
+    required TResult Function(
+            String id, String email, String firstName, String? picture)
+        loaded,
     required TResult Function() error,
   }) {
-    return loaded(id, email, firstName);
+    return loaded(id, email, firstName, picture);
   }
 
   @override
@@ -431,10 +462,12 @@ class _$UserProfileSuccessStateImpl implements UserProfileSuccessState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(String id, String email, String firstName)? loaded,
+    TResult? Function(
+            String id, String email, String firstName, String? picture)?
+        loaded,
     TResult? Function()? error,
   }) {
-    return loaded?.call(id, email, firstName);
+    return loaded?.call(id, email, firstName, picture);
   }
 
   @override
@@ -442,12 +475,14 @@ class _$UserProfileSuccessStateImpl implements UserProfileSuccessState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String id, String email, String firstName)? loaded,
+    TResult Function(
+            String id, String email, String firstName, String? picture)?
+        loaded,
     TResult Function()? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(id, email, firstName);
+      return loaded(id, email, firstName, picture);
     }
     return orElse();
   }
@@ -494,11 +529,13 @@ abstract class UserProfileSuccessState implements UserProfileState {
   const factory UserProfileSuccessState(
       {required final String id,
       required final String email,
-      required final String firstName}) = _$UserProfileSuccessStateImpl;
+      required final String firstName,
+      final String? picture}) = _$UserProfileSuccessStateImpl;
 
   String get id;
   String get email;
   String get firstName;
+  String? get picture;
 
   /// Create a copy of UserProfileState
   /// with the given fields replaced by the non-null parameter values.
@@ -552,7 +589,9 @@ class _$UserProfileErrorStateImpl implements UserProfileErrorState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(String id, String email, String firstName) loaded,
+    required TResult Function(
+            String id, String email, String firstName, String? picture)
+        loaded,
     required TResult Function() error,
   }) {
     return error();
@@ -563,7 +602,9 @@ class _$UserProfileErrorStateImpl implements UserProfileErrorState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(String id, String email, String firstName)? loaded,
+    TResult? Function(
+            String id, String email, String firstName, String? picture)?
+        loaded,
     TResult? Function()? error,
   }) {
     return error?.call();
@@ -574,7 +615,9 @@ class _$UserProfileErrorStateImpl implements UserProfileErrorState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String id, String email, String firstName)? loaded,
+    TResult Function(
+            String id, String email, String firstName, String? picture)?
+        loaded,
     TResult Function()? error,
     required TResult orElse(),
   }) {
