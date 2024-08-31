@@ -81,7 +81,7 @@ class HomeScreen extends StatelessWidget {
                     begin: 200,
                     end: 0,
                     duration: animationDuration,
-                    delay: animationDuration * 3,
+                    delay: animationDuration * 2,
                   );
             } else {
               return const SizedBox.shrink();
