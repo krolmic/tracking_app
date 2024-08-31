@@ -54,20 +54,18 @@ class SettingsScreen extends StatelessWidget {
                 previousState.updatePictureState !=
                 currentState.updatePictureState,
             listener: (context, settingsState) {
-              if (settingsState.updatePictureState.isError) {
+              if (settingsState.updatePictureState.isSuccess) {
                 showToast(
                   context: context,
-                  icon: Icons.error,
-                  message: translations.somethingWentWrong,
-                  isError: true,
-                );
-              } else if (settingsState.updatePictureState.isSuccess) {
-                showToast(
-                  context: context,
-                  icon: Icons.check,
                   message: translations.emojiUpdatedSuccessfully,
                 );
                 context.read<UserProfileCubit>().loadUserProfile();
+              } else if (settingsState.updatePictureState.isError) {
+                showToast(
+                  context: context,
+                  message: translations.somethingWentWrong,
+                  isError: true,
+                );
               }
             },
           ),
@@ -78,7 +76,6 @@ class SettingsScreen extends StatelessWidget {
               if (settingsState.signOutState.isError) {
                 showToast(
                   context: context,
-                  icon: Icons.error,
                   message: translations.somethingWentWrong,
                   isError: true,
                 );
@@ -93,7 +90,6 @@ class SettingsScreen extends StatelessWidget {
               if (settingsState.accountDeletionState.isError) {
                 showToast(
                   context: context,
-                  icon: Icons.error,
                   message: translations.somethingWentWrong,
                   isError: true,
                 );
@@ -107,7 +103,6 @@ class SettingsScreen extends StatelessWidget {
               if (settingsState.sendEmailState.isError) {
                 showToast(
                   context: context,
-                  icon: Icons.error,
                   message: translations.somethingWentWrong,
                   isError: true,
                 );

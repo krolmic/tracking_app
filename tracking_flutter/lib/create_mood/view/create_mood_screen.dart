@@ -40,7 +40,6 @@ class CreateMoodScreen extends StatelessWidget {
         if (state.formStatus.isSuccess) {
           showToast(
             context: context,
-            icon: Iconsax.award_bold,
             message: translations.moodTrackedSuccessfully,
           );
 
@@ -55,7 +54,6 @@ class CreateMoodScreen extends StatelessWidget {
         } else if (state.formStatus.isFailure) {
           showToast(
             context: context,
-            icon: Icons.error_rounded,
             message: translations.somethingWentWrong,
             isError: true,
           );

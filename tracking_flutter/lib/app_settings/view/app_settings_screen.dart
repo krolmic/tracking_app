@@ -33,7 +33,6 @@ class AppSettingsScreen extends StatelessWidget {
         if (state.formSubmissionStatus.isSuccess) {
           showToast(
             context: context,
-            icon: Iconsax.award_bold,
             message: translations.appSettingsSaved,
           );
 
@@ -41,7 +40,6 @@ class AppSettingsScreen extends StatelessWidget {
         } else if (state.formSubmissionStatus.isFailure) {
           showToast(
             context: context,
-            icon: Icons.error,
             message: translations.somethingWentWrong,
             isError: true,
           );
