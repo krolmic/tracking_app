@@ -4,11 +4,21 @@ class _CreateMoodStepper extends StatefulWidget {
   const _CreateMoodStepper({
     required this.pages,
     required this.onCompleted,
+    required this.thingIAmGreatfulForFocusNode,
+    required this.revenueFocusNode,
+    required this.thingsIAmGreatfulForPageIndex,
+    required this.revenuePageIndex,
   });
 
   final List<Widget> pages;
 
   final VoidCallback onCompleted;
+
+  final FocusNode thingIAmGreatfulForFocusNode;
+  final FocusNode revenueFocusNode;
+
+  final int thingsIAmGreatfulForPageIndex;
+  final int revenuePageIndex;
 
   @override
   _CreateMoodStepperState createState() => _CreateMoodStepperState();
@@ -44,6 +54,11 @@ class _CreateMoodStepperState extends State<_CreateMoodStepper> {
     return widget.pages.length - 1 == index;
   }
 
+  void _unfocusAllTextFields() {
+    widget.thingIAmGreatfulForFocusNode.unfocus();
+    widget.revenueFocusNode.unfocus();
+  }
+
   void onStepNext() {
     if (!_isLast(currentStep)) {
       setState(() {
@@ -65,16 +80,28 @@ class _CreateMoodStepperState extends State<_CreateMoodStepper> {
     }
   }
 
+  void onPageChanged(int index) {
+    _unfocusAllTextFields();
+
+    print('onPageChanged $index');
+
+    if (index == widget.thingsIAmGreatfulForPageIndex) {
+      widget.thingIAmGreatfulForFocusNode.requestFocus();
+    } else if (index == widget.revenuePageIndex) {
+      widget.revenueFocusNode.requestFocus();
+    }
+
+    setState(() {
+      currentStep = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final content = Expanded(
       child: PageView(
         controller: _controller,
-        onPageChanged: (index) {
-          setState(() {
-            currentStep = index;
-          });
-        },
+        onPageChanged: onPageChanged,
         children: widget.pages,
       ),
     );
@@ -145,12 +172,13 @@ class _CreateMoodStepperPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.symmetric(
-        vertical: verticalPaddingExtraLarge,
-        horizontal: viewPaddingHorizontal,
+    return Center(
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(
+          horizontal: viewPaddingHorizontal,
+        ),
+        child: child,
       ),
-      child: child,
-    );
+    ).animate().fadeIn(duration: animationDuration);
   }
 }

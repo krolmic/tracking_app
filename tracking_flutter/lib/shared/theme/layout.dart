@@ -3,6 +3,7 @@ const double verticalPaddingSmall = 5;
 const double verticalPaddingMedium = 10;
 const double verticalPaddingLarge = 15;
 const double verticalPaddingExtraLarge = 30;
+const double verticalPaddingExtraExtraLarge = 60;
 const double horizontalPaddingSmall = 5;
 const double horizontalPaddingMedium = 10;
 const double horizontalPaddingLarge = 15;
