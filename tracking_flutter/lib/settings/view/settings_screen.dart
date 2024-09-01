@@ -121,6 +121,55 @@ class SettingsScreen extends StatelessWidget {
 class _SettingsView extends StatelessWidget {
   const _SettingsView();
 
+  @override
+  Widget build(BuildContext context) {
+    return Builder(
+      builder: (context) {
+        final userProfileState = context.watch<UserProfileCubit>().state;
+
+        final userPictureState = context.select(
+          (SettingsCubit settingsCubit) =>
+              settingsCubit.state.updatePictureState,
+        );
+
+        final showLoadingIndicator =
+            userPictureState.isLoading || userProfileState.isInitialOrLoading;
+
+        return BaseView(
+          addVerticalPadding: true,
+          child: showLoadingIndicator
+              ? const Center(child: LoadingIndicator())
+              : userProfileState.maybeWhen(
+                  orElse: () => ErrorMessage(
+                    onRefresh: context.read<UserProfileCubit>().loadUserProfile,
+                  ),
+                  loaded: (id, email, firstName, picture) {
+                    return SingleChildScrollView(
+                      child: _SettingsViewContent(
+                        email: email,
+                        firstName: firstName,
+                        picture: picture,
+                      ),
+                    );
+                  },
+                ),
+        );
+      },
+    );
+  }
+}
+
+class _SettingsViewContent extends StatelessWidget {
+  const _SettingsViewContent({
+    required this.email,
+    required this.firstName,
+    this.picture,
+  });
+
+  final String email;
+  final String firstName;
+  final String? picture;
+
   Future<void> _showSignOutDialog(
     BuildContext context,
     void Function() onConfirm,
@@ -159,7 +208,7 @@ class _SettingsView extends StatelessWidget {
     );
   }
 
-  Future<void> _onSignOutPressed(BuildContext context) async {
+  Future<void> onSignOutPressed(BuildContext context) async {
     await _showSignOutDialog(
       context,
       () async {
@@ -174,7 +223,7 @@ class _SettingsView extends StatelessWidget {
     );
   }
 
-  Future<void> _onDeleteAccountPressed(BuildContext context) async {
+  Future<void> onDeleteAccountPressed(BuildContext context) async {
     await _showAccountDeletionDialog(
       context,
       () async {
@@ -193,152 +242,131 @@ class _SettingsView extends StatelessWidget {
   Widget build(BuildContext context) {
     final translations = AppLocalizations.of(context)!;
 
-    return BlocBuilder<UserProfileCubit, UserProfileState>(
-      buildWhen: (previousUserProfileState, currentUserProfileState) =>
-          previousUserProfileState != currentUserProfileState,
-      builder: (context, userProfileState) {
-        return BaseView(
-          addVerticalPadding: true,
-          child: userProfileState.maybeWhen(
-            orElse: () => const Center(child: LoadingIndicator()),
-            error: () => ErrorMessage(
-              onRefresh: context.read<UserProfileCubit>().loadUserProfile,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Center(
+          child: _UserProfileAvatar(setEmoji: picture),
+        ),
+        const VerticalSpacing.large(),
+        Center(
+          child: Text(
+            email,
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
+        ),
+        const SizedBox(
+          height: verticalPaddingSmall,
+        ),
+        Center(
+          child: Text(
+            firstName,
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+          ),
+        ),
+        const VerticalSpacing.extraLarge(),
+        Text(
+          translations.account,
+          style: Theme.of(context).textTheme.headlineSmall,
+        ),
+        const VerticalSpacing.large(),
+        Tile(
+          icon: Iconsax.edit_2_outline,
+          title: translations.personalDetails,
+          leading: const Icon(Iconsax.profile_circle_bold),
+          onTap: () => context.pushNamed(
+            RoutesNames.updateUserProfile,
+            extra: UpdateUserProfileRouteParameters(
+              email: email,
+              firstName: firstName,
             ),
-            loaded: (id, email, firstName, picture) {
-              return SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Center(
-                      child: _UserProfileAvatar(setEmoji: picture),
-                    ),
-                    const VerticalSpacing.large(),
-                    Center(
-                      child: Text(
-                        email,
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: verticalPaddingSmall,
-                    ),
-                    Center(
-                      child: Text(
-                        firstName,
-                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
-                      ),
-                    ),
-                    const VerticalSpacing.extraLarge(),
-                    Text(
-                      translations.account,
-                      style: Theme.of(context).textTheme.headlineSmall,
-                    ),
-                    const VerticalSpacing.large(),
-                    Tile(
-                      icon: Iconsax.edit_2_outline,
-                      title: translations.personalDetails,
-                      leading: const Icon(Iconsax.profile_circle_bold),
-                      onTap: () => context.pushNamed(
-                        RoutesNames.updateUserProfile,
-                        extra: UpdateUserProfileRouteParameters(
-                          email: email,
-                          firstName: firstName,
-                        ),
-                      ),
-                    ),
-                    const VerticalSpacing.extraLarge(),
-                    Text(
-                      translations.general,
-                      style: Theme.of(context).textTheme.headlineSmall,
-                    ),
-                    const VerticalSpacing.large(),
-                    Tile(
-                      icon: Iconsax.edit_2_outline,
-                      title: translations.appSettings,
-                      leading: const Icon(Iconsax.setting_4_bold),
-                      onTap: () => context.goNamed(
-                        RoutesNames.appSettings,
-                      ),
-                    ),
-                    BlocBuilder<SettingsCubit, SettingsState>(
-                      buildWhen: (previousState, currentState) =>
-                          previousState.sendEmailState !=
-                          currentState.sendEmailState,
-                      builder: (context, state) {
-                        return Tile(
-                          icon: Icons.mail_outline,
-                          title: translations.support,
-                          leading: const Icon(Iconsax.support_bold),
-                          onTap: () => context.read<SettingsCubit>().sendEmail(
-                                recipient: supportEmailAddress,
-                                subject: '',
-                                body: '',
-                              ),
-                          isLoading: state.sendEmailState.isLoading,
-                        );
-                      },
-                    ),
-                    Tile(
-                      title: translations.termsOfService,
-                      leading: const Icon(Iconsax.document_text_1_bold),
-                      onTap: () => context.goNamed(
-                        RoutesNames.termsOfService,
-                      ),
-                    ),
-                    Tile(
-                      title: translations.privacyPolicy,
-                      leading: const Icon(Iconsax.document_text_1_bold),
-                      onTap: () => context.goNamed(
-                        RoutesNames.privacyPolicy,
-                      ),
-                    ),
-                    const VerticalSpacing.extraLarge(),
-                    Center(
-                      child: BlocBuilder<SettingsCubit, SettingsState>(
-                        buildWhen: (previousState, currentState) =>
-                            previousState.signOutState !=
-                            currentState.signOutState,
-                        builder: (context, state) {
-                          return TextButton(
-                            onPressed: () => _onSignOutPressed(context),
-                            child: state.signOutState.maybeWhen(
-                              orElse: () => Text(translations.signOut),
-                              loading: () => const TinyLoadingIndicator(),
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                    Center(
-                      child: BlocBuilder<SettingsCubit, SettingsState>(
-                        buildWhen: (previousState, currentState) =>
-                            previousState.accountDeletionState !=
-                            currentState.accountDeletionState,
-                        builder: (context, state) {
-                          return TextButton(
-                            onPressed: () => _onDeleteAccountPressed(context),
-                            child: state.accountDeletionState.maybeWhen(
-                              loading: () => const TinyLoadingIndicator(),
-                              orElse: () => Text(
-                                translations.deleteAccount,
-                                style: const TextStyle(
-                                  color: AppColors.lightGrey,
-                                ),
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                  ],
+          ),
+        ),
+        const VerticalSpacing.extraLarge(),
+        Text(
+          translations.general,
+          style: Theme.of(context).textTheme.headlineSmall,
+        ),
+        const VerticalSpacing.large(),
+        Tile(
+          icon: Iconsax.edit_2_outline,
+          title: translations.appSettings,
+          leading: const Icon(Iconsax.setting_4_bold),
+          onTap: () => context.goNamed(
+            RoutesNames.appSettings,
+          ),
+        ),
+        BlocBuilder<SettingsCubit, SettingsState>(
+          buildWhen: (previousState, currentState) =>
+              previousState.sendEmailState != currentState.sendEmailState,
+          builder: (context, state) {
+            return Tile(
+              icon: Icons.mail_outline,
+              title: translations.support,
+              leading: const Icon(Iconsax.support_bold),
+              onTap: () => context.read<SettingsCubit>().sendEmail(
+                    recipient: supportEmailAddress,
+                    subject: '',
+                    body: '',
+                  ),
+              isLoading: state.sendEmailState.isLoading,
+            );
+          },
+        ),
+        Tile(
+          title: translations.termsOfService,
+          leading: const Icon(Iconsax.document_text_1_bold),
+          onTap: () => context.goNamed(
+            RoutesNames.termsOfService,
+          ),
+        ),
+        Tile(
+          title: translations.privacyPolicy,
+          leading: const Icon(Iconsax.document_text_1_bold),
+          onTap: () => context.goNamed(
+            RoutesNames.privacyPolicy,
+          ),
+        ),
+        const VerticalSpacing.extraLarge(),
+        Center(
+          child: BlocBuilder<SettingsCubit, SettingsState>(
+            buildWhen: (previousState, currentState) =>
+                previousState.signOutState != currentState.signOutState,
+            builder: (context, state) {
+              return TextButton(
+                onPressed: () => onSignOutPressed(context),
+                child: state.signOutState.maybeWhen(
+                  orElse: () => Text(translations.signOut),
+                  loading: () => const TinyLoadingIndicator(),
                 ),
               );
             },
           ),
-        );
-      },
+        ),
+        Center(
+          child: BlocBuilder<SettingsCubit, SettingsState>(
+            buildWhen: (previousState, currentState) =>
+                previousState.accountDeletionState !=
+                currentState.accountDeletionState,
+            builder: (context, state) {
+              return TextButton(
+                onPressed: () => onDeleteAccountPressed(context),
+                child: state.accountDeletionState.maybeWhen(
+                  loading: () => const TinyLoadingIndicator(),
+                  orElse: () => Text(
+                    translations.deleteAccount,
+                    style: const TextStyle(
+                      color: AppColors.lightGrey,
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 }
