@@ -234,7 +234,7 @@
         }
     },
     "passwordRequirementsPreamble": "Dein Password muss Folgendes beinhalten:",
-    "passwordRequirementsAtLeast": "mindestens {numCharacters, plural, =1{1{characterType} Zeichen} other{{numCharacters}{characterType} Zeichen}}",
+    "passwordRequirementsAtLeast": "mindestens {numCharacters, plural, =1{1{characterType}} other{{numCharacters}{characterType} Zeichen}}",
     "@passwordRequirementsAtLeast": {
         "placeholders": {
             "numCharacters": {
@@ -245,7 +245,7 @@
             }
         }
     },
-    "passwordRequirementsCharacterType": "{characterType, select, requiresUppercase{uppercase} requiresLowercase{lowercase} requiresNumbers{number} requiresSymbols{symbol} other{}}",
+    "passwordRequirementsCharacterType": "{characterType, select, requiresUppercase{Großbuchstabe} requiresLowercase{Kleinbuchstabe} requiresNumbers{Zahl} requiresSymbols{Sonderzeichen} other{}}",
     "@passwordRequirementsCharacterType": {
         "placeholders": {
             "characterType": {
