@@ -39,6 +39,8 @@
     "howMuchDidYouEarnDescription": "Track your revenue so you can see how it correlates with your mood.",
     "howLongDidYouWork": "How long did you work?",
     "howLongDidYouWorkDescription": "Track your work time to see how it correlates with your mood.",
+    "hours": "hours",
+    "minutes": "minutes",
     "revenueHelper": "Revenue in {currency}",
     "@revenueHelper": {
         "placeholders": {
@@ -60,7 +62,7 @@
     "averageRevenue": "Average\nrevenue",
     "recentlyTracked": "Recently tracked",
     "seeAll": "See all",
-    "moodHistoryTitle": "Your tracked entries",
+    "moodHistoryTitle": "All entries",
     "goodMorning": "Good morning,",
     "goodAfternoon": "Good afternoon,",
     "goodEvening": "Good evening,",

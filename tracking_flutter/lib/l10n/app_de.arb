@@ -39,6 +39,8 @@
     "howMuchDidYouEarnDescription": "Tracke deinn Umsatz um zu sehen, wie er sich auf deine Stimmung auswirkt.",
     "howLongDidYouWork": "Wie lange hast du gearbeitet?",
     "howLongDidYouWorkDescription": "Tracke deine Arbeitszeit um zu sehen, wie sie sich auf deine Stimmung auswirkt.",
+    "hours": "Stunden",
+    "minutes": "Minuten",
     "revenueHelper": "Umsatz in {currency}",
     "@revenueHelper": {
         "placeholders": {
@@ -60,7 +62,7 @@
     "averageRevenue": "Durchschn.\nUmsatz",
     "recentlyTracked": "Zuletzt getrackt",
     "seeAll": "Alle anzeigen",
-    "moodHistoryTitle": "Deine getrackten Einträge",
+    "moodHistoryTitle": "Alle Einträge",
     "goodMorning": "Guten Morgen,",
     "goodAfternoon": "Guten Tag,",
     "goodEvening": "Guten Abend,",
