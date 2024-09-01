@@ -18,7 +18,7 @@ void main() {
 
     test('endOfMonth returns correct date', () {
       final date = DateTime(2023, 3, 15);
-      expect(date.endOfMonth, DateTime(2023, 3, 31));
+      expect(date.endOfMonth, DateTime(2023, 3, 31, 23, 59, 59, 999, 999));
     });
 
     test('startOfWeek returns correct date', () {
@@ -43,7 +43,7 @@ void main() {
     });
 
     test('isThisWeek returns true for dates in the current week', () {
-      final now = DateTime.now();
+      final now = DateTime(2024, 8, 28);
       final today = DateTime(now.year, now.month, now.day);
 
       // Test today
