@@ -41,6 +41,7 @@
     "howLongDidYouWorkDescription": "Tracke deine Arbeitszeit um zu sehen, wie sie sich auf deine Stimmung auswirkt.",
     "hours": "Stunden",
     "minutes": "Minuten",
+    "yourWorkTime": "Wähle die Arbeitszeit",
     "revenueHelper": "Umsatz in {currency}",
     "@revenueHelper": {
         "placeholders": {
