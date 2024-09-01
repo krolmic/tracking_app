@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:formz/formz.dart';
 import 'package:go_router/go_router.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:tracking_app/main.dart';
+import 'package:tracking_app/shared/theme/animation.dart';
 import 'package:tracking_app/shared/toast.dart';
 import 'package:tracking_app/shared/view/base_view.dart';
 import 'package:tracking_app/shared/widgets/app_elevated_button.dart';
@@ -95,7 +97,7 @@ class _UpdateUserProfileView extends StatelessWidget {
         child: _UpdateUserProfileForm(
           email: email,
           firstName: firstName,
-        ),
+        ).animate().fade(duration: animationDuration),
       ),
     );
   }
