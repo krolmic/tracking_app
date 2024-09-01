@@ -1,11 +1,13 @@
 import 'package:duration_picker/duration_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:tracking_app/shared/extensions/duration.dart';
 import 'package:tracking_app/shared/theme/colors.dart';
 import 'package:tracking_app/shared/theme/layout.dart';
 import 'package:tracking_app/shared/widgets/platform_widget.dart';
+import 'package:tracking_app/shared/widgets/spacing.dart';
 
 class PlatformTimeInput extends StatelessWidget {
   const PlatformTimeInput({
@@ -45,12 +47,15 @@ class _IOSTimeInput extends StatelessWidget {
     showCupertinoModalPopup<void>(
       context: context,
       builder: (BuildContext context) => Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: AppColors.backgroundColor,
+        ),
         height: 220,
         padding: const EdgeInsets.only(top: viewPaddingVertical),
         margin: EdgeInsets.only(
           bottom: MediaQuery.of(context).viewInsets.bottom,
         ),
-        color: AppColors.backgroundColor,
         child: SafeArea(
           top: false,
           child: CupertinoTheme(
@@ -59,10 +64,9 @@ class _IOSTimeInput extends StatelessWidget {
                 pickerTextStyle: Theme.of(context).textTheme.bodyMedium,
               ),
             ),
-            child: CupertinoTimerPicker(
-              mode: CupertinoTimerPickerMode.hm,
-              initialTimerDuration: time,
-              onTimerDurationChanged: onChange,
+            child: _IOSTimePicker(
+              initialTime: time,
+              onChange: onChange,
             ),
           ),
         ),
@@ -75,6 +79,120 @@ class _IOSTimeInput extends StatelessWidget {
     return _TimeInputField(
       time: time,
       onTap: () => _showDialog(context),
+    );
+  }
+}
+
+class _IOSTimePicker extends StatefulWidget {
+  const _IOSTimePicker({
+    required this.initialTime,
+    required this.onChange,
+  });
+
+  final Duration initialTime;
+  final void Function(Duration) onChange;
+
+  @override
+  State<_IOSTimePicker> createState() => _IOSTimePickerState();
+}
+
+class _IOSTimePickerState extends State<_IOSTimePicker> {
+  int _hours = 0;
+  int _minutes = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _hours = widget.initialTime.inHours;
+    _minutes = widget.initialTime.inMinutes % 60;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final translations = AppLocalizations.of(context)!;
+
+    return CupertinoTheme(
+      data: CupertinoThemeData(
+        textTheme: CupertinoTextThemeData(
+          pickerTextStyle: Theme.of(context).textTheme.bodyMedium,
+        ),
+      ),
+      child: Stack(
+        children: [
+          Center(
+            child: Container(
+              width: 230,
+              height: 32,
+              decoration: BoxDecoration(
+                color: AppColors.inputFillColor,
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                width: 40,
+                child: CupertinoPicker(
+                  selectionOverlay: const SizedBox.shrink(),
+                  itemExtent: 32,
+                  onSelectedItemChanged: (int value) {
+                    widget.onChange(
+                      Duration(hours: value, minutes: _minutes),
+                    );
+
+                    setState(() {
+                      _hours = value;
+                    });
+                  },
+                  scrollController: FixedExtentScrollController(
+                    initialItem: widget.initialTime.inHours,
+                  ),
+                  children: List<Widget>.generate(24, (int index) {
+                    return Center(
+                      child: Text(index.toString().padLeft(2, '0')),
+                    );
+                  }),
+                ),
+              ),
+              Text(
+                translations.hours,
+                style: Theme.of(context).textTheme.labelMedium,
+              ),
+              const HorizontalSpacing.large(),
+              SizedBox(
+                width: 40,
+                child: CupertinoPicker(
+                  selectionOverlay: const SizedBox.shrink(),
+                  itemExtent: 32,
+                  onSelectedItemChanged: (int value) {
+                    widget.onChange(
+                      Duration(hours: _hours, minutes: value),
+                    );
+
+                    setState(() {
+                      _minutes = value;
+                    });
+                  },
+                  scrollController: FixedExtentScrollController(
+                    initialItem: widget.initialTime.inMinutes % 60,
+                  ),
+                  children: List<Widget>.generate(60, (int index) {
+                    return Center(
+                      child: Text(index.toString().padLeft(2, '0')),
+                    );
+                  }),
+                ),
+              ),
+              Text(
+                translations.minutes,
+                style: Theme.of(context).textTheme.labelMedium,
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
