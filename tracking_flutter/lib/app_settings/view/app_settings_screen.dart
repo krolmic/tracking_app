@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:formz/formz.dart';
@@ -8,6 +9,7 @@ import 'package:icons_plus/icons_plus.dart';
 import 'package:tracking_app/app_settings/bloc/app_settings_bloc.dart';
 import 'package:tracking_app/shared/currencies.dart';
 import 'package:tracking_app/shared/extensions/double.dart';
+import 'package:tracking_app/shared/theme/animation.dart';
 import 'package:tracking_app/shared/toast.dart';
 import 'package:tracking_app/shared/view/base_view.dart';
 import 'package:tracking_app/shared/widgets/app_elevated_button.dart';
@@ -66,7 +68,8 @@ class _AppSettingsView extends StatelessWidget {
             none: () => const Center(
               child: LoadingIndicator(),
             ),
-            initialized: (_) => _AppSettingsForm(),
+            initialized: (_) =>
+                _AppSettingsForm().animate().fade(duration: animationDuration),
           );
         },
       ),

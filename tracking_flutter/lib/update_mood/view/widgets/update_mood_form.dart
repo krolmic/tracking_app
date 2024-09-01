@@ -278,6 +278,6 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
           ),
         ),
       ],
-    );
+    ).animate().fade(duration: animationDuration);
   }
 }
