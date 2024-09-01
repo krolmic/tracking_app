@@ -60,7 +60,7 @@ class MoodsScreen extends StatelessWidget {
             buildWhen: (previousState, currentState) =>
                 previousState != currentState,
             builder: (context, state) {
-              if (state.isError) {
+              if (state.isError || state.isInitialOrLoading) {
                 return const SizedBox.shrink();
               }
 
@@ -89,8 +89,8 @@ class MoodsScreen extends StatelessWidget {
                     );
                   }
                 },
-                isLoading: state.isInitialOrLoading,
-              );
+                isLoading: false,
+              ).animate().fadeIn(duration: animationDuration);
             },
           ),
         ),
