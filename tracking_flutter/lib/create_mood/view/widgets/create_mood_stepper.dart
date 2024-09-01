@@ -83,8 +83,6 @@ class _CreateMoodStepperState extends State<_CreateMoodStepper> {
   void onPageChanged(int index) {
     _unfocusAllTextFields();
 
-    print('onPageChanged $index');
-
     if (index == widget.thingsIAmGreatfulForPageIndex) {
       widget.thingIAmGreatfulForFocusNode.requestFocus();
     } else if (index == widget.revenuePageIndex) {
