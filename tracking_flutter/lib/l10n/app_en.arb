@@ -41,6 +41,7 @@
     "howLongDidYouWorkDescription": "Track your work time to see how it correlates with your mood.",
     "hours": "hours",
     "minutes": "minutes",
+    "yourWorkTime": "Select work time",
     "revenueHelper": "Revenue in {currency}",
     "@revenueHelper": {
         "placeholders": {

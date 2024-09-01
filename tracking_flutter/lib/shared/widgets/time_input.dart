@@ -1,4 +1,3 @@
-import 'package:duration_picker/duration_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -6,6 +5,7 @@ import 'package:icons_plus/icons_plus.dart';
 import 'package:tracking_app/shared/extensions/duration.dart';
 import 'package:tracking_app/shared/theme/colors.dart';
 import 'package:tracking_app/shared/theme/layout.dart';
+import 'package:tracking_app/shared/widgets/app_dialog.dart';
 import 'package:tracking_app/shared/widgets/platform_widget.dart';
 import 'package:tracking_app/shared/widgets/spacing.dart';
 
@@ -43,7 +43,7 @@ class _IOSTimeInput extends StatelessWidget {
   final Duration time;
   final void Function(Duration) onChange;
 
-  void _showDialog(BuildContext context) {
+  void _showTimePickerDialog(BuildContext context) {
     showCupertinoModalPopup<void>(
       context: context,
       builder: (BuildContext context) => Container(
@@ -51,7 +51,6 @@ class _IOSTimeInput extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           color: AppColors.backgroundColor,
         ),
-        height: 220,
         padding: const EdgeInsets.only(top: viewPaddingVertical),
         margin: EdgeInsets.only(
           bottom: MediaQuery.of(context).viewInsets.bottom,
@@ -78,7 +77,7 @@ class _IOSTimeInput extends StatelessWidget {
   Widget build(BuildContext context) {
     return _TimeInputField(
       time: time,
-      onTap: () => _showDialog(context),
+      onTap: () => _showTimePickerDialog(context),
     );
   }
 }
@@ -117,81 +116,84 @@ class _IOSTimePickerState extends State<_IOSTimePicker> {
           pickerTextStyle: Theme.of(context).textTheme.bodyMedium,
         ),
       ),
-      child: Stack(
-        children: [
-          Center(
-            child: Container(
-              width: 230,
-              height: 32,
-              decoration: BoxDecoration(
-                color: AppColors.inputFillColor,
-                borderRadius: BorderRadius.circular(10),
+      child: SizedBox(
+        height: 220,
+        child: Stack(
+          children: [
+            Center(
+              child: Container(
+                width: 230,
+                height: 32,
+                decoration: BoxDecoration(
+                  color: AppColors.inputFillColor,
+                  borderRadius: BorderRadius.circular(10),
+                ),
               ),
             ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                width: 40,
-                child: CupertinoPicker(
-                  selectionOverlay: const SizedBox.shrink(),
-                  itemExtent: 32,
-                  onSelectedItemChanged: (int value) {
-                    widget.onChange(
-                      Duration(hours: value, minutes: _minutes),
-                    );
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: 40,
+                  child: CupertinoPicker(
+                    selectionOverlay: const SizedBox.shrink(),
+                    itemExtent: 32,
+                    onSelectedItemChanged: (int value) {
+                      widget.onChange(
+                        Duration(hours: value, minutes: _minutes),
+                      );
 
-                    setState(() {
-                      _hours = value;
-                    });
-                  },
-                  scrollController: FixedExtentScrollController(
-                    initialItem: widget.initialTime.inHours,
+                      setState(() {
+                        _hours = value;
+                      });
+                    },
+                    scrollController: FixedExtentScrollController(
+                      initialItem: widget.initialTime.inHours,
+                    ),
+                    children: List<Widget>.generate(24, (int index) {
+                      return Center(
+                        child: Text(index.toString().padLeft(2, '0')),
+                      );
+                    }),
                   ),
-                  children: List<Widget>.generate(24, (int index) {
-                    return Center(
-                      child: Text(index.toString().padLeft(2, '0')),
-                    );
-                  }),
                 ),
-              ),
-              Text(
-                translations.hours,
-                style: Theme.of(context).textTheme.labelMedium,
-              ),
-              const HorizontalSpacing.large(),
-              SizedBox(
-                width: 40,
-                child: CupertinoPicker(
-                  selectionOverlay: const SizedBox.shrink(),
-                  itemExtent: 32,
-                  onSelectedItemChanged: (int value) {
-                    widget.onChange(
-                      Duration(hours: _hours, minutes: value),
-                    );
+                Text(
+                  translations.hours,
+                  style: Theme.of(context).textTheme.labelMedium,
+                ),
+                const HorizontalSpacing.large(),
+                SizedBox(
+                  width: 40,
+                  child: CupertinoPicker(
+                    selectionOverlay: const SizedBox.shrink(),
+                    itemExtent: 32,
+                    onSelectedItemChanged: (int value) {
+                      widget.onChange(
+                        Duration(hours: _hours, minutes: value),
+                      );
 
-                    setState(() {
-                      _minutes = value;
-                    });
-                  },
-                  scrollController: FixedExtentScrollController(
-                    initialItem: widget.initialTime.inMinutes % 60,
+                      setState(() {
+                        _minutes = value;
+                      });
+                    },
+                    scrollController: FixedExtentScrollController(
+                      initialItem: widget.initialTime.inMinutes % 60,
+                    ),
+                    children: List<Widget>.generate(60, (int index) {
+                      return Center(
+                        child: Text(index.toString().padLeft(2, '0')),
+                      );
+                    }),
                   ),
-                  children: List<Widget>.generate(60, (int index) {
-                    return Center(
-                      child: Text(index.toString().padLeft(2, '0')),
-                    );
-                  }),
                 ),
-              ),
-              Text(
-                translations.minutes,
-                style: Theme.of(context).textTheme.labelMedium,
-              ),
-            ],
-          ),
-        ],
+                Text(
+                  translations.minutes,
+                  style: Theme.of(context).textTheme.labelMedium,
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -206,19 +208,33 @@ class _AndroidTimeInput extends StatelessWidget {
   final Duration time;
   final void Function(Duration) onChange;
 
+  Future<void> _showTimePickerDialog(
+    BuildContext context,
+  ) {
+    return showDialog<void>(
+      context: context,
+      builder: (dialogContext) {
+        final translations = AppLocalizations.of(context)!;
+
+        return AppDialog(
+          title: translations.yourWorkTime,
+          body: _IOSTimePicker(
+            initialTime: time,
+            onChange: onChange,
+          ),
+          confirmButtonText: translations.ok,
+          buildCancelButton: false,
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return _TimeInputField(
       time: time,
       onTap: () async {
-        final updatedWorkTime = await showDurationPicker(
-          context: context,
-          initialTime: time,
-          upperBound: const Duration(hours: 24),
-        );
-        if (updatedWorkTime != null) {
-          onChange(updatedWorkTime);
-        }
+        await _showTimePickerDialog(context);
       },
     );
   }
