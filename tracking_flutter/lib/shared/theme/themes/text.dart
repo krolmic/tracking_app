@@ -38,4 +38,8 @@ final _textTheme = GoogleFonts.latoTextTheme().copyWith(
     fontSize: 14,
     fontWeight: FontWeight.normal,
   ),
+  labelMedium: GoogleFonts.lato(
+    fontSize: 14,
+    fontWeight: FontWeight.bold,
+  ),
 );
