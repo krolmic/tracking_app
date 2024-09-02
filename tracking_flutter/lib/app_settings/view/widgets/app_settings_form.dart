@@ -122,7 +122,7 @@ class _AppSettingsFormState extends State<_AppSettingsForm> {
               inputFormatters: [
                 FilteringTextInputFormatter.allow(RegExp('[0-9.]')),
               ],
-              textInputAction: TextInputAction.next,
+              textInputAction: TextInputAction.done,
             ),
             const VerticalSpacing.large(),
             Text(

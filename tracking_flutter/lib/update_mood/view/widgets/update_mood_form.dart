@@ -170,7 +170,7 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
                       .validator(value ?? '')
                       ?.toString(),
                   keyboardType: TextInputType.text,
-                  textInputAction: TextInputAction.next,
+                  textInputAction: TextInputAction.done,
                 ),
                 const VerticalSpacing.medium(),
                 TextFormField(
@@ -188,7 +188,7 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
                       .validator(value ?? '')
                       ?.toString(),
                   keyboardType: TextInputType.text,
-                  textInputAction: TextInputAction.next,
+                  textInputAction: TextInputAction.done,
                 ),
                 const VerticalSpacing.medium(),
                 TextFormField(
@@ -206,7 +206,7 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
                       .validator(value ?? '')
                       ?.toString(),
                   keyboardType: TextInputType.text,
-                  textInputAction: TextInputAction.next,
+                  textInputAction: TextInputAction.done,
                 ),
                 const VerticalSpacing.extraLarge(),
                 Text(
@@ -232,7 +232,7 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
                       inputFormatters: [
                         FilteringTextInputFormatter.allow(RegExp('[0-9.]')),
                       ],
-                      textInputAction: TextInputAction.next,
+                      textInputAction: TextInputAction.done,
                     );
                   },
                 ),
