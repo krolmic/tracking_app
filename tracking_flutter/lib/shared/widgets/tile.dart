@@ -28,6 +28,9 @@ class Tile extends StatelessWidget {
       elevation: 5,
       shadowColor: AppColors.contentShadowColor,
       child: ListTile(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
         contentPadding: const EdgeInsets.only(
           left: 10,
           right: 15,
