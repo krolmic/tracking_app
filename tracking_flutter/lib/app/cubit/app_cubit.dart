@@ -60,7 +60,10 @@ class AppCubit extends Cubit<AppState> {
   Future<void> _configureLogging() async {
     if (releaseMode) {
       await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
-      FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+
+      FlutterError.onError =
+          FirebaseCrashlytics.instance.recordFlutterFatalError;
+
       PlatformDispatcher.instance.onError = (error, stack) {
         FirebaseCrashlytics.instance.recordError(error, stack);
         return true;
