@@ -9,7 +9,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.trackingApp</string>
+	<string>app.healthyhustle</string>
 	<key>PROJECT_ID</key>
 	<string>mindful-me-project</string>
 	<key>STORAGE_BUCKET</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:679937544462:ios:d20604c1c04f7b040fc75f</string>
+	<string>1:679937544462:ios:fcca3726b934a55b0fc75f</string>
 </dict>
 </plist>
