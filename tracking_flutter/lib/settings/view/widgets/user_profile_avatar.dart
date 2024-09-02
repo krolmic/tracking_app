@@ -64,7 +64,8 @@ class _UserProfileAvatar extends StatelessWidget {
           title: AppLocalizations.of(context)!.selectEmoji,
           body: Padding(
             padding: const EdgeInsets.only(top: verticalPaddingLarge),
-            child: SizedBox(
+            child: Container(
+              constraints: const BoxConstraints(maxWidth: 500),
               width: double.maxFinite,
               child: GridView.count(
                 crossAxisCount: 4,
