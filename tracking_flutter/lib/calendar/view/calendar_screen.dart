@@ -116,6 +116,7 @@ class _CalendarView extends StatelessWidget {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const VerticalSpacing.large(),
                 Center(
                   child: Container(
                     constraints: const BoxConstraints(maxWidth: 430),

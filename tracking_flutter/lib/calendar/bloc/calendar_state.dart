@@ -50,4 +50,14 @@ extension CalendarMoodsStateX on CalendarMoodsState {
 
   List<Mood> get moods =>
       isSuccess ? (this as CalendarMoodsSuccessState).moods : [];
+
+  Mood? getMoodAtCreatedOnDate(DateTime date) {
+    try {
+      return moods.firstWhere(
+        (mood) => mood.createdOn.isSameDay(date),
+      );
+    } catch (e) {
+      return null;
+    }
+  }
 }

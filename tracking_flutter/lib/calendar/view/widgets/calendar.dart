@@ -47,79 +47,74 @@ class _Calendar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CalendarCarousel<Event>(
-      firstDayOfWeek: (0 + 1) % 7,
-      height: 395,
-      todayButtonColor: _CalendarTheme.todayButtonColor,
-      todayTextStyle: _CalendarTheme.todayTextStyle,
-      daysTextStyle: _CalendarTheme.calendarDaysTextStyle,
-      prevDaysTextStyle: _CalendarTheme.calendarNextAndPrevDaysTextStyle,
-      weekendTextStyle: _CalendarTheme.calendarDaysTextStyle,
-      nextDaysTextStyle: _CalendarTheme.calendarNextAndPrevDaysTextStyle,
-      headerTextStyle: Theme.of(context).textTheme.headlineSmall,
-      customDayBuilder: (
-        bool isSelectable,
-        int index,
-        bool isSelectedDay,
-        bool isToday,
-        bool isPrevMonthDay,
-        TextStyle textStyle,
-        bool isNextMonthDay,
-        bool isThisMonthDay,
-        DateTime date,
-      ) {
-        if (isNextMonthDay || isPrevMonthDay) {
-          return Center(
-            child: Text(
-              '${date.day}',
-              style: _CalendarTheme.calendarNextAndPrevDaysTextStyle,
-            ),
-          );
-        } else if (date.isAfterToday) {
-          return Center(
-            child: Text(
-              '${date.day}',
-              style: _CalendarTheme.calendarDaysAfterTodayTextStyle,
-            ),
-          );
-        }
+    final calendarBloc = context.read<CalendarBloc>();
 
-        return null;
-      },
-      rightButtonIcon: Icon(
-        Iconsax.arrow_right_3_outline,
-        color: _CalendarTheme.calendarPrevAndNextButtonsColor,
-        size: Theme.of(context).appBarTheme.iconTheme!.size,
-      ),
-      leftButtonIcon: Icon(
-        Iconsax.arrow_left_2_outline,
-        color: _CalendarTheme.calendarPrevAndNextButtonsColor,
-        size: Theme.of(context).appBarTheme.iconTheme!.size,
-      ),
-      weekdayTextStyle: _CalendarTheme.calendarWeekdaysTextStyle,
-      markedDatesMap: _getMarkedDates(),
-      targetDateTime: targetMonthDate,
-      onCalendarChanged: (date) => context
-          .read<CalendarBloc>()
-          .add(CalendarEvent.targetDateChanged(date: date)),
-      onDayPressed: (date, events) {
-        final mood = _getMoodForDate(date);
-        final moodAtPressedDayExists = mood != null;
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 12, right: 2),
+          child: _CalendarHeader(targetMonthDate: targetMonthDate),
+        ),
+        const VerticalSpacing.extraLarge(),
+        CalendarCarousel<Event>(
+          firstDayOfWeek: (0 + 1) % 7,
+          height: 350,
+          todayButtonColor: _CalendarTheme.todayButtonColor,
+          todayTextStyle: _CalendarTheme.todayTextStyle,
+          daysTextStyle: _CalendarTheme.calendarDaysTextStyle,
+          prevDaysTextStyle: _CalendarTheme.calendarNextAndPrevDaysTextStyle,
+          weekendTextStyle: _CalendarTheme.calendarDaysTextStyle,
+          nextDaysTextStyle: _CalendarTheme.calendarNextAndPrevDaysTextStyle,
+          headerTextStyle: Theme.of(context).textTheme.headlineSmall,
+          showHeader: false,
+          customDayBuilder: (
+            bool isSelectable,
+            int index,
+            bool isSelectedDay,
+            bool isToday,
+            bool isPrevMonthDay,
+            TextStyle textStyle,
+            bool isNextMonthDay,
+            bool isThisMonthDay,
+            DateTime date,
+          ) {
+            if (date.isAfterToday) {
+              return Center(
+                child: Text(
+                  '${date.day}',
+                  style: _CalendarTheme.calendarDaysAfterTodayTextStyle,
+                ),
+              );
+            }
 
-        if (moodAtPressedDayExists) {
-          context.pushNamed(
-            RoutesNames.updateMoodFromCalendar,
-            extra: UpdateMoodRouteParameters(mood: mood),
-          );
-        } else if (date.isSameMonth(targetMonthDate) &&
-            date.isTodayOrBeforeToday) {
-          context.pushNamed(
-            RoutesNames.createMoodFromCalendar,
-            extra: CreateMoodRouteParameters(date: date),
-          );
-        }
-      },
-      locale: Localizations.localeOf(context).languageCode,
+            return null;
+          },
+          weekdayTextStyle: _CalendarTheme.calendarWeekdaysTextStyle,
+          markedDatesMap: _getMarkedDates(),
+          targetDateTime: targetMonthDate,
+          onCalendarChanged: (date) =>
+              calendarBloc.add(CalendarEvent.targetDateChanged(date: date)),
+          onDayPressed: (date, events) {
+            final mood =
+                calendarBloc.state.moodsState.getMoodAtCreatedOnDate(date);
+            final moodAtPressedDateExists = mood != null;
+
+            if (moodAtPressedDateExists) {
+              context.pushNamed(
+                RoutesNames.updateMoodFromCalendar,
+                extra: UpdateMoodRouteParameters(mood: mood),
+              );
+            } else if (date.isSameMonth(targetMonthDate) &&
+                date.isTodayOrBeforeToday) {
+              context.pushNamed(
+                RoutesNames.createMoodFromCalendar,
+                extra: CreateMoodRouteParameters(date: date),
+              );
+            }
+          },
+          locale: Localizations.localeOf(context).languageCode,
+        ),
+      ],
     );
   }
 
@@ -152,14 +147,71 @@ class _Calendar extends StatelessWidget {
       ),
     );
   }
+}
 
-  Mood? _getMoodForDate(DateTime date) {
-    try {
-      return moods.firstWhere(
-        (mood) => mood.createdOn.isSameDay(date),
-      );
-    } catch (e) {
-      return null;
-    }
+class _CalendarHeader extends StatelessWidget {
+  const _CalendarHeader({required this.targetMonthDate});
+
+  final DateTime targetMonthDate;
+
+  @override
+  Widget build(BuildContext context) {
+    final calendarBloc = context.read<CalendarBloc>();
+
+    return Row(
+      children: [
+        Text(
+          targetMonthDate.getDateString(null, includeDay: false),
+          style: Theme.of(context).textTheme.headlineSmall,
+        ),
+        const Spacer(),
+        Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: () => calendarBloc.add(
+              CalendarEvent.targetDateChanged(
+                date: targetMonthDate.previousMonth,
+              ),
+            ),
+            borderRadius: BorderRadius.circular(20),
+            child: Container(
+              alignment: Alignment.center,
+              padding: const EdgeInsets.only(
+                left: 7,
+                right: 8,
+                top: 8,
+                bottom: 8,
+              ),
+              child: Icon(
+                Iconsax.arrow_left_2_outline,
+                color: _CalendarTheme.calendarPrevAndNextButtonsColor,
+                size: Theme.of(context).appBarTheme.iconTheme!.size,
+              ),
+            ),
+          ),
+        ),
+        const HorizontalSpacing.large(),
+        Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: () => calendarBloc.add(
+              CalendarEvent.targetDateChanged(
+                date: targetMonthDate.nextMonth,
+              ),
+            ),
+            borderRadius: BorderRadius.circular(20),
+            child: Container(
+              alignment: Alignment.center,
+              padding: const EdgeInsets.all(8),
+              child: Icon(
+                Iconsax.arrow_right_3_outline,
+                color: _CalendarTheme.calendarPrevAndNextButtonsColor,
+                size: Theme.of(context).appBarTheme.iconTheme!.size,
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
   }
 }
