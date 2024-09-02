@@ -17,9 +17,6 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
   late final TextEditingController _thingIAmGreatfulAbout3Controller;
   late final TextEditingController _revenueController;
 
-  final FocusNode _thingIAmGreatfulAbout1FocusNode = FocusNode();
-  final FocusNode _revenueFocusNode = FocusNode();
-
   void _onMoodValueChanged(double value) {
     context.read<CreateMoodBloc>().add(CreateMoodEvent.moodValueChanged(value));
   }
@@ -112,9 +109,6 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
     _thingIAmGreatfulAbout3Controller.dispose();
     _revenueController.dispose();
 
-    _thingIAmGreatfulAbout1FocusNode.dispose();
-    _revenueFocusNode.dispose();
-
     super.dispose();
   }
 
@@ -125,10 +119,6 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
       child: _CreateMoodStepper(
         onCompleted: _onSubmit,
         pages: _getStepperPages(),
-        thingIAmGreatfulForFocusNode: _thingIAmGreatfulAbout1FocusNode,
-        revenueFocusNode: _revenueFocusNode,
-        thingsIAmGreatfulForPageIndex: 1,
-        revenuePageIndex: 2,
       ),
     );
   }
@@ -207,7 +197,6 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
             TextFormField(
               key: const Key('Create mood form thingIAmGreatfulAbout1 input'),
               controller: _thingIAmGreatfulAbout1Controller,
-              focusNode: _thingIAmGreatfulAbout1FocusNode,
               decoration: InputDecoration(
                 icon: const Icon(Iconsax.heart_add_outline),
                 iconColor: Theme.of(context).primaryColor,
@@ -291,7 +280,6 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
                 return TextFormField(
                   key: const Key('Create mood form revenue input'),
                   controller: _revenueController,
-                  focusNode: _revenueFocusNode,
                   validator: (value) => createMoodBloc
                       .state.moodFormState.revenue
                       .validator(
