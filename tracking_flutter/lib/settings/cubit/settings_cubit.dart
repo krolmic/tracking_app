@@ -107,6 +107,7 @@ class SettingsCubit extends Cubit<SettingsState> {
         ),
       );
 
+      throw Exception('test');
       await _emailRepository.sendEmail(
         recipient: recipient,
         subject: subject,
