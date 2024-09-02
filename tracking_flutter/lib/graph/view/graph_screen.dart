@@ -28,6 +28,7 @@ import 'package:tracking_app/shared/widgets/spacing.dart';
 import 'package:tracking_app/update_mood/bloc/update_mood_bloc.dart';
 import 'package:user_profile_repository/user_profile_repository.dart';
 
+part 'widgets/graph_header.dart';
 part 'widgets/graph_settings.dart';
 part 'widgets/line_graph_explanation.dart';
 part 'widgets/months_selection.dart';
@@ -101,30 +102,6 @@ class GraphScreen extends StatelessWidget {
 class _GraphView extends StatelessWidget {
   const _GraphView();
 
-  Future<void> _showSettingsDialog(
-    BuildContext context,
-  ) {
-    return showDialog<void>(
-      context: context,
-      builder: (dialogContext) {
-        final translations = AppLocalizations.of(context)!;
-
-        return AppDialog(
-          title: translations.display,
-          body: BlocProvider.value(
-            value: BlocProvider.of<GraphBloc>(context),
-            child: const _GraphSettings(),
-          ),
-          confirmButtonText: translations.ok,
-          onConfirm: () {
-            Navigator.of(dialogContext).pop();
-          },
-          buildCancelButton: false,
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final translations = AppLocalizations.of(context)!;
@@ -137,43 +114,11 @@ class _GraphView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const VerticalSpacing.large(),
-            Padding(
-              padding: const EdgeInsets.symmetric(
+            const Padding(
+              padding: EdgeInsets.symmetric(
                 horizontal: horizontalPaddingSmall,
               ),
-              child: SizedBox(
-                height: 30,
-                child: Stack(
-                  children: [
-                    Positioned.fill(
-                      child: Center(
-                        child: Text(
-                          dateTimeNow.year.toString(),
-                          style: Theme.of(context).textTheme.headlineSmall,
-                        ),
-                      ),
-                    ),
-                    Positioned.fill(
-                      child: Align(
-                        alignment: Alignment.centerRight,
-                        child: IconButton(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: horizontalPaddingSmall,
-                          ),
-                          color: AppColors.primarySwatch,
-                          icon: Icon(
-                            Iconsax.setting_4_outline,
-                            size: Theme.of(context).appBarTheme.iconTheme!.size,
-                          ),
-                          onPressed: () async {
-                            await _showSettingsDialog(context);
-                          },
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              child: _GraphHeader(),
             ),
             const VerticalSpacing.medium(),
             BlocBuilder<GraphBloc, GraphState>(
