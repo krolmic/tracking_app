@@ -9,21 +9,26 @@ class _MoodsInMonth extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: [
-          const SizedBox(width: viewPaddingHorizontal),
-          for (final mood in moods)
-            Padding(
-              key: ValueKey(mood),
-              padding: const EdgeInsets.only(
-                right: verticalPaddingSmall,
+    return MoodsShaderMask(
+      begin: Alignment.centerLeft,
+      end: Alignment.centerRight,
+      stops: const [0.0, 0.9, 1.0],
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          children: [
+            const SizedBox(width: viewPaddingHorizontal),
+            for (final mood in moods)
+              Padding(
+                key: ValueKey(mood),
+                padding: const EdgeInsets.only(
+                  right: verticalPaddingSmall,
+                ),
+                child: _TrackedMood(mood: mood),
               ),
-              child: _TrackedMood(mood: mood),
-            ),
-          const SizedBox(width: viewPaddingHorizontal),
-        ],
+            const SizedBox(width: viewPaddingHorizontal),
+          ],
+        ),
       ),
     );
   }

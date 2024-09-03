@@ -21,6 +21,7 @@ import 'package:tracking_app/shared/theme/layout.dart';
 import 'package:tracking_app/shared/toast.dart';
 import 'package:tracking_app/shared/widgets/loading_indicator.dart';
 import 'package:tracking_app/shared/widgets/mood_emoji.dart';
+import 'package:tracking_app/shared/widgets/moods_shader_mask.dart';
 import 'package:tracking_app/shared/widgets/spacing.dart';
 import 'package:tracking_app/update_mood/bloc/update_mood_bloc.dart';
 import 'package:user_profile_repository/user_profile_repository.dart';
