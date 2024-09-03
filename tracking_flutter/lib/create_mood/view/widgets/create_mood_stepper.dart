@@ -152,11 +152,16 @@ class _CreateMoodStepperPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(
-          horizontal: viewPaddingHorizontal,
+      child: Container(
+        constraints: const BoxConstraints(
+          maxWidth: maxViewWidth,
         ),
-        child: child,
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(
+            horizontal: viewPaddingHorizontal,
+          ),
+          child: child,
+        ),
       ),
     ).animate().fadeIn(duration: animationDuration);
   }
