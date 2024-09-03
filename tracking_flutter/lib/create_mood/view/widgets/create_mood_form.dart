@@ -17,6 +17,11 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
   late final TextEditingController _thingIAmGreatfulAbout3Controller;
   late final TextEditingController _revenueController;
 
+  ToastificationItem? _recommendedWorkTimeExceededToast;
+
+  bool get isRecommandedWorkTimeToastSet =>
+      _recommendedWorkTimeExceededToast != null;
+
   void _onMoodValueChanged(double value) {
     context.read<CreateMoodBloc>().add(CreateMoodEvent.moodValueChanged(value));
   }
@@ -59,6 +64,24 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
             value,
           ),
         );
+
+    if (value.inHours > 6) {
+      _recommendedWorkTimeExceededToast ??= toastification.show(
+        context: context,
+        title: Text(AppLocalizations.of(context)!.recommandedWorkTimeExceeded),
+        showProgressBar: false,
+        icon: const Icon(Iconsax.timer_bold),
+        primaryColor: AppColors.toastSuccessColor,
+        alignment: const Alignment(0.5, -0.8),
+        boxShadow: toastShadow,
+        margin: toastMargin,
+      );
+    } else {
+      if (isRecommandedWorkTimeToastSet) {
+        toastification.dismiss(_recommendedWorkTimeExceededToast!);
+        _recommendedWorkTimeExceededToast = null;
+      }
+    }
   }
 
   Future<void> _onSubmit() async {

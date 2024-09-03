@@ -68,6 +68,8 @@ class _CreateMoodStepperState extends State<_CreateMoodStepper> {
   void onPageChanged(int index) {
     FocusManager.instance.primaryFocus?.unfocus();
 
+    toastification.dismissAll();
+
     setState(() {
       currentStep = index;
     });
