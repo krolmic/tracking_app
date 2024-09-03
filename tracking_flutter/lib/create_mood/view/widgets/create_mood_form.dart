@@ -66,15 +66,14 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
         );
 
     if (value > const Duration(hours: 6)) {
-      _recommendedWorkTimeExceededToast ??= toastification.show(
+      _recommendedWorkTimeExceededToast ??= showToast(
         context: context,
-        title: Text(AppLocalizations.of(context)!.recommandedWorkTimeExceeded),
+        message: AppLocalizations.of(context)!.recommandedWorkTimeExceeded,
         showProgressBar: false,
         icon: const Icon(Iconsax.timer_bold),
-        primaryColor: AppColors.toastSuccessColor,
         alignment: const Alignment(0.5, -0.8),
-        boxShadow: toastShadow,
-        margin: toastMargin,
+        autoCloseDuration: null,
+        closeButtonShowType: CloseButtonShowType.always,
       );
     } else {
       if (isRecommandedWorkTimeToastSet) {
