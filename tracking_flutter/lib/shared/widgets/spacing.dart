@@ -42,7 +42,7 @@ class VerticalSpacing extends StatelessWidget {
   }
 }
 
-enum HorizontalSpacingSize { small, medium, large }
+enum HorizontalSpacingSize { small, medium, large, extraLarge }
 
 class HorizontalSpacing extends StatelessWidget {
   const HorizontalSpacing({
@@ -56,6 +56,8 @@ class HorizontalSpacing extends StatelessWidget {
       : size = HorizontalSpacingSize.medium;
   const HorizontalSpacing.large({super.key})
       : size = HorizontalSpacingSize.large;
+  const HorizontalSpacing.extraLarge({super.key})
+      : size = HorizontalSpacingSize.extraLarge;
 
   final HorizontalSpacingSize size;
 
@@ -74,6 +76,8 @@ class HorizontalSpacing extends StatelessWidget {
         return horizontalPaddingMedium;
       case HorizontalSpacingSize.large:
         return horizontalPaddingLarge;
+      case HorizontalSpacingSize.extraLarge:
+        return horizontalPaddingExtraLarge;
     }
   }
 }

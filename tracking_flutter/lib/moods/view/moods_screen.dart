@@ -13,18 +13,16 @@ import 'package:tracking_app/moods/cubit/moods_cubit.dart';
 import 'package:tracking_app/shared/router/routes_names.dart';
 import 'package:tracking_app/shared/router/routes_parameters.dart';
 import 'package:tracking_app/shared/theme/animation.dart';
-import 'package:tracking_app/shared/theme/colors.dart';
 import 'package:tracking_app/shared/theme/layout.dart';
 import 'package:tracking_app/shared/view/base_view.dart';
 import 'package:tracking_app/shared/widgets/app_elevated_button.dart';
 import 'package:tracking_app/shared/widgets/error_message.dart';
 import 'package:tracking_app/shared/widgets/loading_indicator.dart';
+import 'package:tracking_app/shared/widgets/moods_shader_mask.dart';
 import 'package:tracking_app/shared/widgets/tracked_mood.dart';
 import 'package:tracking_app/update_mood/bloc/update_mood_bloc.dart';
 import 'package:tracking_app/user_profile/cubit/user_profile_cubit.dart';
 import 'package:user_profile_repository/user_profile_repository.dart';
-
-part 'widgets/moods_shader_mask.dart';
 
 class MoodsScreen extends StatelessWidget {
   const MoodsScreen({super.key});
@@ -211,6 +209,9 @@ class _MoodsContentViewState extends State<_MoodsContentView> {
       children: [
         Expanded(
           child: MoodsShaderMask(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            stops: const [0.0, 0.95, 1.0],
             child: _buildMoods(),
           ),
         ),

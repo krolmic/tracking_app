@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tracking_app/shared/theme/colors.dart';
+import 'package:tracking_app/shared/theme/layout.dart';
 import 'package:tracking_app/shared/widgets/loading_indicator.dart';
 
 class AppElevatedButton extends StatelessWidget {
@@ -34,15 +35,18 @@ class AppElevatedButton extends StatelessWidget {
       ),
     );
 
-    return ElevatedButton.icon(
-      key: key,
-      onPressed: isDisabled || isLoading ? null : onPressed,
-      icon: isLoading
-          ? const TinyLoadingIndicator(
-              color: AppColors.contentOnDarkBackgroundColor,
-            )
-          : iconToBuild,
-      label: isLoading ? const SizedBox.shrink() : textToBuild,
+    return Container(
+      constraints: const BoxConstraints(maxWidth: maxViewWidth),
+      child: ElevatedButton.icon(
+        key: key,
+        onPressed: isDisabled || isLoading ? null : onPressed,
+        icon: isLoading
+            ? const TinyLoadingIndicator(
+                color: AppColors.contentOnDarkBackgroundColor,
+              )
+            : iconToBuild,
+        label: isLoading ? const SizedBox.shrink() : textToBuild,
+      ),
     );
   }
 }

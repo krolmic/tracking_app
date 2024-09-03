@@ -21,7 +21,15 @@ class BaseView extends StatelessWidget {
           horizontal: addHorizontalPadding ? viewPaddingHorizontal : 0,
           vertical: addVerticalPadding ? viewPaddingVertical : 0,
         ),
-        child: child,
+        child: Align(
+          alignment: Alignment.topCenter,
+          child: Container(
+            constraints: const BoxConstraints(
+              maxWidth: maxViewWidth,
+            ),
+            child: child,
+          ),
+        ),
       ),
     );
   }

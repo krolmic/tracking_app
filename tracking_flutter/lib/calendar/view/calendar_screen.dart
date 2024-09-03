@@ -21,6 +21,7 @@ import 'package:tracking_app/shared/theme/layout.dart';
 import 'package:tracking_app/shared/toast.dart';
 import 'package:tracking_app/shared/widgets/loading_indicator.dart';
 import 'package:tracking_app/shared/widgets/mood_emoji.dart';
+import 'package:tracking_app/shared/widgets/moods_shader_mask.dart';
 import 'package:tracking_app/shared/widgets/spacing.dart';
 import 'package:tracking_app/update_mood/bloc/update_mood_bloc.dart';
 import 'package:user_profile_repository/user_profile_repository.dart';
@@ -113,54 +114,60 @@ class _CalendarView extends StatelessWidget {
           buildWhen: (previous, current) =>
               previous.moodsState != current.moodsState,
           builder: (context, state) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const VerticalSpacing.large(),
-                Center(
-                  child: Container(
-                    constraints: const BoxConstraints(maxWidth: 430),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: viewPaddingHorizontal,
+            return Center(
+              child: Container(
+                constraints: const BoxConstraints(maxWidth: maxViewWidth),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const VerticalSpacing.large(),
+                    Center(
+                      child: Container(
+                        constraints: const BoxConstraints(maxWidth: 430),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: viewPaddingHorizontal,
+                        ),
+                        child: _Calendar(
+                          targetMonthDate: state.targetDate.date,
+                          moods: state.moodsState.moods,
+                        ),
+                      ),
                     ),
-                    child: _Calendar(
-                      targetMonthDate: state.targetDate.date,
-                      moods: state.moodsState.moods,
+                    const VerticalSpacing.medium(),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: viewPaddingHorizontal,
+                      ),
+                      child: Text(
+                        translations.trackedMood,
+                        style: Theme.of(context).textTheme.headlineSmall,
+                      ),
                     ),
-                  ),
+                    const VerticalSpacing.medium(),
+                    if (state.moodsState.isLoading ||
+                        state.moodsState.isInitial)
+                      const SizedBox(
+                        height: 125,
+                        child: Center(child: LoadingIndicator()),
+                      )
+                    else if (state.moodsState.isSuccess &&
+                        state.moodsState.moods.isEmpty)
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: viewPaddingHorizontal,
+                        ),
+                        child: Text(
+                          translations.noTrackedMood,
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                      )
+                    else if (state.moodsState.isSuccess)
+                      _MoodsInMonth(moods: state.moodsState.moods)
+                          .animate()
+                          .fadeIn(duration: animationDuration),
+                  ],
                 ),
-                const VerticalSpacing.large(),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: viewPaddingHorizontal,
-                  ),
-                  child: Text(
-                    translations.trackedMood,
-                    style: Theme.of(context).textTheme.headlineSmall,
-                  ),
-                ),
-                const VerticalSpacing.medium(),
-                if (state.moodsState.isLoading || state.moodsState.isInitial)
-                  const SizedBox(
-                    height: 125,
-                    child: Center(child: LoadingIndicator()),
-                  )
-                else if (state.moodsState.isSuccess &&
-                    state.moodsState.moods.isEmpty)
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: viewPaddingHorizontal,
-                    ),
-                    child: Text(
-                      translations.noTrackedMood,
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                  )
-                else if (state.moodsState.isSuccess)
-                  _MoodsInMonth(moods: state.moodsState.moods)
-                      .animate()
-                      .fadeIn(duration: animationDuration),
-              ],
+              ),
             );
           },
         ),

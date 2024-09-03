@@ -52,13 +52,14 @@ class _Calendar extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: 12, right: 2),
+          padding:
+              const EdgeInsets.symmetric(horizontal: horizontalPaddingLarge),
           child: _CalendarHeader(targetMonthDate: targetMonthDate),
         ),
         const VerticalSpacing.extraLarge(),
         CalendarCarousel<Event>(
           firstDayOfWeek: (0 + 1) % 7,
-          height: 350,
+          height: 335,
           todayButtonColor: _CalendarTheme.todayButtonColor,
           todayTextStyle: _CalendarTheme.todayTextStyle,
           daysTextStyle: _CalendarTheme.calendarDaysTextStyle,
@@ -128,7 +129,6 @@ class _Calendar extends StatelessWidget {
               date: mood.createdOn.dateOnly,
               dot: Container(
                 decoration: _CalendarTheme.eventDotDecoration,
-                margin: const EdgeInsets.symmetric(horizontal: 1),
                 height: 6,
                 width: 6,
               ).animate().fadeIn(
@@ -190,7 +190,7 @@ class _CalendarHeader extends StatelessWidget {
             ),
           ),
         ),
-        const HorizontalSpacing.large(),
+        const HorizontalSpacing.extraLarge(),
         Material(
           color: Colors.transparent,
           child: InkWell(
