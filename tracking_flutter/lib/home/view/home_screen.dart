@@ -31,7 +31,9 @@ import 'package:tracking_app/update_mood/bloc/update_mood_bloc.dart';
 import 'package:tracking_app/user_profile/cubit/user_profile_cubit.dart';
 import 'package:user_profile_repository/user_profile_repository.dart';
 
-part 'widgets/progress.dart';
+part 'widgets/home_moods.dart';
+part 'widgets/home_moods_header.dart';
+part 'widgets/home_progress.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -286,37 +288,8 @@ class _HomeContentView extends StatelessWidget {
             ),
           ),
           const VerticalSpacing.large(),
-          if (moods.isNotEmpty)
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  translations.recentlyTracked,
-                  style: Theme.of(context).textTheme.headlineSmall,
-                ),
-                TextButton(
-                  onPressed: () {
-                    context.goNamed(RoutesNames.moods);
-                  },
-                  child: Text(
-                    translations.seeAll,
-                    style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                          color: AppColors.blue,
-                        ),
-                  ),
-                ),
-              ],
-            ),
-          for (final mood in moods)
-            TrackedMood(
-              mood: mood,
-              onTap: () => context.pushNamed(
-                RoutesNames.updateMoodFromHome,
-                extra: UpdateMoodRouteParameters(mood: mood),
-              ),
-            ).animate().fadeIn(
-                  duration: animationDuration,
-                ),
+          if (moods.isNotEmpty) const _HomeMoodsHeader(),
+          _HomeMoods(moods: moods),
           if (addExtraBottomSpace) const VerticalSpacing.extraLarge(),
         ],
       ),
