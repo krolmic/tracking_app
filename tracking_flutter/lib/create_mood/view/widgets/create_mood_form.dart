@@ -65,7 +65,7 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
           ),
         );
 
-    if (value.inHours > 6) {
+    if (value > const Duration(hours: 6)) {
       _recommendedWorkTimeExceededToast ??= toastification.show(
         context: context,
         title: Text(AppLocalizations.of(context)!.recommandedWorkTimeExceeded),
