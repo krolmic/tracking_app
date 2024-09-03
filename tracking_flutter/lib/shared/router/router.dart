@@ -2,6 +2,7 @@ import 'package:amplify_authenticator/amplify_authenticator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:toastification/toastification.dart';
 import 'package:tracking_app/app_settings/bloc/app_settings_bloc.dart';
 import 'package:tracking_app/app_settings/view/app_settings_screen.dart';
 import 'package:tracking_app/calendar/view/calendar_screen.dart';

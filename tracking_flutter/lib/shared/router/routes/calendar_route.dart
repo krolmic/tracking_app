@@ -13,6 +13,10 @@ final _calendarRoute = GoRoute(
       name: RoutesNames.createMoodFromCalendar,
       path: RoutesNames.createMoodFromCalendar,
       pageBuilder: createMoodRoutePageBuilder,
+      onExit: (context, state) {
+        toastification.dismissAll();
+        return true;
+      },
     ),
     GoRoute(
       name: RoutesNames.updateMoodFromCalendar,
