@@ -13,6 +13,10 @@ final _homeRoute = GoRoute(
       name: RoutesNames.createMoodFromHome,
       path: RoutesNames.createMoodFromHome,
       pageBuilder: createMoodRoutePageBuilder,
+      onExit: (context, state) {
+        toastification.dismissAll();
+        return true;
+      },
     ),
     GoRoute(
       name: RoutesNames.updateMoodFromHome,
@@ -32,6 +36,10 @@ final _homeRoute = GoRoute(
           name: RoutesNames.createMoodFromMoods,
           path: RoutesNames.createMoodFromMoods,
           pageBuilder: createMoodRoutePageBuilder,
+          onExit: (context, state) {
+            toastification.dismissAll();
+            return true;
+          },
         ),
         GoRoute(
           name: RoutesNames.updateMoodFromMoods,
