@@ -40,6 +40,7 @@
     "hours": "Stunden",
     "minutes": "Minuten",
     "yourWorkTime": "Wähle die Arbeitszeit",
+    "recommandedWorkTimeExceeded": "Du hast die empfohlene Arbeitszeit von 6 Stunden überschritten.",
     "revenueHelper": "Umsatz in {currency}",
     "@revenueHelper": {
         "placeholders": {

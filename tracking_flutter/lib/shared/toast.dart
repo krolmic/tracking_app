@@ -4,6 +4,18 @@ import 'package:toastification/toastification.dart';
 import 'package:tracking_app/shared/theme/colors.dart';
 import 'package:tracking_app/shared/theme/layout.dart';
 
+const toastMargin = EdgeInsets.only(
+  left: viewPaddingHorizontal,
+  right: viewPaddingHorizontal,
+);
+
+List<BoxShadow> toastShadow = [
+  BoxShadow(
+    color: AppColors.contentShadowColor,
+    blurRadius: 10,
+  ),
+];
+
 void showToast({
   required BuildContext context,
   required String message,
@@ -20,18 +32,10 @@ void showToast({
     icon: Icon(
       isError ? Iconsax.info_circle_bold : Iconsax.tick_circle_bold,
     ),
-    margin: const EdgeInsets.only(
-      left: viewPaddingHorizontal,
-      right: viewPaddingHorizontal,
-    ),
+    margin: toastMargin,
     primaryColor:
         isError ? AppColors.toastErrorColor : AppColors.toastSuccessColor,
     closeButtonShowType: CloseButtonShowType.none,
-    boxShadow: [
-      BoxShadow(
-        color: AppColors.contentShadowColor,
-        blurRadius: 10,
-      ),
-    ],
+    boxShadow: toastShadow,
   );
 }
