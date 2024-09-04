@@ -5,39 +5,13 @@ import 'package:icons_plus/icons_plus.dart';
 import 'package:tracking_app/shared/extensions/duration.dart';
 import 'package:tracking_app/shared/theme/colors.dart';
 import 'package:tracking_app/shared/theme/layout.dart';
-import 'package:tracking_app/shared/widgets/app_dialog.dart';
-import 'package:tracking_app/shared/widgets/platform_widget.dart';
 import 'package:tracking_app/shared/widgets/spacing.dart';
 
-class PlatformTimeInput extends StatelessWidget {
-  const PlatformTimeInput({
+class TimeInput extends StatelessWidget {
+  const TimeInput({
     required this.onChange,
     required this.time,
     super.key,
-  });
-
-  final Duration time;
-  final void Function(Duration) onChange;
-
-  @override
-  Widget build(BuildContext context) {
-    return PlatformWidget(
-      iOSWidget: _IOSTimeInput(
-        time: time,
-        onChange: onChange,
-      ),
-      androidWidget: _AndroidTimeInput(
-        time: time,
-        onChange: onChange,
-      ),
-    );
-  }
-}
-
-class _IOSTimeInput extends StatelessWidget {
-  const _IOSTimeInput({
-    required this.onChange,
-    required this.time,
   });
 
   final Duration time;
@@ -195,47 +169,6 @@ class _IOSTimePickerState extends State<_IOSTimePicker> {
           ],
         ),
       ),
-    );
-  }
-}
-
-class _AndroidTimeInput extends StatelessWidget {
-  const _AndroidTimeInput({
-    required this.onChange,
-    required this.time,
-  });
-
-  final Duration time;
-  final void Function(Duration) onChange;
-
-  Future<void> _showTimePickerDialog(
-    BuildContext context,
-  ) {
-    return showDialog<void>(
-      context: context,
-      builder: (dialogContext) {
-        final translations = AppLocalizations.of(context)!;
-
-        return AppDialog(
-          title: translations.yourWorkTime,
-          body: _IOSTimePicker(
-            initialTime: time,
-            onChange: onChange,
-          ),
-          confirmButtonText: translations.ok,
-          buildCancelButton: false,
-        );
-      },
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return _TimeInputField(
-      time: time,
-      onTap: () async {
-        await _showTimePickerDialog(context);
-      },
     );
   }
 }

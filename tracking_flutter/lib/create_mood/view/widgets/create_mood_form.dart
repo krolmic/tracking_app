@@ -351,7 +351,7 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
                   previousState.moodFormState.workTime !=
                   currentState.moodFormState.workTime,
               builder: (context, state) {
-                return PlatformTimeInput(
+                return TimeInput(
                   key: const Key('Create mood form workTime input'),
                   time: state.moodFormState.workTime.value,
                   onChange: _onWorkTimeChanged,
