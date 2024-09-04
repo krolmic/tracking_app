@@ -57,63 +57,74 @@ class _Calendar extends StatelessWidget {
           child: _CalendarHeader(targetMonthDate: targetMonthDate),
         ),
         const VerticalSpacing.extraLarge(),
-        CalendarCarousel<Event>(
-          firstDayOfWeek: (0 + 1) % 7,
-          height: 335,
-          todayButtonColor: _CalendarTheme.todayButtonColor,
-          todayTextStyle: _CalendarTheme.todayTextStyle,
-          daysTextStyle: _CalendarTheme.calendarDaysTextStyle,
-          prevDaysTextStyle: _CalendarTheme.calendarNextAndPrevDaysTextStyle,
-          weekendTextStyle: _CalendarTheme.calendarDaysTextStyle,
-          nextDaysTextStyle: _CalendarTheme.calendarNextAndPrevDaysTextStyle,
-          headerTextStyle: Theme.of(context).textTheme.headlineSmall,
-          showHeader: false,
-          customDayBuilder: (
-            bool isSelectable,
-            int index,
-            bool isSelectedDay,
-            bool isToday,
-            bool isPrevMonthDay,
-            TextStyle textStyle,
-            bool isNextMonthDay,
-            bool isThisMonthDay,
-            DateTime date,
-          ) {
-            if (date.isAfterToday) {
-              return Center(
-                child: Text(
-                  '${date.day}',
-                  style: _CalendarTheme.calendarDaysAfterTodayTextStyle,
-                ),
-              );
-            }
+        LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints) {
+            return Container(
+              constraints: const BoxConstraints(
+                maxWidth: maxViewWidth,
+              ),
+              child: CalendarCarousel<Event>(
+                firstDayOfWeek: (0 + 1) % 7,
+                height: constraints.maxWidth - viewPaddingHorizontal,
+                todayButtonColor: _CalendarTheme.todayButtonColor,
+                todayTextStyle: _CalendarTheme.todayTextStyle,
+                daysTextStyle: _CalendarTheme.calendarDaysTextStyle,
+                prevDaysTextStyle:
+                    _CalendarTheme.calendarNextAndPrevDaysTextStyle,
+                weekendTextStyle: _CalendarTheme.calendarDaysTextStyle,
+                nextDaysTextStyle:
+                    _CalendarTheme.calendarNextAndPrevDaysTextStyle,
+                headerTextStyle: Theme.of(context).textTheme.headlineSmall,
+                showHeader: false,
+                customDayBuilder: (
+                  bool isSelectable,
+                  int index,
+                  bool isSelectedDay,
+                  bool isToday,
+                  bool isPrevMonthDay,
+                  TextStyle textStyle,
+                  bool isNextMonthDay,
+                  bool isThisMonthDay,
+                  DateTime date,
+                ) {
+                  if (date.isAfterToday) {
+                    return Center(
+                      child: Text(
+                        '${date.day}',
+                        style: _CalendarTheme.calendarDaysAfterTodayTextStyle,
+                      ),
+                    );
+                  }
 
-            return null;
-          },
-          weekdayTextStyle: _CalendarTheme.calendarWeekdaysTextStyle,
-          markedDatesMap: _getMarkedDates(),
-          targetDateTime: targetMonthDate,
-          onCalendarChanged: (date) =>
-              calendarBloc.add(CalendarEvent.targetDateChanged(date: date)),
-          onDayPressed: (date, events) {
-            final mood =
-                calendarBloc.state.moodsState.getMoodAtCreatedOnDate(date);
-            final moodAtPressedDateExists = mood != null;
+                  return null;
+                },
+                weekdayTextStyle: _CalendarTheme.calendarWeekdaysTextStyle,
+                markedDatesMap: _getMarkedDates(),
+                targetDateTime: targetMonthDate,
+                onCalendarChanged: (date) => calendarBloc
+                    .add(CalendarEvent.targetDateChanged(date: date)),
+                onDayPressed: (date, events) {
+                  final mood = calendarBloc.state.moodsState
+                      .getMoodAtCreatedOnDate(date);
+                  final moodAtPressedDateExists = mood != null;
 
-            if (moodAtPressedDateExists) {
-              context.pushNamed(
-                RoutesNames.updateMoodFromCalendar,
-                extra: UpdateMoodRouteParameters(mood: mood),
-              );
-            } else if (date.isSameMonth(targetMonthDate) &&
-                date.isTodayOrBeforeToday) {
-              context.pushNamed(
-                RoutesNames.createMoodFromCalendar,
-                extra: CreateMoodRouteParameters(date: date),
-              );
-            }
+                  if (moodAtPressedDateExists) {
+                    context.pushNamed(
+                      RoutesNames.updateMoodFromCalendar,
+                      extra: UpdateMoodRouteParameters(mood: mood),
+                    );
+                  } else if (date.isSameMonth(targetMonthDate) &&
+                      date.isTodayOrBeforeToday) {
+                    context.pushNamed(
+                      RoutesNames.createMoodFromCalendar,
+                      extra: CreateMoodRouteParameters(date: date),
+                    );
+                  }
+                },
+                locale: Localizations.localeOf(context).languageCode,
+              ),
+            );
           },
-          locale: Localizations.localeOf(context).languageCode,
         ),
       ],
     );
