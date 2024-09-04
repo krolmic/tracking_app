@@ -71,7 +71,7 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
         message: AppLocalizations.of(context)!.recommandedWorkTimeExceeded,
         showProgressBar: false,
         icon: const Icon(Iconsax.timer_bold),
-        alignment: const Alignment(0.5, -0.8),
+        alignment: const Alignment(0.5, -0.75),
         autoCloseDuration: null,
         closeButtonShowType: CloseButtonShowType.always,
       );
