@@ -249,7 +249,7 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
                   builder: (context, state) {
                     final workTime = state.moodFormState.workTime.value;
 
-                    return PlatformTimeInput(
+                    return TimeInput(
                       time: workTime,
                       onChange: _onWorkTimeChanged,
                     );

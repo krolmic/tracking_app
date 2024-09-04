@@ -122,8 +122,7 @@ class _CalendarView extends StatelessWidget {
                   children: [
                     const VerticalSpacing.large(),
                     Center(
-                      child: Container(
-                        constraints: const BoxConstraints(maxWidth: 430),
+                      child: Padding(
                         padding: const EdgeInsets.symmetric(
                           horizontal: viewPaddingHorizontal,
                         ),
@@ -133,7 +132,7 @@ class _CalendarView extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const VerticalSpacing.medium(),
+                    const VerticalSpacing.small(),
                     Padding(
                       padding: const EdgeInsets.symmetric(
                         horizontal: viewPaddingHorizontal,

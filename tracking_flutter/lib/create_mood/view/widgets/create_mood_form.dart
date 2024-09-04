@@ -71,7 +71,7 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
         message: AppLocalizations.of(context)!.recommandedWorkTimeExceeded,
         showProgressBar: false,
         icon: const Icon(Iconsax.timer_bold),
-        alignment: const Alignment(0.5, -0.8),
+        alignment: const Alignment(0.5, -0.75),
         autoCloseDuration: null,
         closeButtonShowType: CloseButtonShowType.always,
       );
@@ -351,7 +351,7 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
                   previousState.moodFormState.workTime !=
                   currentState.moodFormState.workTime,
               builder: (context, state) {
-                return PlatformTimeInput(
+                return TimeInput(
                   key: const Key('Create mood form workTime input'),
                   time: state.moodFormState.workTime.value,
                   onChange: _onWorkTimeChanged,

@@ -1,6 +1,10 @@
 part of '../theme.dart';
 
 final _elevatedButtonStyle = ElevatedButton.styleFrom(
+  textStyle: const TextStyle(
+    color: AppColors.contentOnDarkBackgroundColor,
+    fontSize: 16,
+  ),
   shadowColor: AppColors.primarySwatch,
   minimumSize: const Size.fromHeight(40),
   shape: RoundedRectangleBorder(
@@ -36,6 +40,7 @@ final _filledButtonStyle = FilledButton.styleFrom(
   foregroundColor: AppColors.contentOnDarkBackgroundColor,
   textStyle: const TextStyle(
     color: AppColors.contentOnDarkBackgroundColor,
+    fontSize: 16,
   ),
   minimumSize: const Size.fromHeight(40),
   shape: RoundedRectangleBorder(
