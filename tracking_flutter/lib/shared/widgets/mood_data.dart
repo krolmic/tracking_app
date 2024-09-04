@@ -49,7 +49,7 @@ class MoodData extends StatelessWidget {
             child: Text(
               label,
               style: Theme.of(context).textTheme.bodySmall,
-              maxLines: 2,
+              maxLines: 3,
               overflow: TextOverflow.ellipsis,
             ),
           ),
