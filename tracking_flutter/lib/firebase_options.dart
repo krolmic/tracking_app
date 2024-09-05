@@ -51,7 +51,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyCKVoTfCEgOp0GkPO1JvDIU45ryBucIJKI',
-    appId: '1:679937544462:android:3ffe7d9811a491c40fc75f',
+    appId: '1:679937544462:android:55296f112815c22b0fc75f',
     messagingSenderId: '679937544462',
     projectId: 'mindful-me-project',
     storageBucket: 'mindful-me-project.appspot.com',
@@ -59,10 +59,11 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyB_Ntnqxr_UcLs9UCB9DgPjEul_zAt_1kg',
-    appId: '1:679937544462:ios:d20604c1c04f7b040fc75f',
+    appId: '1:679937544462:ios:fcca3726b934a55b0fc75f',
     messagingSenderId: '679937544462',
     projectId: 'mindful-me-project',
     storageBucket: 'mindful-me-project.appspot.com',
-    iosBundleId: 'com.example.trackingApp',
+    iosBundleId: 'app.healthyhustle',
   );
+
 }
