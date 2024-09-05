@@ -8,10 +8,14 @@
 
 ## 📱 App
 
-The app provides estimating your current mood, affirmations by writing down things you're grateful about and a diary to write about thoughts keeping your mind busy.
-Additionally users are able to track their daily revenue and working hours so they are able to evaluate data to identify how the tracked factors are connected with each other.
+Healthy Hustle is a mood & work tracker helping users to improve their work-life balance.
 
-The long-term vision is to offer tracking other things besides work related factors that may be connected to users' mood e.g. sport sessions, selfcare time, etc. which all can be tracked personally so users who want to track additionally things not related to their work are able to identify connections betweed tracked factors and their mood based on their personal demands.
+Features:
+
+- Record your feelings, gratitude, revenue, and work time daily
+- Get a monthly overview of your tracked days in the calendar
+- Analyze how your mood relates to your work using the line chart
+- Discover your average and highest tracked values (best mood, longest workday, and highest revenue)
 
 ## 🎯 Short term goals
 
