@@ -3,6 +3,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:formz/formz.dart';
+import 'package:graph_settings_repository/graph_settings_repository.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:jiffy/jiffy.dart';
 import 'package:mood_repository/mood_repository.dart';
@@ -45,6 +46,7 @@ class GraphScreen extends StatelessWidget {
       create: (context) => GraphBloc(
         moodRepository: getIt.get<MoodRepository>(),
         userProfileRepository: getIt.get<UserProfileRepository>(),
+        graphSettingsRepository: getIt.get<GraphSettingsRepository>(),
       )..add(const GraphEvent.graphInitialized()),
       child: MultiBlocListener(
         listeners: [
@@ -52,10 +54,24 @@ class GraphScreen extends StatelessWidget {
             listenWhen: (previousState, currentState) =>
                 previousState.moodsState != currentState.moodsState,
             listener: (context, state) {
-              if (state.isError) {
+              if (state.moodsState.isError) {
                 showToast(
                   context: context,
                   message: translations.somethingWentWrong,
+                  isError: true,
+                );
+              }
+            },
+          ),
+          BlocListener<GraphBloc, GraphState>(
+            listenWhen: (previousState, currentState) =>
+                previousState.savingGraphSettingsState !=
+                currentState.savingGraphSettingsState,
+            listener: (context, state) {
+              if (state.savingGraphSettingsState.isError) {
+                showToast(
+                  context: context,
+                  message: translations.savingGraphSettingsFailed,
                   isError: true,
                 );
               }
@@ -212,7 +228,7 @@ class _GraphView extends StatelessWidget {
                   buildWhen: (previous, current) =>
                       previous.moodsState != current.moodsState,
                   builder: (context, state) {
-                    if (state.isInitialOrLoading) {
+                    if (state.moodsState.isInitialOrLoading) {
                       return const Center(child: LoadingIndicator());
                     }
                     final moodsState = state.moodsState;

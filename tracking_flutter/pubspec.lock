@@ -880,6 +880,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.0.6"
+  graph_settings_repository:
+    dependency: "direct main"
+    description:
+      path: "packages/graph_settings_repository"
+      relative: true
+    source: path
+    version: "1.0.0"
   graphs:
     dependency: transitive
     description:

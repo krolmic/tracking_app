@@ -13,19 +13,9 @@ class GraphState with _$GraphState {
       ),
     )
     GraphSettings settings,
+    @Default(SavingGraphSettingsState.initial())
+    SavingGraphSettingsState savingGraphSettingsState,
   }) = _GraphState;
-}
-
-extension GraphStateX on GraphState {
-  bool get isInitialOrLoading => moodsState.isInitial || moodsState.isLoading;
-  bool get isError => moodsState.isError;
-  bool get isSuccess => moodsState.isSuccess;
-}
-
-enum GraphTimeRangeMode { monthly, weekly }
-
-extension GraphTimeRangeModeX on GraphTimeRangeMode {
-  bool get isMonthly => this == GraphTimeRangeMode.monthly;
 }
 
 @freezed
@@ -35,6 +25,22 @@ class GraphSettings with _$GraphSettings {
     required bool showWorkTime,
     required GraphTimeRangeMode timeRangeMode,
   }) = _GraphSettings;
+}
+
+@freezed
+class SavingGraphSettingsState with _$SavingGraphSettingsState {
+  const factory SavingGraphSettingsState.initial() =
+      SavingGraphSettingsInitialState;
+  const factory SavingGraphSettingsState.loading() =
+      SavingGraphSettingsLoadingState;
+  const factory SavingGraphSettingsState.success() =
+      SavingGraphSettingsSuccessState;
+  const factory SavingGraphSettingsState.error() =
+      SavingGraphSettingsErrorState;
+}
+
+extension SavingGraphSettingsStateX on SavingGraphSettingsState {
+  bool get isError => this is SavingGraphSettingsErrorState;
 }
 
 @freezed
@@ -66,6 +72,7 @@ class GraphMoodsState with _$GraphMoodsState {
 extension GraphMoodsStateX on GraphMoodsState {
   bool get isInitial => this is GraphMoodsInitialState;
   bool get isLoading => this is GraphMoodsLoadingState;
+  bool get isInitialOrLoading => isInitial || isLoading;
   bool get isError => this is GraphMoodsErrorState;
   bool get isSuccess => this is GraphMoodsSuccessState;
 

@@ -25,7 +25,6 @@
     "updateToday": "Update today",
     "moodTrackedSuccessfully": "Mood tracked successfully!",
     "somethingWentWrong": "Something went wrong here. Please try again.",
-    "pleaseTryAgain": "Something went wrong here. Please try again.",
     "howAreYouFeeling": "Mood estimation",
     "estimateYourMood": "Take a deep breath and estimate your mood on a scale from 1 to 10.",
     "whatAreYouGreatfulFor": "What are you grateful for?",
@@ -103,6 +102,7 @@
     "mode": "Mode",
     "monthly": "Monthly",
     "weekly": "Weekly",
+    "savingGraphSettingsFailed": "Saving display settings failed. They won't be applied next time you open the app.",
     "calendarWeek": "CW {weekNumber}",
     "@calendarWeek": {
         "placeholders": {
