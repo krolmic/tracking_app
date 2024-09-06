@@ -1,8 +1,8 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:graph_settings_repository/graph_settings_repository.dart';
 import 'package:mood_repository/mood_repository.dart';
-import 'package:tracking_app/graph/bloc/graph_bloc.dart';
 import 'package:tracking_app/shared/extensions/date_time.dart';
 import 'package:tracking_app/shared/extensions/double.dart';
 import 'package:tracking_app/shared/extensions/duration.dart';

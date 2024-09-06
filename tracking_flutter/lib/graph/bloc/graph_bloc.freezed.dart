@@ -1049,6 +1049,8 @@ mixin _$GraphState {
   GraphMoodsState get moodsState => throw _privateConstructorUsedError;
   GraphTargetDateState get targetDate => throw _privateConstructorUsedError;
   GraphSettings get settings => throw _privateConstructorUsedError;
+  SavingGraphSettingsState get savingGraphSettingsState =>
+      throw _privateConstructorUsedError;
 
   /// Create a copy of GraphState
   /// with the given fields replaced by the non-null parameter values.
@@ -1066,11 +1068,13 @@ abstract class $GraphStateCopyWith<$Res> {
   $Res call(
       {GraphMoodsState moodsState,
       GraphTargetDateState targetDate,
-      GraphSettings settings});
+      GraphSettings settings,
+      SavingGraphSettingsState savingGraphSettingsState});
 
   $GraphMoodsStateCopyWith<$Res> get moodsState;
   $GraphTargetDateStateCopyWith<$Res> get targetDate;
   $GraphSettingsCopyWith<$Res> get settings;
+  $SavingGraphSettingsStateCopyWith<$Res> get savingGraphSettingsState;
 }
 
 /// @nodoc
@@ -1091,6 +1095,7 @@ class _$GraphStateCopyWithImpl<$Res, $Val extends GraphState>
     Object? moodsState = null,
     Object? targetDate = null,
     Object? settings = null,
+    Object? savingGraphSettingsState = null,
   }) {
     return _then(_value.copyWith(
       moodsState: null == moodsState
@@ -1105,6 +1110,10 @@ class _$GraphStateCopyWithImpl<$Res, $Val extends GraphState>
           ? _value.settings
           : settings // ignore: cast_nullable_to_non_nullable
               as GraphSettings,
+      savingGraphSettingsState: null == savingGraphSettingsState
+          ? _value.savingGraphSettingsState
+          : savingGraphSettingsState // ignore: cast_nullable_to_non_nullable
+              as SavingGraphSettingsState,
     ) as $Val);
   }
 
@@ -1137,6 +1146,17 @@ class _$GraphStateCopyWithImpl<$Res, $Val extends GraphState>
       return _then(_value.copyWith(settings: value) as $Val);
     });
   }
+
+  /// Create a copy of GraphState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $SavingGraphSettingsStateCopyWith<$Res> get savingGraphSettingsState {
+    return $SavingGraphSettingsStateCopyWith<$Res>(
+        _value.savingGraphSettingsState, (value) {
+      return _then(_value.copyWith(savingGraphSettingsState: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -1150,7 +1170,8 @@ abstract class _$$GraphStateImplCopyWith<$Res>
   $Res call(
       {GraphMoodsState moodsState,
       GraphTargetDateState targetDate,
-      GraphSettings settings});
+      GraphSettings settings,
+      SavingGraphSettingsState savingGraphSettingsState});
 
   @override
   $GraphMoodsStateCopyWith<$Res> get moodsState;
@@ -1158,6 +1179,8 @@ abstract class _$$GraphStateImplCopyWith<$Res>
   $GraphTargetDateStateCopyWith<$Res> get targetDate;
   @override
   $GraphSettingsCopyWith<$Res> get settings;
+  @override
+  $SavingGraphSettingsStateCopyWith<$Res> get savingGraphSettingsState;
 }
 
 /// @nodoc
@@ -1176,6 +1199,7 @@ class __$$GraphStateImplCopyWithImpl<$Res>
     Object? moodsState = null,
     Object? targetDate = null,
     Object? settings = null,
+    Object? savingGraphSettingsState = null,
   }) {
     return _then(_$GraphStateImpl(
       moodsState: null == moodsState
@@ -1190,6 +1214,10 @@ class __$$GraphStateImplCopyWithImpl<$Res>
           ? _value.settings
           : settings // ignore: cast_nullable_to_non_nullable
               as GraphSettings,
+      savingGraphSettingsState: null == savingGraphSettingsState
+          ? _value.savingGraphSettingsState
+          : savingGraphSettingsState // ignore: cast_nullable_to_non_nullable
+              as SavingGraphSettingsState,
     ));
   }
 }
@@ -1203,7 +1231,9 @@ class _$GraphStateImpl implements _GraphState {
       this.settings = const GraphSettings(
           showRevenue: false,
           showWorkTime: true,
-          timeRangeMode: GraphTimeRangeMode.weekly)});
+          timeRangeMode: GraphTimeRangeMode.weekly),
+      this.savingGraphSettingsState =
+          const SavingGraphSettingsState.initial()});
 
   @override
   @JsonKey()
@@ -1214,10 +1244,13 @@ class _$GraphStateImpl implements _GraphState {
   @override
   @JsonKey()
   final GraphSettings settings;
+  @override
+  @JsonKey()
+  final SavingGraphSettingsState savingGraphSettingsState;
 
   @override
   String toString() {
-    return 'GraphState(moodsState: $moodsState, targetDate: $targetDate, settings: $settings)';
+    return 'GraphState(moodsState: $moodsState, targetDate: $targetDate, settings: $settings, savingGraphSettingsState: $savingGraphSettingsState)';
   }
 
   @override
@@ -1230,12 +1263,15 @@ class _$GraphStateImpl implements _GraphState {
             (identical(other.targetDate, targetDate) ||
                 other.targetDate == targetDate) &&
             (identical(other.settings, settings) ||
-                other.settings == settings));
+                other.settings == settings) &&
+            (identical(
+                    other.savingGraphSettingsState, savingGraphSettingsState) ||
+                other.savingGraphSettingsState == savingGraphSettingsState));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, moodsState, targetDate, settings);
+  int get hashCode => Object.hash(
+      runtimeType, moodsState, targetDate, settings, savingGraphSettingsState);
 
   /// Create a copy of GraphState
   /// with the given fields replaced by the non-null parameter values.
@@ -1248,9 +1284,11 @@ class _$GraphStateImpl implements _GraphState {
 
 abstract class _GraphState implements GraphState {
   const factory _GraphState(
-      {final GraphMoodsState moodsState,
-      final GraphTargetDateState targetDate,
-      final GraphSettings settings}) = _$GraphStateImpl;
+          {final GraphMoodsState moodsState,
+          final GraphTargetDateState targetDate,
+          final GraphSettings settings,
+          final SavingGraphSettingsState savingGraphSettingsState}) =
+      _$GraphStateImpl;
 
   @override
   GraphMoodsState get moodsState;
@@ -1258,6 +1296,8 @@ abstract class _GraphState implements GraphState {
   GraphTargetDateState get targetDate;
   @override
   GraphSettings get settings;
+  @override
+  SavingGraphSettingsState get savingGraphSettingsState;
 
   /// Create a copy of GraphState
   /// with the given fields replaced by the non-null parameter values.
@@ -1437,6 +1477,578 @@ abstract class _GraphSettings implements GraphSettings {
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GraphSettingsImplCopyWith<_$GraphSettingsImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+mixin _$SavingGraphSettingsState {
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() success,
+    required TResult Function() error,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function()? success,
+    TResult? Function()? error,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? success,
+    TResult Function()? error,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(SavingGraphSettingsInitialState value) initial,
+    required TResult Function(SavingGraphSettingsLoadingState value) loading,
+    required TResult Function(SavingGraphSettingsSuccessState value) success,
+    required TResult Function(SavingGraphSettingsErrorState value) error,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(SavingGraphSettingsInitialState value)? initial,
+    TResult? Function(SavingGraphSettingsLoadingState value)? loading,
+    TResult? Function(SavingGraphSettingsSuccessState value)? success,
+    TResult? Function(SavingGraphSettingsErrorState value)? error,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(SavingGraphSettingsInitialState value)? initial,
+    TResult Function(SavingGraphSettingsLoadingState value)? loading,
+    TResult Function(SavingGraphSettingsSuccessState value)? success,
+    TResult Function(SavingGraphSettingsErrorState value)? error,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $SavingGraphSettingsStateCopyWith<$Res> {
+  factory $SavingGraphSettingsStateCopyWith(SavingGraphSettingsState value,
+          $Res Function(SavingGraphSettingsState) then) =
+      _$SavingGraphSettingsStateCopyWithImpl<$Res, SavingGraphSettingsState>;
+}
+
+/// @nodoc
+class _$SavingGraphSettingsStateCopyWithImpl<$Res,
+        $Val extends SavingGraphSettingsState>
+    implements $SavingGraphSettingsStateCopyWith<$Res> {
+  _$SavingGraphSettingsStateCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of SavingGraphSettingsState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+abstract class _$$SavingGraphSettingsInitialStateImplCopyWith<$Res> {
+  factory _$$SavingGraphSettingsInitialStateImplCopyWith(
+          _$SavingGraphSettingsInitialStateImpl value,
+          $Res Function(_$SavingGraphSettingsInitialStateImpl) then) =
+      __$$SavingGraphSettingsInitialStateImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$SavingGraphSettingsInitialStateImplCopyWithImpl<$Res>
+    extends _$SavingGraphSettingsStateCopyWithImpl<$Res,
+        _$SavingGraphSettingsInitialStateImpl>
+    implements _$$SavingGraphSettingsInitialStateImplCopyWith<$Res> {
+  __$$SavingGraphSettingsInitialStateImplCopyWithImpl(
+      _$SavingGraphSettingsInitialStateImpl _value,
+      $Res Function(_$SavingGraphSettingsInitialStateImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of SavingGraphSettingsState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$SavingGraphSettingsInitialStateImpl
+    implements SavingGraphSettingsInitialState {
+  const _$SavingGraphSettingsInitialStateImpl();
+
+  @override
+  String toString() {
+    return 'SavingGraphSettingsState.initial()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SavingGraphSettingsInitialStateImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() success,
+    required TResult Function() error,
+  }) {
+    return initial();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function()? success,
+    TResult? Function()? error,
+  }) {
+    return initial?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? success,
+    TResult Function()? error,
+    required TResult orElse(),
+  }) {
+    if (initial != null) {
+      return initial();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(SavingGraphSettingsInitialState value) initial,
+    required TResult Function(SavingGraphSettingsLoadingState value) loading,
+    required TResult Function(SavingGraphSettingsSuccessState value) success,
+    required TResult Function(SavingGraphSettingsErrorState value) error,
+  }) {
+    return initial(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(SavingGraphSettingsInitialState value)? initial,
+    TResult? Function(SavingGraphSettingsLoadingState value)? loading,
+    TResult? Function(SavingGraphSettingsSuccessState value)? success,
+    TResult? Function(SavingGraphSettingsErrorState value)? error,
+  }) {
+    return initial?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(SavingGraphSettingsInitialState value)? initial,
+    TResult Function(SavingGraphSettingsLoadingState value)? loading,
+    TResult Function(SavingGraphSettingsSuccessState value)? success,
+    TResult Function(SavingGraphSettingsErrorState value)? error,
+    required TResult orElse(),
+  }) {
+    if (initial != null) {
+      return initial(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SavingGraphSettingsInitialState
+    implements SavingGraphSettingsState {
+  const factory SavingGraphSettingsInitialState() =
+      _$SavingGraphSettingsInitialStateImpl;
+}
+
+/// @nodoc
+abstract class _$$SavingGraphSettingsLoadingStateImplCopyWith<$Res> {
+  factory _$$SavingGraphSettingsLoadingStateImplCopyWith(
+          _$SavingGraphSettingsLoadingStateImpl value,
+          $Res Function(_$SavingGraphSettingsLoadingStateImpl) then) =
+      __$$SavingGraphSettingsLoadingStateImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$SavingGraphSettingsLoadingStateImplCopyWithImpl<$Res>
+    extends _$SavingGraphSettingsStateCopyWithImpl<$Res,
+        _$SavingGraphSettingsLoadingStateImpl>
+    implements _$$SavingGraphSettingsLoadingStateImplCopyWith<$Res> {
+  __$$SavingGraphSettingsLoadingStateImplCopyWithImpl(
+      _$SavingGraphSettingsLoadingStateImpl _value,
+      $Res Function(_$SavingGraphSettingsLoadingStateImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of SavingGraphSettingsState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$SavingGraphSettingsLoadingStateImpl
+    implements SavingGraphSettingsLoadingState {
+  const _$SavingGraphSettingsLoadingStateImpl();
+
+  @override
+  String toString() {
+    return 'SavingGraphSettingsState.loading()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SavingGraphSettingsLoadingStateImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() success,
+    required TResult Function() error,
+  }) {
+    return loading();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function()? success,
+    TResult? Function()? error,
+  }) {
+    return loading?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? success,
+    TResult Function()? error,
+    required TResult orElse(),
+  }) {
+    if (loading != null) {
+      return loading();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(SavingGraphSettingsInitialState value) initial,
+    required TResult Function(SavingGraphSettingsLoadingState value) loading,
+    required TResult Function(SavingGraphSettingsSuccessState value) success,
+    required TResult Function(SavingGraphSettingsErrorState value) error,
+  }) {
+    return loading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(SavingGraphSettingsInitialState value)? initial,
+    TResult? Function(SavingGraphSettingsLoadingState value)? loading,
+    TResult? Function(SavingGraphSettingsSuccessState value)? success,
+    TResult? Function(SavingGraphSettingsErrorState value)? error,
+  }) {
+    return loading?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(SavingGraphSettingsInitialState value)? initial,
+    TResult Function(SavingGraphSettingsLoadingState value)? loading,
+    TResult Function(SavingGraphSettingsSuccessState value)? success,
+    TResult Function(SavingGraphSettingsErrorState value)? error,
+    required TResult orElse(),
+  }) {
+    if (loading != null) {
+      return loading(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SavingGraphSettingsLoadingState
+    implements SavingGraphSettingsState {
+  const factory SavingGraphSettingsLoadingState() =
+      _$SavingGraphSettingsLoadingStateImpl;
+}
+
+/// @nodoc
+abstract class _$$SavingGraphSettingsSuccessStateImplCopyWith<$Res> {
+  factory _$$SavingGraphSettingsSuccessStateImplCopyWith(
+          _$SavingGraphSettingsSuccessStateImpl value,
+          $Res Function(_$SavingGraphSettingsSuccessStateImpl) then) =
+      __$$SavingGraphSettingsSuccessStateImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$SavingGraphSettingsSuccessStateImplCopyWithImpl<$Res>
+    extends _$SavingGraphSettingsStateCopyWithImpl<$Res,
+        _$SavingGraphSettingsSuccessStateImpl>
+    implements _$$SavingGraphSettingsSuccessStateImplCopyWith<$Res> {
+  __$$SavingGraphSettingsSuccessStateImplCopyWithImpl(
+      _$SavingGraphSettingsSuccessStateImpl _value,
+      $Res Function(_$SavingGraphSettingsSuccessStateImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of SavingGraphSettingsState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$SavingGraphSettingsSuccessStateImpl
+    implements SavingGraphSettingsSuccessState {
+  const _$SavingGraphSettingsSuccessStateImpl();
+
+  @override
+  String toString() {
+    return 'SavingGraphSettingsState.success()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SavingGraphSettingsSuccessStateImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() success,
+    required TResult Function() error,
+  }) {
+    return success();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function()? success,
+    TResult? Function()? error,
+  }) {
+    return success?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? success,
+    TResult Function()? error,
+    required TResult orElse(),
+  }) {
+    if (success != null) {
+      return success();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(SavingGraphSettingsInitialState value) initial,
+    required TResult Function(SavingGraphSettingsLoadingState value) loading,
+    required TResult Function(SavingGraphSettingsSuccessState value) success,
+    required TResult Function(SavingGraphSettingsErrorState value) error,
+  }) {
+    return success(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(SavingGraphSettingsInitialState value)? initial,
+    TResult? Function(SavingGraphSettingsLoadingState value)? loading,
+    TResult? Function(SavingGraphSettingsSuccessState value)? success,
+    TResult? Function(SavingGraphSettingsErrorState value)? error,
+  }) {
+    return success?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(SavingGraphSettingsInitialState value)? initial,
+    TResult Function(SavingGraphSettingsLoadingState value)? loading,
+    TResult Function(SavingGraphSettingsSuccessState value)? success,
+    TResult Function(SavingGraphSettingsErrorState value)? error,
+    required TResult orElse(),
+  }) {
+    if (success != null) {
+      return success(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SavingGraphSettingsSuccessState
+    implements SavingGraphSettingsState {
+  const factory SavingGraphSettingsSuccessState() =
+      _$SavingGraphSettingsSuccessStateImpl;
+}
+
+/// @nodoc
+abstract class _$$SavingGraphSettingsErrorStateImplCopyWith<$Res> {
+  factory _$$SavingGraphSettingsErrorStateImplCopyWith(
+          _$SavingGraphSettingsErrorStateImpl value,
+          $Res Function(_$SavingGraphSettingsErrorStateImpl) then) =
+      __$$SavingGraphSettingsErrorStateImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$SavingGraphSettingsErrorStateImplCopyWithImpl<$Res>
+    extends _$SavingGraphSettingsStateCopyWithImpl<$Res,
+        _$SavingGraphSettingsErrorStateImpl>
+    implements _$$SavingGraphSettingsErrorStateImplCopyWith<$Res> {
+  __$$SavingGraphSettingsErrorStateImplCopyWithImpl(
+      _$SavingGraphSettingsErrorStateImpl _value,
+      $Res Function(_$SavingGraphSettingsErrorStateImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of SavingGraphSettingsState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$SavingGraphSettingsErrorStateImpl
+    implements SavingGraphSettingsErrorState {
+  const _$SavingGraphSettingsErrorStateImpl();
+
+  @override
+  String toString() {
+    return 'SavingGraphSettingsState.error()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SavingGraphSettingsErrorStateImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() success,
+    required TResult Function() error,
+  }) {
+    return error();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function()? success,
+    TResult? Function()? error,
+  }) {
+    return error?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? success,
+    TResult Function()? error,
+    required TResult orElse(),
+  }) {
+    if (error != null) {
+      return error();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(SavingGraphSettingsInitialState value) initial,
+    required TResult Function(SavingGraphSettingsLoadingState value) loading,
+    required TResult Function(SavingGraphSettingsSuccessState value) success,
+    required TResult Function(SavingGraphSettingsErrorState value) error,
+  }) {
+    return error(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(SavingGraphSettingsInitialState value)? initial,
+    TResult? Function(SavingGraphSettingsLoadingState value)? loading,
+    TResult? Function(SavingGraphSettingsSuccessState value)? success,
+    TResult? Function(SavingGraphSettingsErrorState value)? error,
+  }) {
+    return error?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(SavingGraphSettingsInitialState value)? initial,
+    TResult Function(SavingGraphSettingsLoadingState value)? loading,
+    TResult Function(SavingGraphSettingsSuccessState value)? success,
+    TResult Function(SavingGraphSettingsErrorState value)? error,
+    required TResult orElse(),
+  }) {
+    if (error != null) {
+      return error(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SavingGraphSettingsErrorState
+    implements SavingGraphSettingsState {
+  const factory SavingGraphSettingsErrorState() =
+      _$SavingGraphSettingsErrorStateImpl;
 }
 
 /// @nodoc

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:graph_settings_repository/graph_settings_repository.dart';
 import 'package:mood_repository/mood_repository.dart';
-import 'package:tracking_app/graph/bloc/graph_bloc.dart';
 import 'package:tracking_app/graph/view/widgets/line_graph.dart';
 
 void main() {

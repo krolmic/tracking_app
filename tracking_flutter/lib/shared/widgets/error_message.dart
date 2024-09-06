@@ -19,7 +19,7 @@ class ErrorMessage extends StatelessWidget {
     return Center(
       child: ErrorTextWidget(
         titleText: translations.somethingWentWrong,
-        descriptionText: message ?? translations.pleaseTryAgain,
+        descriptionText: message ?? translations.somethingWentWrong,
         onRefresh: onRefresh,
       ),
     );
