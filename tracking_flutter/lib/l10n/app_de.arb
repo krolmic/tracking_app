@@ -118,6 +118,8 @@
     "appSettingsSaved": "Präferenzen erfolgreich gespeichert!",
     "currency": "Währung",
     "currencySettingDescription": "Symbol der ausgewählten Währung wird in der App angezeigt",
+    "commonCurrencies": "Häufige Währungen",
+    "otherCurrencies": "Andere Währungen",
     "presetRevenue": "Voreingestellter Umsatz",
     "presetRevenueDescription": "Voreingestellter Umsatz wird automatisch eingetragen",
     "presetWorkTime": "Voreingestellte Arbeitszeit",

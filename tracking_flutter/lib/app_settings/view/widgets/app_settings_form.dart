@@ -84,17 +84,9 @@ class _AppSettingsFormState extends State<_AppSettingsForm> {
                   previousState.appSettingsForm.formState.currency !=
                   currentState.appSettingsForm.formState.currency,
               builder: (context, state) {
-                return DropDown<String>(
+                return _CurrencyDropDown(
                   value: state.appSettingsForm.formState.currency.value,
-                  items:
-                      currenciesCodesAndSymbols.keys.toList().map((currency) {
-                    return DropdownMenuItem(
-                      value: currency,
-                      alignment: Alignment.center,
-                      child: Text(currency),
-                    );
-                  }).toList(),
-                  onChanged: _onCurrencyChanged,
+                  onCurrencyChanged: _onCurrencyChanged,
                 );
               },
             ),
@@ -170,6 +162,74 @@ class _AppSettingsFormState extends State<_AppSettingsForm> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _CurrencyDropDown extends StatelessWidget {
+  const _CurrencyDropDown({
+    required this.value,
+    required this.onCurrencyChanged,
+  });
+
+  final void Function(String?) onCurrencyChanged;
+
+  final String value;
+
+  static const commonCurrenciesLabelDropdownItem = 'common';
+  static const otherCurrenciesLabelDropdownItem = 'other';
+
+  List<String> getCurrenciesDropdownItems() {
+    return [
+      commonCurrenciesLabelDropdownItem,
+      ...commonCurrencies,
+      otherCurrenciesLabelDropdownItem,
+      ...currenciesCodesAndSymbols.keys
+          .where((currency) => !commonCurrencies.contains(currency)),
+    ];
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final translations = AppLocalizations.of(context)!;
+    final currenciesDropdownItems = getCurrenciesDropdownItems();
+
+    return DropDown<String>(
+      value: value,
+      items: currenciesDropdownItems.map((dropdownItem) {
+        return switch (dropdownItem) {
+          commonCurrenciesLabelDropdownItem => DropdownMenuItem<String>(
+              alignment: Alignment.center,
+              enabled: false,
+              value: commonCurrenciesLabelDropdownItem,
+              child: Text(
+                translations.commonCurrencies,
+                style: const TextStyle(
+                  color: Colors.grey,
+                ),
+              ),
+            ),
+          otherCurrenciesLabelDropdownItem => DropdownMenuItem<String>(
+              alignment: Alignment.center,
+              enabled: false,
+              value: otherCurrenciesLabelDropdownItem,
+              child: Text(
+                translations.otherCurrencies,
+                style: const TextStyle(
+                  color: Colors.grey,
+                ),
+              ),
+            ),
+          _ => DropdownMenuItem<String>(
+              alignment: Alignment.center,
+              value: dropdownItem,
+              child: Text(
+                '$dropdownItem (${getCurrencySymbol(dropdownItem)})',
+              ),
+            ),
+        };
+      }).toList(),
+      onChanged: onCurrencyChanged,
     );
   }
 }

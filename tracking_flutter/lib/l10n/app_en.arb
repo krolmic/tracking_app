@@ -118,6 +118,8 @@
     "appSettingsSaved": "Preferences saved successfully!",
     "currency": "Currency",
     "currencySettingDescription": "Currency to display symbol of for revenue tracking",
+    "commonCurrencies": "Common currencies",
+    "otherCurrencies": "Other currencies",
     "presetRevenue": "Preset revenue",
     "presetRevenueDescription": "Revenue preset for quick tracking",
     "presetWorkTime": "Preset work time",
