@@ -154,6 +154,19 @@ const currenciesCodesAndSymbols = <String, String>{
   'ZWL': r'$',
 };
 
+const commonCurrencies = [
+  'USD',
+  'EUR',
+  'JPY',
+  'GBP',
+  'AUD',
+  'CAD',
+  'CHF',
+  'CNY',
+  'HKD',
+  'NZD',
+];
+
 String getCurrencySymbol(String currencyCode) {
   return currenciesCodesAndSymbols[currencyCode] ?? '';
 }
