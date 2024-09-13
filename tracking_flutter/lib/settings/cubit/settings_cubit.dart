@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_fimber/flutter_fimber.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:mood_repository/mood_repository.dart';
+import 'package:tracking_app/shared/iap/revenue_cat_service.dart';
 import 'package:user_profile_repository/user_profile_repository.dart'
     as user_profile_repository;
 
@@ -19,19 +20,19 @@ class SettingsCubit extends Cubit<SettingsState> {
     required AccountRepository accountRepository,
     required MoodRepository moodRepository,
     required EmailRepository emailRepository,
+    required RevenueCatService revenueCatService,
   })  : _userProfileRepository = userProfileRepository,
         _accountRepository = accountRepository,
         _moodRepository = moodRepository,
         _emailRepository = emailRepository,
+        _revenueCatService = revenueCatService,
         super(const SettingsState());
 
   final user_profile_repository.UserProfileRepository _userProfileRepository;
-
   final AccountRepository _accountRepository;
-
   final MoodRepository _moodRepository;
-
   final EmailRepository _emailRepository;
+  final RevenueCatService _revenueCatService;
 
   /// Signs out the current user.
   /// Returns `true` if the sign out was successful, `false` otherwise.
@@ -44,6 +45,7 @@ class SettingsCubit extends Cubit<SettingsState> {
       );
 
       await _accountRepository.signOut();
+      await _revenueCatService.logOutUser();
 
       return true;
     } catch (e, stackTrace) {
@@ -74,6 +76,7 @@ class SettingsCubit extends Cubit<SettingsState> {
       await _moodRepository.deleteMoods(userId: userId);
 
       await _accountRepository.deleteAccount();
+      await _revenueCatService.logOutUser();
 
       emit(
         state.copyWith(

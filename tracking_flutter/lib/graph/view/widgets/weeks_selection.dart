@@ -60,7 +60,28 @@ class _WeeksSelection extends StatelessWidget {
             onTap: isDisabled
                 ? null
                 : () {
-                    onWeekSelected(weekIndex);
+                    RevenueCatUIHelper.showPaywallIfNecessary(
+                      requiresSubscriptionCallback: () =>
+                          onWeekSelected(weekIndex),
+                      onPurchased: () => showToast(
+                        context: context,
+                        message: translations.subscriptionPurchaseSuccessful,
+                      ),
+                      onRestored: () => showToast(
+                        context: context,
+                        message: translations.subscriptionPurchaseRestored,
+                      ),
+                      onCancel: () => showToast(
+                        context: context,
+                        message: translations.subscriptionPurchaseCancelled,
+                        icon: const Icon(Iconsax.info_circle_bold),
+                      ),
+                      onError: () => showToast(
+                        context: context,
+                        message: translations.subscriptionPurchaseFailed,
+                        isError: true,
+                      ),
+                    );
                   },
             child: Container(
               width: weekWidth,

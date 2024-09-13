@@ -18,6 +18,7 @@ import 'package:tracking_app/delete_mood/cubit/delete_mood_cubit.dart';
 import 'package:tracking_app/l10n/amplify_resolvers.dart';
 import 'package:tracking_app/main.dart';
 import 'package:tracking_app/onboarding/view/onboarding_screen.dart';
+import 'package:tracking_app/shared/iap/revenue_cat_service.dart';
 import 'package:tracking_app/shared/router/router.dart';
 import 'package:tracking_app/shared/theme/colors.dart';
 import 'package:tracking_app/shared/theme/theme.dart';
@@ -40,12 +41,14 @@ class App extends StatelessWidget {
         BlocProvider<AppCubit>(
           create: (context) => AppCubit(
             amplify: getIt<AmplifyClass>(),
+            revenueCatService: getIt<RevenueCatService>(),
             releaseMode: const bool.fromEnvironment('RELEASE_MODE'),
           )..init(),
         ),
         BlocProvider<UserProfileCubit>(
           create: (context) => UserProfileCubit(
             userProfileRepository: getIt<UserProfileRepository>(),
+            revenueCatService: getIt<RevenueCatService>(),
           ),
         ),
         BlocProvider<AppSettingsBloc>(

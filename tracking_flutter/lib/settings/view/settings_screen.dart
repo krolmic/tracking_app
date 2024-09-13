@@ -10,6 +10,7 @@ import 'package:mood_repository/mood_repository.dart';
 import 'package:tracking_app/main.dart';
 import 'package:tracking_app/settings/cubit/settings_cubit.dart';
 import 'package:tracking_app/shared/constants.dart';
+import 'package:tracking_app/shared/iap/revenue_cat_service.dart';
 import 'package:tracking_app/shared/router/routes_names.dart';
 import 'package:tracking_app/shared/router/routes_parameters.dart';
 import 'package:tracking_app/shared/theme/colors.dart';
@@ -45,6 +46,7 @@ class SettingsScreen extends StatelessWidget {
           moodRepository: getIt.get<MoodRepository>(),
           accountRepository: getIt.get<AccountRepository>(),
           emailRepository: getIt.get<EmailRepository>(),
+          revenueCatService: getIt.get<RevenueCatService>(),
         );
       },
       child: MultiBlocListener(

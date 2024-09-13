@@ -13,6 +13,7 @@ import 'package:tracking_app/create_mood/bloc/create_mood_bloc.dart';
 import 'package:tracking_app/delete_mood/cubit/delete_mood_cubit.dart';
 import 'package:tracking_app/main.dart';
 import 'package:tracking_app/shared/extensions/date_time.dart';
+import 'package:tracking_app/shared/iap/revenue_cat_ui_helper.dart';
 import 'package:tracking_app/shared/router/routes_names.dart';
 import 'package:tracking_app/shared/router/routes_parameters.dart';
 import 'package:tracking_app/shared/theme/animation.dart';
@@ -127,7 +128,7 @@ class _CalendarView extends StatelessWidget {
                           horizontal: viewPaddingHorizontal,
                         ),
                         child: _Calendar(
-                          targetMonthDate: state.targetDate.date,
+                          targetMonthDate: state.targetDate.date.startOfMonth,
                           moods: state.moodsState.moods,
                         ),
                       ),
