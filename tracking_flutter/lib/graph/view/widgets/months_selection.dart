@@ -15,6 +15,8 @@ class _MonthsSelection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final translations = AppLocalizations.of(context)!;
+
     final selectedMonthIndex = selectedMonth - 1;
 
     // Scroll to the month before the selected month so that
@@ -56,7 +58,28 @@ class _MonthsSelection extends StatelessWidget {
             onTap: isDisabled
                 ? null
                 : () {
-                    onMonthSelected(monthIndex);
+                    RevenueCatUIHelper.showPaywallIfNecessary(
+                      requiresSubscriptionCallback: () =>
+                          onMonthSelected(monthIndex),
+                      onPurchased: () => showToast(
+                        context: context,
+                        message: translations.subscriptionPurchaseSuccessful,
+                      ),
+                      onRestored: () => showToast(
+                        context: context,
+                        message: translations.subscriptionPurchaseRestored,
+                      ),
+                      onCancel: () => showToast(
+                        context: context,
+                        message: translations.subscriptionPurchaseCancelled,
+                        icon: const Icon(Iconsax.info_circle_bold),
+                      ),
+                      onError: () => showToast(
+                        context: context,
+                        message: translations.subscriptionPurchaseFailed,
+                        isError: true,
+                      ),
+                    );
                   },
             child: Container(
               width: monthWidth,

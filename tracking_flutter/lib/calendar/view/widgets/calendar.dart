@@ -45,8 +45,31 @@ class _Calendar extends StatelessWidget {
   final List<Mood> moods;
   final DateTime targetMonthDate;
 
+  void onDayPressed({
+    required DateTime date,
+    required BuildContext context,
+  }) {
+    final calendarBloc = context.read<CalendarBloc>();
+
+    final mood = calendarBloc.state.moodsState.getMoodAtCreatedOnDate(date);
+    final moodAtPressedDateExists = mood != null;
+
+    if (moodAtPressedDateExists) {
+      context.pushNamed(
+        RoutesNames.updateMoodFromCalendar,
+        extra: UpdateMoodRouteParameters(mood: mood),
+      );
+    } else {
+      context.pushNamed(
+        RoutesNames.createMoodFromCalendar,
+        extra: CreateMoodRouteParameters(date: date),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final translations = AppLocalizations.of(context)!;
     final calendarBloc = context.read<CalendarBloc>();
 
     return Column(
@@ -101,23 +124,59 @@ class _Calendar extends StatelessWidget {
                 weekdayTextStyle: _CalendarTheme.calendarWeekdaysTextStyle,
                 markedDatesMap: _getMarkedDates(),
                 targetDateTime: targetMonthDate,
-                onCalendarChanged: (date) => calendarBloc
-                    .add(CalendarEvent.targetDateChanged(date: date)),
-                onDayPressed: (date, events) {
-                  final mood = calendarBloc.state.moodsState
-                      .getMoodAtCreatedOnDate(date);
-                  final moodAtPressedDateExists = mood != null;
-
-                  if (moodAtPressedDateExists) {
-                    context.pushNamed(
-                      RoutesNames.updateMoodFromCalendar,
-                      extra: UpdateMoodRouteParameters(mood: mood),
-                    );
-                  } else if (date.isSameMonth(targetMonthDate) &&
+                isScrollable: false,
+                onCalendarChanged: (date) async {
+                  await RevenueCatUIHelper.showPaywallIfNecessary(
+                    requiresSubscriptionCallback: () => calendarBloc
+                        .add(CalendarEvent.targetDateChanged(date: date)),
+                    onPurchased: () => showToast(
+                      context: context,
+                      message: translations.subscriptionPurchaseSuccessful,
+                    ),
+                    onRestored: () => showToast(
+                      context: context,
+                      message: translations.subscriptionPurchaseRestored,
+                    ),
+                    onCancel: () => showToast(
+                      context: context,
+                      message: translations.subscriptionPurchaseCancelled,
+                      icon: const Icon(Iconsax.info_circle_bold),
+                    ),
+                    onError: () => showToast(
+                      context: context,
+                      message: translations.subscriptionPurchaseFailed,
+                      isError: true,
+                    ),
+                  );
+                },
+                onDayPressed: (date, events) async {
+                  if (date.isSameMonth(targetMonthDate) &&
                       date.isTodayOrBeforeToday) {
-                    context.pushNamed(
-                      RoutesNames.createMoodFromCalendar,
-                      extra: CreateMoodRouteParameters(date: date),
+                    await RevenueCatUIHelper.showPaywallIfNecessary(
+                      requiresSubscriptionCallback: () {
+                        onDayPressed(
+                          date: date,
+                          context: context,
+                        );
+                      },
+                      onPurchased: () => showToast(
+                        context: context,
+                        message: translations.subscriptionPurchaseSuccessful,
+                      ),
+                      onRestored: () => showToast(
+                        context: context,
+                        message: translations.subscriptionPurchaseRestored,
+                      ),
+                      onCancel: () => showToast(
+                        context: context,
+                        message: translations.subscriptionPurchaseCancelled,
+                        icon: const Icon(Iconsax.info_circle_bold),
+                      ),
+                      onError: () => showToast(
+                        context: context,
+                        message: translations.subscriptionPurchaseFailed,
+                        isError: true,
+                      ),
                     );
                   }
                 },
@@ -165,10 +224,41 @@ class _CalendarHeader extends StatelessWidget {
 
   final DateTime targetMonthDate;
 
+  Future<void> onButtonPressed({
+    required DateTime date,
+    required BuildContext context,
+  }) async {
+    final translations = AppLocalizations.of(context)!;
+
+    await RevenueCatUIHelper.showPaywallIfNecessary(
+      requiresSubscriptionCallback: () {
+        context
+            .read<CalendarBloc>()
+            .add(CalendarEvent.targetDateChanged(date: date));
+      },
+      onPurchased: () => showToast(
+        context: context,
+        message: translations.subscriptionPurchaseSuccessful,
+      ),
+      onRestored: () => showToast(
+        context: context,
+        message: translations.subscriptionPurchaseRestored,
+      ),
+      onCancel: () => showToast(
+        context: context,
+        message: translations.subscriptionPurchaseCancelled,
+        icon: const Icon(Iconsax.info_circle_bold),
+      ),
+      onError: () => showToast(
+        context: context,
+        message: translations.subscriptionPurchaseFailed,
+        isError: true,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    final calendarBloc = context.read<CalendarBloc>();
-
     return Row(
       children: [
         Text(
@@ -179,11 +269,12 @@ class _CalendarHeader extends StatelessWidget {
         Material(
           color: Colors.transparent,
           child: InkWell(
-            onTap: () => calendarBloc.add(
-              CalendarEvent.targetDateChanged(
+            onTap: () async {
+              await onButtonPressed(
                 date: targetMonthDate.previousMonth,
-              ),
-            ),
+                context: context,
+              );
+            },
             borderRadius: BorderRadius.circular(20),
             child: Container(
               alignment: Alignment.center,
@@ -205,10 +296,9 @@ class _CalendarHeader extends StatelessWidget {
         Material(
           color: Colors.transparent,
           child: InkWell(
-            onTap: () => calendarBloc.add(
-              CalendarEvent.targetDateChanged(
-                date: targetMonthDate.nextMonth,
-              ),
+            onTap: () => onButtonPressed(
+              date: targetMonthDate.nextMonth,
+              context: context,
             ),
             borderRadius: BorderRadius.circular(20),
             child: Container(

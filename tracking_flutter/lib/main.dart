@@ -13,6 +13,7 @@ import 'package:settings_repository/settings_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tracking_app/app/view/app.dart';
 import 'package:tracking_app/firebase_options.dart';
+import 'package:tracking_app/shared/iap/revenue_cat_service.dart';
 import 'package:tracking_client/tracking_client.dart';
 import 'package:user_profile_repository/user_profile_repository.dart';
 
@@ -69,6 +70,12 @@ Future<void> registerSingletons() async {
     ..registerLazySingleton<GraphSettingsRepository>(
       () => GraphSettingsRepository(
         preferences: getIt<SharedPreferences>(),
+      ),
+    )
+    ..registerLazySingleton<RevenueCatService>(
+      () => RevenueCatService(
+        iosApiKey: const String.fromEnvironment('IOS_IAP_API_KEY'),
+        androidApiKey: const String.fromEnvironment('ANDROID_IAP_API_KEY'),
       ),
     );
 }

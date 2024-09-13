@@ -9,6 +9,7 @@ import 'package:tracking_app/amplify_outputs.dart'
     as amplify_config_development;
 import 'package:tracking_app/amplify_outputs_production.dart'
     as amplify_config_production;
+import 'package:tracking_app/shared/iap/revenue_cat_service.dart';
 import 'package:tracking_app/shared/logging.dart';
 
 part 'app_cubit.freezed.dart';
@@ -18,10 +19,13 @@ class AppCubit extends Cubit<AppState> {
   AppCubit({
     required AmplifyClass amplify,
     required this.releaseMode,
+    required RevenueCatService revenueCatService,
   })  : _amplify = amplify,
+        _revenueCatService = revenueCatService,
         super(const AppState.initial());
 
   final AmplifyClass _amplify;
+  final RevenueCatService _revenueCatService;
   final bool releaseMode;
 
   Future<void> init() async {
@@ -31,6 +35,8 @@ class AppCubit extends Cubit<AppState> {
 
     try {
       await _configureAmplify();
+      await _revenueCatService.initialize();
+
       emit(const AppState.success());
     } catch (e, stackTrace) {
       Fimber.e(

@@ -29,6 +29,8 @@ class _GraphHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final translations = AppLocalizations.of(context)!;
+
     return SizedBox(
       height: 30,
       child: Stack(
@@ -53,8 +55,30 @@ class _GraphHeader extends StatelessWidget {
                   Iconsax.setting_4_outline,
                   size: Theme.of(context).appBarTheme.iconTheme!.size,
                 ),
-                onPressed: () async {
-                  await showSettingsDialog(context);
+                onPressed: () {
+                  RevenueCatUIHelper.showPaywallIfNecessary(
+                    requiresSubscriptionCallback: () async {
+                      await showSettingsDialog(context);
+                    },
+                    onPurchased: () => showToast(
+                      context: context,
+                      message: translations.subscriptionPurchaseSuccessful,
+                    ),
+                    onRestored: () => showToast(
+                      context: context,
+                      message: translations.subscriptionPurchaseRestored,
+                    ),
+                    onCancel: () => showToast(
+                      context: context,
+                      message: translations.subscriptionPurchaseCancelled,
+                      icon: const Icon(Iconsax.info_circle_bold),
+                    ),
+                    onError: () => showToast(
+                      context: context,
+                      message: translations.subscriptionPurchaseFailed,
+                      isError: true,
+                    ),
+                  );
                 },
               ),
             ),
