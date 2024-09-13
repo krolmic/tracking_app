@@ -72,7 +72,7 @@
 		D2D877C93254DB48E70E481D /* GoogleService-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Runner/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EEF3CEE697EB8653991E699E /* Pods-Runner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug.xcconfig"; sourceTree = "<group>"; };
 		F5D57E652C94AD020083C4A2 /* Healthy Hustle: Mindfulness.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Healthy Hustle: Mindfulness.storekit"; sourceTree = "<group>"; };
-		F5D57E682C94AF630083C4A2 /* StoreKitTestCertificate.cer */ = {isa = PBXFileReference; lastKnownFileType = file; name = StoreKitTestCertificate.cer; path = "../../../../../../../../../Users/michalkrol/Documents/tracking app documents/StoreKitTestCertificate.cer"; sourceTree = "<group>"; };
+		F5D57E682C94AF630083C4A2 /* StoreKitTestCertificate.cer */ = {isa = PBXFileReference; lastKnownFileType = file; name = StoreKitTestCertificate.cer; path = "Runner/StoreKitTestCertificate.cer"; sourceTree = "<group>"; };
 		F5E1D0602C8F273D00CA17D8 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
