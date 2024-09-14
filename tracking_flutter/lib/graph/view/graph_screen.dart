@@ -223,68 +223,63 @@ class _GraphView extends StatelessWidget {
               padding: const EdgeInsets.symmetric(
                 horizontal: viewPaddingHorizontal,
               ),
-              child: SizedBox(
-                height: 130,
-                child: BlocBuilder<GraphBloc, GraphState>(
-                  buildWhen: (previous, current) =>
-                      previous.moodsState != current.moodsState,
-                  builder: (context, state) {
-                    if (state.moodsState.isInitialOrLoading) {
-                      return const Center(child: LoadingIndicator());
-                    }
-                    final moodsState = state.moodsState;
+              child: BlocBuilder<GraphBloc, GraphState>(
+                buildWhen: (previous, current) =>
+                    previous.moodsState != current.moodsState,
+                builder: (context, state) {
+                  if (state.moodsState.isInitialOrLoading) {
+                    return const Center(child: LoadingIndicator());
+                  }
+                  final moodsState = state.moodsState;
 
-                    return Row(
-                      children: <Widget>[
-                        Expanded(
-                          child: MoodData(
-                            icon: Iconsax.heart_bold,
-                            label: translations.greatestMood,
-                            value: moodsState.greatestMoodValue != null
-                                ? moodsState.greatestMoodValue!.toString()
-                                : '-',
-                          ),
+                  return Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: MoodData(
+                          icon: Iconsax.heart_bold,
+                          label: translations.greatestMood,
+                          value: moodsState.greatestMoodValue != null
+                              ? moodsState.greatestMoodValue!.toString()
+                              : '-',
                         ),
-                        const HorizontalSpacing.medium(),
-                        Expanded(
-                          child: MoodData(
-                            icon: Iconsax.timer_bold,
-                            label: translations.greatestWorkTime,
-                            value: moodsState.greatestWorkTime != null
-                                ? moodsState.greatestWorkTime!
-                                    .toFormattedString()
-                                : '-',
-                          ),
+                      ),
+                      const HorizontalSpacing.medium(),
+                      Expanded(
+                        child: MoodData(
+                          icon: Iconsax.timer_bold,
+                          label: translations.greatestWorkTime,
+                          value: moodsState.greatestWorkTime != null
+                              ? moodsState.greatestWorkTime!.toFormattedString()
+                              : '-',
                         ),
-                        const HorizontalSpacing.medium(),
-                        Expanded(
-                          child: BlocBuilder<AppSettingsBloc, AppSettingsState>(
-                            buildWhen: (previous, current) =>
-                                previous.appSettingsData.currency !=
-                                current.appSettingsData.currency,
-                            builder: (context, state) {
-                              final currencySymbol = getCurrencySymbol(
-                                state.appSettingsData.currency,
-                              );
-                              final greatestRevenue = moodsState
-                                          .greatestRevenue !=
-                                      null
-                                  ? '${moodsState.greatestRevenue!.toInt()} '
-                                      '$currencySymbol'
-                                  : '-';
+                      ),
+                      const HorizontalSpacing.medium(),
+                      Expanded(
+                        child: BlocBuilder<AppSettingsBloc, AppSettingsState>(
+                          buildWhen: (previous, current) =>
+                              previous.appSettingsData.currency !=
+                              current.appSettingsData.currency,
+                          builder: (context, state) {
+                            final currencySymbol = getCurrencySymbol(
+                              state.appSettingsData.currency,
+                            );
+                            final greatestRevenue =
+                                moodsState.greatestRevenue != null
+                                    ? '${moodsState.greatestRevenue!.toInt()} '
+                                        '$currencySymbol'
+                                    : '-';
 
-                              return MoodData(
-                                icon: Iconsax.money_4_bold,
-                                label: translations.greatestRevenue,
-                                value: greatestRevenue,
-                              );
-                            },
-                          ),
+                            return MoodData(
+                              icon: Iconsax.money_4_bold,
+                              label: translations.greatestRevenue,
+                              value: greatestRevenue,
+                            );
+                          },
                         ),
-                      ],
-                    ).animate().fadeIn(duration: animationDuration);
-                  },
-                ),
+                      ),
+                    ],
+                  ).animate().fadeIn(duration: animationDuration);
+                },
               ),
             ),
           ],
