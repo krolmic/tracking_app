@@ -13,7 +13,6 @@ import 'package:tracking_app/shared/extensions/date_time.dart';
 import 'package:tracking_app/shared/extensions/double.dart';
 import 'package:tracking_app/shared/formz.dart';
 import 'package:tracking_app/shared/theme/animation.dart';
-import 'package:tracking_app/shared/theme/colors.dart';
 import 'package:tracking_app/shared/theme/layout.dart';
 import 'package:tracking_app/shared/toast.dart';
 import 'package:tracking_app/shared/view/base_view.dart';
@@ -112,19 +111,15 @@ class UpdateMoodScreen extends StatelessWidget {
           ),
           actions: [
             Padding(
-              padding: const EdgeInsets.only(right: horizontalPaddingSmall),
+              padding: const EdgeInsets.only(right: horizontalPaddingMedium),
               child: BlocBuilder<DeleteMoodCubit, DeleteMoodState>(
                 buildWhen: (previousDeleteMoodState, currentDeleteMoodState) =>
                     previousDeleteMoodState != currentDeleteMoodState,
                 builder: (context, deleteMoodState) {
                   return deleteMoodState.maybeWhen(
-                    loading: () => Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: horizontalPaddingSmall,
-                      ),
-                      child: TinyLoadingIndicator(
-                        color: AppColors.primarySwatch.shade200,
-                      ),
+                    loading: () => IconButton(
+                      icon: const TinyLoadingIndicator(),
+                      onPressed: () {},
                     ),
                     orElse: () => BlocBuilder<UpdateMoodBloc, UpdateMoodState>(
                       buildWhen:
@@ -133,9 +128,6 @@ class UpdateMoodScreen extends StatelessWidget {
                               currentUpdateMoodState.mood,
                       builder: (context, state) {
                         return IconButton(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: horizontalPaddingSmall,
-                          ),
                           icon: const Icon(
                             Iconsax.trash_outline,
                           ),
