@@ -13,21 +13,25 @@ class _MoodsInMonth extends StatelessWidget {
       begin: Alignment.centerLeft,
       end: Alignment.centerRight,
       stops: const [0.0, 0.9, 1.0],
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Row(
-          children: [
-            const SizedBox(width: viewPaddingHorizontal),
-            for (final mood in moods)
-              Padding(
-                key: ValueKey(mood),
-                padding: const EdgeInsets.only(
-                  right: verticalPaddingSmall,
-                ),
-                child: _TrackedMood(mood: mood),
+      child: SizedBox(
+        height: 160,
+        width: double.infinity,
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: moods.length,
+          itemBuilder: (context, index) {
+            return Padding(
+              key: ValueKey(moods[index]),
+              padding: EdgeInsets.only(
+                right: index == moods.length - 1
+                    ? viewPaddingHorizontal
+                    : verticalPaddingSmall,
+                bottom: horizontalPaddingMedium,
+                left: index == 0 ? viewPaddingHorizontal : 0,
               ),
-            const SizedBox(width: viewPaddingHorizontal),
-          ],
+              child: _TrackedMood(mood: moods[index]),
+            );
+          },
         ),
       ),
     );
