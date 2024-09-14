@@ -27,9 +27,7 @@ final _homeRoute = GoRoute(
       name: RoutesNames.moods,
       path: RoutesNames.moods,
       pageBuilder: (context, state) => const NoTransitionPage(
-        child: AuthenticatedView(
-          child: MoodsScreen(),
-        ),
+        child: MoodsScreen(),
       ),
       routes: [
         GoRoute(
