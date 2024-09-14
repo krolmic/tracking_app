@@ -9,7 +9,6 @@ class RevenueCatUIHelper {
     required VoidCallback requiresSubscriptionCallback,
     required VoidCallback onPurchased,
     required VoidCallback onRestored,
-    required VoidCallback onCancel,
     required VoidCallback onError,
   }) async {
     try {
@@ -25,13 +24,13 @@ class RevenueCatUIHelper {
         case PaywallResult.restored:
           onRestored();
           requiresSubscriptionCallback();
-        case PaywallResult.cancelled:
-          onCancel();
         case PaywallResult.notPresented:
           requiresSubscriptionCallback();
         case PaywallResult.error:
           onError();
           Fimber.e('Paywall presentation error');
+        case PaywallResult.cancelled:
+          break;
       }
     } catch (e) {
       onError();

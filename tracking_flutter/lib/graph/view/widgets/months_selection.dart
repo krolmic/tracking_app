@@ -69,11 +69,6 @@ class _MonthsSelection extends StatelessWidget {
                         context: context,
                         message: translations.subscriptionPurchaseRestored,
                       ),
-                      onCancel: () => showToast(
-                        context: context,
-                        message: translations.subscriptionPurchaseCancelled,
-                        icon: const Icon(Iconsax.info_circle_bold),
-                      ),
                       onError: () => showToast(
                         context: context,
                         message: translations.subscriptionPurchaseFailed,
