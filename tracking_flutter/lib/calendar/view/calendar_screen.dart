@@ -8,6 +8,7 @@ import 'package:formz/formz.dart';
 import 'package:go_router/go_router.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:mood_repository/mood_repository.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import 'package:tracking_app/calendar/bloc/calendar_bloc.dart';
 import 'package:tracking_app/create_mood/bloc/create_mood_bloc.dart';
 import 'package:tracking_app/delete_mood/cubit/delete_mood_cubit.dart';
@@ -20,7 +21,6 @@ import 'package:tracking_app/shared/theme/animation.dart';
 import 'package:tracking_app/shared/theme/colors.dart';
 import 'package:tracking_app/shared/theme/layout.dart';
 import 'package:tracking_app/shared/toast.dart';
-import 'package:tracking_app/shared/widgets/loading_indicator.dart';
 import 'package:tracking_app/shared/widgets/mood_emoji.dart';
 import 'package:tracking_app/shared/widgets/moods_shader_mask.dart';
 import 'package:tracking_app/shared/widgets/spacing.dart';
@@ -144,13 +144,7 @@ class _CalendarView extends StatelessWidget {
                       ),
                     ),
                     const VerticalSpacing.medium(),
-                    if (state.moodsState.isLoading ||
-                        state.moodsState.isInitial)
-                      const SizedBox(
-                        height: 125,
-                        child: Center(child: LoadingIndicator()),
-                      )
-                    else if (state.moodsState.isSuccess &&
+                    if (state.moodsState.isSuccess &&
                         state.moodsState.moods.isEmpty)
                       Padding(
                         padding: const EdgeInsets.symmetric(
@@ -161,10 +155,11 @@ class _CalendarView extends StatelessWidget {
                           style: Theme.of(context).textTheme.bodyMedium,
                         ),
                       )
-                    else if (state.moodsState.isSuccess)
-                      _MoodsInMonth(moods: state.moodsState.moods)
-                          .animate()
-                          .fadeIn(duration: animationDuration),
+                    else if (state.isInitialOrLoading || state.isSuccess)
+                      _MoodsInMonth(
+                        moods: state.moodsState.moods,
+                        isLoading: state.isInitialOrLoading,
+                      ).animate().fadeIn(duration: animationDuration),
                   ],
                 ),
               ),
