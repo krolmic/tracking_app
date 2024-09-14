@@ -11,9 +11,7 @@ Page<dynamic> createMoodRoutePageBuilder(
       );
 
   return const NoTransitionPage(
-    child: AuthenticatedView(
-      child: CreateMoodScreen(),
-    ),
+    child: CreateMoodScreen(),
   );
 }
 
@@ -29,10 +27,8 @@ Page<dynamic> updateMoodRoutePageBuilder(
       );
 
   return NoTransitionPage(
-    child: AuthenticatedView(
-      child: UpdateMoodScreen(
-        moodDate: mood.createdOn,
-      ),
+    child: UpdateMoodScreen(
+      moodDate: mood.createdOn,
     ),
   );
 }
