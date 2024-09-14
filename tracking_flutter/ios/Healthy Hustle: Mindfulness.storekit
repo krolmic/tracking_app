@@ -132,6 +132,10 @@
       ]
     }
   ],
+  "subscriptionOffersKeyPair" : {
+    "id" : "D27D8F57",
+    "privateKey" : "MIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQgGMkS0/o7Z9tdzUPSlAa4KXzTuPBI3waKecxH1v4qtTygCgYIKoZIzj0DAQehRANCAAT4RPs0kU4v5uVS7y2I6qOYNCVInRaWB+RNiI5TsBjz7kQLWyQiHGQByv2JGi+43CtDmY2bmSJ8mXTy+G90DOOy"
+  },
   "version" : {
     "major" : 3,
     "minor" : 0
