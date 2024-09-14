@@ -231,6 +231,9 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
               keyboardType: TextInputType.text,
               textInputAction: TextInputAction.next,
               textCapitalization: TextCapitalization.sentences,
+              onTapOutside: (event) {
+                FocusManager.instance.primaryFocus?.unfocus();
+              },
             ),
             const VerticalSpacing.large(),
             TextFormField(
@@ -248,6 +251,9 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
               keyboardType: TextInputType.text,
               textInputAction: TextInputAction.next,
               textCapitalization: TextCapitalization.sentences,
+              onTapOutside: (event) {
+                FocusManager.instance.primaryFocus?.unfocus();
+              },
             ),
             const VerticalSpacing.large(),
             TextFormField(
@@ -265,6 +271,9 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
               keyboardType: TextInputType.text,
               textInputAction: TextInputAction.done,
               textCapitalization: TextCapitalization.sentences,
+              onTapOutside: (event) {
+                FocusManager.instance.primaryFocus?.unfocus();
+              },
             ),
           ],
         ),
@@ -310,13 +319,16 @@ class _CreateMoodFormState extends State<_CreateMoodForm> {
                       ?.toString(),
                   keyboardType: TextInputType.number,
                   inputFormatters: [
-                    FilteringTextInputFormatter.allow(RegExp('[0-9.]')),
+                    FilteringTextInputFormatter.allow(RegExp('[0-9]')),
                   ],
                   textInputAction: TextInputAction.done,
                   decoration: InputDecoration(
-                    hintText: '0.0',
+                    hintText: '0',
                     helperText: translations.revenueHelper(currency),
                   ),
+                  onTapOutside: (event) {
+                    FocusManager.instance.primaryFocus?.unfocus();
+                  },
                 );
               },
             ),

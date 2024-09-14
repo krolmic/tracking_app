@@ -138,7 +138,6 @@ class _SettingsView extends StatelessWidget {
             userPictureState.isLoading || userProfileState.isInitialOrLoading;
 
         return BaseView(
-          addVerticalPadding: true,
           child: showLoadingIndicator
               ? const Center(child: LoadingIndicator())
               : userProfileState.maybeWhen(
@@ -247,6 +246,7 @@ class _SettingsViewContent extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        const VerticalSpacing.large(),
         Center(
           child: _UserProfileAvatar(setEmoji: picture),
         ),

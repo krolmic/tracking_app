@@ -171,6 +171,9 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
                       ?.toString(),
                   keyboardType: TextInputType.text,
                   textInputAction: TextInputAction.done,
+                  onTapOutside: (event) {
+                    FocusManager.instance.primaryFocus?.unfocus();
+                  },
                 ),
                 const VerticalSpacing.medium(),
                 TextFormField(
@@ -189,6 +192,9 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
                       ?.toString(),
                   keyboardType: TextInputType.text,
                   textInputAction: TextInputAction.done,
+                  onTapOutside: (event) {
+                    FocusManager.instance.primaryFocus?.unfocus();
+                  },
                 ),
                 const VerticalSpacing.medium(),
                 TextFormField(
@@ -207,6 +213,9 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
                       ?.toString(),
                   keyboardType: TextInputType.text,
                   textInputAction: TextInputAction.done,
+                  onTapOutside: (event) {
+                    FocusManager.instance.primaryFocus?.unfocus();
+                  },
                 ),
                 const VerticalSpacing.extraLarge(),
                 Text(
@@ -225,14 +234,17 @@ class _UpdateMoodFormState extends State<_UpdateMoodForm> {
                       key: const Key('Update mood form revenue input'),
                       controller: _revenueController,
                       decoration: InputDecoration(
-                        hintText: '0.0',
-                        helperText: 'Revenue in $currency',
+                        hintText: '0',
+                        helperText: translations.revenueHelper(currency),
                       ),
                       keyboardType: TextInputType.number,
                       inputFormatters: [
-                        FilteringTextInputFormatter.allow(RegExp('[0-9.]')),
+                        FilteringTextInputFormatter.allow(RegExp('[0-9]')),
                       ],
                       textInputAction: TextInputAction.done,
+                      onTapOutside: (event) {
+                        FocusManager.instance.primaryFocus?.unfocus();
+                      },
                     );
                   },
                 ),

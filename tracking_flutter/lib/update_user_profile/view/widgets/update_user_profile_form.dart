@@ -120,6 +120,9 @@ class _UpdateUserProfileFormState extends State<_UpdateUserProfileForm> {
                 keyboardType: TextInputType.text,
                 textInputAction: TextInputAction.done,
                 enabled: !state.isInProgress,
+                onTapOutside: (event) {
+                  FocusManager.instance.primaryFocus?.unfocus();
+                },
               ),
               const VerticalSpacing.extraLarge(),
               AppElevatedButton(

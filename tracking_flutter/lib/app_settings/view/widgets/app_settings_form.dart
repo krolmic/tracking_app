@@ -107,14 +107,17 @@ class _AppSettingsFormState extends State<_AppSettingsForm> {
               key: const Key('App settings form revenue input'),
               controller: _revenueController,
               decoration: InputDecoration(
-                hintText: '0.0',
+                hintText: '0',
                 helperText: translations.presetRevenueDescription,
               ),
               keyboardType: TextInputType.number,
               inputFormatters: [
-                FilteringTextInputFormatter.allow(RegExp('[0-9.]')),
+                FilteringTextInputFormatter.allow(RegExp('[0-9]')),
               ],
               textInputAction: TextInputAction.done,
+              onTapOutside: (event) {
+                FocusManager.instance.primaryFocus?.unfocus();
+              },
             ),
             const VerticalSpacing.large(),
             Text(

@@ -161,7 +161,6 @@ class _HomeView extends StatelessWidget {
           final moodsState = homeState.moodsListState;
 
           return BaseView(
-            addVerticalPadding: true,
             child: _HomeContentView(
               firstName: userProfileState.firstName,
               weeklyProgress: moodsState.weeklyProgress,
@@ -214,6 +213,7 @@ class _HomeContentView extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          const VerticalSpacing.large(),
           Text(
             DateTime.now().getGreetingString(translations),
             style: Theme.of(context).textTheme.bodyMedium,
