@@ -6,6 +6,7 @@ import 'package:formz/formz.dart';
 import 'package:go_router/go_router.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:mood_repository/mood_repository.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import 'package:tracking_app/create_mood/bloc/create_mood_bloc.dart';
 import 'package:tracking_app/delete_mood/cubit/delete_mood_cubit.dart';
 import 'package:tracking_app/main.dart';
@@ -140,9 +141,7 @@ class _MoodsView extends StatelessWidget {
         buildWhen: (previousState, currentState) =>
             previousState != currentState,
         builder: (context, state) {
-          if (state.isInitialOrLoading) {
-            return const Center(child: LoadingIndicator());
-          } else if (state.isError) {
+          if (state.isError) {
             return ErrorMessage(
               onRefresh: () {
                 if (state.isError) {
@@ -158,6 +157,7 @@ class _MoodsView extends StatelessWidget {
               child: _MoodsContentView(
                 moods: state.moodsListState.moods,
                 hasReachedMaxMoods: state.moodsListState.hasReachedMax,
+                isLoading: state.isInitialOrLoading,
               ),
             ),
           );
@@ -171,11 +171,12 @@ class _MoodsContentView extends StatefulWidget {
   const _MoodsContentView({
     required this.moods,
     required this.hasReachedMaxMoods,
+    required this.isLoading,
   });
 
   final List<Mood> moods;
   final bool hasReachedMaxMoods;
-
+  final bool isLoading;
   @override
   State<_MoodsContentView> createState() => _MoodsContentViewState();
 }
@@ -213,13 +214,36 @@ class _MoodsContentViewState extends State<_MoodsContentView> {
             end: Alignment.bottomCenter,
             stops: const [0.0, 0.95, 1.0],
             child: _buildMoods(),
-          ),
+          ).animate().fadeIn(duration: animationDuration),
         ),
       ],
     );
   }
 
-  ListView _buildMoods() {
+  Widget _buildMoods() {
+    if (widget.isLoading) {
+      final skeletonMoods = List.generate(
+        10,
+        (index) => Mood(
+          id: index,
+          createdOn: DateTime.now(),
+          value: 10,
+        ),
+      );
+
+      return Skeletonizer(
+        child: ListView.builder(
+          itemCount: skeletonMoods.length,
+          itemBuilder: (context, index) {
+            return TrackedMood(
+              mood: skeletonMoods[index],
+              onTap: () {},
+            );
+          },
+        ),
+      );
+    }
+
     return ListView.builder(
       controller: _scrollController,
       itemCount: widget.hasReachedMaxMoods
@@ -251,7 +275,7 @@ class _MoodsContentViewState extends State<_MoodsContentView> {
               RoutesNames.updateMoodFromMoods,
               extra: UpdateMoodRouteParameters(mood: mood),
             ),
-          ).animate().fadeIn(duration: animationDuration),
+          ),
         );
       },
     );
