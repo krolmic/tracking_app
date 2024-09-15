@@ -143,7 +143,7 @@ class _CalendarView extends StatelessWidget {
                         style: Theme.of(context).textTheme.headlineSmall,
                       ),
                     ),
-                    const VerticalSpacing.medium(),
+                    const VerticalSpacing.large(),
                     if (state.moodsState.isSuccess &&
                         state.moodsState.moods.isEmpty)
                       Padding(
