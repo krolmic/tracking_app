@@ -4,9 +4,7 @@ final _calendarRoute = GoRoute(
   name: RoutesNames.calendar,
   path: '/${RoutesNames.calendar}',
   pageBuilder: (context, state) => const NoTransitionPage(
-    child: AuthenticatedView(
-      child: CalendarScreen(),
-    ),
+    child: CalendarScreen(),
   ),
   routes: [
     GoRoute(
