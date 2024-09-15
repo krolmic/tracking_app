@@ -25,6 +25,7 @@ import 'package:tracking_app/shared/widgets/app_elevated_button.dart';
 import 'package:tracking_app/shared/widgets/error_message.dart';
 import 'package:tracking_app/shared/widgets/loading_indicator.dart';
 import 'package:tracking_app/shared/widgets/mood_data.dart';
+import 'package:tracking_app/shared/widgets/sliver_delegate.dart';
 import 'package:tracking_app/shared/widgets/spacing.dart';
 import 'package:tracking_app/shared/widgets/tracked_mood.dart';
 import 'package:tracking_app/update_mood/bloc/update_mood_bloc.dart';
@@ -161,6 +162,7 @@ class _HomeView extends StatelessWidget {
           final moodsState = homeState.moodsListState;
 
           return BaseView(
+            addHorizontalPadding: false,
             child: _HomeContentView(
               firstName: userProfileState.firstName,
               weeklyProgress: moodsState.weeklyProgress,
@@ -209,88 +211,193 @@ class _HomeContentView extends StatelessWidget {
     final averageWorkTimeValue =
         averageWorkTime != null ? averageWorkTime!.toFormattedString() : '-';
 
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const VerticalSpacing.large(),
-          Text(
-            DateTime.now().getGreetingString(translations),
-            style: Theme.of(context).textTheme.bodyMedium,
-          ),
-          Text(
-            firstName,
-            style: Theme.of(context).textTheme.headlineMedium,
-          ),
-          const VerticalSpacing.large(),
-          Text(
-            translations.weekProgress,
-            style: Theme.of(context).textTheme.headlineSmall,
-            maxLines: 3,
-          ),
-          const VerticalSpacing.large(),
-          _HomeProgress(
-            weeklyProgress: weeklyProgress,
-            trackedEveryDayThisWeek: trackedEveryDay,
-            trackedToday: trackedToday,
-          ),
-          const VerticalSpacing.medium(),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 5),
-            child: Row(
-              children: <Widget>[
-                Expanded(
-                  child: MoodData(
-                    icon: Iconsax.heart_bold,
-                    label: translations.averageMood,
-                    value: averageMoodValue,
-                  ).animate().fadeIn(
+    return Padding(
+      padding: const EdgeInsets.only(top: viewPaddingVertical),
+      child: CustomScrollView(
+        slivers: <Widget>[
+          SliverAppBar(
+            titleSpacing: 0,
+            title: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: viewPaddingHorizontal,
+                  ),
+                  child: Text(
+                    DateTime.now().getGreetingString(translations),
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  )
+                      .animate()
+                      .moveX(
+                        curve: Curves.easeOut,
+                        begin: -100,
+                        end: 0,
+                        duration: animationDuration,
+                      )
+                      .fadeIn(
+                        curve: Curves.easeIn,
                         duration: animationDuration,
                       ),
                 ),
-                const HorizontalSpacing.medium(),
-                Expanded(
-                  child: MoodData(
-                    icon: Iconsax.timer_bold,
-                    label: translations.averageWorkHours,
-                    value: averageWorkTimeValue,
-                  ).animate().fadeIn(
+                const VerticalSpacing.extraSmall(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: viewPaddingHorizontal,
+                  ),
+                  child: Text(
+                    firstName,
+                    style: Theme.of(context).textTheme.headlineMedium,
+                  )
+                      .animate()
+                      .moveX(
+                        curve: Curves.easeOut,
+                        begin: 100,
+                        end: 0,
                         duration: animationDuration,
-                        delay: animationDuration,
-                      ),
-                ),
-                const HorizontalSpacing.medium(),
-                Expanded(
-                  child: BlocBuilder<AppSettingsBloc, AppSettingsState>(
-                    buildWhen: (previous, current) =>
-                        previous.appSettingsData.currency !=
-                        current.appSettingsData.currency,
-                    builder: (context, state) {
-                      final currency =
-                          getCurrencySymbol(state.appSettingsData.currency);
-
-                      final averageRevenueValue = averageRevenue != null
-                          ? '${averageRevenue!.toFormattedString()} $currency'
-                          : '-';
-
-                      return MoodData(
-                        icon: Iconsax.money_4_bold,
-                        label: translations.averageRevenue,
-                        value: averageRevenueValue,
-                      );
-                    },
-                  ).animate().fadeIn(
+                      )
+                      .fadeIn(
+                        curve: Curves.easeIn,
                         duration: animationDuration,
-                        delay: animationDuration * 2,
                       ),
                 ),
               ],
             ),
+            centerTitle: false,
+            pinned: true,
+            elevation: 0,
           ),
-          const VerticalSpacing.large(),
-          if (moods.isNotEmpty) const _HomeMoodsHeader(),
-          _HomeMoods(moods: moods),
-          if (addExtraBottomSpace) const VerticalSpacing.extraLarge(),
+          SliverPersistentHeader(
+            pinned: true,
+            delegate: SliverDelegate(
+              minHeight: 60,
+              maxHeight: 60,
+              child: Container(
+                padding: const EdgeInsets.only(
+                  top: 25,
+                  bottom: verticalPaddingMedium,
+                ),
+                color: AppColors.backgroundColor,
+                alignment: Alignment.topLeft,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: viewPaddingHorizontal,
+                  ),
+                  child: Text(
+                    translations.weekProgress,
+                    style: Theme.of(context).textTheme.headlineSmall,
+                    maxLines: 3,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          SliverPersistentHeader(
+            pinned: true,
+            delegate: SliverDelegate(
+              minHeight: 145,
+              maxHeight: 145,
+              child: ColoredBox(
+                color: AppColors.backgroundColor,
+                child: _HomeProgress(
+                  weeklyProgress: weeklyProgress,
+                  trackedEveryDayThisWeek: trackedEveryDay,
+                  trackedToday: trackedToday,
+                ).animate().fadeIn(
+                      duration: animationDuration,
+                    ),
+              ),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: viewPaddingHorizontal + horizontalPaddingLarge,
+                    right: viewPaddingHorizontal + horizontalPaddingLarge,
+                    top: verticalPaddingMedium,
+                    bottom: verticalPaddingSmall,
+                  ),
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: MoodData(
+                          icon: Iconsax.heart_bold,
+                          label: translations.averageMood,
+                          value: averageMoodValue,
+                        ).animate().fadeIn(
+                              duration: animationDuration,
+                            ),
+                      ),
+                      const HorizontalSpacing.medium(),
+                      Expanded(
+                        child: MoodData(
+                          icon: Iconsax.timer_bold,
+                          label: translations.averageWorkHours,
+                          value: averageWorkTimeValue,
+                        ).animate().fadeIn(
+                              duration: animationDuration,
+                              delay: animationDuration,
+                            ),
+                      ),
+                      const HorizontalSpacing.medium(),
+                      Expanded(
+                        child: BlocBuilder<AppSettingsBloc, AppSettingsState>(
+                          buildWhen: (previous, current) =>
+                              previous.appSettingsData.currency !=
+                              current.appSettingsData.currency,
+                          builder: (context, state) {
+                            final currency = getCurrencySymbol(
+                              state.appSettingsData.currency,
+                            );
+
+                            final averageRevenueValue = averageRevenue != null
+                                ? '${averageRevenue!.toFormattedString()} '
+                                    '$currency'
+                                : '-';
+
+                            return MoodData(
+                              icon: Iconsax.money_4_bold,
+                              label: translations.averageRevenue,
+                              value: averageRevenueValue,
+                            );
+                          },
+                        ).animate().fadeIn(
+                              duration: animationDuration,
+                              delay: animationDuration * 2,
+                            ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          if (moods.isNotEmpty)
+            SliverPersistentHeader(
+              pinned: true,
+              delegate: SliverDelegate(
+                minHeight: 65,
+                maxHeight: 65,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: viewPaddingHorizontal,
+                  ),
+                  child: const _HomeMoodsHeader().animate().fadeIn(
+                        duration: animationDuration,
+                      ),
+                ),
+              ),
+            ),
+          SliverPadding(
+            padding: EdgeInsets.only(
+              bottom: addExtraBottomSpace
+                  ? verticalPaddingExtraExtraLarge
+                  : verticalPaddingMedium,
+            ),
+            sliver: _HomeMoods(moods: moods),
+          ),
         ],
       ),
     );

@@ -7,20 +7,36 @@ class _HomeMoods extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        for (final mood in moods)
-          TrackedMood(
-            mood: mood,
-            onTap: () => context.pushNamed(
-              RoutesNames.updateMoodFromHome,
-              extra: UpdateMoodRouteParameters(mood: mood),
+    return SliverFixedExtentList(
+      itemExtent: 80,
+      delegate: SliverChildBuilderDelegate(
+        (context, index) {
+          final mood = moods[index];
+          return Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: viewPaddingHorizontal,
             ),
-          ).animate().fadeIn(
-                duration: animationDuration,
+            child: TrackedMood(
+              mood: mood,
+              onTap: () => context.pushNamed(
+                RoutesNames.updateMoodFromHome,
+                extra: UpdateMoodRouteParameters(mood: mood),
               ),
-        const VerticalSpacing.medium(),
-      ],
+            )
+                .animate()
+                .fadeIn(
+                  curve: Curves.easeIn,
+                  duration: animationDuration,
+                )
+                .moveX(
+                  duration: animationDuration,
+                  curve: Curves.easeOut,
+                  begin: index.isOdd ? 100 : -100,
+                ),
+          );
+        },
+        childCount: moods.length,
+      ),
     );
   }
 }

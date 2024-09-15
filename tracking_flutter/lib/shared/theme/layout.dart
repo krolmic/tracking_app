@@ -1,4 +1,5 @@
 // Padding constants
+const double verticalPaddingExtraSmall = 2.5;
 const double verticalPaddingSmall = 5;
 const double verticalPaddingMedium = 10;
 const double verticalPaddingLarge = 15;
