@@ -4,9 +4,7 @@ final _homeRoute = GoRoute(
   name: RoutesNames.home,
   path: '/${RoutesNames.home}',
   pageBuilder: (context, state) => const NoTransitionPage(
-    child: AuthenticatedView(
-      child: HomeScreen(),
-    ),
+    child: HomeScreen(),
   ),
   routes: [
     GoRoute(
