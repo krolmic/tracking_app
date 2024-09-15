@@ -232,53 +232,60 @@ class _GraphView extends StatelessWidget {
                   }
                   final moodsState = state.moodsState;
 
-                  return Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: MoodData(
-                          icon: Iconsax.heart_bold,
-                          label: translations.greatestMood,
-                          value: moodsState.greatestMoodValue != null
-                              ? moodsState.greatestMoodValue!.toString()
-                              : '-',
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: horizontalPaddingLarge,
+                    ),
+                    child: Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: MoodData(
+                            icon: Iconsax.heart_bold,
+                            label: translations.greatestMood,
+                            value: moodsState.greatestMoodValue != null
+                                ? moodsState.greatestMoodValue!.toString()
+                                : '-',
+                          ),
                         ),
-                      ),
-                      const HorizontalSpacing.medium(),
-                      Expanded(
-                        child: MoodData(
-                          icon: Iconsax.timer_bold,
-                          label: translations.greatestWorkTime,
-                          value: moodsState.greatestWorkTime != null
-                              ? moodsState.greatestWorkTime!.toFormattedString()
-                              : '-',
+                        const HorizontalSpacing.medium(),
+                        Expanded(
+                          child: MoodData(
+                            icon: Iconsax.timer_bold,
+                            label: translations.greatestWorkTime,
+                            value: moodsState.greatestWorkTime != null
+                                ? moodsState.greatestWorkTime!
+                                    .toFormattedString()
+                                : '-',
+                          ),
                         ),
-                      ),
-                      const HorizontalSpacing.medium(),
-                      Expanded(
-                        child: BlocBuilder<AppSettingsBloc, AppSettingsState>(
-                          buildWhen: (previous, current) =>
-                              previous.appSettingsData.currency !=
-                              current.appSettingsData.currency,
-                          builder: (context, state) {
-                            final currencySymbol = getCurrencySymbol(
-                              state.appSettingsData.currency,
-                            );
-                            final greatestRevenue =
-                                moodsState.greatestRevenue != null
-                                    ? '${moodsState.greatestRevenue!.toInt()} '
-                                        '$currencySymbol'
-                                    : '-';
+                        const HorizontalSpacing.medium(),
+                        Expanded(
+                          child: BlocBuilder<AppSettingsBloc, AppSettingsState>(
+                            buildWhen: (previous, current) =>
+                                previous.appSettingsData.currency !=
+                                current.appSettingsData.currency,
+                            builder: (context, state) {
+                              final currencySymbol = getCurrencySymbol(
+                                state.appSettingsData.currency,
+                              );
+                              final greatestRevenue = moodsState
+                                          .greatestRevenue !=
+                                      null
+                                  ? '${moodsState.greatestRevenue!.toInt()} '
+                                      '$currencySymbol'
+                                  : '-';
 
-                            return MoodData(
-                              icon: Iconsax.money_4_bold,
-                              label: translations.greatestRevenue,
-                              value: greatestRevenue,
-                            );
-                          },
+                              return MoodData(
+                                icon: Iconsax.money_4_bold,
+                                label: translations.greatestRevenue,
+                                value: greatestRevenue,
+                              );
+                            },
+                          ),
                         ),
-                      ),
-                    ],
-                  ).animate().fadeIn(duration: animationDuration);
+                      ],
+                    ).animate().fadeIn(duration: animationDuration),
+                  );
                 },
               ),
             ),
