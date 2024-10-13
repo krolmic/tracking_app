@@ -6,12 +6,14 @@ class _WeeksSelection extends StatelessWidget {
     required this.currentWeek,
     required this.selectedWeek,
     required this.onWeekSelected,
+    required this.disableWeeks,
   });
 
   final int numberOfWeeks;
   final int currentWeek;
   final int selectedWeek;
   final void Function(int) onWeekSelected;
+  final bool disableWeeks;
 
   static const double weekWidth = 75;
 
@@ -37,7 +39,7 @@ class _WeeksSelection extends StatelessWidget {
         itemBuilder: (context, index) {
           final weekIndex = index + 1;
           final isCurrentWeek = weekIndex == selectedWeek;
-          final isDisabled = weekIndex > currentWeek;
+          final isDisabled = disableWeeks && weekIndex > currentWeek;
 
           Color textColor;
           if (isCurrentWeek) {

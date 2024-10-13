@@ -150,6 +150,7 @@ class _GraphView extends StatelessWidget {
                   return _MonthsSelection(
                     currentMonth: dateTimeNow.month,
                     selectedMonth: setTargetDate.month,
+                    disableMonths: setTargetDate.year == dateTimeNow.year,
                     onMonthSelected: (month) {
                       context.read<GraphBloc>().add(
                             GraphEvent.targetDateChanged(
@@ -163,6 +164,7 @@ class _GraphView extends StatelessWidget {
                     numberOfWeeks: setTargetDate.numberOfWeeksInYear,
                     currentWeek: dateTimeNow.weekNumber,
                     selectedWeek: setTargetDate.weekNumber,
+                    disableWeeks: setTargetDate.year == dateTimeNow.year,
                     onWeekSelected: (week) {
                       context.read<GraphBloc>().add(
                             GraphEvent.targetDateChanged(

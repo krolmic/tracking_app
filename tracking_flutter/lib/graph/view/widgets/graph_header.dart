@@ -31,59 +31,81 @@ class _GraphHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     final translations = AppLocalizations.of(context)!;
 
-    return Row(
-      children: [
-        Text(
-          DateTime.now().year.toString(),
-          style: Theme.of(context).textTheme.headlineSmall,
-        ),
-        const Spacer(),
-        IconButton(
-          color: AppColors.primarySwatch,
-          icon: Icon(
-            Iconsax.setting_4_outline,
-            size: Theme.of(context).appBarTheme.iconTheme!.size,
-          ),
-          onPressed: () {
-            RevenueCatUIHelper.showPaywallIfNecessary(
-              requiresSubscriptionCallback: () async {
-                await showSettingsDialog(context);
+    return BlocBuilder<GraphBloc, GraphState>(
+      buildWhen: (previous, current) =>
+          previous.targetDate.date.year != current.targetDate.date.year,
+      builder: (context, state) {
+        return Row(
+          children: [
+            Text(
+              state.targetDate.date.year.toString(),
+              style: Theme.of(context).textTheme.headlineSmall,
+            ),
+            const Spacer(),
+            IconButton(
+              color: AppColors.primarySwatch,
+              icon: Icon(
+                Iconsax.setting_4_outline,
+                size: Theme.of(context).appBarTheme.iconTheme!.size,
+              ),
+              onPressed: () {
+                RevenueCatUIHelper.showPaywallIfNecessary(
+                  requiresSubscriptionCallback: () async {
+                    await showSettingsDialog(context);
+                  },
+                  onPurchased: () => showToast(
+                    context: context,
+                    message: translations.subscriptionPurchaseSuccessful,
+                  ),
+                  onRestored: () => showToast(
+                    context: context,
+                    message: translations.subscriptionPurchaseRestored,
+                  ),
+                  onError: () => showToast(
+                    context: context,
+                    message: translations.subscriptionPurchaseFailed,
+                    isError: true,
+                  ),
+                );
               },
-              onPurchased: () => showToast(
-                context: context,
-                message: translations.subscriptionPurchaseSuccessful,
+            ),
+            const HorizontalSpacing.large(),
+            IconButton(
+              color: AppColors.primarySwatch,
+              icon: Icon(
+                Iconsax.arrow_left_2_outline,
+                size: Theme.of(context).appBarTheme.iconTheme!.size,
               ),
-              onRestored: () => showToast(
-                context: context,
-                message: translations.subscriptionPurchaseRestored,
+              onPressed: () {
+                context.read<GraphBloc>().add(
+                      GraphEvent.targetDateChanged(
+                        date: state.targetDate.date.previousYear.add(
+                          const Duration(days: 3),
+                        ),
+                      ),
+                    );
+              },
+            ),
+            const HorizontalSpacing.large(),
+            IconButton(
+              color: AppColors.primarySwatch,
+              icon: Icon(
+                Iconsax.arrow_right_3_outline,
+                size: Theme.of(context).appBarTheme.iconTheme!.size,
               ),
-              onError: () => showToast(
-                context: context,
-                message: translations.subscriptionPurchaseFailed,
-                isError: true,
-              ),
-            );
-          },
-        ),
-        const HorizontalSpacing.large(),
-        IconButton(
-          color: AppColors.primarySwatch,
-          icon: Icon(
-            Iconsax.arrow_left_2_outline,
-            size: Theme.of(context).appBarTheme.iconTheme!.size,
-          ),
-          onPressed: () {},
-        ),
-        const HorizontalSpacing.large(),
-        IconButton(
-          color: AppColors.primarySwatch,
-          icon: Icon(
-            Iconsax.arrow_right_3_outline,
-            size: Theme.of(context).appBarTheme.iconTheme!.size,
-          ),
-          onPressed: () {},
-        ),
-      ],
+              onPressed: () {
+                context.read<GraphBloc>().add(
+                      GraphEvent.targetDateChanged(
+                        date: state.targetDate.date.nextYear.add(
+                          const Duration(days: 3),
+                        ),
+                      ),
+                    );
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

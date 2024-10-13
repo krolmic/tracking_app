@@ -20,6 +20,10 @@ extension DateTimeX on DateTime {
 
   DateTime get nextMonth => endOfMonth.add(const Duration(days: 1));
 
+  DateTime get previousYear => DateTime(year - 1);
+
+  DateTime get nextYear => DateTime(year + 1);
+
   DateTime get startOfMonth => DateTime(year, month);
 
   DateTime get endOfMonth => DateTime(year, month + 1, 0, 23, 59, 59, 999, 999);

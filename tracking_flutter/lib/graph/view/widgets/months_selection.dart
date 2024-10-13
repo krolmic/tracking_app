@@ -4,12 +4,14 @@ class _MonthsSelection extends StatelessWidget {
   const _MonthsSelection({
     required this.currentMonth,
     required this.selectedMonth,
+    required this.disableMonths,
     required this.onMonthSelected,
   });
 
   final int currentMonth;
   final int selectedMonth;
   final void Function(int) onMonthSelected;
+  final bool disableMonths;
 
   static const double monthWidth = 70;
 
@@ -35,7 +37,7 @@ class _MonthsSelection extends StatelessWidget {
         itemBuilder: (context, index) {
           final monthIndex = index + 1;
           final isCurrentMonth = monthIndex == selectedMonth;
-          final isDisabled = monthIndex > currentMonth;
+          final isDisabled = disableMonths && monthIndex > currentMonth;
 
           Color textColor;
           if (isCurrentMonth) {
