@@ -31,57 +31,59 @@ class _GraphHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     final translations = AppLocalizations.of(context)!;
 
-    return SizedBox(
-      height: 30,
-      child: Stack(
-        children: [
-          Positioned.fill(
-            child: Center(
-              child: Text(
-                DateTime.now().year.toString(),
-                style: Theme.of(context).textTheme.headlineSmall,
-              ),
-            ),
+    return Row(
+      children: [
+        Text(
+          DateTime.now().year.toString(),
+          style: Theme.of(context).textTheme.headlineSmall,
+        ),
+        const Spacer(),
+        IconButton(
+          color: AppColors.primarySwatch,
+          icon: Icon(
+            Iconsax.setting_4_outline,
+            size: Theme.of(context).appBarTheme.iconTheme!.size,
           ),
-          Positioned.fill(
-            child: Align(
-              alignment: Alignment.centerRight,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: horizontalPaddingMedium,
-                ),
-                child: IconButton(
-                  color: AppColors.primarySwatch,
-                  icon: Icon(
-                    Iconsax.setting_4_outline,
-                    size: Theme.of(context).appBarTheme.iconTheme!.size,
-                  ),
-                  onPressed: () {
-                    RevenueCatUIHelper.showPaywallIfNecessary(
-                      requiresSubscriptionCallback: () async {
-                        await showSettingsDialog(context);
-                      },
-                      onPurchased: () => showToast(
-                        context: context,
-                        message: translations.subscriptionPurchaseSuccessful,
-                      ),
-                      onRestored: () => showToast(
-                        context: context,
-                        message: translations.subscriptionPurchaseRestored,
-                      ),
-                      onError: () => showToast(
-                        context: context,
-                        message: translations.subscriptionPurchaseFailed,
-                        isError: true,
-                      ),
-                    );
-                  },
-                ),
+          onPressed: () {
+            RevenueCatUIHelper.showPaywallIfNecessary(
+              requiresSubscriptionCallback: () async {
+                await showSettingsDialog(context);
+              },
+              onPurchased: () => showToast(
+                context: context,
+                message: translations.subscriptionPurchaseSuccessful,
               ),
-            ),
+              onRestored: () => showToast(
+                context: context,
+                message: translations.subscriptionPurchaseRestored,
+              ),
+              onError: () => showToast(
+                context: context,
+                message: translations.subscriptionPurchaseFailed,
+                isError: true,
+              ),
+            );
+          },
+        ),
+        const HorizontalSpacing.large(),
+        IconButton(
+          color: AppColors.primarySwatch,
+          icon: Icon(
+            Iconsax.arrow_left_2_outline,
+            size: Theme.of(context).appBarTheme.iconTheme!.size,
           ),
-        ],
-      ),
+          onPressed: () {},
+        ),
+        const HorizontalSpacing.large(),
+        IconButton(
+          color: AppColors.primarySwatch,
+          icon: Icon(
+            Iconsax.arrow_right_3_outline,
+            size: Theme.of(context).appBarTheme.iconTheme!.size,
+          ),
+          onPressed: () {},
+        ),
+      ],
     );
   }
 }

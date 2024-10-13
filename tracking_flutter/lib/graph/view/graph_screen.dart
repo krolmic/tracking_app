@@ -133,7 +133,7 @@ class _GraphView extends StatelessWidget {
             const VerticalSpacing.large(),
             const Padding(
               padding: EdgeInsets.symmetric(
-                horizontal: horizontalPaddingSmall,
+                horizontal: viewPaddingHorizontal + horizontalPaddingLarge,
               ),
               child: _GraphHeader(),
             ),
@@ -175,7 +175,7 @@ class _GraphView extends StatelessWidget {
                 }
               },
             ),
-            const VerticalSpacing.extraLarge(),
+            const VerticalSpacing.extraExtraLarge(),
             Container(
               padding:
                   const EdgeInsets.symmetric(horizontal: viewPaddingHorizontal),
