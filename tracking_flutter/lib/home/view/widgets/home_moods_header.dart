@@ -17,7 +17,7 @@ class _HomeMoodsHeader extends StatelessWidget {
           stops: const [0.9, 1.0],
           colors: <Color>[
             AppColors.backgroundColor,
-            Colors.white.withOpacity(0)
+            Colors.white.withOpacity(0),
           ],
         ),
       ),
