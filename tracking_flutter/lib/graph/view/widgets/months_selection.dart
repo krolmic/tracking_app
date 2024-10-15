@@ -33,7 +33,7 @@ class _MonthsSelectionState extends State<_MonthsSelection> {
     super.initState();
 
     scrollController = ScrollController(
-      initialScrollOffset: getScrollOffset(),
+      initialScrollOffset: _getScrollOffset(),
     );
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -56,7 +56,7 @@ class _MonthsSelectionState extends State<_MonthsSelection> {
   }
 
   void _scrollToSelectedMonth() {
-    final scrollOffset = getScrollOffset();
+    final scrollOffset = _getScrollOffset();
 
     if (scrollController.hasClients &&
         scrollOffset != scrollController.offset) {
@@ -162,7 +162,7 @@ class _MonthsSelectionState extends State<_MonthsSelection> {
     );
   }
 
-  double getScrollOffset() {
+  double _getScrollOffset() {
     final selectedMonthIndex = widget.selectedMonth - 1;
     return math
         .max(

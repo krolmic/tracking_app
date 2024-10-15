@@ -32,7 +32,7 @@ class _WeeksSelectionState extends State<_WeeksSelection> {
     super.initState();
 
     scrollController = ScrollController(
-      initialScrollOffset: getScrollOffset(),
+      initialScrollOffset: _getScrollOffset(),
     );
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -55,7 +55,7 @@ class _WeeksSelectionState extends State<_WeeksSelection> {
   }
 
   void _scrollToSelectedWeek() {
-    final scrollOffset = getScrollOffset();
+    final scrollOffset = _getScrollOffset();
 
     if (scrollController.hasClients) {
       scrollController.animateTo(
@@ -159,7 +159,7 @@ class _WeeksSelectionState extends State<_WeeksSelection> {
     );
   }
 
-  double getScrollOffset() {
+  double _getScrollOffset() {
     final selectedWeekIndex = widget.selectedWeek - 1;
     return math
         .max(
