@@ -35,6 +35,9 @@ class _GraphHeader extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.targetDate.date.year != current.targetDate.date.year,
       builder: (context, state) {
+        final nextButtonDisabled =
+            state.targetDate.date.year == DateTime.now().year;
+
         return Row(
           children: [
             Text(
@@ -93,15 +96,17 @@ class _GraphHeader extends StatelessWidget {
                 Iconsax.arrow_right_3_outline,
                 size: Theme.of(context).appBarTheme.iconTheme!.size,
               ),
-              onPressed: () {
-                context.read<GraphBloc>().add(
-                      GraphEvent.targetDateChanged(
-                        date: state.targetDate.date.nextYear.add(
-                          const Duration(days: 3),
-                        ),
-                      ),
-                    );
-              },
+              onPressed: nextButtonDisabled
+                  ? null
+                  : () {
+                      context.read<GraphBloc>().add(
+                            GraphEvent.targetDateChanged(
+                              date: state.targetDate.date.nextYear.add(
+                                const Duration(days: 3),
+                              ),
+                            ),
+                          );
+                    },
             ),
           ],
         );
