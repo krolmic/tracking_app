@@ -120,7 +120,6 @@ class GraphBloc extends Bloc<GraphEvent, GraphState> {
         settings: state.settings.copyWith(
           timeRangeMode: mode,
         ),
-        targetDate: const GraphTargetDateState.initial(),
       ),
     );
     await _loadMoods(emit);
