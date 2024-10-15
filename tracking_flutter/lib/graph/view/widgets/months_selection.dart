@@ -1,32 +1,82 @@
 part of '../graph_screen.dart';
 
-class _MonthsSelection extends StatelessWidget {
+class _MonthsSelection extends StatefulWidget {
   const _MonthsSelection({
     required this.currentMonth,
     required this.selectedMonth,
     required this.disableMonths,
     required this.onMonthSelected,
+    required this.currentYear,
   });
 
   final int currentMonth;
   final int selectedMonth;
   final void Function(int) onMonthSelected;
   final bool disableMonths;
+  final int currentYear;
 
-  static const double monthWidth = 70;
+  static const double monthWidth = 75;
+
+  static const int firstMonthIndex = 0;
+  static const int lastMonthIndex = 11;
+
+  @override
+  State<_MonthsSelection> createState() => _MonthsSelectionState();
+}
+
+class _MonthsSelectionState extends State<_MonthsSelection> {
+  late ScrollController scrollController;
+  int? previousYear;
+
+  @override
+  void initState() {
+    super.initState();
+
+    scrollController = ScrollController(
+      initialScrollOffset: getScrollOffset(),
+    );
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _scrollToSelectedMonth();
+      previousYear = widget.currentYear;
+    });
+  }
+
+  @override
+  void didUpdateWidget(covariant _MonthsSelection oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    // Scroll to selected month if year has changed
+    if (widget.currentYear != previousYear) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _scrollToSelectedMonth();
+      });
+      previousYear = widget.currentYear;
+    }
+  }
+
+  void _scrollToSelectedMonth() {
+    final scrollOffset = getScrollOffset();
+
+    if (scrollController.hasClients &&
+        scrollOffset != scrollController.offset) {
+      scrollController.animateTo(
+        scrollOffset,
+        duration: animationDuration,
+        curve: Curves.easeInOut,
+      );
+    }
+  }
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final translations = AppLocalizations.of(context)!;
-
-    final selectedMonthIndex = selectedMonth - 1;
-
-    // Scroll to the month before the selected month so that
-    // user is able to select it without scrolling
-    final scrollController = ScrollController(
-      initialScrollOffset:
-          (selectedMonthIndex - 1) * (monthWidth + horizontalPaddingSmall),
-    );
 
     return SizedBox(
       height: 50,
@@ -36,8 +86,9 @@ class _MonthsSelection extends StatelessWidget {
         itemCount: 12,
         itemBuilder: (context, index) {
           final monthIndex = index + 1;
-          final isCurrentMonth = monthIndex == selectedMonth;
-          final isDisabled = disableMonths && monthIndex > currentMonth;
+          final isCurrentMonth = monthIndex == widget.selectedMonth;
+          final isDisabled =
+              widget.disableMonths && monthIndex > widget.currentMonth;
 
           Color textColor;
           if (isCurrentMonth) {
@@ -62,7 +113,7 @@ class _MonthsSelection extends StatelessWidget {
                 : () {
                     RevenueCatUIHelper.showPaywallIfNecessary(
                       requiresSubscriptionCallback: () =>
-                          onMonthSelected(monthIndex),
+                          widget.onMonthSelected(monthIndex),
                       onPurchased: () => showToast(
                         context: context,
                         message: translations.subscriptionPurchaseSuccessful,
@@ -79,11 +130,13 @@ class _MonthsSelection extends StatelessWidget {
                     );
                   },
             child: Container(
-              width: monthWidth,
+              width: _MonthsSelection.monthWidth,
               alignment: Alignment.center,
               margin: EdgeInsets.only(
-                left: index == 0 ? viewPaddingHorizontal : 0,
-                right: index == 11
+                left: index == _MonthsSelection.firstMonthIndex
+                    ? viewPaddingHorizontal
+                    : 0,
+                right: index == _MonthsSelection.lastMonthIndex
                     ? viewPaddingHorizontal
                     : horizontalPaddingSmall,
                 top: horizontalPaddingSmall,
@@ -97,7 +150,7 @@ class _MonthsSelection extends StatelessWidget {
                 getMonthName(monthIndex),
                 style: Theme.of(context).textTheme.bodySmall!.copyWith(
                       color: textColor,
-                      fontWeight: monthIndex == selectedMonth
+                      fontWeight: monthIndex == widget.selectedMonth
                           ? FontWeight.bold
                           : FontWeight.normal,
                     ),
@@ -107,6 +160,17 @@ class _MonthsSelection extends StatelessWidget {
         },
       ),
     );
+  }
+
+  double getScrollOffset() {
+    final selectedMonthIndex = widget.selectedMonth - 1;
+    return math
+        .max(
+          0,
+          (selectedMonthIndex - 1) *
+              (_MonthsSelection.monthWidth + horizontalPaddingSmall),
+        )
+        .toDouble();
   }
 
   String getMonthName(int month) {
