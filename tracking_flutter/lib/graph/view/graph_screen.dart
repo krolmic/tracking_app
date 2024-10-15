@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -165,6 +167,7 @@ class _GraphView extends StatelessWidget {
                     currentWeek: dateTimeNow.weekNumber,
                     selectedWeek: setTargetDate.weekNumber,
                     disableWeeks: setTargetDate.year == dateTimeNow.year,
+                    currentYear: setTargetDate.year,
                     onWeekSelected: (week) {
                       context.read<GraphBloc>().add(
                             GraphEvent.targetDateChanged(
