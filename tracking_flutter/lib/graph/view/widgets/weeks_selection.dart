@@ -1,43 +1,92 @@
 part of '../graph_screen.dart';
 
-class _WeeksSelection extends StatelessWidget {
+class _WeeksSelection extends StatefulWidget {
   const _WeeksSelection({
     required this.numberOfWeeks,
     required this.currentWeek,
     required this.selectedWeek,
     required this.onWeekSelected,
+    required this.disableWeeks,
+    required this.currentYear,
   });
 
   final int numberOfWeeks;
   final int currentWeek;
   final int selectedWeek;
   final void Function(int) onWeekSelected;
+  final bool disableWeeks;
+  final int currentYear;
 
   static const double weekWidth = 75;
 
   @override
+  State<_WeeksSelection> createState() => _WeeksSelectionState();
+}
+
+class _WeeksSelectionState extends State<_WeeksSelection> {
+  late ScrollController scrollController;
+  int? previousYear;
+
+  @override
+  void initState() {
+    super.initState();
+
+    scrollController = ScrollController(
+      initialScrollOffset: _getSelectedWeekScrollOffset(),
+    );
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _scrollToSelectedWeek();
+      previousYear = widget.currentYear;
+    });
+  }
+
+  @override
+  void didUpdateWidget(covariant _WeeksSelection oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    // Scroll to selected week if year has changed
+    if (widget.currentYear != previousYear) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _scrollToSelectedWeek();
+      });
+      previousYear = widget.currentYear;
+    }
+  }
+
+  void _scrollToSelectedWeek() {
+    final scrollOffset = _getSelectedWeekScrollOffset();
+
+    if (scrollController.hasClients) {
+      scrollController.animateTo(
+        scrollOffset,
+        duration: animationDuration,
+        curve: Curves.easeInOut,
+      );
+    }
+  }
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final translations = AppLocalizations.of(context)!;
-
-    final selectedWeekIndex = selectedWeek - 1;
-
-    // Scroll to the month before the selected week so that
-    // user is able to select it without scrolling
-    final scrollController = ScrollController(
-      initialScrollOffset:
-          (selectedWeekIndex - 1) * (weekWidth + horizontalPaddingSmall),
-    );
 
     return SizedBox(
       height: 50,
       child: ListView.builder(
         controller: scrollController,
         scrollDirection: Axis.horizontal,
-        itemCount: numberOfWeeks,
+        itemCount: widget.numberOfWeeks,
         itemBuilder: (context, index) {
           final weekIndex = index + 1;
-          final isCurrentWeek = weekIndex == selectedWeek;
-          final isDisabled = weekIndex > currentWeek;
+          final isCurrentWeek = weekIndex == widget.selectedWeek;
+          final isDisabled =
+              widget.disableWeeks && weekIndex > widget.currentWeek;
 
           Color textColor;
           if (isCurrentWeek) {
@@ -62,7 +111,7 @@ class _WeeksSelection extends StatelessWidget {
                 : () {
                     RevenueCatUIHelper.showPaywallIfNecessary(
                       requiresSubscriptionCallback: () =>
-                          onWeekSelected(weekIndex),
+                          widget.onWeekSelected(weekIndex),
                       onPurchased: () => showToast(
                         context: context,
                         message: translations.subscriptionPurchaseSuccessful,
@@ -79,10 +128,10 @@ class _WeeksSelection extends StatelessWidget {
                     );
                   },
             child: Container(
-              width: weekWidth,
+              width: _WeeksSelection.weekWidth,
               margin: EdgeInsets.only(
                 left: weekIndex == 1 ? viewPaddingHorizontal : 0,
-                right: weekIndex == numberOfWeeks
+                right: weekIndex == widget.numberOfWeeks
                     ? viewPaddingHorizontal
                     : horizontalPaddingSmall,
                 top: horizontalPaddingSmall,
@@ -97,7 +146,7 @@ class _WeeksSelection extends StatelessWidget {
                   translations.calendarWeek(weekIndex),
                   style: Theme.of(context).textTheme.bodySmall!.copyWith(
                         color: textColor,
-                        fontWeight: weekIndex == selectedWeek
+                        fontWeight: weekIndex == widget.selectedWeek
                             ? FontWeight.bold
                             : FontWeight.normal,
                       ),
@@ -108,5 +157,16 @@ class _WeeksSelection extends StatelessWidget {
         },
       ),
     );
+  }
+
+  double _getSelectedWeekScrollOffset() {
+    final selectedWeekIndex = widget.selectedWeek - 1;
+    return math
+        .max(
+          0,
+          (selectedWeekIndex - 1) *
+              (_WeeksSelection.weekWidth + horizontalPaddingSmall),
+        )
+        .toDouble();
   }
 }

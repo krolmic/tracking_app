@@ -4,21 +4,25 @@ import 'package:jiffy/jiffy.dart';
 
 extension DateTimeX on DateTime {
   DateTime fromWeekNumber(int weekNumber) {
-    final firstDayOfYear = DateTime(year);
+    // Find the first Thursday of the year.
+    var firstThursday = DateTime(year);
+    while (firstThursday.weekday != DateTime.thursday) {
+      firstThursday = firstThursday.add(const Duration(days: 1));
+    }
 
-    final daysSinceFirstDayOfYear = difference(firstDayOfYear).inDays;
-
-    final firstDayOfGivenWeek =
-        firstDayOfYear.add(Duration(days: (weekNumber - 1) * 7));
-
-    return firstDayOfGivenWeek.subtract(
-      Duration(days: daysSinceFirstDayOfYear),
-    );
+    // Calculate the date of the week.
+    // Subtraction of 3 days at the end moves the date
+    // to the Monday of the desired week.
+    return firstThursday.add(Duration(days: (weekNumber - 1) * 7 - 3));
   }
 
   DateTime get previousMonth => startOfMonth.subtract(const Duration(days: 1));
 
   DateTime get nextMonth => endOfMonth.add(const Duration(days: 1));
+
+  DateTime get previousYear => DateTime(year - 1);
+
+  DateTime get nextYear => DateTime(year + 1);
 
   DateTime get startOfMonth => DateTime(year, month);
 

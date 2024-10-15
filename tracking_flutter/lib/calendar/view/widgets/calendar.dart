@@ -26,7 +26,7 @@ class _CalendarTheme {
     color: AppColors.darkBlue,
   );
 
-  static const calendarPrevAndNextButtonsColor = AppColors.grey;
+  static const calendarPrevAndNextButtonsColor = AppColors.primarySwatch;
 
   static const todayButtonColor = AppColors.primarySwatch;
 
@@ -251,50 +251,29 @@ class _CalendarHeader extends StatelessWidget {
           style: Theme.of(context).textTheme.headlineSmall,
         ),
         const Spacer(),
-        Material(
-          color: Colors.transparent,
-          child: InkWell(
-            onTap: () async {
-              await onButtonPressed(
-                date: targetMonthDate.previousMonth,
-                context: context,
-              );
-            },
-            borderRadius: BorderRadius.circular(20),
-            child: Container(
-              alignment: Alignment.center,
-              padding: const EdgeInsets.only(
-                left: 7,
-                right: 8,
-                top: 8,
-                bottom: 8,
-              ),
-              child: Icon(
-                Iconsax.arrow_left_2_outline,
-                color: _CalendarTheme.calendarPrevAndNextButtonsColor,
-                size: Theme.of(context).appBarTheme.iconTheme!.size,
-              ),
-            ),
+        IconButton(
+          color: _CalendarTheme.calendarPrevAndNextButtonsColor,
+          icon: Icon(
+            Iconsax.arrow_left_2_outline,
+            size: Theme.of(context).appBarTheme.iconTheme!.size,
           ),
-        ),
-        const HorizontalSpacing.extraLarge(),
-        Material(
-          color: Colors.transparent,
-          child: InkWell(
-            onTap: () => onButtonPressed(
-              date: targetMonthDate.nextMonth,
+          onPressed: () async {
+            await onButtonPressed(
+              date: targetMonthDate.previousMonth,
               context: context,
-            ),
-            borderRadius: BorderRadius.circular(20),
-            child: Container(
-              alignment: Alignment.center,
-              padding: const EdgeInsets.all(8),
-              child: Icon(
-                Iconsax.arrow_right_3_outline,
-                color: _CalendarTheme.calendarPrevAndNextButtonsColor,
-                size: Theme.of(context).appBarTheme.iconTheme!.size,
-              ),
-            ),
+            );
+          },
+        ),
+        const HorizontalSpacing.large(),
+        IconButton(
+          color: _CalendarTheme.calendarPrevAndNextButtonsColor,
+          icon: Icon(
+            Iconsax.arrow_right_3_outline,
+            size: Theme.of(context).appBarTheme.iconTheme!.size,
+          ),
+          onPressed: () => onButtonPressed(
+            date: targetMonthDate.nextMonth,
+            context: context,
           ),
         ),
       ],

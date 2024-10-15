@@ -7,8 +7,8 @@ void main() {
   group('DateTimeX', () {
     test('fromWeekNumber returns correct date', () {
       final date = DateTime(2023);
-      expect(date.fromWeekNumber(1), DateTime(2023));
-      expect(date.fromWeekNumber(2), DateTime(2023, 1, 8));
+      expect(date.fromWeekNumber(1), DateTime(2023, 1, 2));
+      expect(date.fromWeekNumber(2), DateTime(2023, 1, 9));
     });
 
     test('startOfMonth returns correct date', () {

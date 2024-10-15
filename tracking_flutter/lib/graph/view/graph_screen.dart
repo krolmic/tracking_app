@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -133,7 +135,7 @@ class _GraphView extends StatelessWidget {
             const VerticalSpacing.large(),
             const Padding(
               padding: EdgeInsets.symmetric(
-                horizontal: horizontalPaddingSmall,
+                horizontal: viewPaddingHorizontal + horizontalPaddingLarge,
               ),
               child: _GraphHeader(),
             ),
@@ -150,6 +152,8 @@ class _GraphView extends StatelessWidget {
                   return _MonthsSelection(
                     currentMonth: dateTimeNow.month,
                     selectedMonth: setTargetDate.month,
+                    disableMonths: setTargetDate.year == dateTimeNow.year,
+                    currentYear: setTargetDate.year,
                     onMonthSelected: (month) {
                       context.read<GraphBloc>().add(
                             GraphEvent.targetDateChanged(
@@ -163,6 +167,8 @@ class _GraphView extends StatelessWidget {
                     numberOfWeeks: setTargetDate.numberOfWeeksInYear,
                     currentWeek: dateTimeNow.weekNumber,
                     selectedWeek: setTargetDate.weekNumber,
+                    disableWeeks: setTargetDate.year == dateTimeNow.year,
+                    currentYear: setTargetDate.year,
                     onWeekSelected: (week) {
                       context.read<GraphBloc>().add(
                             GraphEvent.targetDateChanged(
@@ -175,7 +181,7 @@ class _GraphView extends StatelessWidget {
                 }
               },
             ),
-            const VerticalSpacing.extraLarge(),
+            const VerticalSpacing.extraExtraLarge(),
             Container(
               padding:
                   const EdgeInsets.symmetric(horizontal: viewPaddingHorizontal),
