@@ -128,27 +128,27 @@ PODS:
   - PromisesObjC (2.4.0)
   - PromisesSwift (2.4.0):
     - PromisesObjC (= 2.4.0)
-  - purchases_flutter (8.1.1):
+  - purchases_flutter (8.4.1):
     - Flutter
-    - PurchasesHybridCommon (= 13.2.0)
-  - purchases_ui_flutter (8.1.1):
+    - PurchasesHybridCommon (= 13.15.1)
+  - purchases_ui_flutter (8.4.1):
     - Flutter
-    - PurchasesHybridCommonUI (= 13.2.0)
-  - PurchasesHybridCommon (13.2.0):
-    - RevenueCat (= 5.3.1)
-  - PurchasesHybridCommonUI (13.2.0):
-    - PurchasesHybridCommon (= 13.2.0)
-    - RevenueCatUI (= 5.3.1)
-  - RevenueCat (5.3.1)
-  - RevenueCatUI (5.3.1):
-    - RevenueCat (= 5.3.1)
+    - PurchasesHybridCommonUI (= 13.15.1)
+  - PurchasesHybridCommon (13.15.1):
+    - RevenueCat (= 5.14.5)
+  - PurchasesHybridCommonUI (13.15.1):
+    - PurchasesHybridCommon (= 13.15.1)
+    - RevenueCatUI (= 5.14.5)
+  - RevenueCat (5.14.5)
+  - RevenueCatUI (5.14.5):
+    - RevenueCat (= 5.14.5)
   - SDWebImage (5.20.0):
     - SDWebImage/Core (= 5.20.0)
   - SDWebImage/Core (5.20.0)
   - shared_preferences_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
-  - sqflite (0.0.3):
+  - sqflite_darwin (0.0.4):
     - Flutter
     - FlutterMacOS
   - SwiftyGif (5.4.5)
@@ -184,7 +184,7 @@ DEPENDENCIES:
   - purchases_flutter (from `.symlinks/plugins/purchases_flutter/ios`)
   - purchases_ui_flutter (from `.symlinks/plugins/purchases_ui_flutter/ios`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
-  - sqflite (from `.symlinks/plugins/sqflite/darwin`)
+  - sqflite_darwin (from `.symlinks/plugins/sqflite_darwin/darwin`)
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
   - video_player_avfoundation (from `.symlinks/plugins/video_player_avfoundation/darwin`)
   - wakelock_plus (from `.symlinks/plugins/wakelock_plus/ios`)
@@ -254,8 +254,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/purchases_ui_flutter/ios"
   shared_preferences_foundation:
     :path: ".symlinks/plugins/shared_preferences_foundation/darwin"
-  sqflite:
-    :path: ".symlinks/plugins/sqflite/darwin"
+  sqflite_darwin:
+    :path: ".symlinks/plugins/sqflite_darwin/darwin"
   url_launcher_ios:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
   video_player_avfoundation:
@@ -269,7 +269,7 @@ SPEC CHECKSUMS:
   amplify_auth_cognito: b76a0e367489da2b9a3c6e5a8ec74a72a0a7cc2f
   amplify_secure_storage: ede2a5027299bab196b8baa030ed3f4cf50ce9a9
   audio_session: 088d2483ebd1dc43f51d253d4a1c517d9a2e7207
-  connectivity_plus: ddd7f30999e1faaef5967c23d5b6d503d10434db
+  connectivity_plus: 18382e7311ba19efcaee94442b23b32507b20695
   device_info_plus: 97af1d7e84681a90d0693e63169a5d50e0839a0d
   DKImagePickerController: 946cec48c7873164274ecc4624d19e3da4c1ef3c
   DKPhotoGallery: b3834fecb755ee09a593d7c9e389d8b5d6deed60
@@ -293,24 +293,24 @@ SPEC CHECKSUMS:
   image_picker_ios: c560581cceedb403a6ff17f2f816d7fea1421fc1
   just_audio: baa7252489dbcf47a4c7cc9ca663e9661c99aafa
   nanopb: fad817b59e0457d11a5dfbde799381cd727c1275
-  package_info_plus: 58f0028419748fad15bf008b270aaa8e54380b1c
+  package_info_plus: c0502532a26c7662a62a356cebe2692ec5fe4ec4
   path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   PromisesSwift: 9d77319bbe72ebf6d872900551f7eeba9bce2851
-  purchases_flutter: 71bf40d5f70c4653df8a53ef3819b6bfe08d86d3
-  purchases_ui_flutter: 03a84dcfe7e5d04e55556cf37554a7d2c87949af
-  PurchasesHybridCommon: 20acf98303a9593f5d56b449459dcf16ea581a99
-  PurchasesHybridCommonUI: fc8fa6ad78cfcdb6d82a8a865a8ae8b78724df53
-  RevenueCat: b2d2555cbb1f4116d341af4c5f82269c8e4e499a
-  RevenueCatUI: 59b63f64505eac217af31f596e1ce3583734bba6
+  purchases_flutter: c3f090330bcb8ec22008c97d677858fe6f08ba83
+  purchases_ui_flutter: 1f67f7cb574b354278cdaab289cfeb31dda8811a
+  PurchasesHybridCommon: 734baecf69d858f811ccd01488a9cf6c1e1c4f6b
+  PurchasesHybridCommonUI: 74c30d9e6e1fd1e1d41a1fafe65501da32d6395d
+  RevenueCat: 4c0e809f7c7428cbe8d79cbb9a0dc7551e71e74e
+  RevenueCatUI: 3a9872584dfb7b50897c3a7d2d40f3e02b0e5ae4
   SDWebImage: 73c6079366fea25fa4bb9640d5fb58f0893facd8
   shared_preferences_foundation: fcdcbc04712aee1108ac7fda236f363274528f78
-  sqflite: 673a0e54cc04b7d6dba8d24fb8095b31c3a99eec
+  sqflite_darwin: 5a7236e3b501866c1c9befc6771dfd73ffb8702d
   SwiftyGif: 706c60cf65fa2bc5ee0313beece843c8eb8194d4
   TOCropViewController: edfd4f25713d56905ad1e0b9f5be3fbe0f59c863
   url_launcher_ios: 5334b05cef931de560670eeae103fd3e431ac3fe
   video_player_avfoundation: 7c6c11d8470e1675df7397027218274b6d2360b3
-  wakelock_plus: 78ec7c5b202cab7761af8e2b2b3d0671be6c4ae1
+  wakelock_plus: 373cfe59b235a6dd5837d0fb88791d2f13a90d56
   webview_flutter_wkwebview: 0982481e3d9c78fd5c6f62a002fcd24fc791f1e4
 
 PODFILE CHECKSUM: ade96bceabe3919b69c16573938e4268fe3a6c9d
