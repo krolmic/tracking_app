@@ -188,6 +188,7 @@
     "phoneNumber": "Telefonnummer",
     "preferredUsername": "Präferierter Nutzername",
     "rememberDevice": "Gerät merken",
+    "selectEmail": "E-Mail",
     "selectSms": "Textnachricht (SMS)",
     "selectTotp": "Authenticator App (TOTP)",
     "totpCodePrompt": "Bitte gebe den Code aus deiner registrierten Authenticator App ein",

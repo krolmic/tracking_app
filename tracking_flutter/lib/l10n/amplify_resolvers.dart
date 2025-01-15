@@ -1,6 +1,4 @@
 import 'package:amplify_authenticator/amplify_authenticator.dart';
-// ignore: implementation_imports
-import 'package:amplify_authenticator/src/utils/unmet_password_requirements.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -181,6 +179,8 @@ class LocalizedInputResolver extends InputResolver {
         return AppLocalizations.of(context)!.preferredUsername;
       case InputField.rememberDevice:
         return AppLocalizations.of(context)!.rememberDevice;
+      case InputField.selectEmail:
+        return AppLocalizations.of(context)!.selectEmail;
       case InputField.selectSms:
         return AppLocalizations.of(context)!.selectSms;
       case InputField.selectTotp:
