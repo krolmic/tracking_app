@@ -16,15 +16,61 @@ class MoodRepositoryException implements Exception {
   }
 }
 
-class MoodRepository {
-  MoodRepository({
+/// Abstract base class for mood repositories
+abstract class MoodRepository {
+  /// Number of items to return per page
+  static const paginationLimit = 15;
+
+  /// Retrieves a list of moods for a given user and page
+  Future<List<Mood>> getMoods({
+    required int page,
+    required String userId,
+  });
+
+  /// Retrieves a list of moods for a given user and time range
+  Future<List<Mood>> getMoodsInTimeRange({
+    required DateTime from,
+    required DateTime to,
+    required String userId,
+  });
+
+  /// Creates a new mood entry
+  Future<void> createMood({
+    required String userId,
+    required int value,
+    required DateTime createdOn,
+    List<String>? thingsIAmGratefulAbout,
+    double? revenue,
+    Duration? workTime,
+  });
+
+  /// Updates an existing mood entry
+  Future<Mood> updateMood(
+    Mood mood, {
+    int? value,
+    List<String>? thingsIAmGratefulAbout,
+    double? revenue,
+    Duration? workTime,
+  });
+
+  /// Deletes a mood entry
+  Future<void> deleteMood(Mood mood);
+
+  /// Deletes all mood entries for a given user
+  Future<void> deleteMoods({
+    required String userId,
+  });
+}
+
+/// Implementation of [MoodRepository] that uses Serverpod client
+class ServerpodMoodRepository extends MoodRepository {
+  ServerpodMoodRepository({
     required Client serverpodClient,
   }) : _serverpodClient = serverpodClient;
 
   final Client _serverpodClient;
 
-  static const paginationLimit = 15;
-
+  @override
   Future<List<Mood>> getMoods({
     required int page,
     required String userId,
@@ -55,6 +101,7 @@ class MoodRepository {
     }
   }
 
+  @override
   Future<List<Mood>> getMoodsInTimeRange({
     required DateTime from,
     required DateTime to,
@@ -92,6 +139,7 @@ class MoodRepository {
     }
   }
 
+  @override
   Future<void> createMood({
     required String userId,
     required int value,
@@ -125,6 +173,7 @@ class MoodRepository {
     }
   }
 
+  @override
   Future<Mood> updateMood(
     Mood mood, {
     int? value,
@@ -154,6 +203,7 @@ class MoodRepository {
     }
   }
 
+  @override
   Future<void> deleteMood(Mood mood) async {
     try {
       await _serverpodClient.moodEntries.deleteMoodEntry(id: mood.id);
@@ -168,6 +218,7 @@ class MoodRepository {
     }
   }
 
+  @override
   Future<void> deleteMoods({
     required String userId,
   }) async {
