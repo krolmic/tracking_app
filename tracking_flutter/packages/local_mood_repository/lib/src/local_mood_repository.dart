@@ -33,12 +33,6 @@ class LocalMoodRepository extends MoodRepository {
     return LocalMoodRepository(moodBox: box);
   }
 
-  /// Closes the Hive box and cleans up resources
-  Future<void> dispose() async {
-    await _moodBox.compact(); // Optimize storage before closing
-    await _moodBox.close();
-  }
-
   @override
   Future<List<Mood>> getMoods({
     required int page,
