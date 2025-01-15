@@ -67,6 +67,8 @@ dependencies:
   jiffy: ^6.2.1
   legal_repository:
     path: packages/legal_repository/
+  local_mood_repository:
+    path: packages/local_mood_repository/
   mood_repository:
     path: packages/mood_repository/
   purchases_flutter: ^8.1.0

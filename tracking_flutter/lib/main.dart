@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:graph_settings_repository/graph_settings_repository.dart';
 import 'package:legal_repository/legal_repository.dart';
+import 'package:local_mood_repository/local_mood_repository.dart';
 import 'package:mood_repository/mood_repository.dart';
 import 'package:serverpod_auth_shared_flutter/serverpod_auth_shared_flutter.dart';
 import 'package:serverpod_flutter/serverpod_flutter.dart';
@@ -32,20 +33,14 @@ final GetIt getIt = GetIt.instance;
 
 Future<void> registerSingletons() async {
   final sharedPreferences = await SharedPreferences.getInstance();
-  final serverpodClient = await initServerpodClient();
+  await _registerMoodRepository();
 
   getIt
     ..registerSingleton<AmplifyClass>(Amplify)
     ..registerSingleton<AuthCategory>(Amplify.Auth)
     ..registerSingleton<SharedPreferences>(sharedPreferences)
-    ..registerSingleton<Client>(serverpodClient)
 
     // Repositories
-    ..registerLazySingleton<MoodRepository>(
-      () => MoodRepository(
-        serverpodClient: getIt<Client>(),
-      ),
-    )
     ..registerLazySingleton<UserProfileRepository>(
       () => UserProfileRepository(
         amplifyAuth: getIt<AuthCategory>(),
@@ -80,7 +75,29 @@ Future<void> registerSingletons() async {
     );
 }
 
-Future<Client> initServerpodClient() async {
+Future<void> _registerMoodRepository() async {
+  const useServerpodForMoods = bool.fromEnvironment(
+    'USE_SERVERPOD',
+  );
+
+  if (useServerpodForMoods) {
+    final serverpodClient = await _initServerpodClient();
+    getIt
+      ..registerSingleton<Client>(serverpodClient)
+      ..registerLazySingleton<MoodRepository>(
+        () => ServerpodMoodRepository(
+          serverpodClient: getIt<Client>(),
+        ),
+      );
+  } else {
+    final localMoodRepository = await LocalMoodRepository.initialize();
+    getIt.registerLazySingleton<MoodRepository>(
+      () => localMoodRepository,
+    );
+  }
+}
+
+Future<Client> _initServerpodClient() async {
   final serverpodClient = Client(
     const String.fromEnvironment('API_URL'),
     authenticationKeyManager: FlutterAuthenticationKeyManager(),
